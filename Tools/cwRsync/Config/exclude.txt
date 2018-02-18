@@ -1,0 +1,10 @@
+.git/
+Logs/
+Bin/
+Server/packages/
+Temp/
+Server/Server.sdf
+Unity/Library/
+Unity/Temp/
+*/obj
+IOS-Build

@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1947019265242484}
+  m_IsPrefabParent: 1
+--- !u!1 &1947019265242484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4062024702599566}
+  - component: {fileID: 114272512812857624}
+  m_Layer: 0
+  m_Name: Atlas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4062024702599566
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1947019265242484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114272512812857624
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1947019265242484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+  - key: ClubEight
+    gameObject: {fileID: 21300000, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: ClubFive
+    gameObject: {fileID: 21300002, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: ClubFour
+    gameObject: {fileID: 21300004, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: ClubJack
+    gameObject: {fileID: 21300006, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: ClubKing
+    gameObject: {fileID: 21300008, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: ClubNine
+    gameObject: {fileID: 21300010, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: ClubOne
+    gameObject: {fileID: 21300012, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: ClubQueen
+    gameObject: {fileID: 21300014, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: ClubSeven
+    gameObject: {fileID: 21300016, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: ClubSix
+    gameObject: {fileID: 21300018, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: ClubTen
+    gameObject: {fileID: 21300020, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: ClubThree
+    gameObject: {fileID: 21300022, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: ClubTwo
+    gameObject: {fileID: 21300024, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondEight
+    gameObject: {fileID: 21300026, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondFive
+    gameObject: {fileID: 21300028, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondFour
+    gameObject: {fileID: 21300030, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondJack
+    gameObject: {fileID: 21300032, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondKing
+    gameObject: {fileID: 21300034, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondNine
+    gameObject: {fileID: 21300036, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondOne
+    gameObject: {fileID: 21300038, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondQueen
+    gameObject: {fileID: 21300040, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondSeven
+    gameObject: {fileID: 21300042, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondSix
+    gameObject: {fileID: 21300044, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondTen
+    gameObject: {fileID: 21300046, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondThree
+    gameObject: {fileID: 21300048, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: DiamondTwo
+    gameObject: {fileID: 21300050, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartEight
+    gameObject: {fileID: 21300052, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartFive
+    gameObject: {fileID: 21300054, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartFour
+    gameObject: {fileID: 21300056, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartJack
+    gameObject: {fileID: 21300058, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartKing
+    gameObject: {fileID: 21300060, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartNine
+    gameObject: {fileID: 21300062, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartOne
+    gameObject: {fileID: 21300120, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartQueen
+    gameObject: {fileID: 21300064, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartSeven
+    gameObject: {fileID: 21300066, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartSix
+    gameObject: {fileID: 21300068, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartTen
+    gameObject: {fileID: 21300070, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartThree
+    gameObject: {fileID: 21300072, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: HeartTwo
+    gameObject: {fileID: 21300074, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: Identity_Farmer
+    gameObject: {fileID: 21300076, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: Identity_Landlord
+    gameObject: {fileID: 21300078, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: LJoker
+    gameObject: {fileID: 21300080, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: None
+    gameObject: {fileID: 21300118, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SJoker
+    gameObject: {fileID: 21300082, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeEight
+    gameObject: {fileID: 21300084, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeFive
+    gameObject: {fileID: 21300086, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeFour
+    gameObject: {fileID: 21300088, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeJack
+    gameObject: {fileID: 21300090, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeKing
+    gameObject: {fileID: 21300092, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeNine
+    gameObject: {fileID: 21300094, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeOne
+    gameObject: {fileID: 21300096, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeQueen
+    gameObject: {fileID: 21300098, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeSeven
+    gameObject: {fileID: 21300100, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeSix
+    gameObject: {fileID: 21300102, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeTen
+    gameObject: {fileID: 21300104, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeThree
+    gameObject: {fileID: 21300106, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: SpadeTwo
+    gameObject: {fileID: 21300108, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: Identity_Farmer
+    gameObject: {fileID: 21300076, guid: d8396ba905ec610429f1c55258169be8, type: 3}
+  - key: Identity_Landlord
+    gameObject: {fileID: 21300078, guid: d8396ba905ec610429f1c55258169be8, type: 3}
