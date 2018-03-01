@@ -20,10 +20,15 @@ namespace Hotfix
     /// </summary>
     public class LandlordsLoginComponent : Component
     {
+        //账号输入框
         private InputField account;
+        //密码输入框
         private InputField password;
+        //提示文本
         private Text prompt;
+        //是否正在登录中（避免登录请求还没响应时连续点击登录）
         private bool isLogining;
+        //是否正在注册中（避免登录请求还没响应时连续点击注册）
         private bool isRegistering;
 
         public void Awake()
@@ -63,6 +68,7 @@ namespace Hotfix
                 return;
             }
 
+            //设置登录中状态
             isLogining = true;
             Session session = null;
             try
@@ -122,7 +128,9 @@ namespace Hotfix
             }
             finally
             {
+                //断开验证服务器的连接
                 session?.Dispose();
+                //设置登录处理完成状态
                 isLogining = false;
             }
         }
@@ -137,6 +145,7 @@ namespace Hotfix
                 return;
             }
 
+            //设置登录中状态
             isRegistering = true;
             Session session = null;
             prompt.text = "";
@@ -174,7 +183,9 @@ namespace Hotfix
             }
             finally
             {
+                //断开验证服务器的连接
                 session?.Dispose();
+                //设置注册处理完成状态
                 isRegistering = false;
             }
         }

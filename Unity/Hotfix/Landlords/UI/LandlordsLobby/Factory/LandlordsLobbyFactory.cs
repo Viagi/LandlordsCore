@@ -11,10 +11,15 @@ namespace Hotfix
         {
             try
             {
+                //加载AB包
                 ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
                 resourcesComponent.LoadBundle($"{type}.unity3d");
+
+                //加载大厅界面预设并生成实例
                 GameObject bundleGameObject = resourcesComponent.GetAsset<GameObject>($"{type}.unity3d", $"{type}");
                 GameObject lobby = UnityEngine.Object.Instantiate(bundleGameObject);
+
+                //设置UI层级，只有UI摄像机可以渲染
                 lobby.layer = LayerMask.NameToLayer(LayerNames.UI);
                 UI ui = EntityFactory.Create<UI, Scene, UI, GameObject>(scene, null, lobby);
 

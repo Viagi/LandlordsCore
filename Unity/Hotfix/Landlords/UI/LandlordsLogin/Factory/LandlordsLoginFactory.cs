@@ -11,13 +11,21 @@ namespace Hotfix
         {
             try
             {
+                //加载AB包
                 ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
                 resourcesComponent.LoadBundle($"{type}.unity3d");
+
+                //加载登录界面预设并生成实例
                 GameObject bundleGameObject = resourcesComponent.GetAsset<GameObject>($"{type}.unity3d", $"{type}");
                 GameObject login = UnityEngine.Object.Instantiate(bundleGameObject);
+
+                //设置UI层级，只有UI摄像机可以渲染
                 login.layer = LayerMask.NameToLayer(LayerNames.UI);
+
+                //创建登录界面实体
                 UI ui = EntityFactory.Create<UI, Scene, UI, GameObject>(scene, null, login);
 
+                //添加登录界面组件
                 ui.AddComponent<LandlordsLoginComponent>();
                 return ui;
             }
@@ -30,6 +38,7 @@ namespace Hotfix
 
         public void Remove(UIType type)
         {
+            //卸载AB包
             Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle($"{type}.unity3d");
         }
     }
