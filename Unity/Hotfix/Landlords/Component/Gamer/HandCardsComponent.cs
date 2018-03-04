@@ -246,7 +246,7 @@ namespace Hotfix
         /// <returns></returns>
         private GameObject CreateCardSprite(string prefabName, string cardName, Transform parent)
         {
-            GameObject cardSpritePrefab = Game.Scene.GetComponent<ResourcesComponent>().GetAsset<GameObject>($"{prefabName}.unity3d", prefabName);
+            GameObject cardSpritePrefab = Model.Game.Scene.GetComponent<ResourcesComponent>().GetAsset<GameObject>($"{prefabName}.unity3d", prefabName);
             GameObject cardSprite = UnityEngine.Object.Instantiate(cardSpritePrefab);
 
             cardSprite.name = cardName;

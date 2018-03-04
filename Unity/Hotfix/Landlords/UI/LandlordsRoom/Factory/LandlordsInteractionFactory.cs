@@ -8,7 +8,7 @@ namespace Hotfix
     {
         public static UI Create(UIType type, UI parent)
         {
-            ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
+            ResourcesComponent resourcesComponent = Model.Game.Scene.GetComponent<ResourcesComponent>();
             resourcesComponent.LoadBundle($"{type}.unity3d");
             GameObject prefab = resourcesComponent.GetAsset<GameObject>($"{type}.unity3d", $"{type}");
             GameObject interaction = UnityEngine.Object.Instantiate(prefab);

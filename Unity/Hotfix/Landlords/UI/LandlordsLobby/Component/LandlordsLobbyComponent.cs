@@ -42,8 +42,8 @@ namespace Hotfix
                 }
 
                 //切换到房间界面
-                UI room = Hotfix.Scene.GetComponent<UIComponent>().Create(UIType.LandlordsRoom);
-                Hotfix.Scene.GetComponent<UIComponent>().Remove(UIType.LandlordsLobby);
+                UI room = Game.Scene.GetComponent<UIComponent>().Create(UIType.LandlordsRoom);
+                Game.Scene.GetComponent<UIComponent>().Remove(UIType.LandlordsLobby);
 
                 //将房间设为匹配状态
                 room.GetComponent<LandlordsRoomComponent>().Matching = true;

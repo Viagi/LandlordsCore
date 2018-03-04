@@ -12,7 +12,7 @@ namespace Hotfix
             try
             {
                 //加载AB包
-                ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
+                ResourcesComponent resourcesComponent = Model.Game.Scene.GetComponent<ResourcesComponent>();
                 resourcesComponent.LoadBundle($"{type}.unity3d");
 
                 //加载登录界面预设并生成实例
@@ -39,7 +39,7 @@ namespace Hotfix
         public void Remove(UIType type)
         {
             //卸载AB包
-            Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle($"{type}.unity3d");
+            Model.Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle($"{type}.unity3d");
         }
     }
 }

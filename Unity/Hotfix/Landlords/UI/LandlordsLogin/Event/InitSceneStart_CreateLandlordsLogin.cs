@@ -8,7 +8,7 @@ namespace Hotfix
         public override void Run()
         {
             //创建登录界面
-            UI ui = Hotfix.Scene.GetComponent<UIComponent>().Create(UIType.LandlordsLogin);
+            UI ui = Game.Scene.GetComponent<UIComponent>().Create(UIType.LandlordsLogin);
         }
     }
 }

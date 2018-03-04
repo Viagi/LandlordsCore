@@ -25,7 +25,7 @@ namespace Hotfix
         public void Awake(bool isWin)
         {
             ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
-            ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
+            ResourcesComponent resourcesComponent = Model.Game.Scene.GetComponent<ResourcesComponent>();
             resourcesComponent.LoadBundle($"{CONTENT_NAME}.unity3d");
 
             if (isWin)
@@ -52,7 +52,7 @@ namespace Hotfix
 
             base.Dispose();
 
-            ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
+            ResourcesComponent resourcesComponent = Model.Game.Scene.GetComponent<ResourcesComponent>();
             resourcesComponent?.UnloadBundle($"{CONTENT_NAME}.unity3d");
             resourcesComponent?.UnloadBundle($"{UIType.LandlordsEnd}.unity3d");
         }

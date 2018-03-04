@@ -69,7 +69,7 @@ namespace Hotfix
         /// <returns></returns>
         public static Sprite GetCardSprite(string cardName)
         {
-            GameObject atlas = Game.Scene.GetComponent<ResourcesComponent>().GetAsset<GameObject>($"{ATLAS_NAME}.unity3d", ATLAS_NAME);
+            GameObject atlas = Model.Game.Scene.GetComponent<ResourcesComponent>().GetAsset<GameObject>($"{ATLAS_NAME}.unity3d", ATLAS_NAME);
             return atlas.Get<Sprite>(cardName);
         }
     }

@@ -9,7 +9,7 @@ namespace Hotfix
     {
         protected override void Run(Session session, Actor_GamerReconnect_Ntt message)
         {
-            UI uiRoom = Hotfix.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom);
+            UI uiRoom = Game.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom);
             GamerComponent gamerComponent = uiRoom.GetComponent<GamerComponent>();
 
             uiRoom.GameObject.Get<GameObject>("ReadyButton").SetActive(false);

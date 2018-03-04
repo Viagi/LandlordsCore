@@ -11,7 +11,7 @@ namespace Hotfix
         {
             try
             {
-                ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
+                ResourcesComponent resourcesComponent = Model.Game.Scene.GetComponent<ResourcesComponent>();
                 resourcesComponent.LoadBundle($"{type}.unity3d");
                 resourcesComponent.LoadBundle($"{CardHelper.ATLAS_NAME}.unity3d");
                 resourcesComponent.LoadBundle($"{HandCardsComponent.HANDCARD_NAME}.unity3d");
@@ -34,7 +34,7 @@ namespace Hotfix
 
         public void Remove(UIType type)
         {
-            ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
+            ResourcesComponent resourcesComponent = Model.Game.Scene.GetComponent<ResourcesComponent>();
             resourcesComponent.UnloadBundle($"{type}.unity3d");
             resourcesComponent.UnloadBundle($"{HandCardsComponent.HANDCARD_NAME}.unity3d");
             resourcesComponent.UnloadBundle($"{HandCardsComponent.PLAYCARD_NAME}.unity3d");

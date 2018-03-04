@@ -75,7 +75,7 @@ namespace Hotfix
             {
                 //创建登录服务器连接
                 IPEndPoint connetRealmEndPoint = NetworkHelper.ToIPEndPoint(GlobalConfigComponent.Instance.GlobalProto.Address);
-                session = Hotfix.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetRealmEndPoint);
+                session = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetRealmEndPoint);
 
                 //发送登录请求
                 prompt.text = "正在登录中....";
@@ -96,7 +96,7 @@ namespace Hotfix
 
                 //创建Gate服务器连接
                 IPEndPoint connetGateEndPoint = NetworkHelper.ToIPEndPoint(r2C_Login_Ack.Address);
-                Session gateSession = Hotfix.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetGateEndPoint);
+                Session gateSession = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetGateEndPoint);
 
                 //登录Gate服务器
                 G2C_LoginGate_Ack g2C_LoginGate_Ack = await gateSession.Call(new C2G_LoginGate_Req() { Key = r2C_Login_Ack.Key }) as G2C_LoginGate_Ack;
@@ -108,7 +108,7 @@ namespace Hotfix
                 }
 
                 //保存连接,之后所有请求将通过这个连接发送
-                SessionComponent sessionComponent = Game.Scene.AddComponent<SessionComponent>();
+                SessionComponent sessionComponent = Model.Game.Scene.AddComponent<SessionComponent>();
                 sessionComponent.Session = gateSession;
                 Log.Info("登录成功");
 
@@ -117,8 +117,8 @@ namespace Hotfix
                 ClientComponent.Instance.LocalPlayer = user;
 
                 //跳转到大厅界面
-                Hotfix.Scene.GetComponent<UIComponent>().Create(UIType.LandlordsLobby);
-                Hotfix.Scene.GetComponent<UIComponent>().Remove(UIType.LandlordsLogin);
+                Game.Scene.GetComponent<UIComponent>().Create(UIType.LandlordsLobby);
+                Game.Scene.GetComponent<UIComponent>().Remove(UIType.LandlordsLogin);
 
             }
             catch (Exception e)
@@ -153,7 +153,7 @@ namespace Hotfix
             {
                 //创建登录服务器连接
                 IPEndPoint connetRealmEndPoint = NetworkHelper.ToIPEndPoint(GlobalConfigComponent.Instance.GlobalProto.Address);
-                session = Hotfix.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetRealmEndPoint);
+                session = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetRealmEndPoint);
 
                 //发送注册请求
                 prompt.text = "正在注册中....";

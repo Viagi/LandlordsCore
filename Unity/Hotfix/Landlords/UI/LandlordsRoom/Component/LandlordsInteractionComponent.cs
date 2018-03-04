@@ -66,7 +66,7 @@ namespace Hotfix
 
             base.Dispose();
 
-            Game.Scene.GetComponent<ResourcesComponent>()?.UnloadBundle($"{UIType.LandlordsInteraction}.unity3d");
+            Model.Game.Scene.GetComponent<ResourcesComponent>()?.UnloadBundle($"{UIType.LandlordsInteraction}.unity3d");
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace Hotfix
             Actor_GamerPlayCard_Ack response = await SessionComponent.Instance.Session.Call(request) as Actor_GamerPlayCard_Ack;
 
             //出牌错误提示
-            GamerUIComponent gamerUI = Hotfix.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom).GetComponent<GamerComponent>().LocalGamer.GetComponent<GamerUIComponent>();
+            GamerUIComponent gamerUI = Game.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom).GetComponent<GamerComponent>().LocalGamer.GetComponent<GamerUIComponent>();
             if (response.Error == ErrorCode.ERR_PlayCardError)
             {
                 gamerUI.SetPlayCardsError();

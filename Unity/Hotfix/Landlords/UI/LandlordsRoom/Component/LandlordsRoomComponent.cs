@@ -143,8 +143,8 @@ namespace Hotfix
             SessionComponent.Instance.Session.Send(new C2G_ReturnLobby_Ntt());
 
             //切换到大厅界面
-            Hotfix.Scene.GetComponent<UIComponent>().Create(UIType.LandlordsLobby);
-            Hotfix.Scene.GetComponent<UIComponent>().Remove(UIType.LandlordsRoom);
+            Game.Scene.GetComponent<UIComponent>().Create(UIType.LandlordsLobby);
+            Game.Scene.GetComponent<UIComponent>().Remove(UIType.LandlordsRoom);
         }
 
         /// <summary>

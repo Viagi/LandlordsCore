@@ -9,7 +9,7 @@ namespace Hotfix
     {
         protected override void Run(Session session, Actor_AuthorityGrabLandlord_Ntt message)
         {
-            UI uiRoom = Hotfix.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom);
+            UI uiRoom = Game.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom);
             GamerComponent gamerComponent = uiRoom.GetComponent<GamerComponent>();
 
             if (message.UserID == gamerComponent.LocalGamer.UserID)

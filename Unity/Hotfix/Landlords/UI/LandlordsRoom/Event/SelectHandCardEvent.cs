@@ -7,7 +7,7 @@ namespace Hotfix
     {
         public override void Run(Card card)
         {
-            Hotfix.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom).GetComponent<LandlordsRoomComponent>().Interaction.SelectCard(card);
+            Game.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom).GetComponent<LandlordsRoomComponent>().Interaction.SelectCard(card);
         }
     }
 }

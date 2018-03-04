@@ -8,13 +8,13 @@ namespace Hotfix
         protected override void Run(Session session, G2C_PlayerDisconnect_Ntt message)
         {
             //移除连接组件
-            Game.Scene.RemoveComponent<SessionComponent>();
+            Model.Game.Scene.RemoveComponent<SessionComponent>();
             //释放本地玩家对象
-            ClientComponent clientComponent = Game.Scene.GetComponent<ClientComponent>();
+            ClientComponent clientComponent = Model.Game.Scene.GetComponent<ClientComponent>();
             clientComponent.LocalPlayer.Dispose();
             clientComponent.LocalPlayer = null;
 
-            UIComponent uiComponent = Hotfix.Scene.GetComponent<UIComponent>();
+            UIComponent uiComponent = Game.Scene.GetComponent<UIComponent>();
 
             UI uiLogin = uiComponent.Create(UIType.LandlordsLogin);
             uiLogin.GetComponent<LandlordsLoginComponent>().SetPrompt("连接断开");
