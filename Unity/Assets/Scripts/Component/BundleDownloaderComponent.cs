@@ -43,16 +43,16 @@ namespace Model
 				string versionUrl = GlobalConfigComponent.Instance.GlobalProto.GetUrl() + "StreamingAssets/" + "Version.txt";
 				Log.Debug(versionUrl);
 				await request.DownloadAsync(versionUrl);
-				this.VersionConfig = MongoHelper.FromJson<VersionConfig>(request.Request.downloadHandler.text);
+				this.VersionConfig = JsonHelper.FromJson<VersionConfig>(request.Request.downloadHandler.text);
 			}
 			
-			Log.Debug("WebVersion:\n" + MongoHelper.ToJson(this.VersionConfig));
+			Log.Debug("WebVersion:\n" + JsonHelper.ToJson(this.VersionConfig));
 
 			// 对比本地的Version.txt
 			string versionPath = Path.Combine(PathHelper.AppHotfixResPath, "Version.txt");
 			if (!File.Exists(versionPath))
 			{
-				foreach (FileVersionInfo versionInfo in this.VersionConfig.FileVersionInfos)
+				foreach (FileVersionInfo versionInfo in this.VersionConfig.FileInfoDict.Values)
 				{
 					if(versionInfo.File == "Version.txt")
 					{
@@ -65,10 +65,10 @@ namespace Model
 			else
 			{
 
-				VersionConfig localVersionConfig = MongoHelper.FromJson<VersionConfig>(File.ReadAllText(versionPath));
-				Log.Debug("LocalVersion:\n" + MongoHelper.ToJson(localVersionConfig));
+				VersionConfig localVersionConfig = JsonHelper.FromJson<VersionConfig>(File.ReadAllText(versionPath));
+				Log.Debug("LocalVersion:\n" + JsonHelper.ToJson(localVersionConfig));
 				// 先删除服务器端没有的ab
-				foreach (FileVersionInfo fileVersionInfo in localVersionConfig.FileVersionInfos)
+				foreach (FileVersionInfo fileVersionInfo in localVersionConfig.FileInfoDict.Values)
 				{
 					if (this.VersionConfig.FileInfoDict.ContainsKey(fileVersionInfo.File))
 					{
@@ -79,7 +79,7 @@ namespace Model
 				}
 
 				// 再下载
-				foreach (FileVersionInfo fileVersionInfo in this.VersionConfig.FileVersionInfos)
+				foreach (FileVersionInfo fileVersionInfo in this.VersionConfig.FileInfoDict.Values)
 				{
 					FileVersionInfo localVersionInfo;
 					if (localVersionConfig.FileInfoDict.TryGetValue(fileVersionInfo.File, out localVersionInfo))
@@ -156,7 +156,7 @@ namespace Model
 			using (FileStream fs = new FileStream(Path.Combine(PathHelper.AppHotfixResPath, "Version.txt"), FileMode.Create))
 			using (StreamWriter sw = new StreamWriter(fs))
 			{
-				sw.Write(MongoHelper.ToJson(this.VersionConfig));
+				sw.Write(JsonHelper.ToJson(this.VersionConfig));
 			}
 
 			this.Tcs?.SetResult(true);

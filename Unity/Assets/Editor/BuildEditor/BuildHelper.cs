@@ -94,7 +94,7 @@ namespace MyEditor
 
 			using (FileStream fileStream = new FileStream($"{dir}/Version.txt", FileMode.Create))
 			{
-				byte[] bytes = MongoHelper.ToJson(versionProto).ToByteArray();
+				byte[] bytes = JsonHelper.ToJson(versionProto).ToByteArray();
 				fileStream.Write(bytes, 0, bytes.Length);
 			}
 		}
@@ -112,7 +112,7 @@ namespace MyEditor
 				long size = fi.Length;
 				string filePath = relativePath == "" ? fi.Name : $"{relativePath}/{fi.Name}";
 
-				versionProto.FileVersionInfos.Add(new FileVersionInfo
+				versionProto.FileInfoDict.Add(filePath, new FileVersionInfo
 				{
 					File = filePath,
 					MD5 = md5,

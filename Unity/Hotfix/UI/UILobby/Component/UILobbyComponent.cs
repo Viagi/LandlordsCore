@@ -50,7 +50,7 @@ namespace Hotfix
 			{
 				// 向actor发起一次rpc调用
 				Actor_TestResponse response = (Actor_TestResponse) await SessionComponent.Instance.Session.Call(new Actor_TestRequest() { request = "request actor test rpc" });
-				Log.Info($"recv response: {MongoHelper.ToJson(response)}");
+				Log.Info($"recv response: {JsonHelper.ToJson(response)}");
 			}
 			catch (Exception e)
 			{
@@ -63,7 +63,7 @@ namespace Hotfix
 			try
 			{
 				Actor_TransferResponse response = (Actor_TransferResponse) await SessionComponent.Instance.Session.Call(new Actor_TransferRequest() {MapIndex = 0});
-				Log.Info($"传送成功! {MongoHelper.ToJson(response)}");
+				Log.Info($"传送成功! {JsonHelper.ToJson(response)}");
 			}
 			catch (Exception e)
 			{
@@ -74,7 +74,7 @@ namespace Hotfix
 		private async void OnTransfer2()
 		{
 			Actor_TransferResponse response = (Actor_TransferResponse)await SessionComponent.Instance.Session.Call(new Actor_TransferRequest() { MapIndex = 1 });
-			Log.Info($"传送成功! {MongoHelper.ToJson(response)}");
+			Log.Info($"传送成功! {JsonHelper.ToJson(response)}");
 		}
 
 		private async void EnterMap()
@@ -82,7 +82,7 @@ namespace Hotfix
 			try
 			{
 				G2C_EnterMap g2CEnterMap = (G2C_EnterMap)await SessionComponent.Instance.Session.Call(new C2G_EnterMap());
-				Hotfix.Scene.GetComponent<UIComponent>().Remove(UIType.UILobby);
+				Game.Scene.GetComponent<UIComponent>().Remove(UIType.UILobby);
 			}
 			catch (Exception e)
 			{

@@ -10,13 +10,11 @@ namespace Model
 		public long Size;
 	}
 
-	public class VersionConfig : AConfig
+	public class VersionConfig : Object
 	{
 		public int Version;
 		
 		public long TotalSize;
-
-		public List<FileVersionInfo> FileVersionInfos = new List<FileVersionInfo>();
 		
 		[BsonIgnore]
 		public Dictionary<string, FileVersionInfo> FileInfoDict = new Dictionary<string, FileVersionInfo>();
@@ -25,9 +23,8 @@ namespace Model
 		{
 			base.EndInit();
 
-			foreach (FileVersionInfo fileVersionInfo in FileVersionInfos)
+			foreach (FileVersionInfo fileVersionInfo in this.FileInfoDict.Values)
 			{
-				this.FileInfoDict.Add(fileVersionInfo.File, fileVersionInfo);
 				this.TotalSize += fileVersionInfo.Size;
 			}
 		}

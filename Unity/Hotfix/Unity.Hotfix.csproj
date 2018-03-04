@@ -54,8 +54,11 @@
     <Compile Include="Base\Helper\ArrayHelper.cs" />
     <Compile Include="Base\Helper\AssetBundleHelper.cs" />
     <Compile Include="Base\Helper\ExceptionHelper.cs" />
+    <Compile Include="Base\Helper\JsonHelper.cs" />
     <Compile Include="Base\Object\IStart.cs" />
     <Compile Include="Component\OperaComponent.cs" />
+    <Compile Include="Entity\Config\BuffConfig.cs" />
+    <Compile Include="Entity\Config\UnitConfig.cs" />
     <Compile Include="Event\TestHotfixSubscribMonoEvent_LogString.cs" />
     <Compile Include="Handler\Actor_CreateUnitsHandler.cs" />
     <Compile Include="Handler\Actor_TestHandler.cs" />
@@ -95,6 +98,10 @@
     <Compile Include="Landlords\UI\LandlordsRoom\Factory\LandlordsEndFactory.cs" />
     <Compile Include="Landlords\UI\LandlordsRoom\Factory\LandlordsInteractionFactory.cs" />
     <Compile Include="Landlords\UI\LandlordsRoom\Factory\LandlordsRoomFactory.cs" />
+    <Compile Include="Module\Config\ACategory.cs" />
+    <Compile Include="Module\Config\AConfig.cs" />
+    <Compile Include="Module\Config\ConfigComponent.cs" />
+    <Compile Include="Module\Config\ConfigHelper.cs" />
     <Compile Include="Module\Message\IActorMessage.cs" />
     <Compile Include="Module\Message\HotfixMessageDispatcher.cs" />
     <Compile Include="Module\Message\IMessage.cs" />
@@ -117,7 +124,7 @@
     <Compile Include="Module\Message\MessageDispatherComponent.cs" />
     <Compile Include="Module\Message\OpcodeTypeComponent.cs" />
     <Compile Include="Module\UI\UIComponent.cs" />
-    <Compile Include="Entity\Hotfix.cs" />
+    <Compile Include="Entity\Game.cs" />
     <Compile Include="Entity\Scene.cs" />
     <Compile Include="Module\Message\HotfixMessage.cs" />
     <Compile Include="Module\Message\SessionHelper.cs" />

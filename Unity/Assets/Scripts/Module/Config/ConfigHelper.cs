@@ -32,5 +32,10 @@ namespace Model
 				throw new Exception($"load global config file fail", e);
 			}
 		}
+
+		public static T ToObject<T>(string str)
+		{
+			return JsonHelper.FromJson<T>(str);
+		}
 	}
 }
