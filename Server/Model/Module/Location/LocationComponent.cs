@@ -208,7 +208,7 @@ namespace Model
 			if (!this.lockDict.ContainsKey(key))
 			{
 				this.locations.TryGetValue(key, out int location);
-				//Log.Info($"location get key: {key} {location}");
+				Log.Info($"location get key: {key} {location}");
 				return Task.FromResult(location);
 			}
 
@@ -230,7 +230,7 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

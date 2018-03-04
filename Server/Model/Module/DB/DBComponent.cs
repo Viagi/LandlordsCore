@@ -3,11 +3,11 @@
 namespace Model
 {
 	[ObjectSystem]
-	public class DbComponentSystem : ObjectSystem<DBComponent>, IAwake
+	public class DbComponentSystem : AwakeSystem<DBComponent>
 	{
-		public void Awake()
+		public override void Awake(DBComponent self)
 		{
-			this.Get().Awake();
+			self.Awake();
 		}
 	}
 
@@ -27,9 +27,9 @@ namespace Model
             this.database = this.mongoClient.GetDatabase(config.DBName);
         }
 
-		public IMongoCollection<Disposer> GetCollection(string name)
+        public IMongoCollection<Component> GetCollection(string name)
 		{
-			return this.database.GetCollection<Disposer>(name);
+			return this.database.GetCollection<Component>(name);
 		}
 	}
 }

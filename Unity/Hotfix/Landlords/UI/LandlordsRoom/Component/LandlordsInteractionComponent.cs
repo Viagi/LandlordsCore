@@ -6,11 +6,11 @@ using System.Collections.Generic;
 namespace Hotfix
 {
     [ObjectSystem]
-    public class LandlordsInteractionComponentEvent : ObjectSystem<LandlordsInteractionComponent>, IAwake
+    public class LandlordsInteractionComponentAwakeSystem : AwakeSystem<LandlordsInteractionComponent>
     {
-        public void Awake()
+        public override void Awake(LandlordsInteractionComponent self)
         {
-            this.Get().Awake();
+            self.Awake();
         }
     }
 
@@ -59,7 +59,7 @@ namespace Hotfix
 
         public override void Dispose()
         {
-            if(this.Id == 0)
+            if(this.IsDisposed)
             {
                 return;
             }

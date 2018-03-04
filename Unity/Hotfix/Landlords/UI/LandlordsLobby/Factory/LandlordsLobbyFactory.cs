@@ -21,7 +21,7 @@ namespace Hotfix
 
                 //设置UI层级，只有UI摄像机可以渲染
                 lobby.layer = LayerMask.NameToLayer(LayerNames.UI);
-                UI ui = EntityFactory.Create<UI, Scene, UI, GameObject>(scene, null, lobby);
+                UI ui = ComponentFactory.Create<UI, GameObject>(lobby);
 
                 ui.AddComponent<LandlordsLobbyComponent>();
                 return ui;

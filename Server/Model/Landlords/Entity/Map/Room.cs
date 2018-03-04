@@ -126,7 +126,7 @@ namespace Model
         /// 广播消息
         /// </summary>
         /// <param name="message"></param>
-        public void Broadcast(AMessage message)
+        public void Broadcast(IMessage message)
         {
             foreach (Gamer gamer in gamers)
             {
@@ -141,7 +141,7 @@ namespace Model
 
         public override void Dispose()
         {
-            if (this.Id == 0)
+            if (this.IsDisposed)
             {
                 return;
             }

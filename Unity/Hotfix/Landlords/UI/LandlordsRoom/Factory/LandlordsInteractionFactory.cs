@@ -6,7 +6,7 @@ namespace Hotfix
 {
     public class LandlordsInteractionFactory
     {
-        public static UI Create(Scene scene, UIType type, UI parent)
+        public static UI Create(UIType type, UI parent)
         {
             ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
             resourcesComponent.LoadBundle($"{type}.unity3d");
@@ -15,7 +15,7 @@ namespace Hotfix
 
             interaction.layer = LayerMask.NameToLayer("UI");
 
-            UI ui = EntityFactory.Create<UI, Scene, UI, GameObject>(scene, parent, interaction);
+            UI ui = ComponentFactory.Create<UI, UI, GameObject>(parent, interaction);
             ui.AddComponent<LandlordsInteractionComponent>();
             return ui;
         }

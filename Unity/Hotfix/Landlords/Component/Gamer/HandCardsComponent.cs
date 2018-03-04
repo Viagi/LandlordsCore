@@ -6,11 +6,11 @@ using UnityEngine.UI;
 namespace Hotfix
 {
     [ObjectSystem]
-    public class HandCardsComponentEvent : ObjectSystem<HandCardsComponent>, IAwake<GameObject>
+    public class HandCardsComponentAwakeSystem : AwakeSystem<HandCardsComponent, GameObject>
     {
-        public void Awake(GameObject panel)
+        public override void Awake(HandCardsComponent self, GameObject panel)
         {
-            this.Get().Awake(panel);
+            self.Awake(panel);
         }
     }
 
@@ -40,7 +40,7 @@ namespace Hotfix
 
         public override void Dispose()
         {
-            if (this.Id == 0)
+            if (this.IsDisposed)
             {
                 return;
             }

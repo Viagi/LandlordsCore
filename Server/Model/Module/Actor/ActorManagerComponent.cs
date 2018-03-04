@@ -3,11 +3,11 @@
 namespace Model
 {
 	[ObjectSystem]
-	public class ActorManagerComponentSystem : ObjectSystem<ActorManagerComponent>, IAwake
+	public class ActorManagerComponentAwakeSystem : AwakeSystem<ActorManagerComponent>
 	{
-		public void Awake()
+		public override void Awake(ActorManagerComponent self)
 		{
-			this.Get().Awake();
+			self.Awake();
 		}
 	}
 
@@ -41,7 +41,7 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

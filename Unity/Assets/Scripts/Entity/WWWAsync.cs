@@ -6,11 +6,11 @@ using UnityEngine;
 namespace Model
 {
 	[ObjectSystem]
-	public class WwwAsyncSystem : ObjectSystem<WWWAsync>, IUpdate
+	public class WwwAsyncUpdateSystem : UpdateSystem<WWWAsync>
 	{
-		public void Update()
+		public override void Update(WWWAsync self)
 		{
-			this.Get().Update();
+			self.Update();
 		}
 	}
 	
@@ -106,7 +106,7 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

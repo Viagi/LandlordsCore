@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Hotfix
 {
-    [MessageHandler(Opcode.Actor_GamerReady_Ntt)]
+    [MessageHandler]
     public class Actor_GamerReady_NttHandler : AMHandler<Actor_GamerReady_Ntt>
     {
         protected override void Run(Session session, Actor_GamerReady_Ntt message)

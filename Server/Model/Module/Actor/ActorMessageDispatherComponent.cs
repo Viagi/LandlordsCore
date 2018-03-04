@@ -5,16 +5,20 @@ using System.Threading.Tasks;
 namespace Model
 {
 	[ObjectSystem]
-	public class ActorMessageDispatherComponentSystem : ObjectSystem<ActorMessageDispatherComponent>, IStart, ILoad
+	public class ActorMessageDispatherComponentStartSystem : AwakeSystem<ActorMessageDispatherComponent>
 	{
-		public void Start()
+		public override void Awake(ActorMessageDispatherComponent self)
 		{
-			this.Get().Start();
+			self.Awake();
 		}
+	}
 
-		public void Load()
+	[ObjectSystem]
+	public class ActorMessageDispatherComponentLoadSystem : LoadSystem<ActorMessageDispatherComponent>
+	{
+		public override void Load(ActorMessageDispatherComponent self)
 		{
-			this.Get().Load();
+			self.Load();
 		}
 	}
 
@@ -25,14 +29,14 @@ namespace Model
 	{
 		private Dictionary<Type, IMActorHandler> handlers;
 		
-		public void Start()
+		public void Awake()
 		{
 			this.Load();
 		}
 
 		public void Load()
 		{
-			AppType appType = this.Parent.GetComponent<StartConfigComponent>().StartConfig.AppType;
+			AppType appType = this.Entity.GetComponent<StartConfigComponent>().StartConfig.AppType;
 			Log.Info("apptype: " + appType);
 			this.handlers = new Dictionary<Type, IMActorHandler>();
 
@@ -71,19 +75,19 @@ namespace Model
 			return actorHandler;
 		}
 
-		public async Task Handle(Session session, Entity entity, ActorRequest message)
+		public async Task Handle(Session session, Entity entity, uint rpcId, ActorRequest message)
 		{
 			if (!this.handlers.TryGetValue(message.AMessage.GetType(), out IMActorHandler handler))
 			{
 				throw new Exception($"not found message handler: {MongoHelper.ToJson(message)}");
 			}
 			
-			await handler.Handle(session, entity, message);
+			await handler.Handle(session, entity, rpcId, message);
 		}
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

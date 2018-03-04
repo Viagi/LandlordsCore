@@ -5,11 +5,11 @@ using Model;
 namespace Hotfix
 {
     [ObjectSystem]
-    public class GameControllerComponentEvent : ObjectSystem<GameControllerComponent>, IAwake<RoomConfig>
+    public class GameControllerComponentAwakeSystem : AwakeSystem<GameControllerComponent,RoomConfig>
     {
-        public void Awake(RoomConfig config)
+        public override void Awake(GameControllerComponent self, RoomConfig config)
         {
-            this.Get().Awake(config);
+            self.Awake(config);
         }
     }
 
@@ -191,7 +191,7 @@ namespace Hotfix
                 if (isKickOut)
                 {
                     ActorProxy actorProxy = Game.Scene.GetComponent<ActorProxyComponent>().Get(gamers[i].Id);
-                    await actorProxy.Call<Actor_PlayerExitRoom_Ack>(new Actor_PlayerExitRoom_Req());
+                    await actorProxy.Call(new Actor_PlayerExitRoom_Req());
                 }
             }
         }

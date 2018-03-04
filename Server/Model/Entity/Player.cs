@@ -1,11 +1,11 @@
 ﻿namespace Model
 {
 	[ObjectSystem]
-	public class PlayerSystem : ObjectSystem<Player>, IAwake<string>
+	public class PlayerSystem : AwakeSystem<Player, string>
 	{
-		public void Awake(string account)
+		public override void Awake(Player self, string a)
 		{
-			this.Get().Awake(account);
+			self.Awake(a);
 		}
 	}
 
@@ -22,7 +22,7 @@
 		
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

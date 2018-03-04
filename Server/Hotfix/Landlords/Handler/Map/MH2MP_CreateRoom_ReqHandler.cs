@@ -12,7 +12,7 @@ namespace Hotfix
             try
             {
                 //创建房间
-                Room room = EntityFactory.Create<Room>();
+                Room room = ComponentFactory.Create<Room>();
                 room.AddComponent<DeckComponent>();
                 room.AddComponent<DeskCardsCacheComponent>();
                 room.AddComponent<OrderControllerComponent>();

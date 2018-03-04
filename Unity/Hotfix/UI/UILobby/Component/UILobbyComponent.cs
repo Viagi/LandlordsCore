@@ -6,11 +6,11 @@ using UnityEngine.UI;
 namespace Hotfix
 {
 	[ObjectSystem]
-	public class UiLobbyComponentSystem : ObjectSystem<UILobbyComponent>, IAwake
+	public class UiLobbyComponentSystem : AwakeSystem<UILobbyComponent>
 	{
-		public void Awake()
+		public override void Awake(UILobbyComponent self)
 		{
-			this.Get().Awake();
+			self.Awake();
 		}
 	}
 	
@@ -49,8 +49,7 @@ namespace Hotfix
 			try
 			{
 				// 向actor发起一次rpc调用
-				Actor_TestResponse response = (Actor_TestResponse) await SessionComponent.Instance.Session.Call(
-					new Actor_TestRequest() { request = "request actor test rpc" });
+				Actor_TestResponse response = (Actor_TestResponse) await SessionComponent.Instance.Session.Call(new Actor_TestRequest() { request = "request actor test rpc" });
 				Log.Info($"recv response: {MongoHelper.ToJson(response)}");
 			}
 			catch (Exception e)
@@ -63,8 +62,7 @@ namespace Hotfix
 		{
 			try
 			{
-				Actor_TransferResponse response = (Actor_TransferResponse) await SessionComponent.Instance.Session.Call(
-					new Actor_TransferRequest() {MapIndex = 0});
+				Actor_TransferResponse response = (Actor_TransferResponse) await SessionComponent.Instance.Session.Call(new Actor_TransferRequest() {MapIndex = 0});
 				Log.Info($"传送成功! {MongoHelper.ToJson(response)}");
 			}
 			catch (Exception e)
@@ -75,8 +73,7 @@ namespace Hotfix
 
 		private async void OnTransfer2()
 		{
-			Actor_TransferResponse response = (Actor_TransferResponse)await SessionComponent.Instance.Session.Call(
-				new Actor_TransferRequest() { MapIndex = 1 });
+			Actor_TransferResponse response = (Actor_TransferResponse)await SessionComponent.Instance.Session.Call(new Actor_TransferRequest() { MapIndex = 1 });
 			Log.Info($"传送成功! {MongoHelper.ToJson(response)}");
 		}
 

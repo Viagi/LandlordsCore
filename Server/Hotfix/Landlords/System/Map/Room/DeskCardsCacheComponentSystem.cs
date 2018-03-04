@@ -50,7 +50,7 @@ namespace Hotfix
         /// <param name="self"></param>
         public static void Clear(this DeskCardsCacheComponent self)
         {
-            DeckComponent deck = self.Parent.GetComponent<DeckComponent>();
+            DeckComponent deck = self.GetParent<Entity>().GetComponent<DeckComponent>();
             while (self.CardsCount > 0)
             {
                 Card card = self.library[self.CardsCount - 1];

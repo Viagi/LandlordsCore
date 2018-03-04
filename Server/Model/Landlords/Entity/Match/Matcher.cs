@@ -1,11 +1,11 @@
 ﻿namespace Model
 {
     [ObjectSystem]
-    public class MatcherEvent : ObjectSystem<Matcher>, IAwake<long>
+    public class MatcherAwakeSystem : AwakeSystem<Matcher,long>
     {
-        public void Awake(long id)
+        public override void Awake(Matcher self, long id)
         {
-            this.Get().Awake(id);
+            self.Awake(id);
         }
     }
 
@@ -30,7 +30,7 @@
 
         public override void Dispose()
         {
-            if(this.Id == 0)
+            if(this.IsDisposed)
             {
                 return;
             }

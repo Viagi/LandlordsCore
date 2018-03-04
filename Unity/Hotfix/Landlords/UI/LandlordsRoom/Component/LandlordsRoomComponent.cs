@@ -6,16 +6,20 @@ using UnityEngine.UI;
 namespace Hotfix
 {
     [ObjectSystem]
-    public class LandlordsRoomComponentEvent : ObjectSystem<LandlordsRoomComponent>, IAwake, IStart
+    public class LandlordsRoomComponentAwakeSystem : AwakeSystem<LandlordsRoomComponent>
     {
-        public void Awake()
+        public override void Awake(LandlordsRoomComponent self)
         {
-            this.Get().Awake();
+            self.Awake();
         }
+    }
 
-        public void Start()
+    [ObjectSystem]
+    public class LandlordsRoomComponentStartSystem : StartSystem<LandlordsRoomComponent>
+    {
+        public override void Start(LandlordsRoomComponent self)
         {
-            this.Get().Start();
+            self.Start();
         }
     }
 
@@ -36,12 +40,24 @@ namespace Hotfix
                 if (interaction == null)
                 {
                     UI uiRoom = this.GetParent<UI>();
-                    UI uiInteraction = LandlordsInteractionFactory.Create(Hotfix.Scene, UIType.LandlordsInteraction, uiRoom);
+                    UI uiInteraction = LandlordsInteractionFactory.Create(UIType.LandlordsInteraction, uiRoom);
                     interaction = uiInteraction.GetComponent<LandlordsInteractionComponent>();
                     uiRoom.Add(uiInteraction);
                 }
                 return interaction;
             }
+        }
+
+        public override void Dispose()
+        {
+            if (this.IsDisposed)
+            {
+                return;
+            }
+
+            base.Dispose();
+
+            this.Matching = false;
         }
 
         public void Awake()

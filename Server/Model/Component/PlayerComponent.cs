@@ -4,11 +4,11 @@ using System.Linq;
 namespace Model
 {
 	[ObjectSystem]
-	public class PlayerComponentSystem : ObjectSystem<PlayerComponent>, IAwake
+	public class PlayerComponentSystem : AwakeSystem<PlayerComponent>
 	{
-		public void Awake()
+		public override void Awake(PlayerComponent self)
 		{
-			this.Get().Awake();
+			self.Awake();
 		}
 	}
 	
@@ -56,7 +56,7 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

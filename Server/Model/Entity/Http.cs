@@ -36,10 +36,10 @@
 		public string msg = "";
 	}
 
-	public static partial class ErrorCode
+	public static class HttpErrorCode
 	{
-		public const int Exception = 11000;
-		public const int RpcFail = 11002;
-        public const int Success = 0;
-    }
+		public const int Exception = 999;
+		public const int Success = 1000;
+		public const int RpcFail = 1002;
+	}
 }

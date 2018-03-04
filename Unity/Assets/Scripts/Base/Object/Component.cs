@@ -5,22 +5,31 @@ namespace Model
 	[BsonIgnoreExtraElements]
 	public abstract partial class Component: Disposer
 	{
-		[BsonIgnore]
-		public Entity Parent { get; set; }
+		[BsonIgnoreIfDefault]
+		[BsonDefaultValue(0L)]
+		[BsonElement]
+		[BsonId]
+		public long Id { get; set; }
 
-		public T GetParent<T>() where T : Entity
+		[BsonIgnore]
+		public Disposer Parent { get; set; }
+
+		public T GetParent<T>() where T : Disposer
 		{
 			return this.Parent as T;
 		}
 
-		protected Component()
+		public Entity Entity
 		{
-			this.Id = 1;
+			get
+			{
+				return this.Parent as Entity;
+			}
 		}
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

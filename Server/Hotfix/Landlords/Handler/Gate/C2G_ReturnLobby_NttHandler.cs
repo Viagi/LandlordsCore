@@ -32,7 +32,7 @@ namespace Hotfix
             if (user.ActorID != 0)
             {
                 ActorProxy actorProxy = actorProxyComponent.Get(user.ActorID);
-                await actorProxy.Call<Actor_PlayerExitRoom_Ack>(new Actor_PlayerExitRoom_Req() { UserID = user.UserID });
+                await actorProxy.Call(new Actor_PlayerExitRoom_Req() { UserID = user.UserID });
 
                 user.ActorID = 0;
             }

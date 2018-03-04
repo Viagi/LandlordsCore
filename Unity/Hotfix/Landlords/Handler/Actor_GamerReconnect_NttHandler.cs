@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Hotfix
 {
-    [MessageHandler(Opcode.Actor_GamerReconnect_Ntt)]
+    [MessageHandler]
     public class Actor_GamerReconnect_NttHandler : AMHandler<Actor_GamerReconnect_Ntt>
     {
         protected override void Run(Session session, Actor_GamerReconnect_Ntt message)
@@ -30,7 +30,7 @@ namespace Hotfix
                         gamerHandCards.PopCards(deskCards);
                     }
                 }
-                else if (message.GamerGrabLandlordState.ContainsKey(gamer.UserID))
+                else if (message.LordCards == null && message.GamerGrabLandlordState.ContainsKey(gamer.UserID))
                 {
                     gamer.GetComponent<GamerUIComponent>().SetGrab(message.GamerGrabLandlordState[gamer.UserID]);
                 }
@@ -39,7 +39,11 @@ namespace Hotfix
             //初始化界面
             LandlordsRoomComponent uiRoomComponent = uiRoom.GetComponent<LandlordsRoomComponent>();
             uiRoomComponent.SetMultiples(message.Multiples);
-            uiRoomComponent.Interaction.GameStart();
+            //当抢完地主时才能显示托管按钮
+            if (message.LordCards != null)
+            {
+                uiRoomComponent.Interaction.GameStart();
+            }
 
             //初始化地主牌
             if (message.LordCards != null)

@@ -23,7 +23,7 @@ namespace Hotfix
                 login.layer = LayerMask.NameToLayer(LayerNames.UI);
 
                 //创建登录界面实体
-                UI ui = EntityFactory.Create<UI, Scene, UI, GameObject>(scene, null, login);
+                UI ui = ComponentFactory.Create<UI,GameObject>(login);
 
                 //添加登录界面组件
                 ui.AddComponent<LandlordsLoginComponent>();

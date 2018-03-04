@@ -3,12 +3,12 @@
 namespace Hotfix
 {
     [ObjectSystem]
-    public class ServerFrameComponentSystem : ObjectSystem<ServerFrameComponent>, IAwake
+    public class ServerFrameComponentSystem : AwakeSystem<ServerFrameComponent>
     {
-        public void Awake()
-        {
-            this.Get().Awake();
-        }
+	    public override void Awake(ServerFrameComponent self)
+	    {
+		    self.Awake();
+	    }
     }
 	
     public static class ServerFrameComponentEx
@@ -27,7 +27,7 @@ namespace Hotfix
 
             while (true)
             {
-                if (self.Id == 0)
+                if (self.IsDisposed)
                 {
                     return;
                 }
@@ -41,9 +41,9 @@ namespace Hotfix
             }
         }
 
-        public static void Add(this ServerFrameComponent self, AFrameMessage message)
+        public static void Add(this ServerFrameComponent self, IFrameMessage message)
         {
-            self.FrameMessage.Messages.Add(message);
+            self.FrameMessage.Messages.Add((MessageObject)message);
         }
     }
 }

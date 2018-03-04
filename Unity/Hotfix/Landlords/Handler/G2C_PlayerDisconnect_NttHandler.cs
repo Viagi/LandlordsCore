@@ -2,7 +2,7 @@
 
 namespace Hotfix
 {
-    [MessageHandler(Opcode.G2C_PlayerDisconnect_Ntt)]
+    [MessageHandler]
     public class G2C_PlayerDisconnect_NttHandler : AMHandler<G2C_PlayerDisconnect_Ntt>
     {
         protected override void Run(Session session, G2C_PlayerDisconnect_Ntt message)

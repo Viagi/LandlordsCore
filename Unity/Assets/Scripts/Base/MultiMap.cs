@@ -145,5 +145,10 @@ namespace Model
 			}
 			return list.Contains(k);
 		}
+
+		public bool ContainsKey(T t)
+		{
+			return this.dictionary.ContainsKey(t);
+		}
 	}
 }

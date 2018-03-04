@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 namespace Model
 {
 	[ObjectSystem]
-	public class BenchmarkComponentSystem : ObjectSystem<BenchmarkComponent>, IAwake<IPEndPoint>
+	public class BenchmarkComponentSystem : AwakeSystem<BenchmarkComponent, IPEndPoint>
 	{
-		public void Awake(IPEndPoint ipEndPoint)
+		public override void Awake(BenchmarkComponent self, IPEndPoint a)
 		{
-			this.Get().Awake(ipEndPoint);
+			self.Awake(a);
 		}
 	}
 
@@ -84,7 +84,7 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

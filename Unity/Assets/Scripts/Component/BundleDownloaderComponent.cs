@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 namespace Model
 {
 	[ObjectSystem]
-	public class UiBundleDownloaderComponentSystem : ObjectSystem<BundleDownloaderComponent>, IAwake
+	public class UiBundleDownloaderComponentAwakeSystem : AwakeSystem<BundleDownloaderComponent>
 	{
-		public void Awake()
+		public override void Awake(BundleDownloaderComponent self)
 		{
-			BundleDownloaderComponent self = this.Get();
-
 			self.bundles = new Queue<string>();
 			self.downloadedBundles = new HashSet<string>();
 			self.downloadingBundle = "";
@@ -40,7 +38,7 @@ namespace Model
 
 		public async Task StartAsync()
 		{
-			using (UnityWebRequestAsync request = EntityFactory.Create<UnityWebRequestAsync>())
+			using (UnityWebRequestAsync request = ComponentFactory.Create<UnityWebRequestAsync>())
 			{
 				string versionUrl = GlobalConfigComponent.Instance.GlobalProto.GetUrl() + "StreamingAssets/" + "Version.txt";
 				Log.Debug(versionUrl);
@@ -126,7 +124,7 @@ namespace Model
 				{
 					try
 					{
-						using (this.downloadingRequest = EntityFactory.Create<UnityWebRequestAsync>())
+						using (this.downloadingRequest = ComponentFactory.Create<UnityWebRequestAsync>())
 						{
 							await this.downloadingRequest.DownloadAsync(GlobalConfigComponent.Instance.GlobalProto.GetUrl() + "StreamingAssets/" + this.downloadingBundle);
 							byte[] data = this.downloadingRequest.Request.downloadHandler.data;
@@ -202,14 +200,14 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}
 
 			base.Dispose();
 
-			this.Parent?.RemoveComponent<BundleDownloaderComponent>();
+			this.Entity?.RemoveComponent<BundleDownloaderComponent>();
 		}
 	}
 }

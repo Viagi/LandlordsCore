@@ -5,11 +5,11 @@ using Model;
 namespace Hotfix
 {
     [ObjectSystem]
-    public class DeckComponentEvent : ObjectSystem<DeckComponent>, IAwake
+    public class DeckComponentAwakeSystem : AwakeSystem<DeckComponent>
     {
-        public void Awake()
+        public override void Awake(DeckComponent self)
         {
-            this.Get().Awake();
+            self.Awake();
         }
     }
 

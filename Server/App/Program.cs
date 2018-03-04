@@ -89,7 +89,10 @@ namespace App
 						Game.Scene.AddComponent<ActorProxyComponent>();
 						Game.Scene.AddComponent<PlayerComponent>();
 						Game.Scene.AddComponent<UnitComponent>();
-						Game.Scene.AddComponent<DBComponent>();
+                        //PS：如果启动闪退有可能是服务器配置文件没有填数据库配置，请正确填写
+                        //这里需要将DBComponent的Awake注释去掉才能连接MongoDB
+                        Game.Scene.AddComponent<DBComponent>();
+                        //这里需要加上DBCacheComponent才能操作MongoDB
                         Game.Scene.AddComponent<DBCacheComponent>();
 						Game.Scene.AddComponent<DBProxyComponent>();
 						Game.Scene.AddComponent<LocationComponent>();
@@ -103,6 +106,8 @@ namespace App
 						Game.Scene.AddComponent<GateSessionKeyComponent>();
 						Game.Scene.AddComponent<ConfigComponent>();
 						Game.Scene.AddComponent<ServerFrameComponent>();
+                        
+                        //以下是斗地主服务端自定义全局组件
 
                         //GateGlobalComponent
                         Game.Scene.AddComponent<UserComponent>();

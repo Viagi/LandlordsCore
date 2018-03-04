@@ -5,11 +5,11 @@ using System.Net;
 namespace Hotfix
 {
     [ObjectSystem]
-    public class MatchComponentEvent : ObjectSystem<MatchComponent>, IUpdate
+    public class MatchComponentUpdateSystem : UpdateSystem<MatchComponent>
     {
-        public void Update()
+        public override void Update(MatchComponent self)
         {
-            this.Get().Update();
+            self.Update();
         }
     }
 
@@ -82,7 +82,7 @@ namespace Hotfix
             Session mapSession = Game.Scene.GetComponent<NetInnerComponent>().Get(mapIPEndPoint);
             MP2MH_CreateRoom_Ack createRoomRE = await mapSession.Call(new MH2MP_CreateRoom_Req()) as MP2MH_CreateRoom_Ack;
 
-            Room room = EntityFactory.CreateWithId<Room>(createRoomRE.RoomID);
+            Room room = ComponentFactory.CreateWithId<Room>(createRoomRE.RoomID);
             Game.Scene.GetComponent<MatchRoomComponent>().Add(room);
 
             //解锁
@@ -103,12 +103,12 @@ namespace Hotfix
 
             //向房间服务器发送玩家进入请求
             ActorProxy actorProxy = Game.Scene.GetComponent<ActorProxyComponent>().Get(room.Id);
-            Actor_PlayerEnterRoom_Ack actor_PlayerEnterRoom_Ack = await actorProxy.Call<Actor_PlayerEnterRoom_Ack>(new Actor_PlayerEnterRoom_Req()
+            Actor_PlayerEnterRoom_Ack actor_PlayerEnterRoom_Ack = await actorProxy.Call(new Actor_PlayerEnterRoom_Req()
             {
                 PlayerID = matcher.PlayerID,
                 UserID = matcher.UserID,
                 SessionID = matcher.GateSessionID
-            });
+            }) as Actor_PlayerEnterRoom_Ack;
 
             Gamer gamer = GamerFactory.Create(matcher.PlayerID, matcher.UserID, actor_PlayerEnterRoom_Ack.GamerID);
             room.Add(gamer);

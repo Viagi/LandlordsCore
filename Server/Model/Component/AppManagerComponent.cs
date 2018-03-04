@@ -6,11 +6,11 @@ using System.Linq;
 namespace Model
 {
 	[ObjectSystem]
-	public class AppManagerComponentSystem : ObjectSystem<AppManagerComponent>, IStart
+	public class AppManagerComponentStartSystem : StartSystem<AppManagerComponent>
 	{
-		public void Start()
+		public override void Start(AppManagerComponent self)
 		{
-			this.Get().Start();
+			self.Start();
 		}
 	}
 
@@ -78,7 +78,7 @@ namespace Model
 			{
 				await Game.Scene.GetComponent<TimerComponent>().WaitAsync(5000);
 
-				if (this.Id == 0)
+				if (this.IsDisposed)
 				{
 					return;
 				}

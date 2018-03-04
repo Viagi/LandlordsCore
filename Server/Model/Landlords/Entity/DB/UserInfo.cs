@@ -1,8 +1,11 @@
-﻿namespace Model
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace Model
 {
     /// <summary>
     /// 用户信息
     /// </summary>
+    [BsonIgnoreExtraElements]
     public class UserInfo : Entity
     {
         //昵称

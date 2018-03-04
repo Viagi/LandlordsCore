@@ -4,7 +4,7 @@ using Model;
 
 namespace Hotfix
 {
-    [MessageHandler(Opcode.Actor_AuthorityPlayCard_Ntt)]
+    [MessageHandler]
     public class Actor_AuthorityPlayCard_NttHandler : AMHandler<Actor_AuthorityPlayCard_Ntt>
     {
         protected override void Run(Session session, Actor_AuthorityPlayCard_Ntt message)
@@ -24,7 +24,7 @@ namespace Hotfix
                 }
 
                 //显示出牌按钮
-                if (gamer.Id == gamerComponent.LocalGamer.Id)
+                if (gamer.UserID == gamerComponent.LocalGamer.UserID)
                 {
                     LandlordsInteractionComponent interaction = uiRoom.GetComponent<LandlordsRoomComponent>().Interaction;
                     interaction.IsFirst = message.IsFirst;

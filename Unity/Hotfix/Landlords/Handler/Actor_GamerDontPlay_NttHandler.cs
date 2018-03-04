@@ -4,7 +4,7 @@ using Model;
 
 namespace Hotfix
 {
-    [MessageHandler(Opcode.Actor_GamerDontPlay_Ntt)]
+    [MessageHandler]
     public class Actor_GamerDontPlay_NttHandler : AMHandler<Actor_GamerDontPlay_Ntt>
     {
         protected override void Run(Session session, Actor_GamerDontPlay_Ntt message)

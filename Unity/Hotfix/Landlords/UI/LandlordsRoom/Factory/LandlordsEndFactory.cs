@@ -5,7 +5,7 @@ namespace Hotfix
 {
     public class LandlordsEndFactory
     {
-        public static UI Create(Scene scene, UIType type, UI parent, bool isWin)
+        public static UI Create(UIType type, UI parent, bool isWin)
         {
             ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
             resourcesComponent.LoadBundle($"{type}.unity3d");
@@ -14,7 +14,7 @@ namespace Hotfix
 
             endPanel.layer = LayerMask.NameToLayer("UI");
 
-            UI ui = EntityFactory.Create<UI, Scene, UI, GameObject>(scene, parent, endPanel);
+            UI ui = ComponentFactory.Create<UI, UI, GameObject>(parent, endPanel);
             ui.AddComponent<LandlordsEndComponent, bool>(isWin);
             return ui;
         }

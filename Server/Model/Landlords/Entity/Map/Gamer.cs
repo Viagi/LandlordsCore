@@ -1,11 +1,11 @@
 ﻿namespace Model
 {
     [ObjectSystem]
-    public class GamerEvent : ObjectSystem<Gamer>, IAwake<long>
+    public class GamerAwakeSystem : AwakeSystem<Gamer,long>
     {
-        public void Awake(long id)
+        public override void Awake(Gamer self, long id)
         {
-            this.Get().Awake(id);
+            self.Awake(id);
         }
     }
 
@@ -36,7 +36,7 @@
 
         public override void Dispose()
         {
-            if(this.Id == 0)
+            if(this.IsDisposed)
             {
                 return;
             }

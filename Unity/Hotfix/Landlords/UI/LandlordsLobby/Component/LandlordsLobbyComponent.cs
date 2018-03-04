@@ -6,11 +6,11 @@ using UnityEngine.UI;
 namespace Hotfix
 {
     [ObjectSystem]
-    public class LandlordsLobbyComponentEvent : ObjectSystem<LandlordsLobbyComponent>, IAwake
+    public class LandlordsLobbyComponentAwakeSystem : AwakeSystem<LandlordsLobbyComponent>
     {
-        public void Awake()
+        public override void Awake(LandlordsLobbyComponent self)
         {
-            this.Get().Awake();
+            self.Awake();
         }
     }
 

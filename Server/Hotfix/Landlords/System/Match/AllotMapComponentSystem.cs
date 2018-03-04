@@ -3,11 +3,11 @@
 namespace Hotfix
 {
     [ObjectSystem]
-    public class AllotMapComponentEvent : ObjectSystem<AllotMapComponent>, IStart
+    public class AllotMapComponentStartSystem : StartSystem<AllotMapComponent>
     {
-        public void Start()
+        public override void Start(AllotMapComponent self)
         {
-            this.Get().Start();
+            self.Start();
         }
     }
 
@@ -15,7 +15,7 @@ namespace Hotfix
     {
         public static void Start(this AllotMapComponent self)
         {
-            StartConfig[] startConfigs = self.Parent.GetComponent<StartConfigComponent>().GetAll();
+            StartConfig[] startConfigs = self.GetParent<Entity>().GetComponent<StartConfigComponent>().GetAll();
             foreach (StartConfig config in startConfigs)
             {
                 if (!config.AppType.Is(AppType.Map))

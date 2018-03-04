@@ -102,6 +102,12 @@ namespace Hotfix
                     }
                     else
                     {
+                        if (gamer.UserID == orderController.CurrentAuthority)
+                        {
+                            //发送可以出牌消息
+                            bool isFirst = gamer.UserID == orderController.Biggest;
+                            actorProxy.Send(new Actor_AuthorityPlayCard_Ntt() { UserID = orderController.CurrentAuthority, IsFirst = isFirst });
+                        }
                         lordCards = deskCardsCache.LordCards.ToArray();
                     }
                     //发送重连数据

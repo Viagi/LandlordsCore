@@ -13,7 +13,7 @@ namespace Model
 
         public override async void Dispose()
         {
-            if (this.Id == 0)
+            if (this.IsDisposed)
             {
                 return;
             }
@@ -38,7 +38,7 @@ namespace Model
             if(this.User.ActorID != 0)
             {
                 ActorProxy actorProxy = actorProxyComponent.Get(this.User.ActorID);
-                await actorProxy.Call<Actor_PlayerExitRoom_Ack>(new Actor_PlayerExitRoom_Req() { UserID = this.User.UserID });
+                await actorProxy.Call(new Actor_PlayerExitRoom_Req() { UserID = this.User.UserID });
             }
 
             //向登录服务器发送玩家下线消息

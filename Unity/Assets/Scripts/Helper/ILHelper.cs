@@ -1,29 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
+using ILRuntime.CLR.Method;
 using ILRuntime.Runtime.Enviorment;
+using ILRuntime.Runtime.Generated;
+using ILRuntime.Runtime.Intepreter;
 using UnityEngine;
 
 namespace Model
 {
 	public static class ILHelper
 	{
-		public static unsafe void InitILRuntime()
+		public static unsafe void InitILRuntime(ILRuntime.Runtime.Enviorment.AppDomain appDomain)
 		{
 			// 注册重定向函数
-			MethodInfo mi = typeof(Log).GetMethod("Debug", new Type[] { typeof(string) });
-			Init.Instance.AppDomain.RegisterCLRMethodRedirection(mi, ILRedirection.LogDebug);
-
-			MethodInfo mi2 = typeof(Log).GetMethod("Info", new Type[] { typeof(string) });
-			Init.Instance.AppDomain.RegisterCLRMethodRedirection(mi2, ILRedirection.LogInfo);
-
-			MethodInfo mi3 = typeof(Log).GetMethod("Error", new Type[] { typeof(string) });
-			Init.Instance.AppDomain.RegisterCLRMethodRedirection(mi3, ILRedirection.LogError);
 
 			// 注册委托
-			Init.Instance.AppDomain.DelegateManager.RegisterMethodDelegate<AChannel, System.Net.Sockets.SocketError>();
-			Init.Instance.AppDomain.DelegateManager.RegisterMethodDelegate<byte[], int, int>();
-			Init.Instance.AppDomain.DelegateManager.RegisterMethodDelegate<AResponse>();
+			appDomain.DelegateManager.RegisterMethodDelegate<List<object>>();
+			appDomain.DelegateManager.RegisterMethodDelegate<AChannel, System.Net.Sockets.SocketError>();
+			appDomain.DelegateManager.RegisterMethodDelegate<byte[], int, int>();
+			appDomain.DelegateManager.RegisterMethodDelegate<IResponse>();
+			appDomain.DelegateManager.RegisterMethodDelegate<Session, PacketInfo>();
+			appDomain.DelegateManager.RegisterMethodDelegate<Session, uint, object>();
 
+			CLRBindings.Initialize(appDomain);
 
 			// 注册适配器
 			Assembly assembly = typeof(Init).Assembly;
@@ -40,13 +40,33 @@ namespace Model
 				{
 					continue;
 				}
-				Init.Instance.AppDomain.RegisterCrossBindingAdaptor(adaptor);
+				appDomain.RegisterCrossBindingAdaptor(adaptor);
 			}
+
+			// 初始化ILRuntime的protobuf
+			InitializeILRuntimeProtobuf(appDomain);
 		}
 
-		public static void AvoidAot(GameObject gameObject)
+		public static void InitializeILRuntimeProtobuf(ILRuntime.Runtime.Enviorment.AppDomain appDomain)
 		{
-			Input input = gameObject.Get<Input>("11");
+			ProtoBuf.PType.RegisterFunctionCreateInstance((typeName)=>PType_CreateInstance(appDomain, typeName));
+			ProtoBuf.PType.RegisterFunctionGetRealType(PType_GetRealType);
+		}
+
+		private static object PType_CreateInstance(ILRuntime.Runtime.Enviorment.AppDomain appDomain, string typeName)
+		{
+			return appDomain.Instantiate(typeName);
+		}
+
+		private static Type PType_GetRealType(object o)
+		{
+			Type type = o.GetType();
+			if (type.FullName == "ILRuntime.Runtime.Intepreter.ILTypeInstance")
+			{
+				ILTypeInstance ilo = o as ILTypeInstance;
+				type = ProtoBuf.PType.FindType(ilo.Type.FullName);
+			}
+			return type;
 		}
 	}
 }

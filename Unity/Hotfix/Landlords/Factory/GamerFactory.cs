@@ -12,7 +12,7 @@ namespace Hotfix
         /// <returns></returns>
         public static Gamer Create(long userId, bool isReady)
         {
-            Gamer gamer = EntityFactory.Create<Gamer>();
+            Gamer gamer = ComponentFactory.Create<Gamer>();
             gamer.UserID = userId;
             gamer.IsReady = isReady;
             gamer.AddComponent<GamerUIComponent>();

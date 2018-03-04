@@ -6,21 +6,29 @@ using Model;
 namespace Hotfix
 {
 	[ObjectSystem]
-	public class ActorComponentSystem : ObjectSystem<ActorComponent>, IAwake, IAwake<IEntityActorHandler>, ILoad
+	public class ActorComponentAwakeSystem : AwakeSystem<ActorComponent>
 	{
-		public void Awake()
+		public override void Awake(ActorComponent self)
 		{
-			this.Get().Awake();
+			self.Awake();
 		}
+	}
 
-		public void Awake(IEntityActorHandler iEntityActorHandler)
+	[ObjectSystem]
+	public class ActorComponentAwake1System : AwakeSystem<ActorComponent, IEntityActorHandler>
+	{
+		public override void Awake(ActorComponent self, IEntityActorHandler iEntityActorHandler)
 		{
-			this.Get().Awake(iEntityActorHandler);
+			self.Awake(iEntityActorHandler);
 		}
+	}
 
-		public void Load()
+	[ObjectSystem]
+	public class ActorComponentLoadSystem : LoadSystem<ActorComponent>
+	{
+		public override void Load(ActorComponent self)
 		{
-			this.Get().Load();
+			self.Load();
 		}
 	}
 
@@ -33,8 +41,8 @@ namespace Hotfix
 		{
 			self.entityActorHandler = new CommonEntityActorHandler();
 			self.queue = new Queue<ActorMessageInfo>();
-			self.actorId = self.Parent.Id;
-			Game.Scene.GetComponent<ActorManagerComponent>().Add(self.Parent);
+			self.actorId = self.Entity.Id;
+			Game.Scene.GetComponent<ActorManagerComponent>().Add((Entity)self.Parent);
 			self.HandleAsync();
 		}
 
@@ -42,8 +50,8 @@ namespace Hotfix
 		{
 			self.entityActorHandler = iEntityActorHandler;
 			self.queue = new Queue<ActorMessageInfo>();
-			self.actorId = self.Parent.Id;
-			Game.Scene.GetComponent<ActorManagerComponent>().Add(self.Parent);
+			self.actorId = self.Entity.Id;
+			Game.Scene.GetComponent<ActorManagerComponent>().Add((Entity)self.Parent);
 			self.HandleAsync();
 		}
 
@@ -92,7 +100,7 @@ namespace Hotfix
 		{
 			while (true)
 			{
-				if (self.Id == 0)
+				if (self.IsDisposed)
 				{
 					return;
 				}
@@ -104,7 +112,7 @@ namespace Hotfix
 					{
 						return;
 					}
-					await self.entityActorHandler.Handle(info.Session, self.Parent, info.Message);
+					await self.entityActorHandler.Handle(info.Session, (Entity)self.Parent, info.RpcId, info.Message);
 				}
 				catch (Exception e)
 				{

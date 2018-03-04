@@ -17,7 +17,7 @@ namespace Hotfix
                 userSession.Send(new G2C_PlayerDisconnect_Ntt());
 
                 await Game.Scene.GetComponent<TimerComponent>().WaitAsync(1000);
-                Log.Info($"将玩家{user.UserID}连接断开");
+                Log.Info($"将玩家{message.UserID}连接断开");
                 userSession.Dispose();
 
                 reply(response);

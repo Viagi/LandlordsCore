@@ -9,15 +9,14 @@ namespace Model
     }
     
     [ObjectSystem]
-    public class ClientFrameComponentSystem : ObjectSystem<ClientFrameComponent>, IStart
+    public class ClientFrameComponentStartSystem : StartSystem<ClientFrameComponent>
     {
-        public void Start()
-        {
-            this.Get().Start();
-        }
+	    public override void Start(ClientFrameComponent t)
+	    {
+		    t.Start();
+	    }
     }
-
-    public class ClientFrameComponent: Component
+	public class ClientFrameComponent: Component
     {
         public int Frame;
 
@@ -58,7 +57,7 @@ namespace Model
 
                 await timerComponent.WaitAsync(waitTime);
 
-                if (this.Id == 0)
+                if (this.IsDisposed)
                 {
                     return;
                 }
@@ -78,9 +77,9 @@ namespace Model
 
             for (int i = 0; i < sessionFrameMessage.FrameMessage.Messages.Count; ++i)
             {
-	            AFrameMessage message = sessionFrameMessage.FrameMessage.Messages[i];
+	            IFrameMessage message = (IFrameMessage)sessionFrameMessage.FrameMessage.Messages[i];
 	            ushort opcode = Game.Scene.GetComponent<OpcodeTypeComponent>().GetOpcode(message.GetType());
-                Game.Scene.GetComponent<MessageDispatherComponent>().Handle(sessionFrameMessage.Session, new MessageInfo() { Opcode= opcode, Message = message });
+                Game.Scene.GetComponent<MessageDispatherComponent>().Handle(sessionFrameMessage.Session, new MessageInfo(0, opcode, message));
             }
         }
     }

@@ -17,7 +17,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>..\Temp\UnityVS_bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -54,28 +54,13 @@
     <Compile Include="Base\Helper\ArrayHelper.cs" />
     <Compile Include="Base\Helper\AssetBundleHelper.cs" />
     <Compile Include="Base\Helper\ExceptionHelper.cs" />
-    <Compile Include="Base\Message\AMHandler.cs" />
-    <Compile Include="Base\Message\IMHandler.cs" />
-    <Compile Include="Base\Object\Component.cs" />
-    <Compile Include="Base\Object\ComponentFactory.cs" />
-    <Compile Include="Base\Object\Disposer.cs" />
-    <Compile Include="Base\Object\Entity.cs" />
-    <Compile Include="Base\Object\EntityFactory.cs" />
-    <Compile Include="Base\Object\EntityType.cs" />
-    <Compile Include="Base\Object\IAwake.cs" />
-    <Compile Include="Base\Object\ILateUpdate.cs" />
-    <Compile Include="Base\Object\ILoad.cs" />
-    <Compile Include="Base\Object\ISerializeToEntity.cs" />
-    <Compile Include="Base\Object\IUpdate.cs" />
-    <Compile Include="Base\Object\Object.cs" />
-    <Compile Include="Base\Object\EventSystem.cs" />
-    <Compile Include="Base\Object\ObjectPool.cs" />
-    <Compile Include="Base\Other\IUIFactory.cs" />
-    <Compile Include="Component\UIComponent.cs" />
-    <Compile Include="Entity\Hotfix.cs" />
-    <Compile Include="Entity\Scene.cs" />
-    <Compile Include="Entity\UI.cs" />
-    <Compile Include="Init.cs" />
+    <Compile Include="Base\Object\IStart.cs" />
+    <Compile Include="Component\OperaComponent.cs" />
+    <Compile Include="Event\TestHotfixSubscribMonoEvent_LogString.cs" />
+    <Compile Include="Handler\Actor_CreateUnitsHandler.cs" />
+    <Compile Include="Handler\Actor_TestHandler.cs" />
+    <Compile Include="Handler\Frame_ClickMapHandler.cs" />
+    <Compile Include="Handler\G2C_TestHotfixHandler.cs" />
     <Compile Include="Landlords\Component\GamerComponent.cs" />
     <Compile Include="Landlords\Component\Gamer\GamerUIComponent.cs" />
     <Compile Include="Landlords\Component\Gamer\HandCardsComponent.cs" />
@@ -110,6 +95,35 @@
     <Compile Include="Landlords\UI\LandlordsRoom\Factory\LandlordsEndFactory.cs" />
     <Compile Include="Landlords\UI\LandlordsRoom\Factory\LandlordsInteractionFactory.cs" />
     <Compile Include="Landlords\UI\LandlordsRoom\Factory\LandlordsRoomFactory.cs" />
+    <Compile Include="Module\Message\IActorMessage.cs" />
+    <Compile Include="Module\Message\HotfixMessageDispatcher.cs" />
+    <Compile Include="Module\Message\IMessage.cs" />
+    <Compile Include="Module\Message\AMHandler.cs" />
+    <Compile Include="Module\Message\IMHandler.cs" />
+    <Compile Include="Base\Object\Component.cs" />
+    <Compile Include="Base\Object\ComponentFactory.cs" />
+    <Compile Include="Base\Object\Disposer.cs" />
+    <Compile Include="Base\Object\Entity.cs" />
+    <Compile Include="Base\Object\EntityType.cs" />
+    <Compile Include="Base\Object\IAwake.cs" />
+    <Compile Include="Base\Object\ILateUpdate.cs" />
+    <Compile Include="Base\Object\ILoad.cs" />
+    <Compile Include="Base\Object\ISerializeToEntity.cs" />
+    <Compile Include="Base\Object\IUpdate.cs" />
+    <Compile Include="Base\Object\Object.cs" />
+    <Compile Include="Base\Object\EventSystem.cs" />
+    <Compile Include="Base\Object\ObjectPool.cs" />
+    <Compile Include="Module\UI\IUIFactory.cs" />
+    <Compile Include="Module\Message\MessageDispatherComponent.cs" />
+    <Compile Include="Module\Message\OpcodeTypeComponent.cs" />
+    <Compile Include="Module\UI\UIComponent.cs" />
+    <Compile Include="Entity\Hotfix.cs" />
+    <Compile Include="Entity\Scene.cs" />
+    <Compile Include="Module\Message\HotfixMessage.cs" />
+    <Compile Include="Module\Message\SessionHelper.cs" />
+    <Compile Include="Entity\UI.cs" />
+    <Compile Include="Init.cs" />
+    <Compile Include="Module\Message\HotfixOpcode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\UILobby\Component\UILobbyComponent.cs" />
     <Compile Include="UI\UILobby\Factory\UILobbyFactory.cs" />
@@ -117,10 +131,7 @@
     <Compile Include="UI\UILogin\Event\InitSceneStart_CreateLoginUI.cs" />
     <Compile Include="UI\UILogin\Factory\UILoginFactory.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Event\" />
-    <Folder Include="Handler\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Unity.csproj">
       <Project>{cf118143-7e37-744f-be45-3f55345fec40}</Project>

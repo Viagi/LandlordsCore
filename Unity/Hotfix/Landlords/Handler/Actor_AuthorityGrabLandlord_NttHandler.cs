@@ -4,7 +4,7 @@ using Model;
 
 namespace Hotfix
 {
-    [MessageHandler(Opcode.Actor_AuthorityGrabLandlord_Ntt)]
+    [MessageHandler]
     public class Actor_AuthorityGrabLandlord_NttHandler : AMHandler<Actor_AuthorityGrabLandlord_Ntt>
     {
         protected override void Run(Session session, Actor_AuthorityGrabLandlord_Ntt message)

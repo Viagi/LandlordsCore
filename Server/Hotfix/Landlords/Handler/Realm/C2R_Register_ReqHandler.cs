@@ -25,15 +25,15 @@ namespace Hotfix
                 }
 
                 //新建账号
-                AccountInfo newAccount = EntityFactory.CreateWithId<AccountInfo>(IdGenerater.GenerateId());
+                AccountInfo newAccount = ComponentFactory.CreateWithId<AccountInfo>(IdGenerater.GenerateId());
                 newAccount.Account = message.Account;
                 newAccount.Password = message.Password;
 
                 Log.Info($"注册新账号：{MongoHelper.ToJson(newAccount)}");
 
                 //新建用户信息
-                UserInfo newUser = EntityFactory.CreateWithId<UserInfo>(newAccount.Id);
-                newUser.NickName = $"用户{IdGenerater.GenerateId()}";
+                UserInfo newUser = ComponentFactory.CreateWithId<UserInfo>(newAccount.Id);
+                newUser.NickName = $"用户{message.Account}";
                 newUser.Money = 10000;
 
                 //保存到数据库

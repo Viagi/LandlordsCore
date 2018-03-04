@@ -3,11 +3,11 @@
 namespace Hotfix
 {
     [ObjectSystem]
-    public class TrusteeshipComponentEvent : ObjectSystem<TrusteeshipComponent>, IStart
+    public class TrusteeshipComponentStartSystem : StartSystem<TrusteeshipComponent>
     {
-        public void Start()
+        public override void Start(TrusteeshipComponent self)
         {
-            this.Get().Start();
+            self.Start();
         }
     }
 
@@ -19,17 +19,25 @@ namespace Hotfix
             Room room = Game.Scene.GetComponent<RoomComponent>().Get(self.GetParent<Gamer>().RoomID);
             OrderControllerComponent orderController = room.GetComponent<OrderControllerComponent>();
             Gamer gamer = self.GetParent<Gamer>();
+            bool isStartPlayCard = false;
 
             while (true)
             {
                 await Game.Scene.GetComponent<TimerComponent>().WaitAsync(1000);
 
-                if (self.Id == 0)
+                if (self.IsDisposed)
                 {
                     return;
                 }
 
                 if (gamer.UserID != orderController?.CurrentAuthority)
+                {
+                    continue;
+                }
+
+                //自动出牌开关,用于托管延迟出牌
+                isStartPlayCard = !isStartPlayCard;
+                if (isStartPlayCard)
                 {
                     continue;
                 }
@@ -45,14 +53,14 @@ namespace Hotfix
                 }
 
                 //自动提示出牌
-                Actor_GamerPrompt_Ack response = await actorProxy.Call<Actor_GamerPrompt_Ack>(new Actor_GamerPrompt_Req());
+                Actor_GamerPrompt_Ack response = await actorProxy.Call(new Actor_GamerPrompt_Req()) as Actor_GamerPrompt_Ack;
                 if (response.Error > 0 || response.Cards == null)
                 {
                     actorProxy.Send(new Actor_GamerDontPlay_Ntt());
                 }
                 else
                 {
-                    await actorProxy.Call<Actor_GamerPlayCard_Ack>(new Actor_GamerPlayCard_Req() { Cards = response.Cards });
+                    await actorProxy.Call(new Actor_GamerPlayCard_Req() { Cards = response.Cards });
                 }
             }
         }

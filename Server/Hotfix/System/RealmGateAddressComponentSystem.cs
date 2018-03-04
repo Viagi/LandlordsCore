@@ -3,11 +3,11 @@
 namespace Hotfix
 {
 	[ObjectSystem]
-	public class RealmGateAddressComponentSystem : ObjectSystem<RealmGateAddressComponent>, IStart
+	public class RealmGateAddressComponentSystem : StartSystem<RealmGateAddressComponent>
 	{
-		public void Start()
+		public override void Start(RealmGateAddressComponent self)
 		{
-			this.Get().Start();
+			self.Start();
 		}
 	}
 	
@@ -15,7 +15,7 @@ namespace Hotfix
 	{
 		public static void Start(this RealmGateAddressComponent component)
 		{
-			StartConfig[] startConfigs = component.Parent.GetComponent<StartConfigComponent>().GetAll();
+			StartConfig[] startConfigs = component.Entity.GetComponent<StartConfigComponent>().GetAll();
 			foreach (StartConfig config in startConfigs)
 			{
 				if (!config.AppType.Is(AppType.Gate))

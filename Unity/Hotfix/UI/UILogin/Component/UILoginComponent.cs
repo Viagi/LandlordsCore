@@ -7,11 +7,11 @@ using UnityEngine.UI;
 namespace Hotfix
 {
 	[ObjectSystem]
-	public class UiLoginComponentSystem : ObjectSystem<UILoginComponent>, IAwake
+	public class UiLoginComponentSystem : AwakeSystem<UILoginComponent>
 	{
-		public void Awake()
+		public override void Awake(UILoginComponent self)
 		{
-			this.Get().Awake();
+			self.Awake();
 		}
 	}
 	
@@ -45,13 +45,12 @@ namespace Hotfix
 				connetEndPoint = NetworkHelper.ToIPEndPoint(r2CLogin.Address);
 				Session gateSession = Game.Scene.GetComponent<NetOuterComponent>().Create(connetEndPoint);
 				Game.Scene.AddComponent<SessionComponent>().Session = gateSession;
-
 				G2C_LoginGate g2CLoginGate = (G2C_LoginGate)await SessionComponent.Instance.Session.Call(new C2G_LoginGate() { Key = r2CLogin.Key });
 
 				Log.Info("登陆gate成功!");
 
 				// 创建Player
-				Player player = Model.EntityFactory.CreateWithId<Player>(g2CLoginGate.PlayerId);
+				Player player = Model.ComponentFactory.CreateWithId<Player>(g2CLoginGate.PlayerId);
 				PlayerComponent playerComponent = Game.Scene.GetComponent<PlayerComponent>();
 				playerComponent.MyPlayer = player;
 
@@ -60,7 +59,7 @@ namespace Hotfix
 			}
 			catch (Exception e)
 			{
-				Log.Error(e.ToString());
+				Log.Error(e.ToStr());
 			}
 		}
 	}

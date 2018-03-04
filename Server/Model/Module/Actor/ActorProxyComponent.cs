@@ -3,20 +3,18 @@
 namespace Model
 {
 	[ObjectSystem]
-	public class ActorProxyComponentSystem : ObjectSystem<ActorProxyComponent>, IStart
+	public class ActorProxyComponentSystem : StartSystem<ActorProxyComponent>
 	{
 		// 每10s扫描一次过期的actorproxy进行回收,过期时间是1分钟
-		public async void Start()
+		public override async void Start(ActorProxyComponent self)
 		{
-			ActorProxyComponent self = this.Get();
-
 			List<long> timeoutActorProxyIds = new List<long>();
 
 			while (true)
 			{
 				await Game.Scene.GetComponent<TimerComponent>().WaitAsync(10000);
 
-				if (self.Id == 0)
+				if (self.IsDisposed)
 				{
 					return;
 				}
@@ -54,7 +52,7 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}
@@ -73,7 +71,7 @@ namespace Model
 				return actorProxy;
 			}
 			
-			actorProxy = EntityFactory.CreateWithId<ActorProxy>(id);
+			actorProxy = ComponentFactory.CreateWithId<ActorProxy>(id);
 			this.ActorProxys[id] = actorProxy;
 			return actorProxy;
 		}

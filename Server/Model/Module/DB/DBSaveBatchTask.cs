@@ -7,12 +7,10 @@ using MongoDB.Driver;
 namespace Model
 {
 	[ObjectSystem]
-	public class DbSaveBatchTaskSystem : ObjectSystem<DBSaveBatchTask>, IAwake<List<Disposer>, string, TaskCompletionSource<bool>>
+	public class DbSaveBatchTaskSystem : AwakeSystem<DBSaveBatchTask, List<Component>, string, TaskCompletionSource<bool>>
 	{
-		public void Awake(List<Disposer> disposers, string collectionName, TaskCompletionSource<bool> tcs)
+		public override void Awake(DBSaveBatchTask self, List<Component> disposers, string collectionName, TaskCompletionSource<bool> tcs)
 		{
-			DBSaveBatchTask self = this.Get();
-			
 			self.Disposers = disposers;
 			self.CollectionName = collectionName;
 			self.Tcs = tcs;
@@ -23,7 +21,7 @@ namespace Model
 	{
 		public string CollectionName { get; set; }
 
-		public List<Disposer> Disposers;
+		public List<Component> Disposers;
 
 		public TaskCompletionSource<bool> Tcs;
 	
@@ -31,7 +29,7 @@ namespace Model
 		{
 			DBComponent dbComponent = Game.Scene.GetComponent<DBComponent>();
 
-			foreach (Disposer disposer in this.Disposers)
+			foreach (Component disposer in this.Disposers)
 			{
 				if (disposer == null)
 				{

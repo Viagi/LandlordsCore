@@ -7,6 +7,7 @@ namespace Model
 	public class ActorMessageInfo
 	{
 		public Session Session;
+		public uint RpcId;
 		public ActorRequest Message;
 	}
 
@@ -28,7 +29,7 @@ namespace Model
 		{
 			try
 			{
-				if (this.Id == 0)
+				if (this.IsDisposed)
 				{
 					return;
 				}

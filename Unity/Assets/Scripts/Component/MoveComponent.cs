@@ -4,16 +4,20 @@ using UnityEngine;
 namespace Model
 {
 	[ObjectSystem]
-	public class MoveComponentSystem : ObjectSystem<MoveComponent>, IAwake, IUpdate
+	public class MoveComponentAwakeSystem : AwakeSystem<MoveComponent>
 	{
-		public void Awake()
+		public override void Awake(MoveComponent self)
 		{
-			this.Get().Awake();
+			self.Awake();
 		}
+	}
 
-		public void Update()
+	[ObjectSystem]
+	public class MoveComponentUpdateSystem : UpdateSystem<MoveComponent>
+	{
+		public override void Update(MoveComponent self)
 		{
-			this.Get().Update();
+			self.Update();
 		}
 	}
 
@@ -93,7 +97,7 @@ namespace Model
 		public void Awake()
 		{
 			this.mainSpeed = this.AddSpeed(new Vector3());
-			this.animatorComponent = this.Parent.GetComponent<AnimatorComponent>();
+			this.animatorComponent = this.Entity.GetComponent<AnimatorComponent>();
 		}
 
 		public void Update()
@@ -265,7 +269,7 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

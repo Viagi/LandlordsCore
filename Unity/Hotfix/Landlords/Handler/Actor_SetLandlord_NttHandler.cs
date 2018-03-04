@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Hotfix
 {
-    [MessageHandler(Opcode.Actor_SetLandlord_Ntt)]
+    [MessageHandler]
     public class Actor_SetLandlord_NttHandler : AMHandler<Actor_SetLandlord_Ntt>
     {
         protected override void Run(Session session, Actor_SetLandlord_Ntt message)

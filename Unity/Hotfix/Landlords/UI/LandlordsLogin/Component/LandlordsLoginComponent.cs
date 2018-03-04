@@ -7,11 +7,11 @@ using System.Net;
 namespace Hotfix
 {
     [ObjectSystem]
-    public class LandlordsLoginComponentEvent : ObjectSystem<LandlordsLoginComponent>, IAwake
+    public class LandlordsLoginComponentAwakeSystem : AwakeSystem<LandlordsLoginComponent>
     {
-        public void Awake()
+        public override void Awake(LandlordsLoginComponent self)
         {
-            this.Get().Awake();
+            self.Awake();
         }
     }
 
@@ -37,7 +37,7 @@ namespace Hotfix
 
             //热更测试
             Text hotfixPrompt = rc.Get<GameObject>("HotfixPrompt").GetComponent<Text>();
-            hotfixPrompt.text = "斗地主2.0";
+            hotfixPrompt.text = "斗地主3.0";
 
             //绑定关联对象
             account = rc.Get<GameObject>("Account").GetComponent<InputField>();
@@ -63,7 +63,7 @@ namespace Hotfix
         /// </summary>
         public async void OnLogin()
         {
-            if (isLogining || this.Id == 0)
+            if (isLogining || this.IsDisposed)
             {
                 return;
             }
@@ -82,7 +82,7 @@ namespace Hotfix
                 R2C_Login_Ack r2C_Login_Ack = await session.Call(new C2R_Login_Req() { Account = account.text, Password = password.text }) as R2C_Login_Ack;
                 prompt.text = "";
 
-                if (this.Id == 0)
+                if (this.IsDisposed)
                 {
                     return;
                 }
@@ -113,7 +113,7 @@ namespace Hotfix
                 Log.Info("登录成功");
 
                 //保存本地玩家
-                User user = Model.EntityFactory.CreateWithId<User, long>(g2C_LoginGate_Ack.PlayerID, g2C_LoginGate_Ack.UserID);
+                User user = Model.ComponentFactory.CreateWithId<User, long>(g2C_LoginGate_Ack.PlayerID, g2C_LoginGate_Ack.UserID);
                 ClientComponent.Instance.LocalPlayer = user;
 
                 //跳转到大厅界面
@@ -140,7 +140,7 @@ namespace Hotfix
         /// </summary>
         public async void OnRegister()
         {
-            if (isRegistering || this.Id == 0)
+            if (isRegistering || this.IsDisposed)
             {
                 return;
             }
@@ -160,7 +160,7 @@ namespace Hotfix
                 R2C_Register_Ack r2C_Register_Ack = await session.Call(new C2R_Register_Req() { Account = account.text, Password = password.text }) as R2C_Register_Ack;
                 prompt.text = "";
 
-                if (this.Id == 0)
+                if (this.IsDisposed)
                 {
                     return;
                 }

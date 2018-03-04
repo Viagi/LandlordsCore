@@ -2,7 +2,7 @@
 
 namespace Hotfix
 {
-    [MessageHandler(Opcode.Actor_GamerExitRoom_Ntt)]
+    [MessageHandler]
     public class Actor_GamerExitRoom_NttHandler : AMHandler<Actor_GamerExitRoom_Ntt>
     {
         protected override void Run(Session session, Actor_GamerExitRoom_Ntt message)

@@ -5,7 +5,7 @@ using Model;
 
 namespace Hotfix
 {
-    [MessageHandler(Opcode.Actor_Trusteeship_Ntt)]
+    [MessageHandler]
     public class Actor_Trusteeship_NttHandler : AMHandler<Actor_Trusteeship_Ntt>
     {
         protected override void Run(Session session, Actor_Trusteeship_Ntt message)

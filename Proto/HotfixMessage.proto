@@ -1,0 +1,245 @@
+#region ET
+
+message C2R_Login // IRequest
+{
+	required string	Account	 = 1;	// 帐号
+	required string	Password = 2;	// 密码
+}
+
+message R2C_Login // IResponse
+{
+	required string Address = 1;
+	required int64 	Key	    = 2;
+}
+
+message C2G_LoginGate // IRequest
+{
+	required int64 Key = 1;	// 帐号
+}
+
+message G2C_LoginGate // IResponse
+{
+	required int64 PlayerId = 1;
+}
+
+message G2C_TestHotfixMessage // IMessage
+{
+	required string Info = 1;
+}
+
+message C2M_TestActorRequest // IActorRequest
+{
+	required string Info = 1;
+}
+
+message M2C_TestActorResponse // IActorResponse
+{
+	required string Info = 1;
+}
+
+#endregion
+    
+#region Client-Realm
+
+message C2R_Login_Req // IRequest
+{
+    required string Account = 1;
+    required string Password = 2;
+}
+
+message R2C_Login_Ack // IResponse
+{
+    required long Key = 1;
+    required string Address = 2;
+}
+
+message C2R_Register_Req // IRequest
+{
+    required string Account = 1;
+    required string Password = 2;
+}
+
+message R2C_Register_Ack // IResponse
+{
+
+}
+
+#endregion
+
+#region Client-Gate
+
+message C2G_LoginGate_Req // IRequest
+{
+    required long Key = 1;
+}
+
+message G2C_LoginGate_Ack // IResponse
+{
+    required long PlayerID = 1;
+    required long UserID = 2;
+}
+
+message C2G_GetUserInfo_Req // IRequest
+{
+    required long UserID = 1;
+}
+
+message G2C_GetUserInfo_Ack // IResponse
+{
+    required string NickName = 1;
+    required int Wins = 2;
+    required int Loses = 3;
+    required long Money = 4;
+}
+
+message C2G_StartMatch_Req // IRequest
+{
+
+}
+
+message G2C_StartMatch_Ack // IResponse
+{
+
+}
+
+message C2G_ReturnLobby_Ntt // IMessage
+{
+
+}
+
+#endregion
+
+#region Client-Map
+
+message Actor_GamerReady_Ntt // IActorMessage
+{
+    required long UserID = 1;
+}
+
+message Actor_GamerGrabLandlordSelect_Ntt // IActorMessage
+{
+    required long UserID = 1;
+    required bool IsGrab = 2;
+}
+
+message Actor_GamerPlayCard_Req // IActorRequest
+{
+    required Card[] Cards = 1;
+}
+
+message Actor_GamerPlayCard_Ack // IActorResponse
+{
+
+}
+
+message Actor_GamerPlayCard_Ntt // IActorMessage
+{
+    required long UserID = 1;
+    required Card[] Cards = 2;
+}
+
+message Actor_GamerPrompt_Req // IActorRequest
+{
+
+}
+
+message Actor_GamerPrompt_Ack // IActorResponse
+{
+    required Card[] Cards = 1;
+}
+
+message Actor_GamerDontPlay_Ntt // IActorMessage
+{
+    required long UserID = 1;
+}
+
+message Actor_Trusteeship_Ntt // IActorMessage
+{
+    required long UserID = 1;
+    required bool isTrusteeship = 2;
+}
+
+#endregion
+
+#region Gate-Client
+
+message G2C_PlayerDisconnect_Ntt // IMessage
+{
+
+}
+
+#endregion
+
+#region Map-Client
+
+message GamerInfo
+{
+    required long UserID = 1;
+    required bool IsReady = 2;
+}
+
+message Actor_GamerEnterRoom_Ntt // IActorMessage
+{
+    object List<GamerInfo> Gamers = 1;
+}
+
+message Actor_GamerExitRoom_Ntt // IActorMessage
+{
+    required long UserID = 1;
+}
+
+message Actor_GamerReconnect_Ntt // IActorMessage
+{
+    required int Multiples = 1;
+    [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
+    object Dictionary<long,Identity> GamersIdentity = 2;
+    required Card[] LordCards = 3;
+    required KeyValuePair<long,Card[]> DeskCards = 4;
+    [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
+    object Dictionary<long,bool> GamerGrabLandlordState = 5;
+}
+
+message Actor_GameStart_Ntt // IActorMessage
+{
+    required Card[] GamerCards = 1;
+    [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
+    object Dictionary<long,int> GamerCardsNum = 2;
+}
+
+message Actor_AuthorityGrabLandlord_Ntt // IActorMessage
+{
+    required long UserID = 1;
+}
+
+message Actor_AuthorityPlayCard_Ntt // IActorMessage
+{
+    required long UserID = 1;
+    required bool IsFirst = 2;
+}
+
+message Actor_SetMultiples_Ntt // IActorMessage
+{
+    required int Multiples = 1;
+}
+
+message Actor_SetLandlord_Ntt // IActorMessage
+{
+    required long UserID = 1;
+    required Card[] LordCards = 2;
+}
+
+message Actor_Gameover_Ntt // IActorMessage
+{
+    required Identity Winner = 1;
+    required long BasePointPerMatch = 2;
+    required int Multiples = 3;
+    [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
+    object Dictionary<long,long> GamersScore = 4;
+}
+
+message Actor_GamerMoneyLess_Ntt // IActorMessage
+{
+    required long UserID = 1;
+}
+
+#endregion

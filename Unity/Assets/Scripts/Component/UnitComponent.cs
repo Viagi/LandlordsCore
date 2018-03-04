@@ -4,11 +4,11 @@ using System.Linq;
 namespace Model
 {
 	[ObjectSystem]
-	public class UnitComponentSystem : ObjectSystem<UnitComponent>, IAwake
+	public class UnitComponentSystem : AwakeSystem<UnitComponent>
 	{
-		public void Awake()
+		public override void Awake(UnitComponent self)
 		{
-			this.Get().Awake();
+			self.Awake();
 		}
 	}
 	
@@ -27,7 +27,7 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

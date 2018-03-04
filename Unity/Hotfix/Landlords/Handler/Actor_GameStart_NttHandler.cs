@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Hotfix
 {
-    [MessageHandler(Opcode.Actor_GameStart_Ntt)]
+    [MessageHandler]
     public class Actor_GameStart_NttHandler : AMHandler<Actor_GameStart_Ntt>
     {
         protected override void Run(Session session, Actor_GameStart_Ntt message)

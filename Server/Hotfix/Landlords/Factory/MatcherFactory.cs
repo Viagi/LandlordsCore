@@ -13,7 +13,7 @@ namespace Hotfix
         public static Matcher Create(long playerId, long userId, long sessionId)
         {
             //创建匹配玩家
-            Matcher matcher = EntityFactory.Create<Matcher, long>(userId);
+            Matcher matcher = ComponentFactory.Create<Matcher, long>(userId);
             matcher.PlayerID = playerId;
             matcher.GateSessionID = sessionId;
 

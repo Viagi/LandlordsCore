@@ -7,15 +7,15 @@ using UnityEngine.Networking;
 namespace Model
 {
 	[ObjectSystem]
-	public class UnityWebRequestSystem : ObjectSystem<UnityWebRequestAsync>, IUpdate
+	public class UnityWebRequestUpdateSystem : UpdateSystem<UnityWebRequestAsync>
 	{
-		public void Update()
+		public override void Update(UnityWebRequestAsync self)
 		{
-			this.Get().Update();
+			self.Update();
 		}
 	}
 	
-	public class UnityWebRequestAsync : Disposer
+	public class UnityWebRequestAsync : Component
 	{
 		public UnityWebRequest Request;
 
@@ -25,7 +25,7 @@ namespace Model
 		
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

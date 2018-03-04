@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Landlords\System\Map\Room\" />
+    <Folder Include="Other\" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,7 @@ namespace Hotfix
         /// <returns></returns>
         public static Gamer Create(long playerId, long userId, long? id = null)
         {
-            Gamer gamer = EntityFactory.CreateWithId<Gamer, long>(id ?? IdGenerater.GenerateId(), userId);
+            Gamer gamer = ComponentFactory.CreateWithId<Gamer, long>(id ?? IdGenerater.GenerateId(), userId);
             gamer.PlayerID = playerId;
 
             return gamer;

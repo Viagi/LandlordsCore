@@ -6,11 +6,11 @@ using System;
 namespace Hotfix
 {
     [ObjectSystem]
-    public class LandlordsEndComponentEvent : ObjectSystem<LandlordsEndComponent>, IAwake<bool>
+    public class LandlordsEndComponentAwakeSystem : AwakeSystem<LandlordsEndComponent, bool>
     {
-        public void Awake(bool isWin)
+        public override void Awake(LandlordsEndComponent self, bool isWin)
         {
-            this.Get().Awake(isWin);
+            self.Awake(isWin);
         }
     }
 
@@ -45,7 +45,7 @@ namespace Hotfix
 
         public override void Dispose()
         {
-            if(this.Id == 0)
+            if (this.IsDisposed)
             {
                 return;
             }
@@ -80,7 +80,7 @@ namespace Hotfix
             multiplesText.text = multiples.ToString();
             scoreText.text = score.ToString();
 
-            if (gamer.UserID == this.GetParent<UI>().Parent.GetComponent<GamerComponent>().LocalGamer.UserID)
+            if (gamer.UserID == this.GetParent<UI>().GetParent<UI>().GetComponent<GamerComponent>().LocalGamer.UserID)
             {
                 nickNameText.color = Color.red;
                 baseScoreText.color = Color.red;

@@ -1,22 +1,30 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Model;
 
 namespace Hotfix
 {
-	[Model.ObjectSystem]
-	public class UiSystem : ObjectSystem<UI>, IAwake<Scene, UI, GameObject>
+	[ObjectSystem]
+	public class UiSystem : AwakeSystem<UI, GameObject>
 	{
-		public void Awake(Scene scene, UI parent, GameObject gameObject)
+		public override void Awake(UI self, GameObject gameObject)
 		{
-			this.Get().Awake(scene, parent, gameObject);
+			self.Awake(gameObject);
 		}
 	}
-	
-	
-	public sealed class UI: Entity
-	{
-		public Scene Scene { get; set; }
 
+    [ObjectSystem]
+    public class UiAwakeSystem : AwakeSystem<UI, UI, GameObject>
+    {
+        public override void Awake(UI self, UI parent, GameObject gameObject)
+        {
+            self.Awake(parent, gameObject);
+        }
+    }
+
+
+    public sealed class UI: Entity
+	{
 		public string Name
 		{
 			get
@@ -29,22 +37,26 @@ namespace Hotfix
 
 		public Dictionary<string, UI> children = new Dictionary<string, UI>();
 		
-		public void Awake(Scene scene, UI parent, GameObject gameObject)
+		public void Awake(GameObject gameObject)
 		{
 			this.children.Clear();
-			
-			this.Scene = scene;
-
-			if (parent != null)
-			{
-				gameObject.transform.SetParent(parent.GameObject.transform, false);
-			}
 			this.GameObject = gameObject;
 		}
 
-		public override void Dispose()
+        public void Awake(UI parent, GameObject gameObject)
+        {
+            this.children.Clear();
+
+            if (parent != null)
+            {
+                gameObject.transform.SetParent(parent.GameObject.transform, false);
+            }
+            this.GameObject = gameObject;
+        }
+
+        public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}
@@ -94,7 +106,7 @@ namespace Hotfix
 			{
 				return null;
 			}
-			child = EntityFactory.Create<UI, Scene, UI, GameObject>(this.Scene, this, childGameObject);
+			child = ComponentFactory.Create<UI, GameObject>(childGameObject);
 			this.Add(child);
 			return child;
 		}

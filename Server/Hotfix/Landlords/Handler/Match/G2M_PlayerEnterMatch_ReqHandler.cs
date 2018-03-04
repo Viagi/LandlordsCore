@@ -27,7 +27,7 @@ namespace Hotfix
 
                     //重连房间
                     ActorProxy actorProxy = actorProxyComponent.Get(roomId);
-                    await actorProxy.Call<Actor_PlayerEnterRoom_Ack>(new Actor_PlayerEnterRoom_Req()
+                    await actorProxy.Call(new Actor_PlayerEnterRoom_Req()
                     {
                         PlayerID = message.PlayerID,
                         UserID = message.UserID,

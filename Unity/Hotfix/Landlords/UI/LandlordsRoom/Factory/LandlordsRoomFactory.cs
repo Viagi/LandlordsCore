@@ -19,7 +19,7 @@ namespace Hotfix
                 GameObject bundleGameObject = resourcesComponent.GetAsset<GameObject>($"{type}.unity3d", $"{type}");
                 GameObject room = UnityEngine.Object.Instantiate(bundleGameObject);
                 room.layer = LayerMask.NameToLayer(LayerNames.UI);
-                UI ui = EntityFactory.Create<UI, Scene, UI, GameObject>(scene, null, room);
+                UI ui = ComponentFactory.Create<UI, GameObject>(room);
 
                 ui.AddComponent<GamerComponent>();
                 ui.AddComponent<LandlordsRoomComponent>();

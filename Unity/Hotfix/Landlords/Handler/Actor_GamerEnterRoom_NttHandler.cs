@@ -3,7 +3,7 @@ using Model;
 
 namespace Hotfix
 {
-    [MessageHandler(Opcode.Actor_GamerEnterRoom_Ntt)]
+    [MessageHandler]
     public class Actor_GamerEnterRoom_NttHandler : AMHandler<Actor_GamerEnterRoom_Ntt>
     {
         protected override void Run(Session session, Actor_GamerEnterRoom_Ntt message)
@@ -25,14 +25,12 @@ namespace Hotfix
             }
 
             int localGamerIndex = message.Gamers.FindIndex(info => info.UserID == gamerComponent.LocalGamer.UserID);
-            Log.Info($"{MongoHelper.ToJson(message.Gamers)}");
             //添加未显示玩家
             for (int i = 0; i < message.Gamers.Count; i++)
             {
                 GamerInfo gamerInfo = message.Gamers[i];
                 if (gamerInfo.UserID == 0)
                     continue;
-                Log.Info($"玩家{gamerInfo.UserID} 是否未存在:{gamerComponent.Get(gamerInfo.UserID) == null}");
                 if (gamerComponent.Get(gamerInfo.UserID) == null)
                 {
                     Gamer gamer = GamerFactory.Create(gamerInfo.UserID, gamerInfo.IsReady);

@@ -18,7 +18,7 @@ namespace Hotfix
                 gamer.AddComponent<TrusteeshipComponent>();
                 Log.Info($"玩家{gamer.UserID}切换为自动模式");
             }
-            else if(isTrusteeship)
+            else if (isTrusteeship)
             {
                 gamer.RemoveComponent<TrusteeshipComponent>();
                 Log.Info($"玩家{gamer.UserID}切换为手动模式");
@@ -28,6 +28,17 @@ namespace Hotfix
             message.UserID = gamer.UserID;
             //转发消息
             room.Broadcast(message);
+
+            if (isTrusteeship)
+            {
+                OrderControllerComponent orderController = room.GetComponent<OrderControllerComponent>();
+                if (gamer.UserID == orderController.CurrentAuthority)
+                {
+                    bool isFirst = gamer.UserID == orderController.Biggest;
+                    ActorProxy actorProxy = gamer.GetComponent<UnitGateComponent>().GetActorProxy();
+                    actorProxy.Send(new Actor_AuthorityPlayCard_Ntt() { UserID = orderController.CurrentAuthority, IsFirst = isFirst });
+                }
+            }
 
             await Task.CompletedTask;
         }

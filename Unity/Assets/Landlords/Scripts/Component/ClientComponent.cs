@@ -1,11 +1,11 @@
 ﻿namespace Model
 {
     [ObjectSystem]
-    public class ClientComponentEvent : ObjectSystem<ClientComponent>, IAwake
+    public class ClientComponentAwakeSystem : AwakeSystem<ClientComponent>
     {
-        public void Awake()
+        public override void Awake(ClientComponent self)
         {
-            this.Get().Awake();
+            self.Awake();
         }
     }
 

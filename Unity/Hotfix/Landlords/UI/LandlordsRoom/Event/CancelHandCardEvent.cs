@@ -2,10 +2,10 @@
 
 namespace Hotfix
 {
-    [Event((int)Model.EventIdType.CancelHandCard)]
-    public class CancelHandCardEvent : IEvent<Card>
+    [Event(Model.EventIdType.CancelHandCard)]
+    public class CancelHandCardEvent : AEvent<Card>
     {
-        public void Run(Card card)
+        public override void Run(Card card)
         {
             Hotfix.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom).GetComponent<LandlordsRoomComponent>().Interaction.CancelCard(card);
         }

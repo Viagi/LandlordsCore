@@ -15,6 +15,7 @@ namespace Hotfix
             self.Biggest = 0;
             self.CurrentAuthority = id;
             self.SelectLordIndex = 1;
+            self.GamerLandlordState.Clear();
         }
 
         /// <summary>

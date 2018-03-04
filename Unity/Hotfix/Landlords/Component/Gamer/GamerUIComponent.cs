@@ -6,11 +6,11 @@ using UnityEngine.UI;
 namespace Hotfix
 {
     [ObjectSystem]
-    public class GamerUIComponentEvent : ObjectSystem<GamerUIComponent>, IStart
+    public class GamerUIComponentStartSystem : StartSystem<GamerUIComponent>
     {
-        public void Start()
+        public override void Start(GamerUIComponent self)
         {
-            this.Get().Start();
+            self.Start();
         }
     }
 
@@ -171,7 +171,7 @@ namespace Hotfix
 
         public override void Dispose()
         {
-            if (this.Id == 0)
+            if (this.IsDisposed)
             {
                 return;
             }

@@ -7,12 +7,7 @@ namespace Model
 		Hero,
 		Npc
 	}
-
-	[ObjectSystem]
-	public class UnitSystem : ObjectSystem<Unit>
-	{
-	}
-
+	
 	public sealed class Unit: Entity
 	{
 		public VInt3 IntPos;
@@ -49,7 +44,7 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}
