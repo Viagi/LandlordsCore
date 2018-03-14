@@ -1,7 +1,7 @@
-﻿namespace Model
+﻿namespace ETModel
 {
 	public interface IMessageDispatcher
 	{
-		void Dispatch(Session session, PacketInfo packetInfo);
+		void Dispatch(Session session, Packet packet);
 	}
 }

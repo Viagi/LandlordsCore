@@ -1,9 +1,8 @@
-﻿namespace Hotfix
+﻿namespace ETHotfix
 {
 	public static class EventIdType
 	{
-		public const int InitSceneStart = 10001;
-
-        public const int LandlordsInitSceneStart = 10002;
-    }
+		public const string InitSceneStart = "InitSceneStart";
+		public const string LandlordsInitSceneStart = "LandlordsInitSceneStart";
+	}
 }

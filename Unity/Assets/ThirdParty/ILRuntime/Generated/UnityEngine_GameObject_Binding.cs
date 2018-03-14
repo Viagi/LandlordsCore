@@ -39,7 +39,7 @@ namespace ILRuntime.Runtime.Generated
                     lst.Add(m);
                 }
             }
-            args = new Type[]{typeof(Model.CanvasConfig)};
+            args = new Type[]{typeof(ETModel.CanvasConfig)};
             if (genericMethods.TryGetValue("GetComponent", out lst))
             {
                 foreach(var m in lst)
@@ -144,7 +144,7 @@ namespace ILRuntime.Runtime.Generated
             instance_of_this_method = (UnityEngine.GameObject)typeof(UnityEngine.GameObject).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
             __intp.Free(ptr_of_this_method);
 
-            var result_of_this_method = instance_of_this_method.GetComponent<Model.CanvasConfig>();
+            var result_of_this_method = instance_of_this_method.GetComponent<ETModel.CanvasConfig>();
 
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)

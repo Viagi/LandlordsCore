@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model;
+using ETModel;
 using UnityEngine;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	[ObjectSystem]
 	public class UiComponentAwakeSystem : AwakeSystem<UIComponent>
@@ -30,8 +30,8 @@ namespace Hotfix
 	public class UIComponent: Component
 	{
 		private GameObject Root;
-		private readonly Dictionary<UIType, IUIFactory> UiTypes = new Dictionary<UIType, IUIFactory>();
-		private readonly Dictionary<UIType, UI> uis = new Dictionary<UIType, UI>();
+		private readonly Dictionary<string, IUIFactory> UiTypes = new Dictionary<string, IUIFactory>();
+		private readonly Dictionary<string, UI> uis = new Dictionary<string, UI>();
 
 		public override void Dispose()
 		{
@@ -42,7 +42,7 @@ namespace Hotfix
 
 			base.Dispose();
 
-			foreach (UIType type in uis.Keys.ToArray())
+			foreach (string type in uis.Keys.ToArray())
 			{
 				UI ui;
 				if (!uis.TryGetValue(type, out ui))
@@ -67,7 +67,7 @@ namespace Hotfix
 		{
 			UiTypes.Clear();
             
-            Type[] types = Model.Game.Hotfix.GetHotfixTypes();
+            Type[] types = ETModel.Game.Hotfix.GetHotfixTypes();
 
 			foreach (Type type in types)
 			{
@@ -78,7 +78,7 @@ namespace Hotfix
 				}
 
 				UIFactoryAttribute attribute = attrs[0] as UIFactoryAttribute;
-				if (UiTypes.ContainsKey((UIType)attribute.Type))
+				if (UiTypes.ContainsKey(attribute.Type))
 				{
                     Log.Debug($"已经存在同类UI Factory: {attribute.Type}");
 					throw new Exception($"已经存在同类UI Factory: {attribute.Type}");
@@ -90,11 +90,11 @@ namespace Hotfix
 					Log.Error($"{o.GetType().FullName} 没有继承 IUIFactory");
 					continue;
 				}
-				this.UiTypes.Add((UIType)attribute.Type, factory);
+				this.UiTypes.Add(attribute.Type, factory);
 			}
 		}
 
-		public UI Create(UIType type)
+		public UI Create(string type)
 		{
 			try
 			{
@@ -112,12 +112,12 @@ namespace Hotfix
 			}
 		}
 
-		public void Add(UIType type, UI ui)
+		public void Add(string type, UI ui)
 		{
 			this.uis.Add(type, ui);
 		}
 
-		public void Remove(UIType type)
+		public void Remove(string type)
 		{
 			UI ui;
 			if (!uis.TryGetValue(type, out ui))
@@ -131,7 +131,7 @@ namespace Hotfix
 
 		public void RemoveAll()
 		{
-			foreach (UIType type in this.uis.Keys.ToArray())
+			foreach (string type in this.uis.Keys.ToArray())
 			{
 				UI ui;
 				if (!this.uis.TryGetValue(type, out ui))
@@ -143,16 +143,16 @@ namespace Hotfix
 			}
 		}
 
-		public UI Get(UIType type)
+		public UI Get(string type)
 		{
 			UI ui;
 			this.uis.TryGetValue(type, out ui);
 			return ui;
 		}
 
-		public List<UIType> GetUITypeList()
+		public List<string> GetUITypeList()
 		{
-			return new List<UIType>(this.uis.Keys);
+			return new List<string>(this.uis.Keys);
 		}
 	}
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	[ObjectSystem]
 	public class ActorComponentAwakeSystem : AwakeSystem<ActorComponent>
@@ -112,7 +112,7 @@ namespace Hotfix
 					{
 						return;
 					}
-					await self.entityActorHandler.Handle(info.Session, (Entity)self.Parent, info.RpcId, info.Message);
+					await self.entityActorHandler.Handle(info.Session, (Entity)self.Parent, info.Message);
 				}
 				catch (Exception e)
 				{

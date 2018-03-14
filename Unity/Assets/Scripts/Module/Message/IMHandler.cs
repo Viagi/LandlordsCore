@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Model
+namespace ETModel
 {
 	public interface IMHandler
 	{
-		void Handle(Session session, uint rpcId, object message);
+		void Handle(Session session, object message);
 		Type GetMessageType();
 	}
 }

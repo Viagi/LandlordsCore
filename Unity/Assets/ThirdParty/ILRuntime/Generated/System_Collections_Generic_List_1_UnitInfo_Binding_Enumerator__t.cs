@@ -21,7 +21,7 @@ namespace ILRuntime.Runtime.Generated
             MethodBase method;
             FieldInfo field;
             Type[] args;
-            Type type = typeof(System.Collections.Generic.List<Model.UnitInfo>.Enumerator);
+            Type type = typeof(System.Collections.Generic.List<ETModel.UnitInfo>.Enumerator);
             args = new Type[]{};
             method = type.GetMethod("get_Current", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, get_Current_0);
@@ -29,12 +29,12 @@ namespace ILRuntime.Runtime.Generated
             method = type.GetMethod("MoveNext", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, MoveNext_1);
 
-            app.RegisterCLRCreateDefaultInstance(type, () => new System.Collections.Generic.List<Model.UnitInfo>.Enumerator());
+            app.RegisterCLRCreateDefaultInstance(type, () => new System.Collections.Generic.List<ETModel.UnitInfo>.Enumerator());
 
 
         }
 
-        static void WriteBackInstance(ILRuntime.Runtime.Enviorment.AppDomain __domain, StackObject* ptr_of_this_method, IList<object> __mStack, ref System.Collections.Generic.List<Model.UnitInfo>.Enumerator instance_of_this_method)
+        static void WriteBackInstance(ILRuntime.Runtime.Enviorment.AppDomain __domain, StackObject* ptr_of_this_method, IList<object> __mStack, ref System.Collections.Generic.List<ETModel.UnitInfo>.Enumerator instance_of_this_method)
         {
             ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
             switch(ptr_of_this_method->ObjectType)
@@ -73,7 +73,7 @@ namespace ILRuntime.Runtime.Generated
                     break;
                  case ObjectTypes.ArrayReference:
                     {
-                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as System.Collections.Generic.List<Model.UnitInfo>.Enumerator[];
+                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as System.Collections.Generic.List<ETModel.UnitInfo>.Enumerator[];
                         instance_of_arrayReference[ptr_of_this_method->ValueLow] = instance_of_this_method;
                     }
                     break;
@@ -87,8 +87,8 @@ namespace ILRuntime.Runtime.Generated
             StackObject* __ret = ILIntepreter.Minus(__esp, 1);
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
             ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
-            System.Collections.Generic.List<Model.UnitInfo>.Enumerator instance_of_this_method;
-            instance_of_this_method = (System.Collections.Generic.List<Model.UnitInfo>.Enumerator)typeof(System.Collections.Generic.List<Model.UnitInfo>.Enumerator).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            System.Collections.Generic.List<ETModel.UnitInfo>.Enumerator instance_of_this_method;
+            instance_of_this_method = (System.Collections.Generic.List<ETModel.UnitInfo>.Enumerator)typeof(System.Collections.Generic.List<ETModel.UnitInfo>.Enumerator).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
 
             var result_of_this_method = instance_of_this_method.Current;
 
@@ -109,8 +109,8 @@ namespace ILRuntime.Runtime.Generated
             StackObject* __ret = ILIntepreter.Minus(__esp, 1);
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
             ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
-            System.Collections.Generic.List<Model.UnitInfo>.Enumerator instance_of_this_method;
-            instance_of_this_method = (System.Collections.Generic.List<Model.UnitInfo>.Enumerator)typeof(System.Collections.Generic.List<Model.UnitInfo>.Enumerator).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            System.Collections.Generic.List<ETModel.UnitInfo>.Enumerator instance_of_this_method;
+            instance_of_this_method = (System.Collections.Generic.List<ETModel.UnitInfo>.Enumerator)typeof(System.Collections.Generic.List<ETModel.UnitInfo>.Enumerator).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
 
             var result_of_this_method = instance_of_this_method.MoveNext();
 

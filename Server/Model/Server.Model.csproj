@@ -21,9 +21,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\Unity\Assets\Landlords\Scripts\Message\LandlordsOuterErrorCode.cs" Link="Landlords\Message\LandlordsOuterErrorCode.cs" />
-    <Compile Include="..\..\Unity\Assets\Landlords\Scripts\Object\Card.cs" Link="Landlords\Object\Card.cs" />
-    <Compile Include="..\..\Unity\Assets\Landlords\Scripts\Object\Type.cs" Link="Landlords\Object\Type.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Base\DoubleMap.cs" Link="Base\DoubleMap.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Base\Event\AEventAttribute.cs" Link="Base\Event\AEventAttribute.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Base\Event\Env.cs" Link="Base\Event\Env.cs" />
@@ -68,12 +65,11 @@
     <Compile Include="..\..\Unity\Assets\Scripts\Component\Config\InnerConfig.cs" Link="Module\Message\InnerConfig.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Component\Config\OuterConfig.cs" Link="Module\Message\OuterConfig.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Component\TimerComponent.cs" Link="Component\TimerComponent.cs" />
-    <Compile Include="..\..\Unity\Assets\Scripts\Entity\Session.cs" Link="Module\Message\Session.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Config\ACategory.cs" Link="Module\Config\ACategory.cs" />
-    <Compile Include="..\..\Unity\Assets\Scripts\Module\Config\AConfig.cs" Link="Module\Config\AConfig.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Config\ConfigAttribute.cs" Link="Module\Config\ConfigAttribute.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Config\ConfigComponent.cs" Link="Module\Config\ConfigComponent.cs" />
-    <Compile Include="..\..\Unity\Assets\Scripts\Module\Config\ICategory.cs" Link="Module\Config\ICategory.cs" />
+    <Compile Include="..\..\Unity\Assets\Scripts\Module\Config\IConfig.cs" Link="Module\Config\IConfig.cs" />
+    <Compile Include="..\..\Unity\Assets\Scripts\Module\FrameSync\FrameMessage.cs" Link="Module\FrameSync\FrameMessage.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\AMHandler.cs" Link="Module\Message\AMHandler.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\ErrorCode.cs" Link="Module\Message\ErrorCode.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\IActorMessage.cs" Link="Module\Message\IActorMessage.cs" />
@@ -97,11 +93,11 @@
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\Network\TCP\TChannel.cs" Link="Module\Message\Network\TCP\TChannel.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\Network\TCP\TService.cs" Link="Module\Message\Network\TCP\TService.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\Opcode.cs" Link="Module\Message\Opcode.cs" />
+    <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\OpcodeHelper.cs" Link="Module\Message\OpcodeHelper.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\OpcodeTypeComponent.cs" Link="Module\Message\OpcodeTypeComponent.cs" />
-    <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\OuterMessage.cs" Link="Module\Message\OuterMessage.cs" />
-    <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\OuterOpcode.cs" Link="Module\Message\OuterOpcode.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\ProtobufPacker.cs" Link="Module\Message\ProtobufPacker.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\RpcException.cs" Link="Module\Message\RpcException.cs" />
+    <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\Session.cs" Link="Module\Message\Session.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Numeric\INumericWatcher.cs" Link="Module\Numeric\INumericWatcher.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Numeric\NumericChangeEvent_NotifyWatcher.cs" Link="Module\Numeric\NumericChangeEvent_NotifyWatcher.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Numeric\NumericComponent.cs" Link="Module\Numeric\NumericComponent.cs" />
@@ -109,8 +105,6 @@
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Numeric\NumericWatcherAttribute.cs" Link="Module\Numeric\NumericWatcherAttribute.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Numeric\NumericWatcherComponent.cs" Link="Module\Numeric\NumericWatcherComponent.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Other\AppType.cs" Link="Other\AppType.cs" />
-    <Compile Include="..\..\Unity\Hotfix\Module\Message\HotfixMessage.cs" Link="Module\Message\HotfixMessage.cs" />
-    <Compile Include="..\..\Unity\Hotfix\Module\Message\HotfixOpcode.cs" Link="Module\Message\HotfixOpcode.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -128,7 +122,6 @@
 
   <ItemGroup>
     <Folder Include="Component\Config\" />
-    <Folder Include="Landlords\Message\" />
     <Folder Include="Module\Message\Network\KCP\" />
     <Folder Include="Module\Message\Network\TCP\" />
     <Folder Include="Module\Numeric\" />

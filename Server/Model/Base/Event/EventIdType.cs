@@ -1,7 +1,7 @@
-﻿namespace Model
+﻿namespace ETModel
 {
 	public static class EventIdType
 	{
-		public const int NumbericChange = 0;
+		public const string NumbericChange = "NumbericChange";
 	}
 }

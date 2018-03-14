@@ -1,14 +1,15 @@
 ﻿using System;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	public class OuterMessageDispatcher: IMessageDispatcher
 	{
-		public async void Dispatch(Session session, PacketInfo packetInfo)
+		public async void Dispatch(Session session, Packet packet)
 		{
-			Type messageType = Game.Scene.GetComponent<OpcodeTypeComponent>().GetType(packetInfo.Opcode);
-			object message = session.Network.MessagePacker.DeserializeFrom(messageType, packetInfo.Bytes, packetInfo.Index, packetInfo.Length);
+			ushort opcode = packet.Opcode();
+			Type messageType = Game.Scene.GetComponent<OpcodeTypeComponent>().GetType(opcode);
+			object message = session.Network.MessagePacker.DeserializeFrom(messageType, packet.Bytes, Packet.Index, packet.Length - Packet.Index);
 
 			// gate session收到actor消息直接转发给actor自己去处理
 			if (message is IActorMessage)
@@ -25,17 +26,22 @@ namespace Hotfix
                 long actorId = session.GetComponent<SessionUserComponent>().User.ActorID;
                 ActorProxy actorProxy = Game.Scene.GetComponent<ActorProxyComponent>().Get(actorId);
                 IResponse response = await actorProxy.Call(aActorRequest);
-				session.Reply(packetInfo.RpcId, response);
+				session.Reply(response);
 				return;
 			}
 
 			if (message != null)
 			{
-				Game.Scene.GetComponent<MessageDispatherComponent>().Handle(session, new MessageInfo(packetInfo.RpcId, packetInfo.Opcode, message));
+				Game.Scene.GetComponent<MessageDispatherComponent>().Handle(session, new MessageInfo(opcode, message));
 				return;
 			}
 
 			throw new Exception($"message type error: {message.GetType().FullName}");
+		}
+
+		public void Dispatch(Session session, ushort opcode, object message)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

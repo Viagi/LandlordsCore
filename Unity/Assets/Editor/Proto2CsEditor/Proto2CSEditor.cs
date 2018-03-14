@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Model;
+using ETModel;
 using UnityEditor;
 
 namespace MyEditor
@@ -16,6 +16,7 @@ namespace MyEditor
 	[Flags]
 	public enum HeadFlag
 	{
+		None = 0,
 		Bson = 1,
 		Proto = 2,
 	}
@@ -23,9 +24,9 @@ namespace MyEditor
 	public class Proto2CSEditor : EditorWindow
 	{
 		private const string protoPath = @"..\Proto\";
-		private const string innerOutPath = @"..\Server\Model\Module\Message\";
-		private const string outerOutPath = @"Assets\Scripts\Module\Message\";
-		private const string hotfixOutPath = @"Hotfix\Module\Message\";
+		private const string serverMessagePath = @"..\Server\Model\Module\Message\";
+		private const string clientMessagePath = @"Assets\Scripts\Module\Message\";
+		private const string hotfixMessagePath = @"Hotfix\Module\Message\";
 		private static readonly char[] splitChars = { ' ', '\t' };
 		private static readonly List<OpcodeInfo> msgOpcode = new List<OpcodeInfo>();
 		private static MultiMap<string, string> parentMsg = new MultiMap<string, string>();
@@ -34,21 +35,28 @@ namespace MyEditor
 		public static void AllProto2CS()
 		{
 			msgOpcode.Clear();
-			Proto2CS("Model", "OuterMessage.proto", outerOutPath, "OuterOpcode", 100, HeadFlag.Proto | HeadFlag.Bson);
-			GenerateOpcode("OuterOpcode", outerOutPath);
+			Proto2CS("ETModel", "OuterMessage.proto", clientMessagePath, "OuterOpcode", 100, HeadFlag.Proto);
+			GenerateOpcode("OuterOpcode", clientMessagePath);
+
+			Proto2CS("ETModel", "OuterMessage.proto", serverMessagePath, "OuterOpcode", 100, HeadFlag.Proto | HeadFlag.Bson, false);
+			GenerateOpcode("OuterOpcode", serverMessagePath);
 
 			msgOpcode.Clear();
-			Proto2CS("Model", "InnerMessage.proto", innerOutPath, "InnerOpcode", 1000, HeadFlag.Bson);
-			GenerateOpcode("InnerOpcode", innerOutPath);
+			Proto2CS("ETHotfix", "HotfixMessage.proto", hotfixMessagePath, "HotfixOpcode", 10000, HeadFlag.None);
+			GenerateOpcode("HotfixOpcode", hotfixMessagePath);
 
 			msgOpcode.Clear();
-			Proto2CS("Hotfix", "HotfixMessage.proto", hotfixOutPath, "HotfixOpcode", 10000, HeadFlag.Bson);
-			GenerateOpcode("HotfixOpcode", hotfixOutPath);
-			
+			Proto2CS("ETModel", "HotfixMessage.proto", serverMessagePath, "HotfixOpcode", 10000, HeadFlag.Bson, false);
+			GenerateOpcode("HotfixOpcode", serverMessagePath);
+
+			msgOpcode.Clear();
+			Proto2CS("ETModel", "InnerMessage.proto", serverMessagePath, "InnerOpcode", 1000, HeadFlag.Bson, false);
+			GenerateOpcode("InnerOpcode", serverMessagePath);
+
 			AssetDatabase.Refresh();
 		}
 		
-		public static void Proto2CS(string ns, string protoName, string outputPath, string opcodeClassName, int startOpcode, HeadFlag flag)
+		public static void Proto2CS(string ns, string protoName, string outputPath, string opcodeClassName, int startOpcode, HeadFlag flag, bool isClient = true)
 		{
 			msgOpcode.Clear();
 			parentMsg = new MultiMap<string, string>();
@@ -59,15 +67,9 @@ namespace MyEditor
 
 			StringBuilder sb = new StringBuilder();
 			sb.Append("using ProtoBuf;\n");
-			sb.Append("using Model;\n");
-			if (ns == "Hotfix")
-			{
-				sb.Append("using Hotfix;\n");
-			}
-
+			sb.Append("using ETModel;\n");
 			sb.Append("using System.Collections.Generic;\n");
 			sb.Append("using MongoDB.Bson.Serialization.Attributes;\n");
-            sb.Append("using MongoDB.Bson.Serialization.Options;\n\n");
 			sb.Append($"namespace {ns}\n");
 			sb.Append("{\n");
 
@@ -123,18 +125,26 @@ namespace MyEditor
 				{
 					sb.Append("\t{\n");
 
+					if (parentClass == "IRequest" || parentClass == "IActorRequest")
+					{
+						sb.AppendLine("\t\t[ProtoMember(90, IsRequired = true)]");
+						sb.AppendLine("\t\tpublic int RpcId { get; set; }");
+					}
+
 					if (parentClass == "IResponse" || parentClass == "IActorResponse")
 					{
 						sb.AppendLine("\t\t[ProtoMember(90, IsRequired = true)]");
-						sb.AppendLine("\t\tpublic int Error { get; set; }\n");
+						sb.AppendLine("\t\tpublic int Error { get; set; }");
 						sb.AppendLine("\t\t[ProtoMember(91, IsRequired = true)]");
-						sb.AppendLine("\t\tpublic string Message { get; set; }\n");
+						sb.AppendLine("\t\tpublic string Message { get; set; }");
+						sb.AppendLine("\t\t[ProtoMember(92, IsRequired = true)]");
+						sb.AppendLine("\t\tpublic int RpcId { get; set; }");
 					}
 
 					if (parentClass == "IFrameMessage")
 					{
 						sb.AppendLine("\t\t[ProtoMember(92, IsRequired = true)]");
-						sb.AppendLine("\t\tpublic long Id { get; set; }\n");
+						sb.AppendLine("\t\tpublic long Id { get; set; }");
 					}
 				}
 
@@ -151,25 +161,10 @@ namespace MyEditor
 
 				if (newline.StartsWith("repeated"))
 				{
-					Repeated(sb, newline);
+					Repeated(sb, ns, newline, isClient);
 				}
 
-                if (newline.StartsWith("object"))
-                {
-                    Object(sb, newline);
-                }
-
-                if (newline.StartsWith("[") && newline.EndsWith("]"))
-                {
-                    sb.AppendLine($"\t\t{newline}");
-                }
-
-                if (newline.StartsWith("#region") || newline.StartsWith("#endregion"))
-                {
-                    sb.AppendLine($"\t{newline}");
-                }
-
-                if (isMsgStart && newline == "}")
+				if (isMsgStart && newline == "}")
 				{
 					isMsgStart = false;
 					sb.Append("\t}\n\n");
@@ -177,51 +172,62 @@ namespace MyEditor
 			}
 			sb.Append("}\n");
 
-			GenerateHead(sb, flag, opcodeClassName);
+			//if (!isClient)
+			//{
+				GenerateHead(sb, ns, flag, opcodeClassName);
+			//}
 
 			File.WriteAllText(csPath, sb.ToString());
 		}
 
-		private static void GenerateHead(StringBuilder sb, HeadFlag flag, string opcodeClassName)
+		private static void GenerateHead(StringBuilder sb, string ns, HeadFlag flag, string opcodeClassName)
 		{
-			sb.AppendLine("#if SERVER");
-			sb.AppendLine("namespace Model\n{");
-			foreach (string parentClass in parentMsg.GetDictionary().Keys)
+			if ((flag & HeadFlag.Bson) != 0)
 			{
-				if ((flag & HeadFlag.Bson) != 0)
+				if (parentMsg.Count > 0)
 				{
-					foreach (string s in parentMsg.GetAll(parentClass))
+					sb.AppendLine($"namespace {ns}");
+					sb.AppendLine("{");
+					foreach (string parentClass in parentMsg.GetDictionary().Keys)
 					{
-						sb.Append($"\t[BsonKnownTypes(typeof({s}))]\n");
+						foreach (string s in parentMsg.GetAll(parentClass))
+						{
+							sb.Append($"\t[BsonKnownTypes(typeof({s}))]\n");
+						}
+
+						sb.Append($"\tpublic partial class {parentClass} {{}}\n\n");
 					}
+
+					sb.AppendLine("}");
 				}
-
-
-				sb.Append($"\tpublic partial class {parentClass} {{}}\n\n");
 			}
-			sb.AppendLine("}");
-			sb.AppendLine("#endif");
 
-			sb.AppendLine("namespace Model\n{");
-			foreach (string parentClass in parentMsg.GetDictionary().Keys)
+			if ((flag & HeadFlag.Proto) != 0)
 			{
-				if ((flag & HeadFlag.Proto) != 0)
+				if (parentMsg.Count > 0)
 				{
-					foreach (string s in parentMsg.GetAll(parentClass))
+					sb.AppendLine($"namespace {ns}");
+					sb.AppendLine("{");
+					foreach (string parentClass in parentMsg.GetDictionary().Keys)
 					{
-						sb.Append($"\t[ProtoInclude({opcodeClassName}.{s}, typeof({s}))]\n");
-					}
-				}
 
-				sb.Append($"\tpublic partial class {parentClass} {{}}\n\n");
+						foreach (string s in parentMsg.GetAll(parentClass))
+						{
+							sb.Append($"\t[ProtoInclude({opcodeClassName}.{s}, typeof({s}))]\n");
+						}
+
+						sb.Append($"\tpublic partial class {parentClass} {{}}\n\n");
+					}
+
+					sb.AppendLine("}");
+				}
 			}
-			sb.AppendLine("}");
 		}
 		
 		private static void GenerateOpcode(string outputFileName, string outputPath)
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.AppendLine("namespace Model");
+			sb.AppendLine("namespace ETModel");
 			sb.AppendLine("{");
 			sb.AppendLine($"\tpublic static partial class {outputFileName}");
 			sb.AppendLine("\t{");
@@ -236,7 +242,7 @@ namespace MyEditor
 			File.WriteAllText(csPath, sb.ToString());
 		}
 
-		private static void Repeated(StringBuilder sb, string newline)
+		private static void Repeated(StringBuilder sb, string ns, string newline, bool isClient)
 		{
 			try
 			{
@@ -247,7 +253,15 @@ namespace MyEditor
 				type = ConvertType(type);
 				string name = ss[2];
 				int order = int.Parse(ss[4]);
-				sb.Append($"\t\t[ProtoMember({order})]\n");
+				if (isClient)
+				{
+					sb.Append($"\t\t[ProtoMember({order}, TypeName = \"{ns}.{type}\")]\n");
+				}
+				else
+				{
+					sb.Append($"\t\t[ProtoMember({order})]\n");
+				}
+
 				sb.Append($"\t\tpublic List<{type}> {name} = new List<{type}>();\n\n");
 			}
 			catch (Exception e)
@@ -257,27 +271,7 @@ namespace MyEditor
 
 		}
 
-        private static void Object(StringBuilder sb, string newline)
-        {
-            try
-            {
-                int index = newline.IndexOf(";");
-                newline = newline.Remove(index);
-                string[] ss = newline.Split(splitChars, StringSplitOptions.RemoveEmptyEntries);
-                string type = ss[1];
-                string name = ss[2];
-                int order = int.Parse(ss[4]);
-                sb.Append($"\t\t[ProtoMember({order})]\n");
-                sb.Append($"\t\tpublic {type} {name} = new {type}();\n\n");
-            }
-            catch (Exception e)
-            {
-                Log.Error($"{newline}\n {e}");
-            }
-
-        }
-
-        private static string ConvertType(string type)
+		private static string ConvertType(string type)
 		{
 			string typeCs = "";
 			switch (type)

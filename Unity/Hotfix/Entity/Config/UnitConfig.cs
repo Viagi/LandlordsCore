@@ -1,13 +1,15 @@
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	[Config(AppType.Client)]
 	public partial class UnitConfigCategory : ACategory<UnitConfig>
-	{}
-
-	public class UnitConfig: AConfig
 	{
+	}
+
+	public class UnitConfig : IConfig
+	{
+		public long Id { get; set; }
 		public string Name;
 		public string Desc;
 		public int Position;

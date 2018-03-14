@@ -1,7 +1,8 @@
 ﻿using System;
-using Model;
+using ETModel;
+using ProtoBuf;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	[ObjectSystem]
 	public class OpcodeTypeComponentAwakeSystem : AwakeSystem<OpcodeTypeComponent>
@@ -18,7 +19,7 @@ namespace Hotfix
 
 		public void Awake()
 		{
-			Type[] types = Model.Game.Hotfix.GetHotfixTypes();
+			Type[] types = ETModel.Game.Hotfix.GetHotfixTypes();
 			foreach (Type type in types)
 			{
 				object[] attrs = type.GetCustomAttributes(typeof(MessageAttribute), false);
@@ -33,8 +34,17 @@ namespace Hotfix
 					continue;
 				}
 				this.opcodeTypes.Add(messageAttribute.Opcode, type);
+			}
 
-				ProtoBuf.PType.RegisterType(type.FullName, type);
+			foreach (Type type in types)
+			{
+				object[] attrs = type.GetCustomAttributes(typeof(ProtoContractAttribute), false);
+				if (attrs.Length == 0)
+				{
+					continue;
+				}
+
+				PType.RegisterType(type.FullName, type);
 			}
 		}
 

@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 
-namespace Model
+namespace ETModel
 {
 	public interface IEntityActorHandler
 	{
-		Task Handle(Session session, Entity entity, uint rpcId, ActorRequest message);
+		Task Handle(Session session, Entity entity, ActorRequest message);
 	}
 }

@@ -1,10 +1,8 @@
 using ProtoBuf;
-using Model;
+using ETModel;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.Options;
-
-namespace Model
+namespace ETModel
 {
 	[Message(OuterOpcode.Actor_Test)]
 	[ProtoContract]
@@ -19,6 +17,8 @@ namespace Model
 	[ProtoContract]
 	public partial class Actor_TestRequest: MessageObject, IActorRequest
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
 		[ProtoMember(1, IsRequired = true)]
 		public string request;
 
@@ -30,10 +30,10 @@ namespace Model
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int Error { get; set; }
-
 		[ProtoMember(91, IsRequired = true)]
 		public string Message { get; set; }
-
+		[ProtoMember(92, IsRequired = true)]
+		public int RpcId { get; set; }
 		[ProtoMember(1, IsRequired = true)]
 		public string response;
 
@@ -43,6 +43,8 @@ namespace Model
 	[ProtoContract]
 	public partial class Actor_TransferRequest: MessageObject, IActorRequest
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
 		[ProtoMember(1, IsRequired = true)]
 		public int MapIndex;
 
@@ -54,16 +56,18 @@ namespace Model
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int Error { get; set; }
-
 		[ProtoMember(91, IsRequired = true)]
 		public string Message { get; set; }
-
+		[ProtoMember(92, IsRequired = true)]
+		public int RpcId { get; set; }
 	}
 
 	[Message(OuterOpcode.C2G_EnterMap)]
 	[ProtoContract]
 	public partial class C2G_EnterMap: IRequest
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
 	}
 
 	[Message(OuterOpcode.G2C_EnterMap)]
@@ -72,10 +76,10 @@ namespace Model
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int Error { get; set; }
-
 		[ProtoMember(91, IsRequired = true)]
 		public string Message { get; set; }
-
+		[ProtoMember(92, IsRequired = true)]
+		public int RpcId { get; set; }
 		[ProtoMember(1, IsRequired = true)]
 		public long UnitId;
 
@@ -103,7 +107,7 @@ namespace Model
 	[ProtoContract]
 	public partial class Actor_CreateUnits: MessageObject, IActorMessage
 	{
-		[ProtoMember(1)]
+		[ProtoMember(1, TypeName = "ETModel.UnitInfo")]
 		public List<UnitInfo> Units = new List<UnitInfo>();
 
 	}
@@ -126,7 +130,6 @@ namespace Model
 	{
 		[ProtoMember(92, IsRequired = true)]
 		public long Id { get; set; }
-
 		[ProtoMember(1, IsRequired = true)]
 		public int X;
 
@@ -139,6 +142,8 @@ namespace Model
 	[ProtoContract]
 	public partial class C2M_Reload: IRequest
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
 		[ProtoMember(1, IsRequired = true)]
 		public AppType AppType;
 
@@ -150,16 +155,18 @@ namespace Model
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int Error { get; set; }
-
 		[ProtoMember(91, IsRequired = true)]
 		public string Message { get; set; }
-
+		[ProtoMember(92, IsRequired = true)]
+		public int RpcId { get; set; }
 	}
 
 	[Message(OuterOpcode.C2R_Ping)]
 	[ProtoContract]
 	public partial class C2R_Ping: IRequest
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
 	}
 
 	[Message(OuterOpcode.R2C_Ping)]
@@ -168,28 +175,14 @@ namespace Model
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int Error { get; set; }
-
 		[ProtoMember(91, IsRequired = true)]
 		public string Message { get; set; }
-
+		[ProtoMember(92, IsRequired = true)]
+		public int RpcId { get; set; }
 	}
 
 }
-#if SERVER
-namespace Model
-{
-	[BsonKnownTypes(typeof(Actor_Test))]
-	[BsonKnownTypes(typeof(Actor_TestRequest))]
-	[BsonKnownTypes(typeof(Actor_TestResponse))]
-	[BsonKnownTypes(typeof(Actor_TransferRequest))]
-	[BsonKnownTypes(typeof(Actor_TransferResponse))]
-	[BsonKnownTypes(typeof(Actor_CreateUnits))]
-	[BsonKnownTypes(typeof(Frame_ClickMap))]
-	public partial class MessageObject {}
-
-}
-#endif
-namespace Model
+namespace ETModel
 {
 	[ProtoInclude(OuterOpcode.Actor_Test, typeof(Actor_Test))]
 	[ProtoInclude(OuterOpcode.Actor_TestRequest, typeof(Actor_TestRequest))]

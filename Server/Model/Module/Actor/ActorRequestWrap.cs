@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ProtoBuf;
 
-namespace Model
+namespace ETModel
 {
 	/// <summary>
 	/// 用来包装actor消息
@@ -12,6 +12,9 @@ namespace Model
 	[ProtoContract]
 	public partial class ActorRequest : IRequest
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Id { get; set; }
 
@@ -26,13 +29,16 @@ namespace Model
 	[ProtoContract]
 	public partial class ActorResponse : IResponse
 	{
-		[ProtoMember(1, IsRequired = true)]
-		public MessageObject AMessage;
-
 		[ProtoMember(90, IsRequired = true)]
 		public int Error { get; set; }
 
 		[ProtoMember(91, IsRequired = true)]
 		public string Message { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1, IsRequired = true)]
+		public MessageObject AMessage;
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Model
+namespace ETModel
 {
 	[ObjectSystem]
 	public class MessageDispatherComponentAwakeSystem : AwakeSystem<MessageDispatherComponent>
@@ -88,7 +88,7 @@ namespace Model
 			{
 				try
 				{
-					ev.Handle(session, messageInfo.RpcId, messageInfo.Message);
+					ev.Handle(session, messageInfo.Message);
 				}
 				catch (Exception e)
 				{

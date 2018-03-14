@@ -1,16 +1,16 @@
 ﻿using System;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
 #if ILRuntime
 	public interface IMHandler
 	{
-		void Handle(Session session, uint rpcId, object message);
+		void Handle(Session session, object message);
 		Type GetMessageType();
 	}
 #else
-	public interface IMHandler : Model.IMHandler
+	public interface IMHandler : ETModel.IMHandler
 	{
 	}
 #endif

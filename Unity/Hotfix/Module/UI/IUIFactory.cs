@@ -1,11 +1,10 @@
-﻿using Model;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	public interface IUIFactory
 	{
-		UI Create(Scene scene, UIType type, GameObject parent);
-		void Remove(UIType type);
+		UI Create(Scene scene, string type, GameObject parent);
+		void Remove(string type);
 	}
 }

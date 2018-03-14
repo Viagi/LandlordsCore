@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	[ObjectSystem]
 	public class MessageDispatherComponentAwakeSystem : AwakeSystem<MessageDispatherComponent>
@@ -38,10 +38,10 @@ namespace Hotfix
 		{
 			this.handlers.Clear();
 
-			Model.MessageDispatherComponent messageDispatherComponent = Model.Game.Scene.GetComponent<Model.MessageDispatherComponent>();
-			Model.OpcodeTypeComponent opcodeTypeComponent = Model.Game.Scene.GetComponent<Model.OpcodeTypeComponent>();
+			ETModel.MessageDispatherComponent messageDispatherComponent = ETModel.Game.Scene.GetComponent<ETModel.MessageDispatherComponent>();
+			ETModel.OpcodeTypeComponent opcodeTypeComponent = ETModel.Game.Scene.GetComponent<ETModel.OpcodeTypeComponent>();
 
-			Type[] types = Model.Game.Hotfix.GetHotfixTypes();
+			Type[] types = ETModel.Game.Hotfix.GetHotfixTypes();
 
 			foreach (Type type in types)
 			{
@@ -74,7 +74,7 @@ namespace Hotfix
 						continue;
 					}
 
-					MessageProxy messageProxy = new MessageProxy(messageType, (session, rpcId, o) => { iMHandler.Handle(session, rpcId, o); });
+					MessageProxy messageProxy = new MessageProxy(messageType, (session, o) => { iMHandler.Handle(session, o); });
 					messageDispatherComponent.RegisterHandler(monoOpcode, messageProxy);
 				}
 			}
@@ -101,7 +101,7 @@ namespace Hotfix
 			{
 				try
 				{
-					ev.Handle(session, messageInfo.RpcId, messageInfo.Message);
+					ev.Handle(session, messageInfo.Message);
 				}
 				catch (Exception e)
 				{

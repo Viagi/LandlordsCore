@@ -1,7 +1,8 @@
 ﻿using ProtoBuf;
 
-namespace Hotfix
+namespace ETHotfix
 {
+	[ProtoContract]
 	public partial class MessageObject
 	{
 	}
@@ -10,13 +11,22 @@ namespace Hotfix
 	{
 	}
 	
-	public interface IRequest
+	public interface IRequest: IMessage
 	{
+		int RpcId { get; set; }
 	}
 
 	public interface IResponse : IMessage
 	{
 		int Error { get; set; }
 		string Message { get; set; }
+		int RpcId { get; set; }
+	}
+
+	public class ResponseMessage : IResponse
+	{
+		public int Error { get; set; }
+		public string Message { get; set; }
+		public int RpcId { get; set; }
 	}
 }

@@ -39,7 +39,7 @@ namespace ILRuntime.Runtime.Generated
                     lst.Add(m);
                 }
             }
-            args = new Type[]{typeof(Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor)};
+            args = new Type[]{typeof(ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor)};
             if (genericMethods.TryGetValue("Start", out lst))
             {
                 foreach(var m in lst)
@@ -53,7 +53,7 @@ namespace ILRuntime.Runtime.Generated
                     }
                 }
             }
-            args = new Type[]{typeof(System.Runtime.CompilerServices.TaskAwaiter<ILRuntime.Runtime.Intepreter.ILTypeInstance>), typeof(Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor)};
+            args = new Type[]{typeof(System.Runtime.CompilerServices.TaskAwaiter<ILRuntime.Runtime.Intepreter.ILTypeInstance>), typeof(ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor)};
             if (genericMethods.TryGetValue("AwaitUnsafeOnCompleted", out lst))
             {
                 foreach(var m in lst)
@@ -76,7 +76,7 @@ namespace ILRuntime.Runtime.Generated
             args = new Type[]{typeof(System.Runtime.CompilerServices.IAsyncStateMachine)};
             method = type.GetMethod("SetStateMachine", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, SetStateMachine_5);
-            args = new Type[]{typeof(System.Runtime.CompilerServices.TaskAwaiter<Model.IResponse>), typeof(Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor)};
+            args = new Type[]{typeof(System.Runtime.CompilerServices.TaskAwaiter<ETModel.IResponse>), typeof(ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor)};
             if (genericMethods.TryGetValue("AwaitUnsafeOnCompleted", out lst))
             {
                 foreach(var m in lst)
@@ -160,13 +160,13 @@ namespace ILRuntime.Runtime.Generated
             StackObject* __ret = ILIntepreter.Minus(__esp, 2);
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
             ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
-            Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor stateMachine = (Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor)typeof(Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor stateMachine = (ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor)typeof(ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
             ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
             System.Runtime.CompilerServices.AsyncVoidMethodBuilder instance_of_this_method;
             instance_of_this_method = (System.Runtime.CompilerServices.AsyncVoidMethodBuilder)typeof(System.Runtime.CompilerServices.AsyncVoidMethodBuilder).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
 
-            instance_of_this_method.Start<Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor>(ref stateMachine);
+            instance_of_this_method.Start<ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor>(ref stateMachine);
 
             WriteBackInstance(__domain, ptr_of_this_method, __mStack, ref instance_of_this_method);
 
@@ -218,7 +218,7 @@ namespace ILRuntime.Runtime.Generated
                     break;
                  case ObjectTypes.ArrayReference:
                     {
-                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor[];
+                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor[];
                         instance_of_arrayReference[ptr_of_this_method->ValueLow] = stateMachine;
                     }
                     break;
@@ -234,7 +234,7 @@ namespace ILRuntime.Runtime.Generated
             StackObject* __ret = ILIntepreter.Minus(__esp, 3);
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
             ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
-            Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor stateMachine = (Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor)typeof(Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor stateMachine = (ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor)typeof(ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
             ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
             System.Runtime.CompilerServices.TaskAwaiter<ILRuntime.Runtime.Intepreter.ILTypeInstance> awaiter = (System.Runtime.CompilerServices.TaskAwaiter<ILRuntime.Runtime.Intepreter.ILTypeInstance>)typeof(System.Runtime.CompilerServices.TaskAwaiter<ILRuntime.Runtime.Intepreter.ILTypeInstance>).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
@@ -243,7 +243,7 @@ namespace ILRuntime.Runtime.Generated
             System.Runtime.CompilerServices.AsyncVoidMethodBuilder instance_of_this_method;
             instance_of_this_method = (System.Runtime.CompilerServices.AsyncVoidMethodBuilder)typeof(System.Runtime.CompilerServices.AsyncVoidMethodBuilder).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
 
-            instance_of_this_method.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<ILRuntime.Runtime.Intepreter.ILTypeInstance>, Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor>(ref awaiter, ref stateMachine);
+            instance_of_this_method.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<ILRuntime.Runtime.Intepreter.ILTypeInstance>, ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor>(ref awaiter, ref stateMachine);
 
             WriteBackInstance(__domain, ptr_of_this_method, __mStack, ref instance_of_this_method);
 
@@ -295,7 +295,7 @@ namespace ILRuntime.Runtime.Generated
                     break;
                  case ObjectTypes.ArrayReference:
                     {
-                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor[];
+                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor[];
                         instance_of_arrayReference[ptr_of_this_method->ValueLow] = stateMachine;
                     }
                     break;
@@ -422,16 +422,16 @@ namespace ILRuntime.Runtime.Generated
             StackObject* __ret = ILIntepreter.Minus(__esp, 3);
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
             ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
-            Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor stateMachine = (Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor)typeof(Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor stateMachine = (ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor)typeof(ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
             ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
-            System.Runtime.CompilerServices.TaskAwaiter<Model.IResponse> awaiter = (System.Runtime.CompilerServices.TaskAwaiter<Model.IResponse>)typeof(System.Runtime.CompilerServices.TaskAwaiter<Model.IResponse>).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            System.Runtime.CompilerServices.TaskAwaiter<ETModel.IResponse> awaiter = (System.Runtime.CompilerServices.TaskAwaiter<ETModel.IResponse>)typeof(System.Runtime.CompilerServices.TaskAwaiter<ETModel.IResponse>).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
             ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
             ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
             System.Runtime.CompilerServices.AsyncVoidMethodBuilder instance_of_this_method;
             instance_of_this_method = (System.Runtime.CompilerServices.AsyncVoidMethodBuilder)typeof(System.Runtime.CompilerServices.AsyncVoidMethodBuilder).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
 
-            instance_of_this_method.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<Model.IResponse>, Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor>(ref awaiter, ref stateMachine);
+            instance_of_this_method.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<ETModel.IResponse>, ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor>(ref awaiter, ref stateMachine);
 
             WriteBackInstance(__domain, ptr_of_this_method, __mStack, ref instance_of_this_method);
 
@@ -483,7 +483,7 @@ namespace ILRuntime.Runtime.Generated
                     break;
                  case ObjectTypes.ArrayReference:
                     {
-                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as Model.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor[];
+                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as ETModel.IAsyncStateMachineClassInheritanceAdaptor.IAsyncStateMachineAdaptor[];
                         instance_of_arrayReference[ptr_of_this_method->ValueLow] = stateMachine;
                     }
                     break;
@@ -537,7 +537,7 @@ namespace ILRuntime.Runtime.Generated
                     break;
                  case ObjectTypes.ArrayReference:
                     {
-                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as System.Runtime.CompilerServices.TaskAwaiter<Model.IResponse>[];
+                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as System.Runtime.CompilerServices.TaskAwaiter<ETModel.IResponse>[];
                         instance_of_arrayReference[ptr_of_this_method->ValueLow] = awaiter;
                     }
                     break;

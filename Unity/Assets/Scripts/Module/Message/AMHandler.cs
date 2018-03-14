@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Model
+namespace ETModel
 {
-	public abstract class AMHandler<Message> : IMHandler where Message : class
+	public abstract class AMHandler<Message> : IMHandler where Message: class
 	{
 		protected abstract void Run(Session session, Message message);
 
-		public void Handle(Session session, uint rpcId, object msg)
+		public void Handle(Session session, object msg)
 		{
 			Message message = msg as Message;
 			if (message == null)

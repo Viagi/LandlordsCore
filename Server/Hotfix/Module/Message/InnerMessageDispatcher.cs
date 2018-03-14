@@ -1,14 +1,15 @@
 ﻿using System;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	public class InnerMessageDispatcher: IMessageDispatcher
 	{
-		public void Dispatch(Session session, PacketInfo packetInfo)
+		public void Dispatch(Session session, Packet packet)
 		{
-			Type messageType = Game.Scene.GetComponent<OpcodeTypeComponent>().GetType(packetInfo.Opcode);
-			IMessage message = (IMessage)session.Network.MessagePacker.DeserializeFrom(messageType, packetInfo.Bytes, packetInfo.Index, packetInfo.Length);
+			ushort opcode = packet.Opcode();
+			Type messageType = Game.Scene.GetComponent<OpcodeTypeComponent>().GetType(opcode);
+			IMessage message = (IMessage)session.Network.MessagePacker.DeserializeFrom(messageType, packet.Bytes, Packet.Index, packet.Length - Packet.Index);
 			// 收到actor rpc request
 			if (message is ActorRequest actorRpcRequest)
 			{
@@ -20,15 +21,15 @@ namespace Hotfix
 					{
 						Error = ErrorCode.ERR_NotFoundActor
 					};
-					session.Reply(packetInfo.RpcId, response);
+					session.Reply(response);
 					return;
 				}
 				
-				entity.GetComponent<ActorComponent>().Add(new ActorMessageInfo() { Session = session, RpcId = packetInfo.RpcId, Message = actorRpcRequest });
+				entity.GetComponent<ActorComponent>().Add(new ActorMessageInfo() { Session = session, RpcId = actorRpcRequest.RpcId, Message = actorRpcRequest });
 				return;
 			}
 			
-			Game.Scene.GetComponent<MessageDispatherComponent>().Handle(session, new MessageInfo(packetInfo.RpcId, packetInfo.Opcode, message));
+			Game.Scene.GetComponent<MessageDispatherComponent>().Handle(session, new MessageInfo(opcode, message));
 		}
 	}
 }

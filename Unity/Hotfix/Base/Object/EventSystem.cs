@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	public sealed class EventSystem
 	{
-		private readonly Dictionary<int, List<IEvent>> allEvents = new Dictionary<int, List<IEvent>>();
+		private readonly Dictionary<string, List<IEvent>> allEvents = new Dictionary<string, List<IEvent>>();
 
 		private readonly UnOrderMultiMap<Type, AAwakeSystem> awakeEvents = new UnOrderMultiMap<Type, AAwakeSystem>();
 
@@ -33,7 +33,7 @@ namespace Hotfix
 
 		public EventSystem()
 		{
-			Type[] types = Model.Game.Hotfix.GetHotfixTypes();
+			Type[] types = ETModel.Game.Hotfix.GetHotfixTypes();
 			foreach (Type type in types)
 			{
 				object[] attrs = type.GetCustomAttributes(typeof(ObjectSystemAttribute), false);
@@ -94,14 +94,14 @@ namespace Hotfix
 
 					// hotfix的事件也要注册到mono层，hotfix可以订阅mono层的事件
 					Action<List<object>> action = list => { Handle(aEventAttribute.Type, list); };
-					Model.Game.EventSystem.RegisterEvent(aEventAttribute.Type, new EventProxy(action));
+					ETModel.Game.EventSystem.RegisterEvent(aEventAttribute.Type, new EventProxy(action));
 				}
 			}
 
 			this.Load();
 		}
 
-		public static void Handle(int type, List<object> param)
+		public static void Handle(string type, List<object> param)
 		{
 			switch (param.Count)
 			{
@@ -120,7 +120,7 @@ namespace Hotfix
 			}
 		}
 		
-		public void RegisterEvent(int eventId, IEvent e)
+		public void RegisterEvent(string eventId, IEvent e)
 		{
 			if (!this.allEvents.ContainsKey(eventId))
 			{
@@ -412,10 +412,10 @@ namespace Hotfix
 			ObjectHelper.Swap(ref this.lateUpdates, ref this.lateUpdates2);
 		}
 
-		public void Run(int type)
+		public void Run(string type)
 		{
 			List<IEvent> iEvents;
-			if (!this.allEvents.TryGetValue((int)type, out iEvents))
+			if (!this.allEvents.TryGetValue(type, out iEvents))
 			{
 				return;
 			}
@@ -432,10 +432,10 @@ namespace Hotfix
 			}
 		}
 
-		public void Run<A>(int type, A a)
+		public void Run<A>(string type, A a)
 		{
 			List<IEvent> iEvents;
-			if (!this.allEvents.TryGetValue((int)type, out iEvents))
+			if (!this.allEvents.TryGetValue(type, out iEvents))
 			{
 				return;
 			}
@@ -452,10 +452,10 @@ namespace Hotfix
 			}
 		}
 
-		public void Run<A, B>(int type, A a, B b)
+		public void Run<A, B>(string type, A a, B b)
 		{
 			List<IEvent> iEvents;
-			if (!this.allEvents.TryGetValue((int)type, out iEvents))
+			if (!this.allEvents.TryGetValue(type, out iEvents))
 			{
 				return;
 			}
@@ -472,10 +472,10 @@ namespace Hotfix
 			}
 		}
 
-		public void Run<A, B, C>(int type, A a, B b, C c)
+		public void Run<A, B, C>(string type, A a, B b, C c)
 		{
 			List<IEvent> iEvents;
-			if (!this.allEvents.TryGetValue((int)type, out iEvents))
+			if (!this.allEvents.TryGetValue(type, out iEvents))
 			{
 				return;
 			}

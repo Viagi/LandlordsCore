@@ -1,13 +1,13 @@
 ﻿using System;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	public abstract class AMHandler<Message> : IMHandler where Message: class
 	{
 		protected abstract void Run(Session session, Message message);
 
-		public void Handle(Session session, uint rpcId, object msg)
+		public void Handle(Session session, object msg)
 		{
 			Message message = msg as Message;
 			if (message == null)

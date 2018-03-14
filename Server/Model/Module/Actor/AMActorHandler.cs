@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Model
+namespace ETModel
 {
 	public abstract class AMActorHandler<E, Message>: IMActorHandler where E: Entity where Message : MessageObject
 	{
 		protected abstract Task Run(E entity, Message message);
 
-		public async Task Handle(Session session, Entity entity, uint rpcId, ActorRequest message)
+		public async Task Handle(Session session, Entity entity, ActorRequest message)
 		{
 			Message msg = message.AMessage as Message;
 			if (msg == null)
@@ -30,7 +30,7 @@ namespace Model
 				return;
 			}
 			ActorResponse response = new ActorResponse();
-			session.Reply(rpcId, response);
+			session.Reply(response);
 		}
 
 		public Type GetMessageType()
@@ -51,7 +51,7 @@ namespace Model
 
 		protected abstract Task Run(E unit, Request message, Action<Response> reply);
 
-		public async Task Handle(Session session, Entity entity, uint rpcId, ActorRequest message)
+		public async Task Handle(Session session, Entity entity, ActorRequest message)
 		{
 			try
 			{
@@ -78,7 +78,9 @@ namespace Model
 					{
 						AMessage = response
 					};
-					session.Reply(rpcId, actorResponse);
+					int rpcId = message.RpcId;
+					actorResponse.RpcId = rpcId;
+					session.Reply(actorResponse);
 				});
 			}
 			catch (Exception e)
