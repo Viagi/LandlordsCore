@@ -1,6 +1,6 @@
-﻿using Model;
+﻿using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [Event(EventIdType.LandlordsInitSceneStart)]
     public class InitSceneStart_CreateLandlordsLogin : AEvent

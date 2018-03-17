@@ -21,6 +21,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\Unity\Assets\Landlords\Scripts\Message\LandlordsOuterErrorCode.cs" Link="Landlords\Message\LandlordsOuterErrorCode.cs" />
+    <Compile Include="..\..\Unity\Assets\Landlords\Scripts\Object\Card.cs" Link="Landlords\Object\Card.cs" />
+    <Compile Include="..\..\Unity\Assets\Landlords\Scripts\Object\Type.cs" Link="Landlords\Object\Type.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Base\DoubleMap.cs" Link="Base\DoubleMap.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Base\Event\AEventAttribute.cs" Link="Base\Event\AEventAttribute.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Base\Event\Env.cs" Link="Base\Event\Env.cs" />
@@ -122,6 +125,7 @@
 
   <ItemGroup>
     <Folder Include="Component\Config\" />
+    <Folder Include="Landlords\Message\" />
     <Folder Include="Module\Message\Network\KCP\" />
     <Folder Include="Module\Message\Network\TCP\" />
     <Folder Include="Module\Numeric\" />

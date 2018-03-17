@@ -1,18 +1,18 @@
-﻿using Model;
+﻿using ETModel;
 using System;
 using UnityEngine;
 
-namespace Hotfix
+namespace ETHotfix
 {
-    [UIFactory((int)UIType.LandlordsLobby)]
+    [UIFactory(UIType.LandlordsLobby)]
     public class LandlordsLobbyFactory : IUIFactory
     {
-        public UI Create(Scene scene, UIType type, GameObject gameObject)
+        public UI Create(Scene scene, string type, GameObject parent)
         {
             try
             {
                 //加载AB包
-                ResourcesComponent resourcesComponent = Model.Game.Scene.GetComponent<ResourcesComponent>();
+                ResourcesComponent resourcesComponent = ETModel.Game.Scene.GetComponent<ResourcesComponent>();
                 resourcesComponent.LoadBundle($"{type}.unity3d");
 
                 //加载大厅界面预设并生成实例
@@ -33,9 +33,9 @@ namespace Hotfix
             }
         }
 
-        public void Remove(UIType type)
+        public void Remove(string type)
         {
-            Model.Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle($"{type}.unity3d");
+            ETModel.Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle($"{type}.unity3d");
         }
     }
 }

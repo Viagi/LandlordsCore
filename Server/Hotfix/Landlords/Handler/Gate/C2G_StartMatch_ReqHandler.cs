@@ -1,8 +1,8 @@
 ﻿using System;
-using Model;
+using ETModel;
 using System.Net;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler(AppType.Gate)]
     public class C2G_StartMatch_ReqHandler : AMRpcHandler<C2G_StartMatch_Req, G2C_StartMatch_Ack>

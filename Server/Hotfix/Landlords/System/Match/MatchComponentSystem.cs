@@ -1,8 +1,8 @@
-﻿using Model;
+﻿using ETModel;
 using System.Collections.Generic;
 using System.Net;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [ObjectSystem]
     public class MatchComponentUpdateSystem : UpdateSystem<MatchComponent>
@@ -113,9 +113,8 @@ namespace Hotfix
             Gamer gamer = GamerFactory.Create(matcher.PlayerID, matcher.UserID, actor_PlayerEnterRoom_Ack.GamerID);
             room.Add(gamer);
 
-            ActorProxyComponent actorProxyComponent = Game.Scene.GetComponent<ActorProxyComponent>();
-
             //向玩家发送匹配成功消息
+            ActorProxyComponent actorProxyComponent = Game.Scene.GetComponent<ActorProxyComponent>();
             ActorProxy gamerActorProxy = actorProxyComponent.Get(gamer.PlayerID);
             gamerActorProxy.Send(new Actor_MatchSucess_Ntt() { GamerID = gamer.Id });
         }

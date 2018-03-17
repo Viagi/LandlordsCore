@@ -1,9 +1,9 @@
 ﻿using System;
-using Model;
+using ETModel;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [ObjectSystem]
     public class LandlordsLobbyComponentAwakeSystem : AwakeSystem<LandlordsLobbyComponent>
@@ -33,7 +33,7 @@ namespace Hotfix
             {
                 //发送开始匹配消息
                 C2G_StartMatch_Req c2G_StartMatch_Req = new C2G_StartMatch_Req();
-                G2C_StartMatch_Ack g2C_StartMatch_Ack = await SessionComponent.Instance.Session.Call(c2G_StartMatch_Req) as G2C_StartMatch_Ack;
+                G2C_StartMatch_Ack g2C_StartMatch_Ack = await SessionWrapComponent.Instance.Session.Call(c2G_StartMatch_Req) as G2C_StartMatch_Ack;
 
                 if (g2C_StartMatch_Ack.Error == ErrorCode.ERR_UserMoneyLessError)
                 {
@@ -67,7 +67,7 @@ namespace Hotfix
             //获取玩家数据
             long userId = ClientComponent.Instance.LocalPlayer.UserID;
             C2G_GetUserInfo_Req c2G_GetUserInfo_Req = new C2G_GetUserInfo_Req() { UserID = userId };
-            G2C_GetUserInfo_Ack g2C_GetUserInfo_Ack = await SessionComponent.Instance.Session.Call(c2G_GetUserInfo_Req) as G2C_GetUserInfo_Ack;
+            G2C_GetUserInfo_Ack g2C_GetUserInfo_Ack = await SessionWrapComponent.Instance.Session.Call(c2G_GetUserInfo_Req) as G2C_GetUserInfo_Ack;
 
             //显示用户信息
             rc.Get<GameObject>("NickName").GetComponent<Text>().text = g2C_GetUserInfo_Ack.NickName;

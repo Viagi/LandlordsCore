@@ -176,7 +176,8 @@ namespace ETModel
 							actorTask.RunFail(response.Error);
 						}
 
-						// 失败直接删除actorproxy
+                        // 失败直接删除actorproxy
+                        Log.Error($"Actor消息{MongoHelper.ToJson(task.message)}发送失败");
 						Game.Scene.GetComponent<ActorProxyComponent>().Remove(this.Id);
 						return;
 					}

@@ -70,6 +70,7 @@ namespace MyEditor
 			sb.Append("using ETModel;\n");
 			sb.Append("using System.Collections.Generic;\n");
 			sb.Append("using MongoDB.Bson.Serialization.Attributes;\n");
+            sb.Append("using MongoDB.Bson.Serialization.Options;\n");
 			sb.Append($"namespace {ns}\n");
 			sb.Append("{\n");
 
@@ -164,11 +165,26 @@ namespace MyEditor
 					Repeated(sb, ns, newline, isClient);
 				}
 
-				if (isMsgStart && newline == "}")
+                if (newline.StartsWith("object"))
+                {
+                    Object(sb, ns, newline, isClient);
+                }
+
+                if (isMsgStart && newline == "}")
 				{
 					isMsgStart = false;
 					sb.Append("\t}\n\n");
 				}
+
+                if(newline.StartsWith("[") && newline.EndsWith("]"))
+                {
+                    sb.AppendLine($"\t\t{newline}");
+                }
+
+                if(newline.StartsWith("#region") || newline.StartsWith("#endregion"))
+                {
+                    sb.AppendLine($"\t{newline}\n");
+                }
 			}
 			sb.Append("}\n");
 
@@ -271,7 +287,35 @@ namespace MyEditor
 
 		}
 
-		private static string ConvertType(string type)
+        private static void Object(StringBuilder sb, string ns, string newline, bool isClient)
+        {
+            try
+            {
+                int index = newline.IndexOf(";");
+                newline = newline.Remove(index);
+                string[] ss = newline.Split(splitChars, StringSplitOptions.RemoveEmptyEntries);
+                string type = ss[1];
+                string name = ss[2];
+                int order = int.Parse(ss[4]);
+                if (isClient)
+                {
+                    sb.Append($"\t\t[ProtoMember({order}, TypeName = \"{ns}.{type}\")]\n");
+                }
+                else
+                {
+                    sb.Append($"\t\t[ProtoMember({order})]\n");
+                }
+
+                sb.Append($"\t\tpublic {type} {name} = new {type}();\n\n");
+            }
+            catch (Exception e)
+            {
+                Log.Error($"{newline}\n {e}");
+            }
+
+        }
+
+        private static string ConvertType(string type)
 		{
 			string typeCs = "";
 			switch (type)

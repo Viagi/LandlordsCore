@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Model;
+using ETModel;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [ObjectSystem]
     public class HandCardsComponentAwakeSystem : AwakeSystem<HandCardsComponent, GameObject>
@@ -246,7 +246,7 @@ namespace Hotfix
         /// <returns></returns>
         private GameObject CreateCardSprite(string prefabName, string cardName, Transform parent)
         {
-            GameObject cardSpritePrefab = Model.Game.Scene.GetComponent<ResourcesComponent>().GetAsset<GameObject>($"{prefabName}.unity3d", prefabName);
+            GameObject cardSpritePrefab = ETModel.Game.Scene.GetComponent<ResourcesComponent>().GetAsset<GameObject>($"{prefabName}.unity3d", prefabName);
             GameObject cardSprite = UnityEngine.Object.Instantiate(cardSpritePrefab);
 
             cardSprite.name = cardName;

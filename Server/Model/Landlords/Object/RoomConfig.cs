@@ -1,4 +1,4 @@
-﻿namespace Model
+﻿namespace ETModel
 {
     /// <summary>
     /// 房间配置

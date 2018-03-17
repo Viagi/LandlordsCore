@@ -18,7 +18,19 @@
 			this.GateSessionId = gateSessionId;
 		}
 
-		public ActorProxy GetActorProxy()
+        public override void Dispose()
+        {
+            if (this.IsDisposed)
+            {
+                return;
+            }
+
+            Game.Scene.GetComponent<ActorProxyComponent>()?.Remove(GateSessionId);
+
+            base.Dispose();
+        }
+
+        public ActorProxy GetActorProxy()
 		{
 			return Game.Scene.GetComponent<ActorProxyComponent>().Get(this.GateSessionId);
 		}

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [ActorMessageHandler(AppType.Map)]
     public class Actor_GamerGrabLandlordSelect_NttHandler : AMActorHandler<Gamer, Actor_GamerGrabLandlordSelect_Ntt>

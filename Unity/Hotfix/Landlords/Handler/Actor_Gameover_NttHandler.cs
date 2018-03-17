@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler]
     public class Actor_Gameover_NttHandler : AMHandler<Actor_Gameover_Ntt>
@@ -14,7 +14,6 @@ namespace Hotfix
             Identity localGamerIdentity = gamerComponent.LocalGamer.GetComponent<HandCardsComponent>().AccessIdentity;
             UI uiEndPanel = LandlordsEndFactory.Create(UIType.LandlordsEnd, uiRoom, message.Winner == localGamerIdentity);
             LandlordsEndComponent landlordsEndComponent = uiEndPanel.GetComponent<LandlordsEndComponent>();
-            uiRoom.Add(uiEndPanel);
 
             foreach (var gamer in gamerComponent.GetAll())
             {

@@ -1,7 +1,7 @@
-﻿using Model;
+﻿using ETModel;
 using System.Net;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler(AppType.Gate)]
     public class C2G_ReturnLobby_NttHandler : AMHandler<C2G_ReturnLobby_Ntt>

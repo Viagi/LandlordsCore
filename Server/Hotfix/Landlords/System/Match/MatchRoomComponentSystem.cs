@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     public static class MatchRoomComponentSystem
     {

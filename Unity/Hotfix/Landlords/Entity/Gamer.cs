@@ -1,6 +1,6 @@
-﻿using Model;
+﻿using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     /// <summary>
     /// 玩家对象

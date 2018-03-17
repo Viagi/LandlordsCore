@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [ActorMessageHandler(AppType.Gate)]
     public class Actor_MatchSucess_NttHandler : AMActorHandler<User, Actor_MatchSucess_Ntt>
@@ -10,6 +10,7 @@ namespace Hotfix
         {
             user.IsMatching = false;
             user.ActorID = message.GamerID;
+            Log.Info($"玩家{user.UserID}匹配成功");
 
             await Task.CompletedTask;
         }

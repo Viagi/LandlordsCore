@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 
-namespace Hotfix
+namespace ETHotfix
 {
     public class GamerComponent : Component
     {

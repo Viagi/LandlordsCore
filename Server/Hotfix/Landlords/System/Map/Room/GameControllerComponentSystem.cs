@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [ObjectSystem]
     public class GameControllerComponentAwakeSystem : AwakeSystem<GameControllerComponent,RoomConfig>

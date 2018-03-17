@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace Model
+namespace ETModel
 {
     /// <summary>
     /// 用户信息

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ETHotfix
 {
-    public static class UIType
+    public static partial class UIType
     {
 	    public const string Root = "Root";
 	    public const string UILogin = "UILogin";

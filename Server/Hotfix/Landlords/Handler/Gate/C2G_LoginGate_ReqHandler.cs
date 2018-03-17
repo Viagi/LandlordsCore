@@ -1,8 +1,8 @@
 ﻿using System;
-using Model;
+using ETModel;
 using System.Net;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler(AppType.Gate)]
     public class C2G_LoginGate_ReqHandler : AMRpcHandler<C2G_LoginGate_Req, G2C_LoginGate_Ack>
@@ -40,7 +40,7 @@ namespace Hotfix
                 StartConfigComponent config = Game.Scene.GetComponent<StartConfigComponent>();
                 IPEndPoint realmIPEndPoint = config.RealmConfig.GetComponent<InnerConfig>().IPEndPoint;
                 Session realmSession = Game.Scene.GetComponent<NetInnerComponent>().Get(realmIPEndPoint);
-                realmSession.Send(new G2R_PlayerOnline_Ntt() { UserID = userId, GateAppID = config.StartConfig.AppId });
+                await realmSession.Call(new G2R_PlayerOnline_Req() { UserID = userId, GateAppID = config.StartConfig.AppId });
 
                 response.PlayerID = user.Id;
                 response.UserID = user.UserID;

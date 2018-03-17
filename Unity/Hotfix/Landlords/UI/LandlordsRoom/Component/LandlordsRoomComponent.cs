@@ -1,9 +1,9 @@
 ﻿using System;
-using Model;
+using ETModel;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [ObjectSystem]
     public class LandlordsRoomComponentAwakeSystem : AwakeSystem<LandlordsRoomComponent>
@@ -11,15 +11,6 @@ namespace Hotfix
         public override void Awake(LandlordsRoomComponent self)
         {
             self.Awake();
-        }
-    }
-
-    [ObjectSystem]
-    public class LandlordsRoomComponentStartSystem : StartSystem<LandlordsRoomComponent>
-    {
-        public override void Start(LandlordsRoomComponent self)
-        {
-            self.Start();
         }
     }
 
@@ -42,7 +33,6 @@ namespace Hotfix
                     UI uiRoom = this.GetParent<UI>();
                     UI uiInteraction = LandlordsInteractionFactory.Create(UIType.LandlordsInteraction, uiRoom);
                     interaction = uiInteraction.GetComponent<LandlordsInteractionComponent>();
-                    uiRoom.Add(uiInteraction);
                 }
                 return interaction;
             }
@@ -83,10 +73,7 @@ namespace Hotfix
             this.GamersPanel[0] = gamersPanel.Get<GameObject>("Left");
             this.GamersPanel[1] = gamersPanel.Get<GameObject>("Local");
             this.GamersPanel[2] = gamersPanel.Get<GameObject>("Right");
-        }
 
-        public void Start()
-        {
             //添加本地玩家
             User localPlayer = ClientComponent.Instance.LocalPlayer;
             Gamer localGamer = GamerFactory.Create(localPlayer.UserID, false);
@@ -140,7 +127,7 @@ namespace Hotfix
         private void OnQuit()
         {
             //发送退出房间消息
-            SessionComponent.Instance.Session.Send(new C2G_ReturnLobby_Ntt());
+            SessionWrapComponent.Instance.Session.Send(new C2G_ReturnLobby_Ntt());
 
             //切换到大厅界面
             Game.Scene.GetComponent<UIComponent>().Create(UIType.LandlordsLobby);
@@ -153,7 +140,7 @@ namespace Hotfix
         private void OnReady()
         {
             //发送准备
-            SessionComponent.Instance.Session.Send(new Actor_GamerReady_Ntt());
+            SessionWrapComponent.Instance.Session.Send(new Actor_GamerReady_Ntt());
         }
     }
 }

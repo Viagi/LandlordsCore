@@ -1,7 +1,8 @@
 ﻿using System;
-using Model;
+using System.Net;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler(AppType.Gate)]
     public class R2G_PlayerKickOut_ReqHandler : AMRpcHandler<R2G_PlayerKickOut_Req, G2R_PlayerKickOut_Ack>
@@ -12,13 +13,12 @@ namespace Hotfix
             try
             {
                 User user = Game.Scene.GetComponent<UserComponent>().Get(message.UserID);
+
+                //服务端主动断开客户端连接
                 long userSessionId = user.GetComponent<UnitGateComponent>().GateSessionId;
                 Session userSession = Game.Scene.GetComponent<NetOuterComponent>().Get(userSessionId);
-                userSession.Send(new G2C_PlayerDisconnect_Ntt());
-
-                await Game.Scene.GetComponent<TimerComponent>().WaitAsync(1000);
-                Log.Info($"将玩家{message.UserID}连接断开");
                 userSession.Dispose();
+                Log.Info($"将玩家{message.UserID}连接断开");
 
                 reply(response);
             }

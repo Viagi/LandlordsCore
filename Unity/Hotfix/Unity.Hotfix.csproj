@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\Temp\UnityVS_bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;ILRuntime</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -56,6 +56,9 @@
     <Compile Include="Base\Helper\ExceptionHelper.cs" />
     <Compile Include="Base\Helper\JsonHelper.cs" />
     <Compile Include="Base\Object\IStart.cs" />
+    <Compile Include="Landlords\Component\SessionWrap\SessionOfflineComponent.cs" />
+    <Compile Include="Landlords\Event\LandlordsEventIdType.cs" />
+    <Compile Include="Landlords\Object\LandlordsUIType.cs" />
     <Compile Include="Module\FrameSync\OperaComponent.cs" />
     <Compile Include="Entity\Config\UnitConfig.cs" />
     <Compile Include="Module\FrameSync\TestHotfixSubscribMonoEvent_LogString.cs" />
@@ -82,7 +85,6 @@
     <Compile Include="Landlords\Handler\Actor_SetLandlord_NttHandler.cs" />
     <Compile Include="Landlords\Handler\Actor_SetMultiples_NttHandler.cs" />
     <Compile Include="Landlords\Handler\Actor_Trusteeship_NttHandler.cs" />
-    <Compile Include="Landlords\Handler\G2C_PlayerDisconnect_NttHandler.cs" />
     <Compile Include="Landlords\Helper\CardHelper.cs" />
     <Compile Include="Landlords\UI\LandlordsLobby\Component\LandlordsLobbyComponent.cs" />
     <Compile Include="Landlords\UI\LandlordsLobby\Factory\LandlordsLobbyFactory.cs" />

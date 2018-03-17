@@ -1,10 +1,10 @@
 ﻿using System;
-using Model;
+using ETModel;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Net;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [ObjectSystem]
     public class LandlordsLoginComponentAwakeSystem : AwakeSystem<LandlordsLoginComponent>
@@ -70,16 +70,17 @@ namespace Hotfix
 
             //设置登录中状态
             isLogining = true;
-            Session session = null;
+            SessionWrap sessionWrap = null;
             try
             {
                 //创建登录服务器连接
-                IPEndPoint connetRealmEndPoint = NetworkHelper.ToIPEndPoint(GlobalConfigComponent.Instance.GlobalProto.Address);
-                session = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetRealmEndPoint);
+                IPEndPoint connetEndPoint = NetworkHelper.ToIPEndPoint(GlobalConfigComponent.Instance.GlobalProto.Address);
+                Session session = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetEndPoint);
+                sessionWrap = new SessionWrap(session);
 
                 //发送登录请求
                 prompt.text = "正在登录中....";
-                R2C_Login_Ack r2C_Login_Ack = await session.Call(new C2R_Login_Req() { Account = account.text, Password = password.text }) as R2C_Login_Ack;
+                R2C_Login_Ack r2C_Login_Ack = await sessionWrap.Call(new C2R_Login_Req() { Account = account.text, Password = password.text }) as R2C_Login_Ack;
                 prompt.text = "";
 
                 if (this.IsDisposed)
@@ -95,25 +96,27 @@ namespace Hotfix
                 }
 
                 //创建Gate服务器连接
-                IPEndPoint connetGateEndPoint = NetworkHelper.ToIPEndPoint(r2C_Login_Ack.Address);
-                Session gateSession = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetGateEndPoint);
+                connetEndPoint = NetworkHelper.ToIPEndPoint(r2C_Login_Ack.Address);
+                Session gateSession = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetEndPoint);
+                Game.Scene.AddComponent<SessionWrapComponent>().Session = new SessionWrap(gateSession);
+                //SessionWeap添加连接断开组件，用于处理客户端连接断开
+                Game.Scene.GetComponent<SessionWrapComponent>().Session.AddComponent<SessionOfflineComponent>();
+                ETModel.Game.Scene.AddComponent<SessionComponent>().Session = gateSession;
 
                 //登录Gate服务器
-                G2C_LoginGate_Ack g2C_LoginGate_Ack = await gateSession.Call(new C2G_LoginGate_Req() { Key = r2C_Login_Ack.Key }) as G2C_LoginGate_Ack;
+                G2C_LoginGate_Ack g2C_LoginGate_Ack = await SessionWrapComponent.Instance.Session.Call(new C2G_LoginGate_Req() { Key = r2C_Login_Ack.Key }) as G2C_LoginGate_Ack;
                 if (g2C_LoginGate_Ack.Error == ErrorCode.ERR_ConnectGateKeyError)
                 {
                     prompt.text = "连接网关服务器超时";
                     password.text = "";
+                    Game.Scene.GetComponent<SessionWrapComponent>().Session.Dispose();
                     return;
                 }
 
-                //保存连接,之后所有请求将通过这个连接发送
-                SessionComponent sessionComponent = Model.Game.Scene.AddComponent<SessionComponent>();
-                sessionComponent.Session = gateSession;
                 Log.Info("登录成功");
 
                 //保存本地玩家
-                User user = Model.ComponentFactory.CreateWithId<User, long>(g2C_LoginGate_Ack.PlayerID, g2C_LoginGate_Ack.UserID);
+                User user = ETModel.ComponentFactory.CreateWithId<User, long>(g2C_LoginGate_Ack.PlayerID, g2C_LoginGate_Ack.UserID);
                 ClientComponent.Instance.LocalPlayer = user;
 
                 //跳转到大厅界面
@@ -129,7 +132,7 @@ namespace Hotfix
             finally
             {
                 //断开验证服务器的连接
-                session?.Dispose();
+                sessionWrap?.Dispose();
                 //设置登录处理完成状态
                 isLogining = false;
             }
@@ -147,17 +150,18 @@ namespace Hotfix
 
             //设置登录中状态
             isRegistering = true;
-            Session session = null;
+            SessionWrap sessionWrap = null;
             prompt.text = "";
             try
             {
                 //创建登录服务器连接
-                IPEndPoint connetRealmEndPoint = NetworkHelper.ToIPEndPoint(GlobalConfigComponent.Instance.GlobalProto.Address);
-                session = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetRealmEndPoint);
+                IPEndPoint connetEndPoint = NetworkHelper.ToIPEndPoint(GlobalConfigComponent.Instance.GlobalProto.Address);
+                Session session = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetEndPoint);
+                sessionWrap = new SessionWrap(session);
 
                 //发送注册请求
                 prompt.text = "正在注册中....";
-                R2C_Register_Ack r2C_Register_Ack = await session.Call(new C2R_Register_Req() { Account = account.text, Password = password.text }) as R2C_Register_Ack;
+                R2C_Register_Ack r2C_Register_Ack = await sessionWrap.Call(new C2R_Register_Req() { Account = account.text, Password = password.text }) as R2C_Register_Ack;
                 prompt.text = "";
 
                 if (this.IsDisposed)
@@ -184,7 +188,7 @@ namespace Hotfix
             finally
             {
                 //断开验证服务器的连接
-                session?.Dispose();
+                sessionWrap?.Dispose();
                 //设置注册处理完成状态
                 isRegistering = false;
             }

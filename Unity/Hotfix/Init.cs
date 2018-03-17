@@ -28,8 +28,9 @@ namespace ETHotfix
 				UnitConfig unitConfig = (UnitConfig)Game.Scene.GetComponent<ConfigComponent>().Get(typeof(UnitConfig), 1001);
 				Log.Debug($"config {JsonHelper.ToJson(unitConfig)}");
 
-				Game.EventSystem.Run(EventIdType.InitSceneStart);
-			}
+                //Game.EventSystem.Run(EventIdType.InitSceneStart);
+                Game.EventSystem.Run(EventIdType.LandlordsInitSceneStart);
+            }
 			catch (Exception e)
 			{
 				Log.Error(e.ToStr());

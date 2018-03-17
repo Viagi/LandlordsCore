@@ -1,8 +1,8 @@
-﻿using Model;
+﻿using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
-    [Event(Model.EventIdType.SelectHandCard)]
+    [Event(ETModel.EventIdType.SelectHandCard)]
     public class SelectHandCardEvent : AEvent<Card>
     {
         public override void Run(Card card)

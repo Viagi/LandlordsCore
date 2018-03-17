@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler]
     public class Actor_Trusteeship_NttHandler : AMHandler<Actor_Trusteeship_Ntt>

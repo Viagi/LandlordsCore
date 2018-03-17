@@ -1,17 +1,17 @@
-﻿using Model;
+﻿using ETModel;
 using System;
 using UnityEngine;
 
-namespace Hotfix
+namespace ETHotfix
 {
-    [UIFactory((int)UIType.LandlordsRoom)]
+    [UIFactory(UIType.LandlordsRoom)]
     public class LandlordsRoomFactory : IUIFactory
     {
-        public UI Create(Scene scene, UIType type, GameObject gameObject)
+        public UI Create(Scene scene, string type, GameObject parent)
         {
             try
             {
-                ResourcesComponent resourcesComponent = Model.Game.Scene.GetComponent<ResourcesComponent>();
+                ResourcesComponent resourcesComponent = ETModel.Game.Scene.GetComponent<ResourcesComponent>();
                 resourcesComponent.LoadBundle($"{type}.unity3d");
                 resourcesComponent.LoadBundle($"{CardHelper.ATLAS_NAME}.unity3d");
                 resourcesComponent.LoadBundle($"{HandCardsComponent.HANDCARD_NAME}.unity3d");
@@ -32,9 +32,9 @@ namespace Hotfix
             }
         }
 
-        public void Remove(UIType type)
+        public void Remove(string type)
         {
-            ResourcesComponent resourcesComponent = Model.Game.Scene.GetComponent<ResourcesComponent>();
+            ResourcesComponent resourcesComponent = ETModel.Game.Scene.GetComponent<ResourcesComponent>();
             resourcesComponent.UnloadBundle($"{type}.unity3d");
             resourcesComponent.UnloadBundle($"{HandCardsComponent.HANDCARD_NAME}.unity3d");
             resourcesComponent.UnloadBundle($"{HandCardsComponent.PLAYCARD_NAME}.unity3d");

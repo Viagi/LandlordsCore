@@ -1,4 +1,4 @@
-﻿namespace Model
+﻿namespace ETModel
 {
     [ObjectSystem]
     public class GamerAwakeSystem : AwakeSystem<Gamer,long>
@@ -40,6 +40,9 @@
             {
                 return;
             }
+
+            Game.Scene.GetComponent<ActorProxyComponent>()?.Remove(this.Id);
+            Game.Scene.GetComponent<ActorProxyComponent>()?.Remove(this.PlayerID);
 
             base.Dispose();
 

@@ -174,15 +174,6 @@ message Actor_Trusteeship_Ntt // IActorMessage
 
 #endregion
 
-#region Gate-Client
-
-message G2C_PlayerDisconnect_Ntt // IMessage
-{
-
-}
-
-#endregion
-
 #region Map-Client
 
 message GamerInfo

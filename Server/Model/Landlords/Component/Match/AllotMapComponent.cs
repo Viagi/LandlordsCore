@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Model
+namespace ETModel
 {
     /// <summary>
     /// 分配房间服务器组件，逻辑在AllotMapComponentSystem扩展

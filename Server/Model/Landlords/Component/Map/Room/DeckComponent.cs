@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Model
+namespace ETModel
 {
     /// <summary>
     /// 牌库组件

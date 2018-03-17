@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [ObjectSystem]
     public class DeckComponentAwakeSystem : AwakeSystem<DeckComponent>

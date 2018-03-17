@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Model
+namespace ETModel
 {
     /// <summary>
     /// 房间管理组件

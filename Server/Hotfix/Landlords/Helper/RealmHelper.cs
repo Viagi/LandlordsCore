@@ -1,8 +1,8 @@
-﻿using Model;
+﻿using ETModel;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Hotfix
+namespace ETHotfix
 {
     public static class RealmHelper
     {

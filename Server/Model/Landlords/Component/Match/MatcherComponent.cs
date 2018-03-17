@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 
-namespace Model
+namespace ETModel
 {
     /// <summary>
     /// 匹配对象管理组件

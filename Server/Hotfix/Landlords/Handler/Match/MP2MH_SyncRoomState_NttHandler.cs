@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler(AppType.Match)]
     public class MP2MH_SyncRoomState_NttHandler : AMHandler<MP2MH_SyncRoomState_Ntt>

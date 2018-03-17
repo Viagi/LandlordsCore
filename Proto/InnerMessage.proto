@@ -178,15 +178,23 @@
 	
 	#region Gate-Realm
 
-    message G2R_PlayerOnline_Ntt // IMessage
+    message G2R_PlayerOnline_Req // IRequest
     {
         required long UserID = 1;
         required int GateAppID = 2;
     }
+	
+	message R2G_PlayerOnline_Ack // IResponse
+    {
+    }
 
-    message G2R_PlayerOffline_Ntt // IMessage
+    message G2R_PlayerOffline_Req // IRequest
     {
         required long UserID = 1;
+    }
+	
+	message R2G_PlayerOffline_Ack // IResponse
+    {
     }
 
     #endregion
@@ -292,10 +300,14 @@
 
     #region Map-Match
 
-    message MP2MH_PlayerExitRoom_Ntt // IMessage
+    message MP2MH_PlayerExitRoom_Req // IRequest
     {
         required long RoomID = 1;
         required long UserID = 2;
+    }
+	
+	message MH2MP_PlayerExitRoom_Ack // IResponse
+    {
     }
 
     message MP2MH_SyncRoomState_Ntt // IMessage

@@ -1,8 +1,8 @@
 ﻿using System;
-using Model;
+using ETModel;
 using System.Threading.Tasks;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler(AppType.Match)]
     public class G2M_PlayerEnterMatch_ReqHandler : AMRpcHandler<G2M_PlayerEnterMatch_Req, M2G_PlayerEnterMatch_Ack>
@@ -37,13 +37,12 @@ namespace Hotfix
                     //向玩家发送匹配成功消息
                     ActorProxy gamerActorProxy = actorProxyComponent.Get(gamer.PlayerID);
                     gamerActorProxy.Send(new Actor_MatchSucess_Ntt() { GamerID = gamer.Id });
-
-                    reply(response);
-                    return;
                 }
-
-                //创建匹配玩家
-                Matcher matcher = MatcherFactory.Create(message.PlayerID, message.UserID, message.SessionID);
+                else
+                {
+                    //创建匹配玩家
+                    Matcher matcher = MatcherFactory.Create(message.PlayerID, message.UserID, message.SessionID);
+                }
 
                 reply(response);
             }

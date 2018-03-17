@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 
-namespace Model
+namespace ETModel
 {
     /// <summary>
     /// 匹配房间管理组件，逻辑在MatchRoomComponentSystem扩展

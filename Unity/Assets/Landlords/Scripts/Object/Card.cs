@@ -1,7 +1,7 @@
 ﻿using System;
 using ProtoBuf;
 
-namespace Model
+namespace ETModel
 {
     /// <summary>
     /// 牌类

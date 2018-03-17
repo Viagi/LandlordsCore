@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model;
+using ETModel;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler]
     public class Actor_GameStart_NttHandler : AMHandler<Actor_GameStart_Ntt>

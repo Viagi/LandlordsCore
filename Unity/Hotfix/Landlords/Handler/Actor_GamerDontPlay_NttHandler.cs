@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler]
     public class Actor_GamerDontPlay_NttHandler : AMHandler<Actor_GamerDontPlay_Ntt>

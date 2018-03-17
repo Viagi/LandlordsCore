@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [ActorMessageHandler(AppType.Map)]
     public class Actor_PlayerExitRoom_ReqHandler : AMActorRpcHandler<Gamer, Actor_PlayerExitRoom_Req, Actor_PlayerExitRoom_Ack>
@@ -28,12 +28,12 @@ namespace Hotfix
                     room.Remove(gamer.UserID);
 
                     //同步匹配服务器移除玩家
-                    MapHelper.SendMessage(new MP2MH_PlayerExitRoom_Ntt() { RoomID = room.Id, UserID = gamer.UserID });
+                    await MapHelper.GetMapSession().Call(new MP2MH_PlayerExitRoom_Req() { RoomID = room.Id, UserID = gamer.UserID });
 
                     //消息广播给其他人
                     room.Broadcast(new Actor_GamerExitRoom_Ntt() { UserID = gamer.UserID });
 
-                    Log.Info($"玩家{gamer.UserID}退出房间");
+                    Log.Info($"Map：玩家{gamer.UserID}退出房间");
 
                     gamer.Dispose();
                 }
@@ -44,8 +44,6 @@ namespace Hotfix
             {
                 ReplyError(response, e, reply);
             }
-
-            await Task.CompletedTask;
         }
     }
 }

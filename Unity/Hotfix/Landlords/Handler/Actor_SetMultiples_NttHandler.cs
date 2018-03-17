@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler]
     public class Actor_SetMultiples_NttHandler : AMHandler<Actor_SetMultiples_Ntt>

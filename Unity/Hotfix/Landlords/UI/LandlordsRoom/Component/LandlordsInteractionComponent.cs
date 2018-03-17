@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Model;
+using ETModel;
 using System.Collections.Generic;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [ObjectSystem]
     public class LandlordsInteractionComponentAwakeSystem : AwakeSystem<LandlordsInteractionComponent>
@@ -66,7 +66,7 @@ namespace Hotfix
 
             base.Dispose();
 
-            Model.Game.Scene.GetComponent<ResourcesComponent>()?.UnloadBundle($"{UIType.LandlordsInteraction}.unity3d");
+            ETModel.Game.Scene.GetComponent<ResourcesComponent>()?.UnloadBundle($"{UIType.LandlordsInteraction}.unity3d");
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Hotfix
                 EndPlay();
                 changeGameModeButton.GetComponentInChildren<Text>().text = "取消托管";
             }
-            SessionComponent.Instance.Session.Send(new Actor_Trusteeship_Ntt() { isTrusteeship = !this.isTrusteeship });
+            SessionWrapComponent.Instance.Session.Send(new Actor_Trusteeship_Ntt() { isTrusteeship = !this.isTrusteeship });
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Hotfix
         {
             CardHelper.Sort(currentSelectCards);
             Actor_GamerPlayCard_Req request = new Actor_GamerPlayCard_Req() { Cards = currentSelectCards.ToArray() };
-            Actor_GamerPlayCard_Ack response = await SessionComponent.Instance.Session.Call(request) as Actor_GamerPlayCard_Ack;
+            Actor_GamerPlayCard_Ack response = await SessionWrapComponent.Instance.Session.Call(request) as Actor_GamerPlayCard_Ack;
 
             //出牌错误提示
             GamerUIComponent gamerUI = Game.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom).GetComponent<GamerComponent>().LocalGamer.GetComponent<GamerUIComponent>();
@@ -201,7 +201,7 @@ namespace Hotfix
         private async void OnPrompt()
         {
             Actor_GamerPrompt_Req request = new Actor_GamerPrompt_Req();
-            Actor_GamerPrompt_Ack response = await SessionComponent.Instance.Session.Call(request) as Actor_GamerPrompt_Ack;
+            Actor_GamerPrompt_Ack response = await SessionWrapComponent.Instance.Session.Call(request) as Actor_GamerPrompt_Ack;
 
             GamerComponent gamerComponent = this.GetParent<UI>().GetParent<UI>().GetComponent<GamerComponent>();
             HandCardsComponent handCards = gamerComponent.LocalGamer.GetComponent<HandCardsComponent>();
@@ -228,7 +228,7 @@ namespace Hotfix
         /// </summary>
         private void OnDiscard()
         {
-            SessionComponent.Instance.Session.Send(new Actor_GamerDontPlay_Ntt());
+            SessionWrapComponent.Instance.Session.Send(new Actor_GamerDontPlay_Ntt());
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace Hotfix
         /// </summary>
         private void OnGrab()
         {
-            SessionComponent.Instance.Session.Send(new Actor_GamerGrabLandlordSelect_Ntt() { IsGrab = true });
+            SessionWrapComponent.Instance.Session.Send(new Actor_GamerGrabLandlordSelect_Ntt() { IsGrab = true });
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace Hotfix
         /// </summary>
         private void OnDisgrab()
         {
-            SessionComponent.Instance.Session.Send(new Actor_GamerGrabLandlordSelect_Ntt() { IsGrab = false });
+            SessionWrapComponent.Instance.Session.Send(new Actor_GamerGrabLandlordSelect_Ntt() { IsGrab = false });
         }
     }
 }

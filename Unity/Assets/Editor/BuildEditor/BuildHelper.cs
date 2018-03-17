@@ -78,9 +78,7 @@ namespace MyEditor
 			
 			if (isBuildExe)
 			{
-				string[] levels = {
-					"Assets/Scenes/Init.unity",
-				};
+                string[] levels = EditorBuildSettingsScene.GetActiveSceneList(EditorBuildSettings.scenes);
 				Log.Info("开始EXE打包");
 				BuildPipeline.BuildPlayer(levels, $"{relativeDirPrefix}/{exeName}", buildTarget, buildOptions);
 				Log.Info("完成exe打包");

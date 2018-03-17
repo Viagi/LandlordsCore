@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-namespace Model
+namespace ETModel
 {
     public class HandCardSprite : MonoBehaviour
     {

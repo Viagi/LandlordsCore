@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using Model;
+using ETModel;
 using UnityEngine.UI;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler]
     public class Actor_GamerReconnect_NttHandler : AMHandler<Actor_GamerReconnect_Ntt>

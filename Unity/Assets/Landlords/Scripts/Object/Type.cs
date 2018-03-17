@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace Model
+namespace ETModel
 {
     /// <summary>
     /// 房间等级

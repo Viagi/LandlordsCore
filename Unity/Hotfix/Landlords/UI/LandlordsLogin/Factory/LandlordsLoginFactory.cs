@@ -1,18 +1,18 @@
-﻿using Model;
+﻿using ETModel;
 using System;
 using UnityEngine;
 
-namespace Hotfix
+namespace ETHotfix
 {
-    [UIFactory((int)UIType.LandlordsLogin)]
+    [UIFactory(UIType.LandlordsLogin)]
     public class LandlordsLoginFactory : IUIFactory
     {
-        public UI Create(Scene scene, UIType type, GameObject gameObject)
+        public UI Create(Scene scene, string type, GameObject parent)
         {
             try
             {
                 //加载AB包
-                ResourcesComponent resourcesComponent = Model.Game.Scene.GetComponent<ResourcesComponent>();
+                ResourcesComponent resourcesComponent = ETModel.Game.Scene.GetComponent<ResourcesComponent>();
                 resourcesComponent.LoadBundle($"{type}.unity3d");
 
                 //加载登录界面预设并生成实例
@@ -23,7 +23,7 @@ namespace Hotfix
                 login.layer = LayerMask.NameToLayer(LayerNames.UI);
 
                 //创建登录界面实体
-                UI ui = ComponentFactory.Create<UI,GameObject>(login);
+                UI ui = ComponentFactory.Create<UI, GameObject>(login);
 
                 //添加登录界面组件
                 ui.AddComponent<LandlordsLoginComponent>();
@@ -36,10 +36,10 @@ namespace Hotfix
             }
         }
 
-        public void Remove(UIType type)
+        public void Remove(string type)
         {
             //卸载AB包
-            Model.Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle($"{type}.unity3d");
+            ETModel.Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle($"{type}.unity3d");
         }
     }
 }

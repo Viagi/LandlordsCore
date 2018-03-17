@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model;
+using ETModel;
 using UnityEngine;
 
-namespace Hotfix
+namespace ETHotfix
 {
     [MessageHandler]
     public class Actor_GamerReady_NttHandler : AMHandler<Actor_GamerReady_Ntt>

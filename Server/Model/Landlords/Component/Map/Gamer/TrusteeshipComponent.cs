@@ -1,4 +1,4 @@
-﻿namespace Model
+﻿namespace ETModel
 {
     /// <summary>
     /// 托管组件，逻辑在TrusteeshipComponentSystem扩展

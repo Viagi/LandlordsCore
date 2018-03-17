@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Model
+namespace ETModel
 {
     /// <summary>
     /// 房间状态
