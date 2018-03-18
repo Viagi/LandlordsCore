@@ -276,7 +276,6 @@
     <Compile Include="Assets\Scripts\Module\FrameSync\AnimatorComponent.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\CameraComponent.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\ClientFrameComponent.cs" />
-    <Compile Include="Assets\Scripts\Module\FrameSync\FrameMessage.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\MoveComponent.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\Player.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\PlayerComponent.cs" />
@@ -359,7 +358,6 @@
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_ClientComponent_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Component_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_ComponentFactory_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Define_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Disposer_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_DoubleMap_2_UInt16_Type_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Entity_Binding.cs" />

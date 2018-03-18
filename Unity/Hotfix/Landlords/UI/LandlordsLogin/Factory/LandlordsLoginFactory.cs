@@ -16,7 +16,7 @@ namespace ETHotfix
                 resourcesComponent.LoadBundle($"{type}.unity3d");
 
                 //加载登录界面预设并生成实例
-                GameObject bundleGameObject = resourcesComponent.GetAsset<GameObject>($"{type}.unity3d", $"{type}");
+                GameObject bundleGameObject = (GameObject)resourcesComponent.GetAsset($"{type}.unity3d", $"{type}");
                 GameObject login = UnityEngine.Object.Instantiate(bundleGameObject);
 
                 //设置UI层级，只有UI摄像机可以渲染

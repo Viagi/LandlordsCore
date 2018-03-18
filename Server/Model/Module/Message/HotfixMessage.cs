@@ -13,6 +13,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public string Account;
 
@@ -26,11 +27,14 @@ namespace ETModel
 	public partial class R2C_Login: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public string Address;
 
@@ -45,6 +49,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Key;
 
@@ -55,11 +60,14 @@ namespace ETModel
 	public partial class G2C_LoginGate: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long PlayerId;
 
@@ -76,10 +84,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.C2M_TestActorRequest)]
 	[ProtoContract]
-	public partial class C2M_TestActorRequest: MessageObject, IActorRequest
+	public partial class C2M_TestActorRequest: IActorRequest
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public string Info;
 
@@ -87,14 +99,17 @@ namespace ETModel
 
 	[Message(HotfixOpcode.M2C_TestActorResponse)]
 	[ProtoContract]
-	public partial class M2C_TestActorResponse: MessageObject, IActorResponse
+	public partial class M2C_TestActorResponse: IActorResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public string Info;
 
@@ -112,6 +127,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 	}
 
 	[Message(HotfixOpcode.G2C_PlayerInfo)]
@@ -119,11 +135,14 @@ namespace ETModel
 	public partial class G2C_PlayerInfo: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1)]
 		public List<PlayerInfo> PlayerInfos = new List<PlayerInfo>();
 
@@ -139,6 +158,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public string Account;
 
@@ -152,11 +172,14 @@ namespace ETModel
 	public partial class R2C_Login_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Key;
 
@@ -171,6 +194,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public string Account;
 
@@ -184,11 +208,14 @@ namespace ETModel
 	public partial class R2C_Register_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	#endregion
@@ -201,6 +228,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Key;
 
@@ -211,11 +239,14 @@ namespace ETModel
 	public partial class G2C_LoginGate_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long PlayerID;
 
@@ -230,6 +261,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -240,11 +272,14 @@ namespace ETModel
 	public partial class G2C_GetUserInfo_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public string NickName;
 
@@ -265,6 +300,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 	}
 
 	[Message(HotfixOpcode.G2C_StartMatch_Ack)]
@@ -272,11 +308,14 @@ namespace ETModel
 	public partial class G2C_StartMatch_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(HotfixOpcode.C2G_ReturnLobby_Ntt)]
@@ -291,8 +330,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_GamerReady_Ntt)]
 	[ProtoContract]
-	public partial class Actor_GamerReady_Ntt: MessageObject, IActorMessage
+	public partial class Actor_GamerReady_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -300,8 +345,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_GamerGrabLandlordSelect_Ntt)]
 	[ProtoContract]
-	public partial class Actor_GamerGrabLandlordSelect_Ntt: MessageObject, IActorMessage
+	public partial class Actor_GamerGrabLandlordSelect_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -312,10 +363,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_GamerPlayCard_Req)]
 	[ProtoContract]
-	public partial class Actor_GamerPlayCard_Req: MessageObject, IActorRequest
+	public partial class Actor_GamerPlayCard_Req: IActorRequest
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public Card[] Cards;
 
@@ -323,20 +378,29 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_GamerPlayCard_Ack)]
 	[ProtoContract]
-	public partial class Actor_GamerPlayCard_Ack: MessageObject, IActorResponse
+	public partial class Actor_GamerPlayCard_Ack: IActorResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(HotfixOpcode.Actor_GamerPlayCard_Ntt)]
 	[ProtoContract]
-	public partial class Actor_GamerPlayCard_Ntt: MessageObject, IActorMessage
+	public partial class Actor_GamerPlayCard_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -347,22 +411,29 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_GamerPrompt_Req)]
 	[ProtoContract]
-	public partial class Actor_GamerPrompt_Req: MessageObject, IActorRequest
+	public partial class Actor_GamerPrompt_Req: IActorRequest
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 	}
 
 	[Message(HotfixOpcode.Actor_GamerPrompt_Ack)]
 	[ProtoContract]
-	public partial class Actor_GamerPrompt_Ack: MessageObject, IActorResponse
+	public partial class Actor_GamerPrompt_Ack: IActorResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public Card[] Cards;
 
@@ -370,8 +441,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_GamerDontPlay_Ntt)]
 	[ProtoContract]
-	public partial class Actor_GamerDontPlay_Ntt: MessageObject, IActorMessage
+	public partial class Actor_GamerDontPlay_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -379,8 +456,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_Trusteeship_Ntt)]
 	[ProtoContract]
-	public partial class Actor_Trusteeship_Ntt: MessageObject, IActorMessage
+	public partial class Actor_Trusteeship_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -407,8 +490,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_GamerEnterRoom_Ntt)]
 	[ProtoContract]
-	public partial class Actor_GamerEnterRoom_Ntt: MessageObject, IActorMessage
+	public partial class Actor_GamerEnterRoom_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1)]
 		public List<GamerInfo> Gamers = new List<GamerInfo>();
 
@@ -416,8 +505,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_GamerExitRoom_Ntt)]
 	[ProtoContract]
-	public partial class Actor_GamerExitRoom_Ntt: MessageObject, IActorMessage
+	public partial class Actor_GamerExitRoom_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -425,8 +520,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_GamerReconnect_Ntt)]
 	[ProtoContract]
-	public partial class Actor_GamerReconnect_Ntt: MessageObject, IActorMessage
+	public partial class Actor_GamerReconnect_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public int Multiples;
 
@@ -448,8 +549,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_GameStart_Ntt)]
 	[ProtoContract]
-	public partial class Actor_GameStart_Ntt: MessageObject, IActorMessage
+	public partial class Actor_GameStart_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public Card[] GamerCards;
 
@@ -461,8 +568,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_AuthorityGrabLandlord_Ntt)]
 	[ProtoContract]
-	public partial class Actor_AuthorityGrabLandlord_Ntt: MessageObject, IActorMessage
+	public partial class Actor_AuthorityGrabLandlord_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -470,8 +583,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_AuthorityPlayCard_Ntt)]
 	[ProtoContract]
-	public partial class Actor_AuthorityPlayCard_Ntt: MessageObject, IActorMessage
+	public partial class Actor_AuthorityPlayCard_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -482,8 +601,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_SetMultiples_Ntt)]
 	[ProtoContract]
-	public partial class Actor_SetMultiples_Ntt: MessageObject, IActorMessage
+	public partial class Actor_SetMultiples_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public int Multiples;
 
@@ -491,8 +616,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_SetLandlord_Ntt)]
 	[ProtoContract]
-	public partial class Actor_SetLandlord_Ntt: MessageObject, IActorMessage
+	public partial class Actor_SetLandlord_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -503,8 +634,14 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_Gameover_Ntt)]
 	[ProtoContract]
-	public partial class Actor_Gameover_Ntt: MessageObject, IActorMessage
+	public partial class Actor_Gameover_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public Identity Winner;
 
@@ -522,39 +659,19 @@ namespace ETModel
 
 	[Message(HotfixOpcode.Actor_GamerMoneyLess_Ntt)]
 	[ProtoContract]
-	public partial class Actor_GamerMoneyLess_Ntt: MessageObject, IActorMessage
+	public partial class Actor_GamerMoneyLess_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
 	}
 
 	#endregion
-
-}
-namespace ETModel
-{
-	[BsonKnownTypes(typeof(C2M_TestActorRequest))]
-	[BsonKnownTypes(typeof(M2C_TestActorResponse))]
-	[BsonKnownTypes(typeof(Actor_GamerReady_Ntt))]
-	[BsonKnownTypes(typeof(Actor_GamerGrabLandlordSelect_Ntt))]
-	[BsonKnownTypes(typeof(Actor_GamerPlayCard_Req))]
-	[BsonKnownTypes(typeof(Actor_GamerPlayCard_Ack))]
-	[BsonKnownTypes(typeof(Actor_GamerPlayCard_Ntt))]
-	[BsonKnownTypes(typeof(Actor_GamerPrompt_Req))]
-	[BsonKnownTypes(typeof(Actor_GamerPrompt_Ack))]
-	[BsonKnownTypes(typeof(Actor_GamerDontPlay_Ntt))]
-	[BsonKnownTypes(typeof(Actor_Trusteeship_Ntt))]
-	[BsonKnownTypes(typeof(Actor_GamerEnterRoom_Ntt))]
-	[BsonKnownTypes(typeof(Actor_GamerExitRoom_Ntt))]
-	[BsonKnownTypes(typeof(Actor_GamerReconnect_Ntt))]
-	[BsonKnownTypes(typeof(Actor_GameStart_Ntt))]
-	[BsonKnownTypes(typeof(Actor_AuthorityGrabLandlord_Ntt))]
-	[BsonKnownTypes(typeof(Actor_AuthorityPlayCard_Ntt))]
-	[BsonKnownTypes(typeof(Actor_SetMultiples_Ntt))]
-	[BsonKnownTypes(typeof(Actor_SetLandlord_Ntt))]
-	[BsonKnownTypes(typeof(Actor_Gameover_Ntt))]
-	[BsonKnownTypes(typeof(Actor_GamerMoneyLess_Ntt))]
-	public partial class MessageObject {}
 
 }

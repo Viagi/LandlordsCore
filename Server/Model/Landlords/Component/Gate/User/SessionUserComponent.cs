@@ -46,6 +46,7 @@ namespace ETModel
             Session realmSession = Game.Scene.GetComponent<NetInnerComponent>().Get(realmIPEndPoint);
             await realmSession.Call(new G2R_PlayerOffline_Req() { UserID = this.User.UserID });
 
+            actorProxyComponent.Remove(this.User.ActorID);
             this.User.Dispose();
             this.User = null;
         }

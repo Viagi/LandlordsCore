@@ -16,7 +16,7 @@ namespace ETHotfix
                 resourcesComponent.LoadBundle($"{CardHelper.ATLAS_NAME}.unity3d");
                 resourcesComponent.LoadBundle($"{HandCardsComponent.HANDCARD_NAME}.unity3d");
                 resourcesComponent.LoadBundle($"{HandCardsComponent.PLAYCARD_NAME}.unity3d");
-                GameObject bundleGameObject = resourcesComponent.GetAsset<GameObject>($"{type}.unity3d", $"{type}");
+                GameObject bundleGameObject = (GameObject)resourcesComponent.GetAsset($"{type}.unity3d", $"{type}");
                 GameObject room = UnityEngine.Object.Instantiate(bundleGameObject);
                 room.layer = LayerMask.NameToLayer(LayerNames.UI);
                 UI ui = ComponentFactory.Create<UI, GameObject>(room);

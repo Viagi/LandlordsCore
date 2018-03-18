@@ -6,17 +6,23 @@ namespace ETModel
 	{
 		public ActorProxy proxy;
 		
-		public MessageObject message;
+		public IActorMessage message;
 		
 		public TaskCompletionSource<IResponse> Tcs;
 
 		public async Task<IResponse> Run()
 		{
-			ActorRequest request = new ActorRequest() { Id = this.proxy.Id, AMessage = this.message };
-			ActorResponse response = (ActorResponse)await this.proxy.RealCall(request, this.proxy.CancellationTokenSource.Token);
+			Session session = Game.Scene.GetComponent<NetInnerComponent>().Get(this.proxy.Address);
+
+			this.message.ActorId = this.proxy.Id;
+			IResponse response = await session.Call(message, this.proxy.CancellationTokenSource.Token);
+
 			if (response.Error != ErrorCode.ERR_NotFoundActor)
 			{
-				this.Tcs?.SetResult((IResponse)response.AMessage);
+				if (this.Tcs != null)
+				{
+					this.Tcs?.SetResult(response);
+				}
 			}
 			return response;
 		}

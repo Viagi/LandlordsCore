@@ -109,8 +109,7 @@ namespace MyEditor
 					sb.Append($"\tpublic partial class {msgName}");
 					if (parentClass == "IActorMessage" || parentClass == "IActorRequest" || parentClass == "IActorResponse" || parentClass == "IFrameMessage")
 					{
-						sb.Append($": MessageObject, {parentClass}\n");
-						parentMsg.Add("MessageObject", msgName);
+						sb.Append($": {parentClass}\n");
 					}
 					else if (parentClass != "")
 					{
@@ -125,27 +124,33 @@ namespace MyEditor
 				if (isMsgStart && newline == "{")
 				{
 					sb.Append("\t{\n");
-
-					if (parentClass == "IRequest" || parentClass == "IActorRequest")
+					
+					if (parentClass == "IRequest" || parentClass == "IActorRequest" || parentClass == "IActorMessage" || parentClass == "IFrameMessage")
 					{
 						sb.AppendLine("\t\t[ProtoMember(90, IsRequired = true)]");
-						sb.AppendLine("\t\tpublic int RpcId { get; set; }");
+						sb.AppendLine("\t\tpublic int RpcId { get; set; }\n");
 					}
 
 					if (parentClass == "IResponse" || parentClass == "IActorResponse")
 					{
 						sb.AppendLine("\t\t[ProtoMember(90, IsRequired = true)]");
-						sb.AppendLine("\t\tpublic int Error { get; set; }");
+						sb.AppendLine("\t\tpublic int RpcId { get; set; }\n");
 						sb.AppendLine("\t\t[ProtoMember(91, IsRequired = true)]");
-						sb.AppendLine("\t\tpublic string Message { get; set; }");
+						sb.AppendLine("\t\tpublic int Error { get; set; }\n");
 						sb.AppendLine("\t\t[ProtoMember(92, IsRequired = true)]");
-						sb.AppendLine("\t\tpublic int RpcId { get; set; }");
+						sb.AppendLine("\t\tpublic string Message { get; set; }\n");
+					}
+
+					if (parentClass == "IActorRequest" || parentClass == "IActorMessage")
+					{
+						sb.AppendLine("\t\t[ProtoMember(93, IsRequired = true)]");
+						sb.AppendLine("\t\tpublic long ActorId { get; set; }\n");
 					}
 
 					if (parentClass == "IFrameMessage")
 					{
-						sb.AppendLine("\t\t[ProtoMember(92, IsRequired = true)]");
-						sb.AppendLine("\t\tpublic long Id { get; set; }");
+						sb.AppendLine("\t\t[ProtoMember(94, IsRequired = true)]");
+						sb.AppendLine("\t\tpublic long Id { get; set; }\n");
 					}
 				}
 
@@ -190,7 +195,7 @@ namespace MyEditor
 
 			//if (!isClient)
 			//{
-				GenerateHead(sb, ns, flag, opcodeClassName);
+				//GenerateHead(sb, ns, flag, opcodeClassName);
 			//}
 
 			File.WriteAllText(csPath, sb.ToString());
@@ -320,6 +325,9 @@ namespace MyEditor
 			string typeCs = "";
 			switch (type)
 			{
+				case "int16":
+					typeCs = "short";
+					break;
 				case "int32":
 					typeCs = "int";
 					break;
@@ -337,6 +345,9 @@ namespace MyEditor
 					break;
 				case "uint64":
 					typeCs = "ulong";
+					break;
+				case "uint16":
+					typeCs = "ushort";
 					break;
 				default:
 					typeCs = type;

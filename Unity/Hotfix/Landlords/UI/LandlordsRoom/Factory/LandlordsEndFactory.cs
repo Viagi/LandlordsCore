@@ -9,7 +9,7 @@ namespace ETHotfix
         {
             ResourcesComponent resourcesComponent = ETModel.Game.Scene.GetComponent<ResourcesComponent>();
             resourcesComponent.LoadBundle($"{type}.unity3d");
-            GameObject prefab = resourcesComponent.GetAsset<GameObject>($"{type}.unity3d", $"{type}");
+            GameObject prefab = (GameObject)resourcesComponent.GetAsset($"{type}.unity3d", $"{type}");
             GameObject endPanel = UnityEngine.Object.Instantiate(prefab);
 
             endPanel.layer = LayerMask.NameToLayer("UI");

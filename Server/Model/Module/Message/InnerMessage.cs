@@ -16,6 +16,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public Unit Unit;
 
@@ -26,11 +27,14 @@ namespace ETModel
 	public partial class M2M_TrasferUnitResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.M2A_Reload)]
@@ -39,6 +43,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 	}
 
 	[Message(InnerOpcode.A2M_Reload)]
@@ -46,11 +51,14 @@ namespace ETModel
 	public partial class A2M_Reload: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.G2G_LockRequest)]
@@ -59,6 +67,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Id;
 
@@ -72,11 +81,14 @@ namespace ETModel
 	public partial class G2G_LockResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.G2G_LockReleaseRequest)]
@@ -85,6 +97,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Id;
 
@@ -98,11 +111,14 @@ namespace ETModel
 	public partial class G2G_LockReleaseResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.DBSaveRequest)]
@@ -111,6 +127,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public bool NeedCache;
 
@@ -127,11 +144,14 @@ namespace ETModel
 	public partial class DBSaveBatchResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.DBSaveBatchRequest)]
@@ -140,6 +160,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public bool NeedCache;
 
@@ -156,11 +177,14 @@ namespace ETModel
 	public partial class DBSaveResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.DBQueryRequest)]
@@ -169,6 +193,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Id;
 
@@ -185,11 +210,14 @@ namespace ETModel
 	public partial class DBQueryResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public Component Disposer;
 
@@ -201,6 +229,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public string CollectionName;
 
@@ -217,11 +246,14 @@ namespace ETModel
 	public partial class DBQueryBatchResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1)]
 		public List<Component> Disposers = new List<Component>();
 
@@ -233,6 +265,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public string CollectionName;
 
@@ -249,11 +282,14 @@ namespace ETModel
 	public partial class DBQueryJsonResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1)]
 		public List<Component> Disposers = new List<Component>();
 
@@ -265,6 +301,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Key;
 
@@ -278,11 +315,14 @@ namespace ETModel
 	public partial class ObjectAddResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.ObjectRemoveRequest)]
@@ -291,6 +331,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Key;
 
@@ -301,11 +342,14 @@ namespace ETModel
 	public partial class ObjectRemoveResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.ObjectLockRequest)]
@@ -314,6 +358,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Key;
 
@@ -330,11 +375,14 @@ namespace ETModel
 	public partial class ObjectLockResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.ObjectUnLockRequest)]
@@ -343,6 +391,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Key;
 
@@ -359,11 +408,14 @@ namespace ETModel
 	public partial class ObjectUnLockResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.ObjectGetRequest)]
@@ -372,6 +424,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Key;
 
@@ -382,11 +435,14 @@ namespace ETModel
 	public partial class ObjectGetResponse: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public int AppId;
 
@@ -398,6 +454,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public string Account;
 
@@ -408,11 +465,14 @@ namespace ETModel
 	public partial class G2R_GetLoginKey: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Key;
 
@@ -424,6 +484,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long PlayerId;
 
@@ -437,11 +498,14 @@ namespace ETModel
 	public partial class M2G_CreateUnit: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UnitId;
 
@@ -460,6 +524,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -473,11 +538,14 @@ namespace ETModel
 	public partial class R2G_PlayerOnline_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.G2R_PlayerOffline_Req)]
@@ -486,6 +554,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -496,11 +565,14 @@ namespace ETModel
 	public partial class R2G_PlayerOffline_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	#endregion
@@ -513,6 +585,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -523,11 +596,14 @@ namespace ETModel
 	public partial class G2R_GetLoginKey_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long Key;
 
@@ -539,6 +615,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -549,11 +626,14 @@ namespace ETModel
 	public partial class G2R_PlayerKickOut_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	#endregion
@@ -566,6 +646,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long PlayerID;
 
@@ -582,11 +663,14 @@ namespace ETModel
 	public partial class M2G_PlayerEnterMatch_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.G2M_PlayerExitMatch_Req)]
@@ -595,6 +679,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -605,11 +690,14 @@ namespace ETModel
 	public partial class M2G_PlayerExitMatch_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	#endregion
@@ -618,10 +706,14 @@ namespace ETModel
 
 	[Message(InnerOpcode.Actor_PlayerExitRoom_Req)]
 	[ProtoContract]
-	public partial class Actor_PlayerExitRoom_Req: MessageObject, IActorRequest
+	public partial class Actor_PlayerExitRoom_Req: IActorRequest
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long UserID;
 
@@ -629,14 +721,17 @@ namespace ETModel
 
 	[Message(InnerOpcode.Actor_PlayerExitRoom_Ack)]
 	[ProtoContract]
-	public partial class Actor_PlayerExitRoom_Ack: MessageObject, IActorResponse
+	public partial class Actor_PlayerExitRoom_Ack: IActorResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	#endregion
@@ -645,8 +740,14 @@ namespace ETModel
 
 	[Message(InnerOpcode.Actor_MatchSucess_Ntt)]
 	[ProtoContract]
-	public partial class Actor_MatchSucess_Ntt: MessageObject, IActorMessage
+	public partial class Actor_MatchSucess_Ntt: IActorMessage
 	{
+		[ProtoMember(90, IsRequired = true)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long GamerID;
 
@@ -662,6 +763,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 	}
 
 	[Message(InnerOpcode.MP2MH_CreateRoom_Ack)]
@@ -669,11 +771,14 @@ namespace ETModel
 	public partial class MP2MH_CreateRoom_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long RoomID;
 
@@ -681,10 +786,14 @@ namespace ETModel
 
 	[Message(InnerOpcode.Actor_PlayerEnterRoom_Req)]
 	[ProtoContract]
-	public partial class Actor_PlayerEnterRoom_Req: MessageObject, IActorRequest
+	public partial class Actor_PlayerEnterRoom_Req: IActorRequest
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(93, IsRequired = true)]
+		public long ActorId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long PlayerID;
 
@@ -698,14 +807,17 @@ namespace ETModel
 
 	[Message(InnerOpcode.Actor_PlayerEnterRoom_Ack)]
 	[ProtoContract]
-	public partial class Actor_PlayerEnterRoom_Ack: MessageObject, IActorResponse
+	public partial class Actor_PlayerEnterRoom_Ack: IActorResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long GamerID;
 
@@ -721,6 +833,7 @@ namespace ETModel
 	{
 		[ProtoMember(90, IsRequired = true)]
 		public int RpcId { get; set; }
+
 		[ProtoMember(1, IsRequired = true)]
 		public long RoomID;
 
@@ -734,11 +847,14 @@ namespace ETModel
 	public partial class MH2MP_PlayerExitRoom_Ack: IResponse
 	{
 		[ProtoMember(90, IsRequired = true)]
-		public int Error { get; set; }
-		[ProtoMember(91, IsRequired = true)]
-		public string Message { get; set; }
-		[ProtoMember(92, IsRequired = true)]
 		public int RpcId { get; set; }
+
+		[ProtoMember(91, IsRequired = true)]
+		public int Error { get; set; }
+
+		[ProtoMember(92, IsRequired = true)]
+		public string Message { get; set; }
+
 	}
 
 	[Message(InnerOpcode.MP2MH_SyncRoomState_Ntt)]
@@ -754,15 +870,5 @@ namespace ETModel
 	}
 
 	#endregion
-
-}
-namespace ETModel
-{
-	[BsonKnownTypes(typeof(Actor_PlayerExitRoom_Req))]
-	[BsonKnownTypes(typeof(Actor_PlayerExitRoom_Ack))]
-	[BsonKnownTypes(typeof(Actor_MatchSucess_Ntt))]
-	[BsonKnownTypes(typeof(Actor_PlayerEnterRoom_Req))]
-	[BsonKnownTypes(typeof(Actor_PlayerEnterRoom_Ack))]
-	public partial class MessageObject {}
 
 }

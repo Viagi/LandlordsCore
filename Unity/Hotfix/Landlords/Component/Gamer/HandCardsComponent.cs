@@ -246,7 +246,7 @@ namespace ETHotfix
         /// <returns></returns>
         private GameObject CreateCardSprite(string prefabName, string cardName, Transform parent)
         {
-            GameObject cardSpritePrefab = ETModel.Game.Scene.GetComponent<ResourcesComponent>().GetAsset<GameObject>($"{prefabName}.unity3d", prefabName);
+            GameObject cardSpritePrefab = (GameObject)ETModel.Game.Scene.GetComponent<ResourcesComponent>().GetAsset($"{prefabName}.unity3d", prefabName);
             GameObject cardSprite = UnityEngine.Object.Instantiate(cardSpritePrefab);
 
             cardSprite.name = cardName;

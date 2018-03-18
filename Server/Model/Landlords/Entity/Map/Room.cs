@@ -126,7 +126,7 @@ namespace ETModel
         /// 广播消息
         /// </summary>
         /// <param name="message"></param>
-        public void Broadcast(IMessage message)
+        public void Broadcast(IActorMessage message)
         {
             foreach (Gamer gamer in gamers)
             {

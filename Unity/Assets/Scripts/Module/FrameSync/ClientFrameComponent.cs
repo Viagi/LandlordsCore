@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ETModel
 {
@@ -26,7 +27,7 @@ namespace ETModel
         
         public int waitTime;
 
-        public const int maxWaitTime = 40;
+        public const int maxWaitTime = 100;
 
         public void Start()
         {
@@ -40,30 +41,25 @@ namespace ETModel
 
         public async void UpdateAsync()
         {
-            TimerComponent timerComponent = Game.Scene.GetComponent<TimerComponent>();
-            while (true)
-            {
-                // 如果队列中消息多于4个，则加速跑帧
-                this.waitTime = maxWaitTime;
-                if (this.Queue.Count > 4)
-                {
-                    this.waitTime = maxWaitTime - (this.Queue.Count - 4) * 2;
-                }
-                // 最快加速一倍
-                if (this.waitTime < 20)
-                {
-                    this.waitTime = 20;
-                }
+	        try
+	        {
+		        TimerComponent timerComponent = Game.Scene.GetComponent<TimerComponent>();
+		        while (true)
+		        {
+			        await timerComponent.WaitAsync(waitTime);
 
-                await timerComponent.WaitAsync(waitTime);
+			        if (this.IsDisposed)
+			        {
+				        return;
+			        }
 
-                if (this.IsDisposed)
-                {
-                    return;
-                }
-                
-                this.UpdateFrame();
-            }
+			        this.UpdateFrame();
+		        }
+			}
+	        catch (Exception e)
+	        {
+		        Log.Error(e);
+	        }
         }
 
         private void UpdateFrame()
@@ -77,9 +73,14 @@ namespace ETModel
 
             for (int i = 0; i < sessionFrameMessage.FrameMessage.Messages.Count; ++i)
             {
-	            IFrameMessage message = (IFrameMessage)sessionFrameMessage.FrameMessage.Messages[i];
-	            ushort opcode = Game.Scene.GetComponent<OpcodeTypeComponent>().GetOpcode(message.GetType());
-                Game.Scene.GetComponent<MessageDispatherComponent>().Handle(sessionFrameMessage.Session, new MessageInfo(opcode, message));
+	            OneFrameMessage oneFrameMessage = sessionFrameMessage.FrameMessage.Messages[i];
+
+				Session session = sessionFrameMessage.Session;
+				OpcodeTypeComponent opcodeTypeComponent = session.Network.Entity.GetComponent<OpcodeTypeComponent>();
+	            Type type = opcodeTypeComponent.GetType(oneFrameMessage.Op);
+
+	            IMessage message = (IMessage)session.Network.MessagePacker.DeserializeFrom(type, oneFrameMessage.AMessage);
+                Game.Scene.GetComponent<MessageDispatherComponent>().Handle(sessionFrameMessage.Session, new MessageInfo(oneFrameMessage.Op, message));
             }
         }
     }

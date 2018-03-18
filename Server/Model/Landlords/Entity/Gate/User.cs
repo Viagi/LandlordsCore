@@ -27,17 +27,5 @@
         {
             this.UserID = id;
         }
-
-        public override void Dispose()
-        {
-            if (this.IsDisposed)
-            {
-                return;
-            }
-
-            Game.Scene.GetComponent<ActorProxyComponent>()?.Remove(this.ActorID);
-
-            base.Dispose();
-        }
     }
 }

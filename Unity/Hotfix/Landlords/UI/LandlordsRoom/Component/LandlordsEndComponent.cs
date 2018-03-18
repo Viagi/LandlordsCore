@@ -40,7 +40,7 @@ namespace ETHotfix
             gamerContent = rc.Get<GameObject>("GamerContent");
             Button continueButton = rc.Get<GameObject>("ContinueButton").GetComponent<Button>();
             continueButton.onClick.Add(OnContinue);
-            contentPrefab = resourcesComponent.GetAsset<GameObject>($"{CONTENT_NAME}.unity3d", CONTENT_NAME);
+            contentPrefab = (GameObject)resourcesComponent.GetAsset($"{CONTENT_NAME}.unity3d", CONTENT_NAME);
         }
 
         public override void Dispose()
