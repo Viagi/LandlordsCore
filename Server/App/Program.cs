@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading;
 using ETModel;
+using MongoDB.Bson.Serialization;
 using NLog;
 
 namespace App
@@ -13,8 +14,6 @@ namespace App
 			// 异步方法全部会回掉到主线程
 			OneThreadSynchronizationContext contex = new OneThreadSynchronizationContext();
 			SynchronizationContext.SetSynchronizationContext(contex);
-
-			MongoHelper.Init();
 			
 			try
 			{
@@ -53,37 +52,39 @@ namespace App
 						Game.Scene.AddComponent<NetInnerComponent, IPEndPoint>(innerConfig.IPEndPoint);
 						Game.Scene.AddComponent<NetOuterComponent, IPEndPoint>(outerConfig.IPEndPoint);
 						Game.Scene.AddComponent<AppManagerComponent>();
+						Game.Scene.AddComponent<ActorManagerComponent>();
 						break;
 					case AppType.Realm:
 						Game.Scene.AddComponent<ActorMessageDispatherComponent>();
-						Game.Scene.AddComponent<ActorManagerComponent>();
 						Game.Scene.AddComponent<NetInnerComponent, IPEndPoint>(innerConfig.IPEndPoint);
 						Game.Scene.AddComponent<NetOuterComponent, IPEndPoint>(outerConfig.IPEndPoint);
 						Game.Scene.AddComponent<LocationProxyComponent>();
 						Game.Scene.AddComponent<RealmGateAddressComponent>();
+						Game.Scene.AddComponent<ActorManagerComponent>();
 						break;
 					case AppType.Gate:
 						Game.Scene.AddComponent<PlayerComponent>();
 						Game.Scene.AddComponent<ActorMessageDispatherComponent>();
-						Game.Scene.AddComponent<ActorManagerComponent>();
 						Game.Scene.AddComponent<NetInnerComponent, IPEndPoint>(innerConfig.IPEndPoint);
 						Game.Scene.AddComponent<NetOuterComponent, IPEndPoint>(outerConfig.IPEndPoint);
 						Game.Scene.AddComponent<LocationProxyComponent>();
 						Game.Scene.AddComponent<ActorProxyComponent>();
 						Game.Scene.AddComponent<GateSessionKeyComponent>();
+						Game.Scene.AddComponent<ActorManagerComponent>();
 						break;
 					case AppType.Location:
 						Game.Scene.AddComponent<NetInnerComponent, IPEndPoint>(innerConfig.IPEndPoint);
 						Game.Scene.AddComponent<LocationComponent>();
+						Game.Scene.AddComponent<ActorManagerComponent>();
 						break;
 					case AppType.Map:
 						Game.Scene.AddComponent<NetInnerComponent, IPEndPoint>(innerConfig.IPEndPoint);
-						Game.Scene.AddComponent<ActorManagerComponent>();
 						Game.Scene.AddComponent<UnitComponent>();
 						Game.Scene.AddComponent<LocationProxyComponent>();
 						Game.Scene.AddComponent<ActorProxyComponent>();
 						Game.Scene.AddComponent<ActorMessageDispatherComponent>();
 						Game.Scene.AddComponent<ServerFrameComponent>();
+						Game.Scene.AddComponent<ActorManagerComponent>();
 						break;
 					case AppType.AllServer:
 						Game.Scene.AddComponent<ActorProxyComponent>();
@@ -97,7 +98,6 @@ namespace App
 						Game.Scene.AddComponent<DBProxyComponent>();
 						Game.Scene.AddComponent<LocationComponent>();
 						Game.Scene.AddComponent<ActorMessageDispatherComponent>();
-						Game.Scene.AddComponent<ActorManagerComponent>();
 						Game.Scene.AddComponent<NetInnerComponent, IPEndPoint>(innerConfig.IPEndPoint);
 						Game.Scene.AddComponent<NetOuterComponent, IPEndPoint>(outerConfig.IPEndPoint);
 						Game.Scene.AddComponent<LocationProxyComponent>();
@@ -106,6 +106,8 @@ namespace App
 						Game.Scene.AddComponent<GateSessionKeyComponent>();
 						Game.Scene.AddComponent<ConfigComponent>();
 						Game.Scene.AddComponent<ServerFrameComponent>();
+						Game.Scene.AddComponent<ActorManagerComponent>();
+						// Game.Scene.AddComponent<HttpComponent>();
                         
                         //以下是斗地主服务端自定义全局组件
 
@@ -143,13 +145,13 @@ namespace App
 					}
 					catch (Exception e)
 					{
-						Log.Error(e.ToString());
+						Log.Error(e);
 					}
 				}
 			}
 			catch (Exception e)
 			{
-				Log.Error(e.ToString());
+				Log.Error(e);
 			}
 		}
 	}

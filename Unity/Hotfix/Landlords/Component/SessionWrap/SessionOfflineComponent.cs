@@ -19,6 +19,7 @@ namespace ETHotfix
             //移除连接组件
             ETModel.Game.Scene.RemoveComponent<SessionComponent>();
             Game.Scene.RemoveComponent<SessionWrapComponent>();
+
             //释放本地玩家对象
             ClientComponent clientComponent = ETModel.Game.Scene.GetComponent<ClientComponent>();
             if (clientComponent.LocalPlayer != null)
@@ -28,6 +29,11 @@ namespace ETHotfix
             }
 
             UIComponent uiComponent = Game.Scene.GetComponent<UIComponent>();
+            //游戏关闭，不用回到登录界面
+            if(uiComponent == null || uiComponent.IsDisposed)
+            {
+                return;
+            }
 
             UI uiLogin = uiComponent.Create(UIType.LandlordsLogin);
             uiLogin.GetComponent<LandlordsLoginComponent>().SetPrompt("连接断开");

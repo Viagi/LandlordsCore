@@ -7,16 +7,15 @@ namespace ETModel
 		public Action<Session, Packet> MessageCallback;
 		public Action<Session> DisposeCallback;
 
-        public override void Dispose()
-        {
-            if (this.IsDisposed)
-            {
-                return;
-            }
+		public override void Dispose()
+		{
+			if (this.IsDisposed)
+			{
+				return;
+			}
+			base.Dispose();
 
-            base.Dispose();
-
-            DisposeCallback(GetParent<Session>());
-        }
-    }
+			this.DisposeCallback?.Invoke(this.GetParent<Session>());
+		}
+	}
 }
