@@ -76,67 +76,13 @@ namespace ETHotfix
                     deskCardsCache.AddCard(card);
                 }
 
+                reply(response);
+
                 //转发玩家出牌消息
                 room.Broadcast(new Actor_GamerPlayCard_Ntt() { UserID = gamer.UserID, Cards = message.Cards });
 
-                if (handCards.CardsCount == 0)
-                {
-                    //当前出牌者手牌数为0时游戏结束，当前最大出牌者为赢家
-                    Identity winnerIdentity = room.Get(orderController.Biggest).GetComponent<HandCardsComponent>().AccessIdentity;
-                    Dictionary<long, long> gamersScore = new Dictionary<long, long>();
-
-                    //游戏结束所有玩家摊牌
-                    foreach (var _gamer in room.GetAll())
-                    {
-                        _gamer.RemoveComponent<TrusteeshipComponent>();
-                        gamersScore.Add(_gamer.UserID, gameController.GetScore(_gamer, winnerIdentity));
-
-                        if (_gamer.UserID != gamer.UserID)
-                        {
-                            Card[] _gamerCards = _gamer.GetComponent<HandCardsComponent>().GetAll();
-                            room.Broadcast(new Actor_GamerPlayCard_Ntt() { UserID = _gamer.UserID, Cards = _gamerCards });
-                        }
-                    }
-
-                    //游戏结束结算
-                    Dictionary<long, long> gamersMoney = await gameController.GameOver(gamersScore);
-
-                    //广播游戏结束消息
-                    room.Broadcast(new Actor_Gameover_Ntt()
-                    {
-                        Winner = winnerIdentity,
-                        BasePointPerMatch = gameController.BasePointPerMatch,
-                        Multiples = gameController.Multiples,
-                        GamersScore = gamersScore
-                    });
-
-                    //清理玩家
-                    foreach (var _gamer in room.GetAll())
-                    {
-                        //踢出余额不足玩家
-                        if (gamersMoney[_gamer.UserID] < gameController.MinThreshold)
-                        {
-                            ActorProxy actorProxy = _gamer.GetComponent<UnitGateComponent>().GetActorProxy();
-                            actorProxy.Send(new Actor_GamerMoneyLess_Ntt() { UserID = _gamer.UserID });
-                        }
-
-                        //踢出离线玩家
-                        if (_gamer.isOffline)
-                        {
-                            ActorProxy actorProxy = Game.Scene.GetComponent<ActorProxyComponent>().Get(_gamer.Id);
-                            await actorProxy.Call(new Actor_PlayerExitRoom_Req());
-                        }
-                    }
-                }
-                else
-                {
-                    //轮到下位玩家出牌
-                    orderController.Biggest = gamer.UserID;
-                    orderController.Turn();
-                    room.Broadcast(new Actor_AuthorityPlayCard_Ntt() { UserID = orderController.CurrentAuthority, IsFirst = false });
-                }
-
-                reply(response);
+                //游戏控制器继续游戏
+                gameController.Continue(gamer);
             }
             catch (Exception e)
             {

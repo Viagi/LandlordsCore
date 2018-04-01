@@ -316,4 +316,24 @@
     }
 
     #endregion
+	
+	#region Map-Map
+
+    message MP2MH_PlayerExitRoom_Req // IRequest
+    {
+        required long RoomID = 1;
+        required long UserID = 2;
+    }
+	
+	message MH2MP_PlayerExitRoom_Ack // IResponse
+    {
+    }
+
+    message MP2MH_SyncRoomState_Ntt // IMessage
+    {
+        required long RoomID = 1;
+        required RoomState State = 2;
+    }
+
+    #endregion
 }

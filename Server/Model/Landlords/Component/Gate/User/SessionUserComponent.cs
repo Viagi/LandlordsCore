@@ -20,34 +20,41 @@ namespace ETModel
 
             base.Dispose();
 
-            //释放User对象时将User对象从管理组件中移除
-            Game.Scene.GetComponent<UserComponent>()?.Remove(this.User.UserID);
-
-            StartConfigComponent config = Game.Scene.GetComponent<StartConfigComponent>();
-            ActorProxyComponent actorProxyComponent = Game.Scene.GetComponent<ActorProxyComponent>();
-
-            //正在匹配中发送玩家退出匹配请求
-            if (this.User.IsMatching)
+            try
             {
-                IPEndPoint matchIPEndPoint = config.MatchConfig.GetComponent<InnerConfig>().IPEndPoint;
-                Session matchSession = Game.Scene.GetComponent<NetInnerComponent>().Get(matchIPEndPoint);
-                await matchSession.Call(new G2M_PlayerExitMatch_Req() { UserID = this.User.UserID });
-            }
+                //释放User对象时将User对象从管理组件中移除
+                Game.Scene.GetComponent<UserComponent>()?.Remove(this.User.UserID);
 
-            //正在游戏中发送玩家退出房间请求
-            if (this.User.ActorID != 0)
+                StartConfigComponent config = Game.Scene.GetComponent<StartConfigComponent>();
+                ActorProxyComponent actorProxyComponent = Game.Scene.GetComponent<ActorProxyComponent>();
+
+                //正在匹配中发送玩家退出匹配请求
+                if (this.User.IsMatching)
+                {
+                    IPEndPoint matchIPEndPoint = config.MatchConfig.GetComponent<InnerConfig>().IPEndPoint;
+                    Session matchSession = Game.Scene.GetComponent<NetInnerComponent>().Get(matchIPEndPoint);
+                    await matchSession.Call(new G2M_PlayerExitMatch_Req() { UserID = this.User.UserID });
+                }
+
+                //正在游戏中发送玩家退出房间请求
+                if (this.User.ActorID != 0)
+                {
+                    ActorProxy actorProxy = actorProxyComponent.Get(this.User.ActorID);
+                    await actorProxy.Call(new Actor_PlayerExitRoom_Req() { UserID = this.User.UserID });
+                }
+
+                //向登录服务器发送玩家下线消息
+                IPEndPoint realmIPEndPoint = config.RealmConfig.GetComponent<InnerConfig>().IPEndPoint;
+                Session realmSession = Game.Scene.GetComponent<NetInnerComponent>().Get(realmIPEndPoint);
+                await realmSession.Call(new G2R_PlayerOffline_Req() { UserID = this.User.UserID });
+
+                this.User.Dispose();
+                this.User = null;
+            }
+            catch (System.Exception e)
             {
-                ActorProxy actorProxy = actorProxyComponent.Get(this.User.ActorID);
-                await actorProxy.Call(new Actor_PlayerExitRoom_Req() { UserID = this.User.UserID });
+                Log.Trace(e.ToString());
             }
-
-            //向登录服务器发送玩家下线消息
-            IPEndPoint realmIPEndPoint = config.RealmConfig.GetComponent<InnerConfig>().IPEndPoint;
-            Session realmSession = Game.Scene.GetComponent<NetInnerComponent>().Get(realmIPEndPoint);
-            await realmSession.Call(new G2R_PlayerOffline_Req() { UserID = this.User.UserID });
-
-            this.User.Dispose();
-            this.User = null;
         }
     }
 }

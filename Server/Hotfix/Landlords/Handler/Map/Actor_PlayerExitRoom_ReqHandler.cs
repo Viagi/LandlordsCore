@@ -34,7 +34,6 @@ namespace ETHotfix
                     room.Broadcast(new Actor_GamerExitRoom_Ntt() { UserID = gamer.UserID });
 
                     Log.Info($"Map：玩家{gamer.UserID}退出房间");
-
                     gamer.Dispose();
                 }
 
