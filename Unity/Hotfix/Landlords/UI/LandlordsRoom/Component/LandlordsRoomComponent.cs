@@ -48,6 +48,7 @@ namespace ETHotfix
             base.Dispose();
 
             this.Matching = false;
+            this.interaction = null;
         }
 
         public void Awake()
@@ -124,7 +125,7 @@ namespace ETHotfix
         /// <summary>
         /// 退出房间
         /// </summary>
-        private void OnQuit()
+        public void OnQuit()
         {
             //发送退出房间消息
             SessionWrapComponent.Instance.Session.Send(new C2G_ReturnLobby_Ntt());

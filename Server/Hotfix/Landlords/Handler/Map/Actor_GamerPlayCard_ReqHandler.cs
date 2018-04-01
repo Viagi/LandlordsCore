@@ -99,7 +99,7 @@ namespace ETHotfix
                     }
 
                     //游戏结束结算
-                    gameController.GameOver(gamersScore);
+                    Dictionary<long, long> gamersMoney = await gameController.GameOver(gamersScore);
 
                     //广播游戏结束消息
                     room.Broadcast(new Actor_Gameover_Ntt()
@@ -109,6 +109,24 @@ namespace ETHotfix
                         Multiples = gameController.Multiples,
                         GamersScore = gamersScore
                     });
+
+                    //清理玩家
+                    foreach (var _gamer in room.GetAll())
+                    {
+                        //踢出余额不足玩家
+                        if (gamersMoney[_gamer.UserID] < gameController.MinThreshold)
+                        {
+                            ActorProxy actorProxy = _gamer.GetComponent<UnitGateComponent>().GetActorProxy();
+                            actorProxy.Send(new Actor_GamerMoneyLess_Ntt() { UserID = _gamer.UserID });
+                        }
+
+                        //踢出离线玩家
+                        if (_gamer.isOffline)
+                        {
+                            ActorProxy actorProxy = Game.Scene.GetComponent<ActorProxyComponent>().Get(_gamer.Id);
+                            await actorProxy.Call(new Actor_PlayerExitRoom_Req());
+                        }
+                    }
                 }
                 else
                 {
@@ -124,8 +142,6 @@ namespace ETHotfix
             {
                 ReplyError(response, e, reply);
             }
-
-            await Task.CompletedTask;
         }
     }
 }

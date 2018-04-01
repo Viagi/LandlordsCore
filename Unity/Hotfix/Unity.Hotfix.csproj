@@ -62,6 +62,7 @@
     <Compile Include="Base\Object\IStartSystem.cs" />
     <Compile Include="Landlords\Component\SessionWrap\SessionOfflineComponent.cs" />
     <Compile Include="Landlords\Event\LandlordsEventIdType.cs" />
+    <Compile Include="Landlords\Handler\Actor_GamerMoneyLess_NttHandler.cs" />
     <Compile Include="Landlords\Object\LandlordsUIType.cs" />
     <Compile Include="Module\FrameSync\OperaComponent.cs" />
     <Compile Include="Entity\Config\UnitConfig.cs" />

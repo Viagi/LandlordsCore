@@ -17,8 +17,9 @@ namespace ETHotfix
             Gamer[] gamers = room.GetAll();
 
             //转发玩家准备消息
-            message.UserID = gamer.UserID;
-            room.Broadcast(message);
+            Actor_GamerReady_Ntt transpond = new Actor_GamerReady_Ntt();
+            transpond.UserID = gamer.UserID;
+            room.Broadcast(transpond);
             Log.Info($"玩家{gamer.UserID}准备");
 
             //房间内有3名玩家且全部准备则开始游戏

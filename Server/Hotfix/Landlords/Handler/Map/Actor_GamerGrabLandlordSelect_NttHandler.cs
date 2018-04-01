@@ -18,9 +18,6 @@ namespace ETHotfix
                 //保存抢地主状态
                 orderController.GamerLandlordState[gamer.UserID] = message.IsGrab;
 
-                //这里由服务端设置消息UserID用于转发
-                message.UserID = gamer.UserID;
-
                 if (message.IsGrab)
                 {
                     orderController.Biggest = gamer.UserID;
@@ -29,7 +26,10 @@ namespace ETHotfix
                 }
 
                 //转发消息
-                room.Broadcast(message);
+                Actor_GamerGrabLandlordSelect_Ntt transpond = new Actor_GamerGrabLandlordSelect_Ntt();
+                transpond.IsGrab = message.IsGrab;
+                transpond.UserID = gamer.UserID;
+                room.Broadcast(transpond);
 
                 if (orderController.SelectLordIndex >= room.Count)
                 {

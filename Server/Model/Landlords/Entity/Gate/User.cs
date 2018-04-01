@@ -27,5 +27,18 @@
         {
             this.UserID = id;
         }
+
+        public override void Dispose()
+        {
+            if (this.IsDisposed)
+            {
+                return;
+            }
+
+            base.Dispose();
+
+            this.IsMatching = false;
+            this.ActorID = 0;
+        }
     }
 }

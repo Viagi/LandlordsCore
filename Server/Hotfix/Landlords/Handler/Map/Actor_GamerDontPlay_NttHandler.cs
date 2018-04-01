@@ -14,10 +14,10 @@ namespace ETHotfix
             OrderControllerComponent orderController = room.GetComponent<OrderControllerComponent>();
             if (orderController.CurrentAuthority == gamer.UserID)
             {
-                //这里由服务端设置消息UserID用于转发
-                message.UserID = gamer.UserID;
                 //转发玩家不出牌消息
-                room.Broadcast(message);
+                Actor_GamerDontPlay_Ntt transpond = new Actor_GamerDontPlay_Ntt();
+                transpond.UserID = gamer.UserID;
+                room.Broadcast(transpond);
 
                 //轮到下位玩家出牌
                 orderController.Turn();

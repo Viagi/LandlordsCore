@@ -25,9 +25,11 @@ namespace ETHotfix
             }
 
             //这里由服务端设置消息UserID用于转发
-            message.UserID = gamer.UserID;
+            Actor_Trusteeship_Ntt transpond = new Actor_Trusteeship_Ntt();
+            transpond.isTrusteeship = message.isTrusteeship;
+            transpond.UserID = gamer.UserID;
             //转发消息
-            room.Broadcast(message);
+            room.Broadcast(transpond);
 
             if (isTrusteeship)
             {

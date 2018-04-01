@@ -37,7 +37,7 @@ namespace ETHotfix
 
             //热更测试
             Text hotfixPrompt = rc.Get<GameObject>("HotfixPrompt").GetComponent<Text>();
-            hotfixPrompt.text = "斗地主3.0";
+            hotfixPrompt.text = "斗地主3.1";
 
             //绑定关联对象
             account = rc.Get<GameObject>("Account").GetComponent<InputField>();
@@ -67,6 +67,7 @@ namespace ETHotfix
             {
                 return;
             }
+            NetOuterComponent netOuterComponent = Game.Scene.ModelScene.GetComponent<NetOuterComponent>();
 
             //设置登录中状态
             isLogining = true;
@@ -75,8 +76,16 @@ namespace ETHotfix
             {
                 //创建登录服务器连接
                 IPEndPoint connetEndPoint = NetworkHelper.ToIPEndPoint(GlobalConfigComponent.Instance.GlobalProto.Address);
-                Session session = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetEndPoint);
+                Session session = netOuterComponent.Create(connetEndPoint);
                 sessionWrap = new SessionWrap(session);
+                sessionWrap.session.GetComponent<SessionCallbackComponent>().DisposeCallback += s => 
+                {
+                    if (Game.Scene.GetComponent<UIComponent>()?.Get(UIType.LandlordsLogin) != null)
+                    {
+                        prompt.text = "连接失败";
+                        isLogining = false;
+                    }
+                };
 
                 //发送登录请求
                 prompt.text = "正在登录中....";
@@ -97,7 +106,7 @@ namespace ETHotfix
 
                 //创建Gate服务器连接
                 connetEndPoint = NetworkHelper.ToIPEndPoint(r2C_Login_Ack.Address);
-                Session gateSession = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetEndPoint);
+                Session gateSession = netOuterComponent.Create(connetEndPoint);
                 Game.Scene.AddComponent<SessionWrapComponent>().Session = new SessionWrap(gateSession);
                 //SessionWeap添加连接断开组件，用于处理客户端连接断开
                 Game.Scene.GetComponent<SessionWrapComponent>().Session.AddComponent<SessionOfflineComponent>();
@@ -132,7 +141,7 @@ namespace ETHotfix
             finally
             {
                 //断开验证服务器的连接
-                sessionWrap?.Dispose();
+                netOuterComponent.Remove(sessionWrap.session.Id);
                 //设置登录处理完成状态
                 isLogining = false;
             }

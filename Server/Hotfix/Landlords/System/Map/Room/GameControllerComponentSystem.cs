@@ -5,7 +5,7 @@ using ETModel;
 namespace ETHotfix
 {
     [ObjectSystem]
-    public class GameControllerComponentAwakeSystem : AwakeSystem<GameControllerComponent,RoomConfig>
+    public class GameControllerComponentAwakeSystem : AwakeSystem<GameControllerComponent, RoomConfig>
     {
         public override void Awake(GameControllerComponent self, RoomConfig config)
         {
@@ -161,7 +161,7 @@ namespace ETHotfix
         /// 游戏结束
         /// </summary>
         /// <param name="self"></param>
-        public static async void GameOver(this GameControllerComponent self, Dictionary<long, long> gamersSorce)
+        public static async Task<Dictionary<long, long>> GameOver(this GameControllerComponent self, Dictionary<long, long> gamersSorce)
         {
             Room room = self.GetParent<Room>();
 
@@ -173,27 +173,15 @@ namespace ETHotfix
             room.State = RoomState.Ready;
             MapHelper.SendMessage(new MP2MH_SyncRoomState_Ntt() { RoomID = room.Id, State = room.State });
 
-            Gamer[] gamers = room.GetAll();
-            for (int i = 0; i < gamers.Length; i++)
+            Dictionary<long, long> gamersMoney = new Dictionary<long, long>();
+            foreach (Gamer gamer in room.GetAll())
             {
-                long gamerMoney = await self.StatisticalIntegral(gamers[i], gamersSorce[gamers[i].UserID]);
-                bool isKickOut = gamers[i].isOffline;
-
-                //玩家余额低于最低门槛
-                if (gamerMoney < self.MinThreshold)
-                {
-                    ActorProxy actorProxy = gamers[i].GetComponent<UnitGateComponent>().GetActorProxy();
-                    actorProxy.Send(new Actor_GamerMoneyLess_Ntt() { UserID = gamers[i].UserID });
-                    isKickOut = true;
-                }
-
-                //踢出玩家
-                if (isKickOut)
-                {
-                    ActorProxy actorProxy = Game.Scene.GetComponent<ActorProxyComponent>().Get(gamers[i].Id);
-                    await actorProxy.Call(new Actor_PlayerExitRoom_Req());
-                }
+                //结算玩家余额
+                long gamerMoney = await self.StatisticalIntegral(gamer, gamersSorce[gamer.UserID]);
+                gamersMoney[gamer.UserID] = gamerMoney;
             }
+
+            return gamersMoney;
         }
 
         /// <summary>

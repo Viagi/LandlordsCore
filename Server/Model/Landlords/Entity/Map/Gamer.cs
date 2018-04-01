@@ -41,9 +41,6 @@
                 return;
             }
 
-            Game.Scene.GetComponent<ActorProxyComponent>()?.Remove(this.Id);
-            Game.Scene.GetComponent<ActorProxyComponent>()?.Remove(this.PlayerID);
-
             base.Dispose();
 
             this.UserID = 0;
