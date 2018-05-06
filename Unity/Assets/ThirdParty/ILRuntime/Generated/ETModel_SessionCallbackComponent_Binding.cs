@@ -23,33 +23,33 @@ namespace ILRuntime.Runtime.Generated
             Type[] args;
             Type type = typeof(ETModel.SessionCallbackComponent);
 
-            field = type.GetField("MessageCallback", flag);
-            app.RegisterCLRFieldGetter(field, get_MessageCallback_0);
-            app.RegisterCLRFieldSetter(field, set_MessageCallback_0);
             field = type.GetField("DisposeCallback", flag);
-            app.RegisterCLRFieldGetter(field, get_DisposeCallback_1);
-            app.RegisterCLRFieldSetter(field, set_DisposeCallback_1);
+            app.RegisterCLRFieldGetter(field, get_DisposeCallback_0);
+            app.RegisterCLRFieldSetter(field, set_DisposeCallback_0);
+            field = type.GetField("MessageCallback", flag);
+            app.RegisterCLRFieldGetter(field, get_MessageCallback_1);
+            app.RegisterCLRFieldSetter(field, set_MessageCallback_1);
 
 
         }
 
 
 
-        static object get_MessageCallback_0(ref object o)
-        {
-            return ((ETModel.SessionCallbackComponent)o).MessageCallback;
-        }
-        static void set_MessageCallback_0(ref object o, object v)
-        {
-            ((ETModel.SessionCallbackComponent)o).MessageCallback = (System.Action<ETModel.Session, ETModel.Packet>)v;
-        }
-        static object get_DisposeCallback_1(ref object o)
+        static object get_DisposeCallback_0(ref object o)
         {
             return ((ETModel.SessionCallbackComponent)o).DisposeCallback;
         }
-        static void set_DisposeCallback_1(ref object o, object v)
+        static void set_DisposeCallback_0(ref object o, object v)
         {
             ((ETModel.SessionCallbackComponent)o).DisposeCallback = (System.Action<ETModel.Session>)v;
+        }
+        static object get_MessageCallback_1(ref object o)
+        {
+            return ((ETModel.SessionCallbackComponent)o).MessageCallback;
+        }
+        static void set_MessageCallback_1(ref object o, object v)
+        {
+            ((ETModel.SessionCallbackComponent)o).MessageCallback = (System.Action<ETModel.Session, ETModel.Packet>)v;
         }
 
 
