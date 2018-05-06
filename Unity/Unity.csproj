@@ -274,6 +274,7 @@
     <Compile Include="Assets\Scripts\Module\FrameSync\AnimatorComponent.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\CameraComponent.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\ClientFrameComponent.cs" />
+    <Compile Include="Assets\Scripts\Module\FrameSync\FrameMessage.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\MoveComponent.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\Player.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\PlayerComponent.cs" />
@@ -522,6 +523,7 @@
     <Compile Include="Assets\ThirdParty\ILRuntime\ILRuntime\Runtime\Enviorment\CLRRedirections.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\ILRuntime\Runtime\Enviorment\CrossBindingAdaptor.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\ILRuntime\Runtime\Enviorment\DelegateManager.cs" />
+    <Compile Include="Assets\ThirdParty\ILRuntime\ILRuntime\Runtime\Enviorment\InvocationContext.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\ILRuntime\Runtime\Enviorment\ValueTypeBinder.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\ILRuntime\Runtime\Extensions.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\ILRuntime\Runtime\Intepreter\DelegateAdapter.cs" />
@@ -798,6 +800,7 @@
     <None Include="Assets\Res\Config\BuffConfig.txt" />
     <None Include="Assets\Res\Config\GlobalProto.txt" />
     <None Include="Assets\Res\Config\UnitConfig.txt" />
+    <None Include="Assets\StreamingAssets\Version.txt" />
     <None Include="Assets\link.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

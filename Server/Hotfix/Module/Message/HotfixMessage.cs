@@ -3,7 +3,7 @@ using ETModel;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Options;
-namespace ETModel
+namespace ETHotfix
 {
 	#region ET
 

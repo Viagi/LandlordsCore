@@ -158,7 +158,7 @@ namespace ETModel
 						return;
 					}
 
-					await this.sendBuffer.ReadAsync(stream);
+					await this.sendBuffer.WriteToAsync(stream);
 				}
 			}
 			catch (IOException)
@@ -193,14 +193,14 @@ namespace ETModel
 						return;
 					}
 
-					int n = await this.recvBuffer.WriteAsync(stream);
+					int n = await this.recvBuffer.ReadFromAsync(stream);
 
 					if (n == 0)
 					{
 						this.OnError(SocketError.NetworkReset);
 						return;
 					}
-
+					
 					if (this.recvTcs != null)
 					{
 						bool isOK = this.parser.Parse();

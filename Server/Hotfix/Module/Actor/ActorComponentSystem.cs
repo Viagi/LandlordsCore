@@ -11,10 +11,7 @@ namespace ETHotfix
 		public override void Awake(ActorComponent self)
 		{
 			self.ActorType = ActorType.Common;
-			self.Queue = new Queue<ActorMessageInfo>();
-			Game.Scene.GetComponent<ActorManagerComponent>().Add(self.Entity);
-
-			self.HandleAsync();
+			self.Queue.Clear();
 		}
 	}
 
@@ -24,19 +21,24 @@ namespace ETHotfix
 		public override void Awake(ActorComponent self, string actorType)
 		{
 			self.ActorType = actorType;
-			self.Queue = new Queue<ActorMessageInfo>();
-			Game.Scene.GetComponent<ActorManagerComponent>().Add(self.Entity);
+			self.Queue.Clear();
+		}
+	}
 
+	[ObjectSystem]
+	public class ActorComponentStartSystem : StartSystem<ActorComponent>
+	{
+		public override void Start(ActorComponent self)
+		{
 			self.HandleAsync();
 		}
 	}
-	
+
 	[ObjectSystem]
 	public class ActorComponentDestroySystem : DestroySystem<ActorComponent>
 	{
 		public override void Destroy(ActorComponent self)
 		{
-			Game.Scene.GetComponent<ActorManagerComponent>().Remove(self.Entity.Id);
 		}
 	}
 
@@ -47,7 +49,7 @@ namespace ETHotfix
 	{
 		public static async Task AddLocation(this ActorComponent self)
 		{
-			await Game.Scene.GetComponent<LocationProxyComponent>().Add(self.Entity.Id);
+			await Game.Scene.GetComponent<LocationProxyComponent>().Add(self.Entity.Id, self.Entity.InstanceId);
 		}
 
 		public static async Task RemoveLocation(this ActorComponent self)
@@ -82,6 +84,7 @@ namespace ETHotfix
 
 		public static async void HandleAsync(this ActorComponent self)
 		{
+			ActorMessageDispatherComponent actorMessageDispatherComponent = Game.Scene.GetComponent<ActorMessageDispatherComponent>();
 			while (true)
 			{
 				if (self.IsDisposed)
@@ -98,8 +101,7 @@ namespace ETHotfix
 					}
 
 					// 根据这个actor的类型分发给相应的ActorHandler处理
-					await Game.Scene.GetComponent<ActorMessageDispatherComponent>().ActorTypeHandle(
-							self.ActorType, info.Session, (Entity)self.Parent, info.Message);
+					await actorMessageDispatherComponent.ActorTypeHandle(self.ActorType, (Entity)self.Parent, info);
 				}
 				catch (Exception e)
 				{

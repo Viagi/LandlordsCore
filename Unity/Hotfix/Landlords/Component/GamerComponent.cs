@@ -52,7 +52,8 @@ namespace ETHotfix
         /// <returns></returns>
         public int GetGamerSeat(long id)
         {
-            if (seats.TryGetValue(id, out int seatIndex))
+            int seatIndex;
+            if (seats.TryGetValue(id, out seatIndex))
             {
                 return seatIndex;
             }

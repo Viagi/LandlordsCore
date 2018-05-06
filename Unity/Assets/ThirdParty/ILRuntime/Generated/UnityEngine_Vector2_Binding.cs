@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -114,11 +114,13 @@ namespace ILRuntime.Runtime.Generated
             StackObject* ptr_of_this_method;
             StackObject* __ret = ILIntepreter.Minus(__esp, 2);
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Single y = *(float*)&ptr_of_this_method->Value;
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
-            System.Single x = *(float*)&ptr_of_this_method->Value;
+            System.Single @y = *(float*)&ptr_of_this_method->Value;
 
-            var result_of_this_method = new UnityEngine.Vector2(x, y);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
+            System.Single @x = *(float*)&ptr_of_this_method->Value;
+
+
+            var result_of_this_method = new UnityEngine.Vector2(@x, @y);
 
             if(!isNewObj)
             {
@@ -126,6 +128,7 @@ namespace ILRuntime.Runtime.Generated
                 WriteBackInstance(__domain, __ret, __mStack, ref result_of_this_method);
                 return __ret;
             }
+
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 

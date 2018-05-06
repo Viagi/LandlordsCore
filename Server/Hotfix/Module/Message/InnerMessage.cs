@@ -3,7 +3,7 @@ using ETModel;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Options;
-namespace ETModel
+namespace ETHotfix
 {
 	#region ET
 
@@ -34,6 +34,9 @@ namespace ETModel
 
 		[ProtoMember(92, IsRequired = true)]
 		public string Message { get; set; }
+
+		[ProtoMember(1, IsRequired = true)]
+		public long InstanceId;
 
 	}
 
@@ -303,7 +306,7 @@ namespace ETModel
 		public long Key;
 
 		[ProtoMember(2, IsRequired = true)]
-		public int AppId;
+		public long InstanceId;
 
 	}
 
@@ -360,7 +363,7 @@ namespace ETModel
 		public long Key;
 
 		[ProtoMember(2, IsRequired = true)]
-		public int LockAppId;
+		public long InstanceId;
 
 		[ProtoMember(3, IsRequired = true)]
 		public int Time;
@@ -393,10 +396,10 @@ namespace ETModel
 		public long Key;
 
 		[ProtoMember(2, IsRequired = true)]
-		public int UnLockAppId;
+		public long OldInstanceId;
 
 		[ProtoMember(3, IsRequired = true)]
-		public int AppId;
+		public long InstanceId;
 
 	}
 
@@ -441,7 +444,7 @@ namespace ETModel
 		public string Message { get; set; }
 
 		[ProtoMember(1, IsRequired = true)]
-		public int AppId;
+		public long InstanceId;
 
 	}
 
