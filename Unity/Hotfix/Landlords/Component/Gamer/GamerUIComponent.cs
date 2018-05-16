@@ -160,7 +160,7 @@ namespace ETHotfix
         /// <param name="id"></param>
         private async void SetUserInfo()
         {
-            G2C_GetUserInfo_Ack g2C_GetUserInfo_Ack = await SessionWrapComponent.Instance.Session.Call(new C2G_GetUserInfo_Req() { UserID = this.GetParent<Gamer>().UserID }) as G2C_GetUserInfo_Ack;
+            G2C_GetUserInfo_Ack g2C_GetUserInfo_Ack = await SessionComponent.Instance.Session.Call(new C2G_GetUserInfo_Req() { UserID = this.GetParent<Gamer>().UserID }) as G2C_GetUserInfo_Ack;
 
             if (this.Panel != null)
             {

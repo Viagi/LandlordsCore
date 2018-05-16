@@ -66,7 +66,7 @@ namespace App
 						Game.Scene.AddComponent<NetInnerComponent, IPEndPoint>(innerConfig.IPEndPoint);
 						Game.Scene.AddComponent<NetOuterComponent, IPEndPoint>(outerConfig.IPEndPoint);
 						Game.Scene.AddComponent<LocationProxyComponent>();
-						Game.Scene.AddComponent<ActorProxyComponent>();
+						Game.Scene.AddComponent<ActorMessageSenderComponent>();
 						Game.Scene.AddComponent<GateSessionKeyComponent>();
 						break;
 					case AppType.Location:
@@ -77,12 +77,12 @@ namespace App
 						Game.Scene.AddComponent<NetInnerComponent, IPEndPoint>(innerConfig.IPEndPoint);
 						Game.Scene.AddComponent<UnitComponent>();
 						Game.Scene.AddComponent<LocationProxyComponent>();
-						Game.Scene.AddComponent<ActorProxyComponent>();
+						Game.Scene.AddComponent<ActorMessageSenderComponent>();
 						Game.Scene.AddComponent<ActorMessageDispatherComponent>();
 						Game.Scene.AddComponent<ServerFrameComponent>();
 						break;
 					case AppType.AllServer:
-						Game.Scene.AddComponent<ActorProxyComponent>();
+						Game.Scene.AddComponent<ActorMessageSenderComponent>();
 						Game.Scene.AddComponent<PlayerComponent>();
 						Game.Scene.AddComponent<UnitComponent>();
                         //PS：如果启动闪退有可能是服务器配置文件没有填数据库配置，请正确填写

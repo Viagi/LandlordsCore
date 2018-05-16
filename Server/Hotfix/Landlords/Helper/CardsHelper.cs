@@ -31,7 +31,7 @@ namespace ETHotfix
                     if (i < cards.Length - 2)
                     {
                         if (cards[i].CardWeight == cards[i + 1].CardWeight &&
-                            cards[i].CardWeight == cards[i + 2].CardWeight)
+                            cards[i].CardSuits == cards[i + 2].CardSuits)
                         {
                             totalWeight += (int)cards[i].CardWeight;
                             totalWeight *= 3;

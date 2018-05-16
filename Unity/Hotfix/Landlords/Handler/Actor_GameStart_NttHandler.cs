@@ -9,14 +9,15 @@ namespace ETHotfix
     [MessageHandler]
     public class Actor_GameStart_NttHandler : AMHandler<Actor_GameStart_Ntt>
     {
-        protected override void Run(Session session, Actor_GameStart_Ntt message)
+        protected override void Run(ETModel.Session session, Actor_GameStart_Ntt message)
         {
             UI uiRoom = Game.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom);
             GamerComponent gamerComponent = uiRoom.GetComponent<GamerComponent>();
 
             //初始化玩家UI
-            foreach (var gamer in gamerComponent.GetAll())
+            foreach (GamerCardNum gamerCardNum in message.GamersCardNum)
             {
+                Gamer gamer = uiRoom.GetComponent<GamerComponent>().Get(gamerCardNum.UserID);
                 GamerUIComponent gamerUI = gamer.GetComponent<GamerUIComponent>();
                 gamerUI.GameStart();
 
@@ -35,12 +36,12 @@ namespace ETHotfix
                 if (gamer.UserID == gamerComponent.LocalGamer.UserID)
                 {
                     //本地玩家添加手牌
-                    handCards.AddCards(message.GamerCards);
+                    handCards.AddCards(message.HandCards);
                 }
                 else
                 {
                     //设置其他玩家手牌数
-                    handCards.SetHandCardsNum(message.GamerCardsNum[gamer.UserID]);
+                    handCards.SetHandCardsNum(gamerCardNum.Num);
                 }
             }
 

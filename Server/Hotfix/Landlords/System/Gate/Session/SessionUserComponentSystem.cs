@@ -14,7 +14,7 @@ namespace ETHotfix
                 Game.Scene.GetComponent<UserComponent>()?.Remove(self.User.UserID);
 
                 StartConfigComponent config = Game.Scene.GetComponent<StartConfigComponent>();
-                ActorProxyComponent actorProxyComponent = Game.Scene.GetComponent<ActorProxyComponent>();
+                ActorMessageSenderComponent actorProxyComponent = Game.Scene.GetComponent<ActorMessageSenderComponent>();
 
                 //正在匹配中发送玩家退出匹配请求
                 if (self.User.IsMatching)
@@ -27,7 +27,7 @@ namespace ETHotfix
                 //正在游戏中发送玩家退出房间请求
                 if (self.User.ActorID != 0)
                 {
-                    ActorProxy actorProxy = actorProxyComponent.Get(self.User.ActorID);
+                    ActorMessageSender actorProxy = actorProxyComponent.Get(self.User.ActorID);
                     await actorProxy.Call(new Actor_PlayerExitRoom_Req() { UserID = self.User.UserID });
                 }
 

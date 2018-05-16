@@ -36,22 +36,22 @@ namespace ETEditor
 		{
 			msgOpcode.Clear();
 			Proto2CS("ETModel", "OuterMessage.proto", clientMessagePath, "OuterOpcode", 100, HeadFlag.Proto);
-			GenerateOpcode("OuterOpcode", clientMessagePath);
+			GenerateOpcode("ETModel", "OuterOpcode", clientMessagePath);
 
 			Proto2CS("ETHotfix", "OuterMessage.proto", serverMessagePath, "OuterOpcode", 100, HeadFlag.Proto | HeadFlag.Bson, false);
-			GenerateOpcode("OuterOpcode", serverMessagePath);
+			GenerateOpcode("ETHotfix", "OuterOpcode", serverMessagePath);
 
 			msgOpcode.Clear();
 			Proto2CS("ETHotfix", "HotfixMessage.proto", hotfixMessagePath, "HotfixOpcode", 10000, HeadFlag.None);
-			GenerateOpcode("HotfixOpcode", hotfixMessagePath);
+			GenerateOpcode("ETHotfix", "HotfixOpcode", hotfixMessagePath);
 
 			msgOpcode.Clear();
 			Proto2CS("ETHotfix", "HotfixMessage.proto", serverMessagePath, "HotfixOpcode", 10000, HeadFlag.Bson, false);
-			GenerateOpcode("HotfixOpcode", serverMessagePath);
+			GenerateOpcode("ETHotfix", "HotfixOpcode", serverMessagePath);
 
 			msgOpcode.Clear();
 			Proto2CS("ETHotfix", "InnerMessage.proto", serverMessagePath, "InnerOpcode", 1000, HeadFlag.Bson, false);
-			GenerateOpcode("InnerOpcode", serverMessagePath);
+			GenerateOpcode("ETHotfix", "InnerOpcode", serverMessagePath);
 
 			AssetDatabase.Refresh();
 		}
@@ -170,21 +170,11 @@ namespace ETEditor
 					Repeated(sb, ns, newline, isClient);
 				}
 
-                if (newline.StartsWith("object"))
-                {
-                    Object(sb, ns, newline, isClient);
-                }
-
                 if (isMsgStart && newline == "}")
 				{
 					isMsgStart = false;
 					sb.Append("\t}\n\n");
 				}
-
-                if(newline.StartsWith("[") && newline.EndsWith("]"))
-                {
-                    sb.AppendLine($"\t\t{newline}");
-                }
 
                 if(newline.StartsWith("#region") || newline.StartsWith("#endregion"))
                 {
@@ -245,10 +235,10 @@ namespace ETEditor
 			}
 		}
 		
-		private static void GenerateOpcode(string outputFileName, string outputPath)
+		private static void GenerateOpcode(string ns, string outputFileName, string outputPath)
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.AppendLine("namespace ETModel");
+			sb.AppendLine($"namespace {ns}");
 			sb.AppendLine("{");
 			sb.AppendLine($"\tpublic static partial class {outputFileName}");
 			sb.AppendLine("\t{");
@@ -291,34 +281,6 @@ namespace ETEditor
 			}
 
 		}
-
-        private static void Object(StringBuilder sb, string ns, string newline, bool isClient)
-        {
-            try
-            {
-                int index = newline.IndexOf(";");
-                newline = newline.Remove(index);
-                string[] ss = newline.Split(splitChars, StringSplitOptions.RemoveEmptyEntries);
-                string type = ss[1];
-                string name = ss[2];
-                int order = int.Parse(ss[4]);
-                if (isClient)
-                {
-                    sb.Append($"\t\t[ProtoMember({order}, TypeName = \"{ns}.{type}\")]\n");
-                }
-                else
-                {
-                    sb.Append($"\t\t[ProtoMember({order})]\n");
-                }
-
-                sb.Append($"\t\tpublic {type} {name} = new {type}();\n\n");
-            }
-            catch (Exception e)
-            {
-                Log.Error($"{newline}\n {e}");
-            }
-
-        }
 
         private static string ConvertType(string type)
 		{

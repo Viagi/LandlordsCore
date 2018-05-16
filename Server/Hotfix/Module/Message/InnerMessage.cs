@@ -489,7 +489,7 @@ namespace ETHotfix
 		public long PlayerId;
 
 		[ProtoMember(2, IsRequired = true)]
-		public long GateSessionId;
+		public long GateSessionActorId;
 
 	}
 

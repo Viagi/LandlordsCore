@@ -175,7 +175,7 @@ namespace ETHotfix
                 EndPlay();
                 changeGameModeButton.GetComponentInChildren<Text>().text = "取消托管";
             }
-            SessionWrapComponent.Instance.Session.Send(new Actor_Trusteeship_Ntt() { isTrusteeship = !this.isTrusteeship });
+            SessionComponent.Instance.Session.Send(new Actor_Trusteeship_Ntt() { isTrusteeship = !this.isTrusteeship });
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace ETHotfix
         {
             CardHelper.Sort(currentSelectCards);
             Actor_GamerPlayCard_Req request = new Actor_GamerPlayCard_Req() { Cards = currentSelectCards.ToArray() };
-            Actor_GamerPlayCard_Ack response = await SessionWrapComponent.Instance.Session.Call(request) as Actor_GamerPlayCard_Ack;
+            Actor_GamerPlayCard_Ack response = await SessionComponent.Instance.Session.Call(request) as Actor_GamerPlayCard_Ack;
 
             //出牌错误提示
             GamerUIComponent gamerUI = Game.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom).GetComponent<GamerComponent>().LocalGamer.GetComponent<GamerUIComponent>();
@@ -201,7 +201,7 @@ namespace ETHotfix
         private async void OnPrompt()
         {
             Actor_GamerPrompt_Req request = new Actor_GamerPrompt_Req();
-            Actor_GamerPrompt_Ack response = await SessionWrapComponent.Instance.Session.Call(request) as Actor_GamerPrompt_Ack;
+            Actor_GamerPrompt_Ack response = await SessionComponent.Instance.Session.Call(request) as Actor_GamerPrompt_Ack;
 
             GamerComponent gamerComponent = this.GetParent<UI>().GetParent<UI>().GetComponent<GamerComponent>();
             HandCardsComponent handCards = gamerComponent.LocalGamer.GetComponent<HandCardsComponent>();
@@ -228,7 +228,7 @@ namespace ETHotfix
         /// </summary>
         private void OnDiscard()
         {
-            SessionWrapComponent.Instance.Session.Send(new Actor_GamerDontPlay_Ntt());
+            SessionComponent.Instance.Session.Send(new Actor_GamerDontPlay_Ntt());
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace ETHotfix
         /// </summary>
         private void OnGrab()
         {
-            SessionWrapComponent.Instance.Session.Send(new Actor_GamerGrabLandlordSelect_Ntt() { IsGrab = true });
+            SessionComponent.Instance.Session.Send(new Actor_GamerGrabLandlordSelect_Ntt() { IsGrab = true });
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace ETHotfix
         /// </summary>
         private void OnDisgrab()
         {
-            SessionWrapComponent.Instance.Session.Send(new Actor_GamerGrabLandlordSelect_Ntt() { IsGrab = false });
+            SessionComponent.Instance.Session.Send(new Actor_GamerGrabLandlordSelect_Ntt() { IsGrab = false });
         }
     }
 }

@@ -7,7 +7,7 @@ namespace ETHotfix
     [MessageHandler]
     public class Actor_GamerDontPlay_NttHandler : AMHandler<Actor_GamerDontPlay_Ntt>
     {
-        protected override void Run(Session session, Actor_GamerDontPlay_Ntt message)
+        protected override void Run(ETModel.Session session, Actor_GamerDontPlay_Ntt message)
         {
             UI uiRoom = Game.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom);
             GamerComponent gamerComponent = uiRoom.GetComponent<GamerComponent>();

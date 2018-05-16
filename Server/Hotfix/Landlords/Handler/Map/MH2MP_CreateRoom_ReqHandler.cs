@@ -17,7 +17,7 @@ namespace ETHotfix
                 room.AddComponent<DeskCardsCacheComponent>();
                 room.AddComponent<OrderControllerComponent>();
                 room.AddComponent<GameControllerComponent, RoomConfig>(RoomHelper.GetConfig(RoomLevel.Lv100));
-                await room.AddComponent<ActorComponent>().AddLocation();
+                await room.AddComponent<MailBoxComponent>().AddLocation();
                 Game.Scene.GetComponent<RoomComponent>().Add(room);
 
                 Log.Info($"创建房间{room.Id}");

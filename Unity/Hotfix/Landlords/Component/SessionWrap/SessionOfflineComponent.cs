@@ -17,8 +17,8 @@ namespace ETHotfix
             base.Dispose();
 
             //移除连接组件
-            ETModel.Game.Scene.RemoveComponent<SessionComponent>();
-            Game.Scene.RemoveComponent<SessionWrapComponent>();
+            Game.Scene.RemoveComponent<SessionComponent>();
+            Game.Scene.ModelScene.RemoveComponent<ETModel.SessionComponent>();
 
             //释放本地玩家对象
             ClientComponent clientComponent = ETModel.Game.Scene.GetComponent<ClientComponent>();

@@ -1,4 +1,4 @@
-namespace ETModel
+namespace ETHotfix
 {
 	public static partial class HotfixOpcode
 	{
@@ -35,13 +35,16 @@ namespace ETModel
 		 public const ushort GamerInfo = 10031;
 		 public const ushort Actor_GamerEnterRoom_Ntt = 10032;
 		 public const ushort Actor_GamerExitRoom_Ntt = 10033;
-		 public const ushort Actor_GamerReconnect_Ntt = 10034;
-		 public const ushort Actor_GameStart_Ntt = 10035;
-		 public const ushort Actor_AuthorityGrabLandlord_Ntt = 10036;
-		 public const ushort Actor_AuthorityPlayCard_Ntt = 10037;
-		 public const ushort Actor_SetMultiples_Ntt = 10038;
-		 public const ushort Actor_SetLandlord_Ntt = 10039;
-		 public const ushort Actor_Gameover_Ntt = 10040;
-		 public const ushort Actor_GamerMoneyLess_Ntt = 10041;
+		 public const ushort GamerState = 10034;
+		 public const ushort Actor_GamerReconnect_Ntt = 10035;
+		 public const ushort GamerCardNum = 10036;
+		 public const ushort Actor_GameStart_Ntt = 10037;
+		 public const ushort Actor_AuthorityGrabLandlord_Ntt = 10038;
+		 public const ushort Actor_AuthorityPlayCard_Ntt = 10039;
+		 public const ushort Actor_SetMultiples_Ntt = 10040;
+		 public const ushort Actor_SetLandlord_Ntt = 10041;
+		 public const ushort GamerScore = 10042;
+		 public const ushort Actor_Gameover_Ntt = 10043;
+		 public const ushort Actor_GamerMoneyLess_Ntt = 10044;
 	}
 }

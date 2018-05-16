@@ -37,7 +37,7 @@ namespace ETHotfix
                 if (gamer.UserID == orderController.CurrentAuthority)
                 {
                     bool isFirst = gamer.UserID == orderController.Biggest;
-                    ActorProxy actorProxy = gamer.GetComponent<UnitGateComponent>().GetActorProxy();
+                    ActorMessageSender actorProxy = gamer.GetComponent<UnitGateComponent>().GetActorMessageSender();
                     actorProxy.Send(new Actor_AuthorityPlayCard_Ntt() { UserID = orderController.CurrentAuthority, IsFirst = isFirst });
                 }
             }

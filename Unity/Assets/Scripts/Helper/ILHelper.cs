@@ -25,8 +25,19 @@ namespace ETModel
 			appDomain.DelegateManager.RegisterMethodDelegate<Session, Packet>();
 			appDomain.DelegateManager.RegisterMethodDelegate<Session>();
 			appDomain.DelegateManager.RegisterMethodDelegate<ILTypeInstance>();
+            appDomain.DelegateManager.RegisterMethodDelegate<ILTypeInstance, System.Boolean>();
 
-			CLRBindings.Initialize(appDomain);
+            appDomain.DelegateManager.RegisterFunctionDelegate<ILTypeInstance, System.Boolean>();
+
+            appDomain.DelegateManager.RegisterDelegateConvertor<Predicate<ILTypeInstance>>((act) =>
+            {
+                return new Predicate<ILTypeInstance>((obj) =>
+                {
+                    return ((Func<ILTypeInstance, System.Boolean>)act)(obj);
+                });
+            });
+
+            CLRBindings.Initialize(appDomain);
 
 			// 注册适配器
 			Assembly assembly = typeof(Init).Assembly;

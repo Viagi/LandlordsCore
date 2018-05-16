@@ -165,7 +165,7 @@
 	message G2M_CreateUnit // IRequest
 	{
 		required int64 PlayerId = 1;
-		required int64 GateSessionId = 2;
+		required int64 GateSessionActorId = 2;
 	}
 
 	message M2G_CreateUnit // IResponse

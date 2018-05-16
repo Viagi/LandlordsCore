@@ -184,7 +184,7 @@ message GamerInfo
 
 message Actor_GamerEnterRoom_Ntt // IActorMessage
 {
-    object List<GamerInfo> Gamers = 1;
+    repeated GamerInfo Gamers = 1;
 }
 
 message Actor_GamerExitRoom_Ntt // IActorMessage
@@ -192,22 +192,31 @@ message Actor_GamerExitRoom_Ntt // IActorMessage
     required long UserID = 1;
 }
 
+message GamerState
+{
+    required long UserID = 1;
+    required byte Identity = 2;
+	required bool GrabLandlordState = 3;
+}
+
 message Actor_GamerReconnect_Ntt // IActorMessage
 {
     required int Multiples = 1;
-    [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-    object Dictionary<long,Identity> GamersIdentity = 2;
+    repeated GamerState GamersState = 2;
     required Card[] LordCards = 3;
     required KeyValuePair<long,Card[]> DeskCards = 4;
-    [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-    object Dictionary<long,bool> GamerGrabLandlordState = 5;
+}
+
+message GamerCardNum
+{
+    required long UserID = 1;
+    required int Num = 2;
 }
 
 message Actor_GameStart_Ntt // IActorMessage
 {
-    required Card[] GamerCards = 1;
-    [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-    object Dictionary<long,int> GamerCardsNum = 2;
+    required Card[] HandCards = 1;
+    repeated GamerCardNum GamersCardNum = 2;
 }
 
 message Actor_AuthorityGrabLandlord_Ntt // IActorMessage
@@ -232,13 +241,18 @@ message Actor_SetLandlord_Ntt // IActorMessage
     required Card[] LordCards = 2;
 }
 
+message GamerScore
+{
+    required long UserID = 1;
+    required long Score = 2;
+}
+
 message Actor_Gameover_Ntt // IActorMessage
 {
-    required Identity Winner = 1;
+    required byte Winner = 1;
     required long BasePointPerMatch = 2;
     required int Multiples = 3;
-    [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-    object Dictionary<long,long> GamersScore = 4;
+    repeated GamerScore GamersScore = 4;
 }
 
 message Actor_GamerMoneyLess_Ntt // IActorMessage

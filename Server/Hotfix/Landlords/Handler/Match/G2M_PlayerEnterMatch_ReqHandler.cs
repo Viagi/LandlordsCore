@@ -13,7 +13,7 @@ namespace ETHotfix
             try
             {
                 MatchComponent matchComponent = Game.Scene.GetComponent<MatchComponent>();
-                ActorProxyComponent actorProxyComponent = Game.Scene.GetComponent<ActorProxyComponent>();
+                ActorMessageSenderComponent actorProxyComponent = Game.Scene.GetComponent<ActorMessageSenderComponent>();
 
                 if (matchComponent.Playing.ContainsKey(message.UserID))
                 {
@@ -26,7 +26,7 @@ namespace ETHotfix
                     gamer.PlayerID = message.PlayerID;
 
                     //重连房间
-                    ActorProxy actorProxy = actorProxyComponent.Get(roomId);
+                    ActorMessageSender actorProxy = actorProxyComponent.Get(roomId);
                     await actorProxy.Call(new Actor_PlayerEnterRoom_Req()
                     {
                         PlayerID = message.PlayerID,
@@ -35,7 +35,7 @@ namespace ETHotfix
                     });
 
                     //向玩家发送匹配成功消息
-                    ActorProxy gamerActorProxy = actorProxyComponent.Get(gamer.PlayerID);
+                    ActorMessageSender gamerActorProxy = actorProxyComponent.Get(gamer.PlayerID);
                     gamerActorProxy.Send(new Actor_MatchSucess_Ntt() { GamerID = gamer.Id });
                 }
                 else

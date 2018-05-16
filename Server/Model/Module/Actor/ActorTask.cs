@@ -4,32 +4,20 @@ namespace ETModel
 {
 	public struct ActorTask
 	{
-		public ActorProxy proxy;
-		
-		public IActorMessage message;
+		public IActorMessage ActorMessage;
 		
 		public TaskCompletionSource<IResponse> Tcs;
 
-		public async Task<IResponse> Run()
+		public ActorTask(IActorMessage actorMessage)
 		{
-			Session session = Game.Scene.GetComponent<NetInnerComponent>().Get(this.proxy.Address);
-
-			this.message.ActorId = this.proxy.ActorId;
-			IResponse response = await session.Call(message);
-
-			if (response.Error != ErrorCode.ERR_NotFoundActor)
-			{
-				if (this.Tcs != null)
-				{
-					this.Tcs?.SetResult(response);
-				}
-			}
-			return response;
+			this.ActorMessage = actorMessage;
+			this.Tcs = null;
 		}
-
-		public void RunFail(int error)
+		
+		public ActorTask(IActorMessage actorMessage, TaskCompletionSource<IResponse> tcs)
 		{
-			this.Tcs?.SetException(new RpcException(error, ""));
+			this.ActorMessage = actorMessage;
+			this.Tcs = tcs;
 		}
 	}
 }

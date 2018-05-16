@@ -1,0 +1,1314 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<doc>
+  <members>
+    <assembly>
+      <name>UnityEditor.iOS.Extensions.Xcode</name>
+    </assembly>
+    <member name="T:UnityEditor.iOS.Xcode.BackgroundModesOptions">
+      <summary>
+        <para>"This enumeration type describes the various actions an app can take while it is running in the background on iOS. The values are flags, meaning they can be combined with the | operator.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.BackgroundModesOptions.ActsAsABluetoothLEAccessory">
+      <summary>
+        <para>The app acts as a Bluetooth accessory.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.BackgroundModesOptions.AudioAirplayPiP">
+      <summary>
+        <para>The app plays or records audio while in the background.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.BackgroundModesOptions.BackgroundFetch">
+      <summary>
+        <para>The app downloads small amounts of data regularly.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.BackgroundModesOptions.ExternalAccessoryCommunication">
+      <summary>
+        <para>The app communicates with external hardware accessories.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.BackgroundModesOptions.LocationUpdates">
+      <summary>
+        <para>The app keeps the user informed of their location.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.BackgroundModesOptions.NewsstandDownloads">
+      <summary>
+        <para>The app downloads Newsstand content.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.BackgroundModesOptions.None">
+      <summary>
+        <para>No background modes are necessary.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.BackgroundModesOptions.RemoteNotifications">
+      <summary>
+        <para>The app needs to download content when a push notification arrives without delay.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.BackgroundModesOptions.UsesBluetoothLEAccessory">
+      <summary>
+        <para>The app works with Bluetooth accessories.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.BackgroundModesOptions.VoiceOverIP">
+      <summary>
+        <para>The app provides Voice over IP functionality.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.Extensions.PBXProjectExtensions">
+      <summary>
+        <para>Additional extension methods for PBXProject class.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.Extensions.PBXProjectExtensions.AddAppExtension(UnityEditor.iOS.Xcode.PBXProject,System.String,System.String,System.String,System.String)">
+      <summary>
+        <para>Creates an app extension.</para>
+      </summary>
+      <param name="proj">The implicit this parameter for the extension method.</param>
+      <param name="mainTargetGuid">The GUID of the main target to link the app to.</param>
+      <param name="name">The name of the app extension.</param>
+      <param name="bundleId">The bundle ID of the app extension. The bundle ID must be prefixed with the parent app bundle ID.</param>
+      <param name="infoPlistPath">Path to the app extension Info.plist document.</param>
+      <returns>
+        <para>The GUID of the new target.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.Extensions.PBXProjectExtensions.AddFileToEmbedFrameworks(UnityEditor.iOS.Xcode.PBXProject,System.String,System.String)">
+      <summary>
+        <para>Configures file for embed framework section for the given native target.</para>
+      </summary>
+      <param name="proj">A project passed as this argument.</param>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="fileGuid">The file GUID returned by AddFile or AddFolderReference.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.Extensions.PBXProjectExtensions.AddWatchApp(UnityEditor.iOS.Xcode.PBXProject,System.String,System.String,System.String,System.String,System.String)">
+      <summary>
+        <para>Creates a watch application.</para>
+      </summary>
+      <param name="proj">The implicit this parameter for the extension method.</param>
+      <param name="mainTargetGuid">The GUID of the main target to link the watch extension to.</param>
+      <param name="watchExtensionTargetGuid">The GUID of watch extension as returned by AddWatchExtension().</param>
+      <param name="name">The name of the watch app. It must the same as the name of the watch extension.</param>
+      <param name="bundleId">The bundle ID of the watch app.</param>
+      <param name="infoPlistPath">Path to the watch app Info.plist document.</param>
+      <returns>
+        <para>The GUID of the new target.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.Extensions.PBXProjectExtensions.AddWatchExtension(UnityEditor.iOS.Xcode.PBXProject,System.String,System.String,System.String,System.String)">
+      <summary>
+        <para>Creates a watch extension.</para>
+      </summary>
+      <param name="proj">The implicit this parameter for the extension method.</param>
+      <param name="mainTarget">The GUID of the main target to link the watch extension to.</param>
+      <param name="name">The name of the watch extension.</param>
+      <param name="bundleId">The bundle ID of the watch extension. This bundle ID must include the bundle ID that is later used for watch app as a prefix. That is, the structure of the ID is as follows: watchAppBundleId + ".a_subdomain".</param>
+      <param name="infoPlistPath">Path to the watch extension Info.plist document.</param>
+      <returns>
+        <para>The GUID of the new target.</para>
+      </returns>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.MapsOptions">
+      <summary>
+        <para>This enumerated type describes various navigational options that your app can use to receive route data from the Maps app. The values are flags, meaning they can be combined with | operator.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.Airplane">
+      <summary>
+        <para>Provide routing information for airplane travel.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.Bike">
+      <summary>
+        <para>Provide routing information for bicycle travel.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.Bus">
+      <summary>
+        <para>Provide routing information for bus travel.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.Car">
+      <summary>
+        <para>Provide routing information for car travel.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.Ferry">
+      <summary>
+        <para>Provide routing information for ferry travel.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.None">
+      <summary>
+        <para>No Maps routing information is necessary.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.Other">
+      <summary>
+        <para>Provide routing information for other types of travel.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.Pedestrian">
+      <summary>
+        <para>Provide routing information for pedestrian travel.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.RideSharing">
+      <summary>
+        <para>Provide routing information for ride sharing travel.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.StreetCar">
+      <summary>
+        <para>Provide routing information for street car travel.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.Subway">
+      <summary>
+        <para>Provide routing information for subway travel.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.Taxi">
+      <summary>
+        <para>Provide routing information for taxi travel.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.MapsOptions.Train">
+      <summary>
+        <para>Provide routing information for train travel.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.PBXCapabilityType">
+      <summary>
+        <para>Represents what a capability modifies in a PBXProject.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEditor.iOS.Xcode.PBXCapabilityType.framework">
+      <summary>
+        <para>Specifies a framework required by the capability.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.iCloud">
+      <summary>
+        <para>Definition of the iCloud capability requirements.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEditor.iOS.Xcode.PBXCapabilityType.id">
+      <summary>
+        <para>Specifies the capability identifier.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEditor.iOS.Xcode.PBXCapabilityType.optionalFramework">
+      <summary>
+        <para>Specifies an optional framework a capability may use.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEditor.iOS.Xcode.PBXCapabilityType.requiresEntitlements">
+      <summary>
+        <para>Specifies if a capability requires entitlements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.AppGroups">
+      <summary>
+        <para>Definition of the App Groups capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.ApplePay">
+      <summary>
+        <para>Definition of the Apple Pay capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.AssociatedDomains">
+      <summary>
+        <para>Definition of the Associated Domains capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.BackgroundModes">
+      <summary>
+        <para>Definition of the Background Modes capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.DataProtection">
+      <summary>
+        <para>Definition of the Data Protection capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.GameCenter">
+      <summary>
+        <para>Definition of the GameCenter capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.HealthKit">
+      <summary>
+        <para>Definition of the HealthKit capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.HomeKit">
+      <summary>
+        <para>Definition of the HomeKit capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.InAppPurchase">
+      <summary>
+        <para>Definition of the In-App Purchase capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.InterAppAudio">
+      <summary>
+        <para>Definition of the Inter-App Audio capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.KeychainSharing">
+      <summary>
+        <para>Definition of the Keychain Sharing capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.Maps">
+      <summary>
+        <para>Definition of the Maps capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.PersonalVPN">
+      <summary>
+        <para>Definition of the Personal VPN capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.PushNotifications">
+      <summary>
+        <para>Definition of the Push Notifications capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.Siri">
+      <summary>
+        <para>Definition of the Siri capability requirements.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXCapabilityType.StringToPBXCapabilityType(System.String)">
+      <summary>
+        <para>Convenience method that converts a reverse DNS name(i.e. com.apple.iCloud) to a PBXCapabilityType.</para>
+      </summary>
+      <param name="type">The string to translate to a PBXCapabilityType.</param>
+      <param name="cap"></param>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.Wallet">
+      <summary>
+        <para>Definition of the Wallet capability requirements.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXCapabilityType.WirelessAccessoryConfiguration">
+      <summary>
+        <para>Definition of the Wireless Accessory Configuration capability requirements.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.PBXProject">
+      <summary>
+        <para>Represents an Xcode project (pbxproj file).</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddAssetTagForFile(System.String,System.String,System.String)">
+      <summary>
+        <para>Adds an asset tag for the given file.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="fileGuid">The GUID of the file.</param>
+      <param name="tag">The name of the asset tag.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddAssetTagToDefaultInstall(System.String,System.String)">
+      <summary>
+        <para>Adds the asset tag to the list of tags to download during initial installation.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="tag">The name of the asset tag.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddBuildConfig(System.String)">
+      <summary>
+        <para>Creates a new set of build configurations for all targets in the project.</para>
+      </summary>
+      <param name="name">The name of the build configuration.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddBuildProperty(System.String,System.String,System.String)">
+      <summary>
+        <para>Adds a value to build property list in all build configurations for the specified target(s).</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName.</param>
+      <param name="targetGuids">An array of target GUIDs.</param>
+      <param name="name">The name of the build property.</param>
+      <param name="value">The value of the build property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddBuildProperty(System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.String,System.String)">
+      <summary>
+        <para>Adds a value to build property list in all build configurations for the specified target(s).</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName.</param>
+      <param name="targetGuids">An array of target GUIDs.</param>
+      <param name="name">The name of the build property.</param>
+      <param name="value">The value of the build property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddBuildPropertyForConfig(System.String,System.String,System.String)">
+      <summary>
+        <para>Adds a value to build property list of the given build configuration(s).</para>
+      </summary>
+      <param name="configGuid">The GUID of the build configuration as returned by BuildConfigByName().</param>
+      <param name="configGuids">An array of GUIDs of build configurations.</param>
+      <param name="name">The name of the build property.</param>
+      <param name="value">The value of the build property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddBuildPropertyForConfig(System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.String,System.String)">
+      <summary>
+        <para>Adds a value to build property list of the given build configuration(s).</para>
+      </summary>
+      <param name="configGuid">The GUID of the build configuration as returned by BuildConfigByName().</param>
+      <param name="configGuids">An array of GUIDs of build configurations.</param>
+      <param name="name">The name of the build property.</param>
+      <param name="value">The value of the build property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddCapability">
+      <summary>
+        <para>Add a target capability to the Xcode project. This enables behavior based on the capability type. Some capabilities will require additional setup within Xcode. For more control over the specific settings of capability use the iOS.Xcode.ProjectCapabilityManager class.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="capability">The capability to enable.</param>
+      <param name="entitlementFileName">Path to the entitlements file to be used for this capability. Information regarding the contents of entitlements files can be found at https:developer.apple.comlibrarycontentdocumentationMiscellaneousReferenceEntitlementKeyReferenceChaptersAboutEntitlements.html</param>
+      <param name="addOptionalFramework">Set this to true to indicate that this capability requires additional frameworks. Set it to false if no additional frameworks are required.</param>
+      <returns>
+        <para>True if the capability was successfully added, and false otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddCopyFilesBuildPhase(System.String,System.String,System.String,System.String)">
+      <summary>
+        <para>Creates a new copy files build phase for given target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="name">The name of the phase.</param>
+      <param name="dstPath">The destination path.</param>
+      <param name="subfolderSpec">The "subfolder spec". The following usages are known:
+"10" for embedding frameworks;
+"13" for embedding app extension content;
+"16" for embedding watch content.</param>
+      <returns>
+        <para>Returns the GUID of the new phase.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddFile(System.String,System.String,UnityEditor.iOS.Xcode.PBXSourceTree)">
+      <summary>
+        <para>Adds a new file reference to the list of known files.</para>
+      </summary>
+      <param name="path">The physical path to the file on the filesystem.</param>
+      <param name="projectPath">The project path to the file.</param>
+      <param name="sourceTree">The source tree the path is relative to. By default it's PBXSourceTree.Source. The PBXSourceTree.Group tree is not supported.</param>
+      <returns>
+        <para>The GUID of the added file. It can later be used to add the file for building to targets, etc.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddFile(System.String,System.String)">
+      <summary>
+        <para>Adds a new file reference to the list of known files.</para>
+      </summary>
+      <param name="path">The physical path to the file on the filesystem.</param>
+      <param name="projectPath">The project path to the file.</param>
+      <param name="sourceTree">The source tree the path is relative to. By default it's PBXSourceTree.Source. The PBXSourceTree.Group tree is not supported.</param>
+      <returns>
+        <para>The GUID of the added file. It can later be used to add the file for building to targets, etc.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddFileToBuild(System.String,System.String)">
+      <summary>
+        <para>Configures file for building for the given native target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName.</param>
+      <param name="fileGuid">The file guid returned by AddFile or AddFolderReference.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddFileToBuildSection(System.String,System.String,System.String)">
+      <summary>
+        <para>Configures file for building for the given native target on specific build section.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="sectionGuid">The GUID of the section to add the file to.</param>
+      <param name="fileGuid">The file guid returned by AddFile or AddFolderReference.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddFileToBuildWithFlags(System.String,System.String,System.String)">
+      <summary>
+        <para>Configures file for building for the given target with specific compiler flags.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName.</param>
+      <param name="fileGuid">The file guid returned by AddFile or AddFolderReference.</param>
+      <param name="compileFlags">Compile flags to use.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddFolderReference(System.String,System.String,UnityEditor.iOS.Xcode.PBXSourceTree)">
+      <summary>
+        <para>Adds a new folder reference to the list of known files.</para>
+      </summary>
+      <param name="path">The physical path to the folder on the filesystem.</param>
+      <param name="projectPath">The project path to the folder.</param>
+      <param name="sourceTree">The source tree the path is relative to. By default it's PBXSourceTree.Source. The PBXSourceTree.Group tree is not supported.</param>
+      <returns>
+        <para>The GUID of the added folder reference. It can later be used to add the file for building to targets, etc.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddFrameworksBuildPhase(System.String)">
+      <summary>
+        <para>Creates a new frameworks build phase for given target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <returns>
+        <para>Returns the GUID of the new phase.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddFrameworkToProject(System.String,System.String,System.Boolean)">
+      <summary>
+        <para>Adds a system framework dependency for the specified target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the build configuration as returned by TargetGuidByName.</param>
+      <param name="framework">The name of the framework. The extension of the filename must be ".framework".</param>
+      <param name="weak">True if the framework is optional (i.e. weakly linked), false if the framework is required.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddResourcesBuildPhase(System.String)">
+      <summary>
+        <para>Creates a new resources build phase for given target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <returns>
+        <para>Returns the GUID of the new phase.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddSourcesBuildPhase(System.String)">
+      <summary>
+        <para>Creates a new sources build phase for given target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <returns>
+        <para>Returns the GUID of the new phase.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.AddTarget(System.String,System.String,System.String)">
+      <summary>
+        <para>Creates a new native target.</para>
+      </summary>
+      <param name="name">The name of the new target.</param>
+      <param name="ext">The file extension of the target artifact (leading dot is not necessary, but accepted).</param>
+      <param name="type">The type of the target. For example:
+"com.apple.product-type.app-extension" - App extension,
+"com.apple.product-type.application.watchapp2" - WatchKit 2 application.</param>
+      <returns>
+        <para>The GUID of the new target.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.BuildConfigByName(System.String,System.String)">
+      <summary>
+        <para>Returns the GUID of build configuration with the given name for the specific target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName.</param>
+      <param name="name">The name of the build configuration.</param>
+      <returns>
+        <para>The GUID of the build configuration or null if it does not exist.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.BuildConfigNames">
+      <summary>
+        <para>Returns the names of the build configurations available in the project.</para>
+      </summary>
+      <returns>
+        <para>An array of build config names.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.ContainsFileByProjectPath(System.String)">
+      <summary>
+        <para>Checks if the project contains a file with the given project path.</para>
+      </summary>
+      <param name="path">The project path of the file.</param>
+      <returns>
+        <para>Returns true if the project contains the file, false otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.ContainsFileByRealPath(System.String)">
+      <summary>
+        <para>Checks if the project contains a file with the given physical path.</para>
+      </summary>
+      <param name="path">The physical path of the file.</param>
+      <param name="sourceTree">The source tree path is relative to. The PBXSourceTree.Group tree is not supported.</param>
+      <returns>
+        <para>Returns true if the project contains the file, false otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.ContainsFileByRealPath(System.String,UnityEditor.iOS.Xcode.PBXSourceTree)">
+      <summary>
+        <para>Checks if the project contains a file with the given physical path.</para>
+      </summary>
+      <param name="path">The physical path of the file.</param>
+      <param name="sourceTree">The source tree path is relative to. The PBXSourceTree.Group tree is not supported.</param>
+      <returns>
+        <para>Returns true if the project contains the file, false otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.ContainsFramework(System.String,System.String)">
+      <summary>
+        <para>Checks whether the given system framework is a dependency of a target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="framework">The name of the framework. The extension of the filename must be ".framework".</param>
+      <returns>
+        <para>Returns true if the given framework is a dependency of the given target, false otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.#ctor">
+      <summary>
+        <para>Creates a new instance of PBXProject class.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.FindFileGuidByProjectPath(System.String)">
+      <summary>
+        <para>Finds a file with the given project path in the project, if any.</para>
+      </summary>
+      <param name="path">The project path of the file.</param>
+      <returns>
+        <para>The GUID of the file if the search succeeded, null otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.FindFileGuidByRealPath(System.String,UnityEditor.iOS.Xcode.PBXSourceTree)">
+      <summary>
+        <para>Finds a file with the given physical path in the project, if any.</para>
+      </summary>
+      <param name="path">The physical path of the file.</param>
+      <param name="sourceTree">The source tree path is relative to. The PBXSourceTree.Group tree is not supported.</param>
+      <returns>
+        <para>The GUID of the file if the search succeeded, null otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.FindFileGuidByRealPath(System.String)">
+      <summary>
+        <para>Finds a file with the given physical path in the project, if any.</para>
+      </summary>
+      <param name="path">The physical path of the file.</param>
+      <param name="sourceTree">The source tree path is relative to. The PBXSourceTree.Group tree is not supported.</param>
+      <returns>
+        <para>The GUID of the file if the search succeeded, null otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.GetCompileFlagsForFile(System.String,System.String)">
+      <summary>
+        <para>Returns compile flags set for the specific file on a given target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="fileGuid">The GUID of the file.</param>
+      <returns>
+        <para>The compile flags for the specified file.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.GetCopyFilesBuildPhaseByTarget(System.String,System.String,System.String,System.String)">
+      <summary>
+        <para>Returns the GUID of matching copy files build phase for the given target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="name">The name of the phase.</param>
+      <param name="dstPath">The destination path.</param>
+      <param name="subfolderSpec">The "subfolder spec". The following usages are known:
+"10" for embedding frameworks;
+"13" for embedding app extension content;
+"16" for embedding watch content.</param>
+      <returns>
+        <para>Returns the GUID of the matching phase or null if it does not exist.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.GetFrameworksBuildPhaseByTarget(System.String)">
+      <summary>
+        <para>Returns the GUID of frameworks build phase for the given target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <returns>
+        <para>Returns the GUID of the existing phase or null if it does not exist.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.GetPBXProjectPath(System.String)">
+      <summary>
+        <para>Returns the path to PBX project in the given Unity build path.</para>
+      </summary>
+      <param name="buildPath">The project build path.</param>
+      <returns>
+        <para>The path to the PBX project file that can later be opened via ReadFromFile function.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.GetResourcesBuildPhaseByTarget(System.String)">
+      <summary>
+        <para>Returns the GUID of resources build phase for the given target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <returns>
+        <para>Returns the GUID of the existing phase or null if it does not exist.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.GetSourcesBuildPhaseByTarget(System.String)">
+      <summary>
+        <para>Returns the GUID of sources build phase for the given target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <returns>
+        <para>Returns the GUID of the existing phase or null if it does not exist.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.GetTargetProductFileRef(System.String)">
+      <summary>
+        <para>Returns the file reference of the artifact created by building target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <returns>
+        <para>The file reference of the artifact created by building target.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.GetUnityTargetName">
+      <summary>
+        <para>Returns the default main target name in Unity project.</para>
+      </summary>
+      <returns>
+        <para>The default main target name.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.GetUnityTestTargetName">
+      <summary>
+        <para>Returns the default test target name.</para>
+      </summary>
+      <returns>
+        <para>The default test target name.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.IsBuildable(System.String)">
+      <summary>
+        <para>Checks if a file with the given extension can be built by Xcode.</para>
+      </summary>
+      <param name="ext">The file extension (leading dot is not necessary, but accepted).</param>
+      <returns>
+        <para>Returns true of the file can be built, false otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.IsKnownExtension(System.String)">
+      <summary>
+        <para>Checks if files with the given extension are known to PBXProject.</para>
+      </summary>
+      <param name="ext">The file extension (leading dot is not necessary, but accepted).</param>
+      <returns>
+        <para>Returns true of the extension is known, false otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.ProjectGuid">
+      <summary>
+        <para>Returns the GUID of the project.</para>
+      </summary>
+      <returns>
+        <para>The GUID of the project.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.ReadFromFile(System.String)">
+      <summary>
+        <para>Reads the project from a file identified by the given path.</para>
+      </summary>
+      <param name="path">Path of the file.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.ReadFromStream(System.IO.TextReader)">
+      <summary>
+        <para>Reads the project from the given text reader.</para>
+      </summary>
+      <param name="sr">The project contents.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.ReadFromString(System.String)">
+      <summary>
+        <para>Reads the project from the given string.</para>
+      </summary>
+      <param name="src">The project contents.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.RemoveAssetTag(System.String)">
+      <summary>
+        <para>Removes an asset tag.</para>
+      </summary>
+      <param name="tag">The name of the asset tag.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.RemoveAssetTagForFile(System.String,System.String,System.String)">
+      <summary>
+        <para>Removes an asset tag for the given file.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="fileGuid">The GUID of the file.</param>
+      <param name="tag">The name of the asset tag.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.RemoveAssetTagFromDefaultInstall(System.String,System.String)">
+      <summary>
+        <para>Removes the asset tag from the list of tags to download during initial installation.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="tag">The name of the asset tag.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.RemoveBuildConfig(System.String)">
+      <summary>
+        <para>Removes all build configurations with the given name from all targets in the project.</para>
+      </summary>
+      <param name="name">The name of the build configuration.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.RemoveFile(System.String)">
+      <summary>
+        <para>Removes the given file from project.</para>
+      </summary>
+      <param name="fileGuid">The GUID of the file or folder reference.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.RemoveFileFromBuild(System.String,System.String)">
+      <summary>
+        <para>Removes given file from the list of files to build for the given target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName.</param>
+      <param name="fileGuid">The GUID of the file or folder reference.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.RemoveFrameworkFromProject(System.String,System.String)">
+      <summary>
+        <para>Removes a system framework dependency for the specified target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName.</param>
+      <param name="framework">The name of the framework. The extension of the filename must be ".framework".</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.SetBuildProperty(System.String,System.String,System.String)">
+      <summary>
+        <para>Sets a build property to the given value in all build configurations for the specified target(s).</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="targetGuids">The GUIDs of the target as returned by TargetGuidByName().</param>
+      <param name="name">The name of the build property.</param>
+      <param name="value">The value of the build property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.SetBuildProperty(System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.String,System.String)">
+      <summary>
+        <para>Sets a build property to the given value in all build configurations for the specified target(s).</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="targetGuids">The GUIDs of the target as returned by TargetGuidByName().</param>
+      <param name="name">The name of the build property.</param>
+      <param name="value">The value of the build property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.SetBuildPropertyForConfig(System.String,System.String,System.String)">
+      <summary>
+        <para>Sets a build property to the given value in the specified build configuration(s).</para>
+      </summary>
+      <param name="configGuid">The GUID of the build configuration as returned by BuildConfigByName.</param>
+      <param name="configGuids">The GUIDs of the build configurations as returned by BuildConfigByName().</param>
+      <param name="name">The name of the build property.</param>
+      <param name="value">The value of the build property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.SetBuildPropertyForConfig(System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.String,System.String)">
+      <summary>
+        <para>Sets a build property to the given value in the specified build configuration(s).</para>
+      </summary>
+      <param name="configGuid">The GUID of the build configuration as returned by BuildConfigByName.</param>
+      <param name="configGuids">The GUIDs of the build configurations as returned by BuildConfigByName().</param>
+      <param name="name">The name of the build property.</param>
+      <param name="value">The value of the build property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.SetCompileFlagsForFile(System.String,System.String,System.Collections.Generic.List`1&lt;System.String&gt;)">
+      <summary>
+        <para>Sets the compilation flags for the given file in the given target.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName.</param>
+      <param name="fileGuid">The GUID of the file.</param>
+      <param name="compileFlags">The list of compile flags or null if the flags should be unset.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.SetTeamId">
+      <summary>
+        <para>Set the Team ID of an Xcode project.</para>
+      </summary>
+      <param name="targetGuid">The GUID of the target as returned by TargetGuidByName().</param>
+      <param name="teamId">The code signing team ID to be used for this target.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.TargetGuidByName(System.String)">
+      <summary>
+        <para>Returns the GUID of the native target with the given name.</para>
+      </summary>
+      <param name="name">The name of the native target.</param>
+      <returns>
+        <para>The GUID identifying the native target.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.UpdateBuildProperty(System.String,System.String,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;)">
+      <summary>
+        <para>Adds and removes values from build property in all build configurations for the specified target(s).</para>
+      </summary>
+      <param name="targetGuid">The target GUID as returned by NativeTargetByName.</param>
+      <param name="targetGuids">An array of target GUIDs.</param>
+      <param name="name">The name of the build property.</param>
+      <param name="addValues">The values to add to the build property.</param>
+      <param name="removeValues">The values to remove from the build property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.UpdateBuildProperty(System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.String,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;)">
+      <summary>
+        <para>Adds and removes values from build property in all build configurations for the specified target(s).</para>
+      </summary>
+      <param name="targetGuid">The target GUID as returned by NativeTargetByName.</param>
+      <param name="targetGuids">An array of target GUIDs.</param>
+      <param name="name">The name of the build property.</param>
+      <param name="addValues">The values to add to the build property.</param>
+      <param name="removeValues">The values to remove from the build property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.UpdateBuildPropertyForConfig(System.String,System.String,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;)">
+      <summary>
+        <para>Adds and removes values from build property in the given build configuration.</para>
+      </summary>
+      <param name="configGuid">The GUID of the build configuration as returned by BuildConfigByName.</param>
+      <param name="configGuids">An array of GUIDs of build configurations.</param>
+      <param name="name">The name of the build property.</param>
+      <param name="addValues">The values to add to the build property.</param>
+      <param name="removeValues">The values to remove from the build property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.UpdateBuildPropertyForConfig(System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.String,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;)">
+      <summary>
+        <para>Adds and removes values from build property in the given build configuration.</para>
+      </summary>
+      <param name="configGuid">The GUID of the build configuration as returned by BuildConfigByName.</param>
+      <param name="configGuids">An array of GUIDs of build configurations.</param>
+      <param name="name">The name of the build property.</param>
+      <param name="addValues">The values to add to the build property.</param>
+      <param name="removeValues">The values to remove from the build property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.WriteToFile(System.String)">
+      <summary>
+        <para>Writes the project contents to the specified file.</para>
+      </summary>
+      <param name="path">Path to write the project contents to.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.WriteToStream(System.IO.TextWriter)">
+      <summary>
+        <para>Writes the project contents to the specified text writer.</para>
+      </summary>
+      <param name="sw">Text writer to write to.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PBXProject.WriteToString">
+      <summary>
+        <para>Writes the contents of the project to string.</para>
+      </summary>
+      <returns>
+        <para>The project contents converted to string.</para>
+      </returns>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.PBXSourceTree">
+      <summary>
+        <para>Specifies source trees for files.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXSourceTree.Absolute">
+      <summary>
+        <para>The file path is absolute path.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXSourceTree.Build">
+      <summary>
+        <para>The file path is relative to build products path.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXSourceTree.Developer">
+      <summary>
+        <para>The file path is relative to the developer directory.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXSourceTree.Group">
+      <summary>
+        <para>The file path is relative to the group the file is in.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXSourceTree.Sdk">
+      <summary>
+        <para>The file path is relative to SDK path.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PBXSourceTree.Source">
+      <summary>
+        <para>The file path is relative to the project path.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.PlistDocument">
+      <summary>
+        <para>Represents an Apple property list document. Documentation on property lists can be found here. https:developer.apple.comlibrarycontentdocumentationGeneralConceptualDevPedia-CocoaCorePropertyList.html#apple_refdocuidTP40008195-CH44</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PlistDocument.root">
+      <summary>
+        <para>The root element of the property list document.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PlistDocument.version">
+      <summary>
+        <para>The version of the property list document. At the moment Apple uses '1.0' for all property list files.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistDocument.Create">
+      <summary>
+        <para>Create a new property list Document.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistDocument.#ctor">
+      <summary>
+        <para>Creates a new property list document instance.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistDocument.ReadFromFile(System.String)">
+      <summary>
+        <para>Reads the document from a file identified by the given path.</para>
+      </summary>
+      <param name="path">Path of the file.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistDocument.ReadFromStream(System.IO.TextReader)">
+      <summary>
+        <para>Reads the project from the given text reader.</para>
+      </summary>
+      <param name="tr">The project contents.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistDocument.ReadFromString(System.String)">
+      <summary>
+        <para>Reads the document from the given string.</para>
+      </summary>
+      <param name="text">The project contents.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistDocument.WriteToFile(System.String)">
+      <summary>
+        <para>Writes the project contents to the specified file.</para>
+      </summary>
+      <param name="path">Path to write the document contents to.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistDocument.WriteToStream(System.IO.TextWriter)">
+      <summary>
+        <para>Writes the document contents to the specified text writer.</para>
+      </summary>
+      <param name="tw">Text writer to write to.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistDocument.WriteToString">
+      <summary>
+        <para>Writes the document contents to a string.</para>
+      </summary>
+      <returns>
+        <para>The project contents converted to string.</para>
+      </returns>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.PlistElement">
+      <summary>
+        <para>Represents a plist element.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElement.AsArray">
+      <summary>
+        <para>Convenience method to convert to array element.</para>
+      </summary>
+      <returns>
+        <para>The element as PlistElementArray.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElement.AsBoolean">
+      <summary>
+        <para>Convenience method to convert to bool.</para>
+      </summary>
+      <returns>
+        <para>The value of the boolean element.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElement.AsDict">
+      <summary>
+        <para>Convenience method to convert to dictionary element.</para>
+      </summary>
+      <returns>
+        <para>The element as PlistElementDict.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElement.AsInteger">
+      <summary>
+        <para>Convenience method to convert to integer.</para>
+      </summary>
+      <returns>
+        <para>The value of the integer element.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElement.AsString">
+      <summary>
+        <para>Convenience method to convert to string.</para>
+      </summary>
+      <returns>
+        <para>The value of the string element.</para>
+      </returns>
+    </member>
+    <member name="P:UnityEditor.iOS.Xcode.PlistElement.this">
+      <summary>
+        <para>Convenience method to access properties of a dictionary element.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.PlistElementArray">
+      <summary>
+        <para>Represents an array element in plist document.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PlistElementArray.values">
+      <summary>
+        <para>The values stored in the array element.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementArray.AddArray">
+      <summary>
+        <para>Convenience method to append new array to values.</para>
+      </summary>
+      <returns>
+        <para>The new array element.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementArray.AddBoolean(System.Boolean)">
+      <summary>
+        <para>Convenience method to append new boolean element to values.</para>
+      </summary>
+      <param name="val">The value of the new boolean element.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementArray.AddDict">
+      <summary>
+        <para>Convenience method to append new dictionary to values.</para>
+      </summary>
+      <returns>
+        <para>The new dictionary element.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementArray.AddInteger(System.Int32)">
+      <summary>
+        <para>Convenience method to append new integer element to values.</para>
+      </summary>
+      <param name="val">The value of the new integer element.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementArray.AddString(System.String)">
+      <summary>
+        <para>Convenience method to append new string element to values.</para>
+      </summary>
+      <param name="val">The value of the new string element.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementArray.#ctor">
+      <summary>
+        <para>Creates new array element.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.PlistElementBoolean">
+      <summary>
+        <para>Represents a boolean element in plist document.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PlistElementBoolean.value">
+      <summary>
+        <para>The value stored in the boolean element.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementBoolean.#ctor(System.Boolean)">
+      <summary>
+        <para>Creates new boolean element.</para>
+      </summary>
+      <param name="v">The value of the element.</param>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.PlistElementDict">
+      <summary>
+        <para>Represents a dictionary element in plist document.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEditor.iOS.Xcode.PlistElementDict.values">
+      <summary>
+        <para>The values stored in the dictionary element.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementDict.CreateArray(System.String)">
+      <summary>
+        <para>Convenience method to set a property to a new array element.</para>
+      </summary>
+      <param name="key">The key of the property.</param>
+      <returns>
+        <para>The new array element.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementDict.CreateDict(System.String)">
+      <summary>
+        <para>Convenience method to set a property to a new dictionary element.</para>
+      </summary>
+      <param name="key">The key of the property.</param>
+      <returns>
+        <para>The new dictionary element.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementDict.#ctor">
+      <summary>
+        <para>Creates new dictionary element.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementDict.SetBoolean(System.String,System.Boolean)">
+      <summary>
+        <para>Convenience method to set a boolean property.</para>
+      </summary>
+      <param name="key">The key of the property.</param>
+      <param name="val">The value of the property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementDict.SetInteger(System.String,System.Int32)">
+      <summary>
+        <para>Convenience method to set an integer property.</para>
+      </summary>
+      <param name="key">The key of the property.</param>
+      <param name="val">The value of the property.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementDict.SetString(System.String,System.String)">
+      <summary>
+        <para>Convenience method to set a string property.</para>
+      </summary>
+      <param name="key">The key of the property.</param>
+      <param name="val">The value of the property.</param>
+    </member>
+    <member name="P:UnityEditor.iOS.Xcode.PlistElementDict.this">
+      <summary>
+        <para>Convenience method to access the stored values.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.PlistElementInteger">
+      <summary>
+        <para>Represents an integer element in plist document.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PlistElementInteger.value">
+      <summary>
+        <para>The value stored in the integer element.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementInteger.#ctor(System.Int32)">
+      <summary>
+        <para>Creates new integer element.</para>
+      </summary>
+      <param name="v">The value of the element.</param>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.PlistElementString">
+      <summary>
+        <para>Represents a string element in plist document.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEditor.iOS.Xcode.PlistElementString.value">
+      <summary>
+        <para>The value stored in the string element.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.PlistElementString.#ctor(System.String)">
+      <summary>
+        <para>Creates new string element.</para>
+      </summary>
+      <param name="v">The value of the element.</param>
+    </member>
+    <member name="T:UnityEditor.iOS.Xcode.ProjectCapabilityManager">
+      <summary>
+        <para>This class allows you to add and modify the specifics of Xcode project capabilities. If you wish to simply enable a capability and edit the capabilities options in Xcode use iOS.Xcode.PBXProject.AddCapability instead.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddAppGroups(System.String[])">
+      <summary>
+        <para>Add the App Groups capability.</para>
+      </summary>
+      <param name="groups">Array of group names.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddApplePay(System.String[])">
+      <summary>
+        <para>Add the Apple Pay capability.</para>
+      </summary>
+      <param name="merchants">Array of merchant IDs.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddAssociatedDomains(System.String[])">
+      <summary>
+        <para>Add the Associated Domains capability.</para>
+      </summary>
+      <param name="domains"></param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddBackgroundModes(UnityEditor.iOS.Xcode.BackgroundModesOptions)">
+      <summary>
+        <para>Add the Background Modes capability.</para>
+      </summary>
+      <param name="options">Mask of BackgroundModesOptions to enable.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddDataProtection">
+      <summary>
+        <para>Add the Data Protection capability.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddGameCenter">
+      <summary>
+        <para>Add the GameCenter capability.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddHealthKit">
+      <summary>
+        <para>Add the HealthKit capability.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddHomeKit">
+      <summary>
+        <para>Add the HomeKit capability.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddiCloud">
+      <summary>
+        <para></para>
+      </summary>
+      <param name="keyValueStorage">Enable or disable key-value Storage.</param>
+      <param name="iCloudDocument">Enable or disable iCloud document storage.</param>
+      <param name="customContainer">Array of containers in which to store documents on iCloud. Information about custom container types can be found here: https:developer.apple.comlibrarycontentdocumentationIDEsConceptualAppDistributionGuideAddingCapabilitiesAddingCapabilities.html#apple_refdocuid/TP40012582-CH26-SW22</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddInAppPurchase">
+      <summary>
+        <para>Add the In-App Purchase capability.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddInterAppAudio">
+      <summary>
+        <para>Add the Inter-App Audio capability.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddKeychainSharing(System.String[])">
+      <summary>
+        <para>Add the Keychain Sharing capability.</para>
+      </summary>
+      <param name="accessGroups">Array of access groups.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddMaps(UnityEditor.iOS.Xcode.MapsOptions)">
+      <summary>
+        <para>Add the Maps capability.</para>
+      </summary>
+      <param name="options">Mask of MapsOptions to enable.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddPersonalVPN">
+      <summary>
+        <para>Add the Personal VPN capability.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddPushNotifications(System.Boolean)">
+      <summary>
+        <para>Add the Apple Push Notifications capability.</para>
+      </summary>
+      <param name="development">Enable or disable development mode. Development mode should be used while testing your application outside of the App Store.</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddSiri">
+      <summary>
+        <para>Add the Siri capability.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddWallet(System.String[])">
+      <summary>
+        <para>Add the Wallet capability.</para>
+      </summary>
+      <param name="passSubset">Array of pass subsets to enable. Documentation on pass subsets can be found here: https:developer.apple.comlibrarycontentdocumentationIDEsConceptualAppDistributionGuideAddingCapabilitiesAddingCapabilities.html#apple_refdocuid/TP40012582-CH26-SW13</param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.AddWirelessAccessoryConfiguration">
+      <summary>
+        <para>Add the Wireless Accessory Configuration capability.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.#ctor(System.String,System.String,System.String)">
+      <summary>
+        <para>Creates a new ProjectCapabilityManager object.</para>
+      </summary>
+      <param name="buildPath">The project path provided by Build.IPostprocessBuild.OnPostprocessBuild.</param>
+      <param name="entitlementFileName">Name of the entitlements file.</param>
+      <param name="targetName">Name of the target project. Defaults to Unity-iPhone.</param>
+      <param name="pbxProjectPath"></param>
+      <param name="entitlementFilePath"></param>
+    </member>
+    <member name="M:UnityEditor.iOS.Xcode.ProjectCapabilityManager.WriteToFile">
+      <summary>
+        <para>Saves the project file to disk.</para>
+      </summary>
+    </member>
+  </members>
+</doc>

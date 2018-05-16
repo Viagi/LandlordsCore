@@ -42,7 +42,7 @@ namespace ETHotfix
                     continue;
                 }
 
-                ActorProxy actorProxy = Game.Scene.GetComponent<ActorProxyComponent>().Get(gamer.Id);
+                ActorMessageSender actorProxy = Game.Scene.GetComponent<ActorMessageSenderComponent>().Get(gamer.Id);
                 //当还没抢地主时随机抢地主
                 if (gamer.GetComponent<HandCardsComponent>().AccessIdentity == Identity.None)
                 {

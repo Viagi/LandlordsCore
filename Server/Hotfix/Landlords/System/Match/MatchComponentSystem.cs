@@ -102,7 +102,7 @@ namespace ETHotfix
             self.MatchSuccessQueue.Enqueue(matcher);
 
             //向房间服务器发送玩家进入请求
-            ActorProxy actorProxy = Game.Scene.GetComponent<ActorProxyComponent>().Get(room.Id);
+            ActorMessageSender actorProxy = Game.Scene.GetComponent<ActorMessageSenderComponent>().Get(room.Id);
             Actor_PlayerEnterRoom_Ack actor_PlayerEnterRoom_Ack = await actorProxy.Call(new Actor_PlayerEnterRoom_Req()
             {
                 PlayerID = matcher.PlayerID,
@@ -114,8 +114,8 @@ namespace ETHotfix
             room.Add(gamer);
 
             //向玩家发送匹配成功消息
-            ActorProxyComponent actorProxyComponent = Game.Scene.GetComponent<ActorProxyComponent>();
-            ActorProxy gamerActorProxy = actorProxyComponent.Get(gamer.PlayerID);
+            ActorMessageSenderComponent actorProxyComponent = Game.Scene.GetComponent<ActorMessageSenderComponent>();
+            ActorMessageSender gamerActorProxy = actorProxyComponent.Get(gamer.PlayerID);
             gamerActorProxy.Send(new Actor_MatchSucess_Ntt() { GamerID = gamer.Id });
         }
     }

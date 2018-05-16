@@ -15,7 +15,7 @@ namespace ETHotfix
                 User user = Game.Scene.GetComponent<UserComponent>().Get(message.UserID);
 
                 //服务端主动断开客户端连接
-                long userSessionId = user.GetComponent<UnitGateComponent>().GateSessionId;
+                long userSessionId = user.GetComponent<UnitGateComponent>().GateSessionActorId;
                 Game.Scene.GetComponent<NetOuterComponent>().Remove(userSessionId);
                 Log.Info($"将玩家{message.UserID}连接断开");
 

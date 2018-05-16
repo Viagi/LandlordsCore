@@ -498,7 +498,7 @@ namespace ETHotfix
 		[ProtoMember(93, IsRequired = true)]
 		public long ActorId { get; set; }
 
-		[ProtoMember(1, TypeName = "ETHotfix.List<GamerInfo>")]
+		[ProtoMember(1, TypeName = "ETHotfix.GamerInfo")]
 		public List<GamerInfo> Gamers = new List<GamerInfo>();
 
 	}
@@ -518,6 +518,21 @@ namespace ETHotfix
 
 	}
 
+	[Message(HotfixOpcode.GamerState)]
+	[ProtoContract]
+	public partial class GamerState
+	{
+		[ProtoMember(1, IsRequired = true)]
+		public long UserID;
+
+		[ProtoMember(2, IsRequired = true)]
+		public byte Identity;
+
+		[ProtoMember(3, IsRequired = true)]
+		public bool GrabLandlordState;
+
+	}
+
 	[Message(HotfixOpcode.Actor_GamerReconnect_Ntt)]
 	[ProtoContract]
 	public partial class Actor_GamerReconnect_Ntt: IActorMessage
@@ -531,9 +546,8 @@ namespace ETHotfix
 		[ProtoMember(1, IsRequired = true)]
 		public int Multiples;
 
-		[BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-		[ProtoMember(2, TypeName = "ETHotfix.Dictionary<long,Identity>")]
-		public Dictionary<long,Identity> GamersIdentity = new Dictionary<long,Identity>();
+		[ProtoMember(2, TypeName = "ETHotfix.GamerState")]
+		public List<GamerState> GamersState = new List<GamerState>();
 
 		[ProtoMember(3, IsRequired = true)]
 		public Card[] LordCards;
@@ -541,9 +555,17 @@ namespace ETHotfix
 		[ProtoMember(4, IsRequired = true)]
 		public KeyValuePair<long,Card[]> DeskCards;
 
-		[BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-		[ProtoMember(5, TypeName = "ETHotfix.Dictionary<long,bool>")]
-		public Dictionary<long,bool> GamerGrabLandlordState = new Dictionary<long,bool>();
+	}
+
+	[Message(HotfixOpcode.GamerCardNum)]
+	[ProtoContract]
+	public partial class GamerCardNum
+	{
+		[ProtoMember(1, IsRequired = true)]
+		public long UserID;
+
+		[ProtoMember(2, IsRequired = true)]
+		public int Num;
 
 	}
 
@@ -558,11 +580,10 @@ namespace ETHotfix
 		public long ActorId { get; set; }
 
 		[ProtoMember(1, IsRequired = true)]
-		public Card[] GamerCards;
+		public Card[] HandCards;
 
-		[BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-		[ProtoMember(2, TypeName = "ETHotfix.Dictionary<long,int>")]
-		public Dictionary<long,int> GamerCardsNum = new Dictionary<long,int>();
+		[ProtoMember(2, TypeName = "ETHotfix.GamerCardNum")]
+		public List<GamerCardNum> GamersCardNum = new List<GamerCardNum>();
 
 	}
 
@@ -632,6 +653,18 @@ namespace ETHotfix
 
 	}
 
+	[Message(HotfixOpcode.GamerScore)]
+	[ProtoContract]
+	public partial class GamerScore
+	{
+		[ProtoMember(1, IsRequired = true)]
+		public long UserID;
+
+		[ProtoMember(2, IsRequired = true)]
+		public long Score;
+
+	}
+
 	[Message(HotfixOpcode.Actor_Gameover_Ntt)]
 	[ProtoContract]
 	public partial class Actor_Gameover_Ntt: IActorMessage
@@ -643,7 +676,7 @@ namespace ETHotfix
 		public long ActorId { get; set; }
 
 		[ProtoMember(1, IsRequired = true)]
-		public Identity Winner;
+		public byte Winner;
 
 		[ProtoMember(2, IsRequired = true)]
 		public long BasePointPerMatch;
@@ -651,9 +684,8 @@ namespace ETHotfix
 		[ProtoMember(3, IsRequired = true)]
 		public int Multiples;
 
-		[BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-		[ProtoMember(4, TypeName = "ETHotfix.Dictionary<long,long>")]
-		public Dictionary<long,long> GamersScore = new Dictionary<long,long>();
+		[ProtoMember(4, TypeName = "ETHotfix.GamerScore")]
+		public List<GamerScore> GamersScore = new List<GamerScore>();
 
 	}
 

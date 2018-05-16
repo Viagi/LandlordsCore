@@ -8,7 +8,7 @@ namespace ETHotfix
     [MessageHandler]
     public class Actor_Trusteeship_NttHandler : AMHandler<Actor_Trusteeship_Ntt>
     {
-        protected override void Run(Session session, Actor_Trusteeship_Ntt message)
+        protected override void Run(ETModel.Session session, Actor_Trusteeship_Ntt message)
         {
             UI uiRoom = Game.Scene.GetComponent<UIComponent>().Get(UIType.LandlordsRoom);
             GamerComponent gamerComponent = uiRoom.GetComponent<GamerComponent>();

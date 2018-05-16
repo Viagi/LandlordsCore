@@ -47,15 +47,19 @@ namespace ETHotfix
 
                         //发送玩家手牌
                         Gamer[] gamers = room.GetAll();
-                        Dictionary<long, int> gamerCardsNum = new Dictionary<long, int>();
-                        Array.ForEach(gamers, _gamer => gamerCardsNum.Add(_gamer.UserID, _gamer.GetComponent<HandCardsComponent>().GetAll().Length));
+                        List<GamerCardNum> gamersCardNum = new List<GamerCardNum>();
+                        Array.ForEach(gamers, _gamer => gamersCardNum.Add(new GamerCardNum()
+                        {
+                            UserID = _gamer.UserID,
+                            Num = _gamer.GetComponent<HandCardsComponent>().GetAll().Length
+                        }));
                         Array.ForEach(gamers, _gamer =>
                         {
-                            ActorProxy actorProxy = _gamer.GetComponent<UnitGateComponent>().GetActorProxy();
+                            ActorMessageSender actorProxy = _gamer.GetComponent<UnitGateComponent>().GetActorMessageSender();
                             actorProxy.Send(new Actor_GameStart_Ntt()
                             {
-                                GamerCards = _gamer.GetComponent<HandCardsComponent>().GetAll(),
-                                GamerCardsNum = gamerCardsNum
+                                HandCards = _gamer.GetComponent<HandCardsComponent>().GetAll(),
+                                GamersCardNum = gamersCardNum
                             });
                         });
 

@@ -189,24 +189,28 @@ namespace ETHotfix
                 //洗牌发牌
                 gameController.DealCards();
 
-                Dictionary<long, int> gamerCardsNum = new Dictionary<long, int>();
+                List<GamerCardNum> gamersCardNum = new List<GamerCardNum>();
                 Array.ForEach(gamers, (g) =>
                 {
                     HandCardsComponent handCards = g.GetComponent<HandCardsComponent>();
                     //重置玩家身份
                     handCards.AccessIdentity = Identity.None;
                     //记录玩家手牌数
-                    gamerCardsNum.Add(g.UserID, handCards.CardsCount);
+                    gamersCardNum.Add(new GamerCardNum()
+                    {
+                        UserID = g.UserID,
+                        Num = g.GetComponent<HandCardsComponent>().GetAll().Length
+                    });
                 });
 
                 //发送玩家手牌和其他玩家手牌数
                 foreach (var _gamer in gamers)
                 {
-                    ActorProxy actorProxy = _gamer.GetComponent<UnitGateComponent>().GetActorProxy();
+                    ActorMessageSender actorProxy = _gamer.GetComponent<UnitGateComponent>().GetActorMessageSender();
                     actorProxy.Send(new Actor_GameStart_Ntt()
                     {
-                        GamerCards = _gamer.GetComponent<HandCardsComponent>().GetAll(),
-                        GamerCardsNum = gamerCardsNum
+                        HandCards = _gamer.GetComponent<HandCardsComponent>().GetAll(),
+                        GamersCardNum = gamersCardNum
                     });
                 }
 
@@ -233,7 +237,7 @@ namespace ETHotfix
             {
                 //当前最大出牌者为赢家
                 Identity winnerIdentity = room.Get(orderController.Biggest).GetComponent<HandCardsComponent>().AccessIdentity;
-                Dictionary<long, long> gamersScore = new Dictionary<long, long>();
+                List<GamerScore> gamersScore = new List<GamerScore>();
 
                 //游戏结束所有玩家摊牌
                 foreach (var gamer in room.GetAll())
@@ -241,7 +245,11 @@ namespace ETHotfix
                     //取消托管
                     gamer.RemoveComponent<TrusteeshipComponent>();
                     //计算玩家积分
-                    gamersScore.Add(gamer.UserID, self.GetGamerScore(gamer, winnerIdentity));
+                    gamersScore.Add(new GamerScore()
+                    {
+                        UserID = gamer.UserID,
+                        Score = self.GetGamerScore(gamer, winnerIdentity)
+                    });
 
                     if (gamer.UserID != lastGamer.UserID)
                     {
@@ -258,6 +266,7 @@ namespace ETHotfix
                 //轮到下位玩家出牌
                 orderController.Biggest = lastGamer.UserID;
                 orderController.Turn();
+                room.Broadcast(new Actor_AuthorityPlayCard_Ntt() { UserID = orderController.CurrentAuthority, IsFirst = false });
             }
         }
 
@@ -265,7 +274,7 @@ namespace ETHotfix
         /// 游戏结束
         /// </summary>
         /// <param name="self"></param>
-        public static async void GameOver(this GameControllerComponent self, Dictionary<long, long> gamersScore, Identity winnerIdentity)
+        public static async void GameOver(this GameControllerComponent self, List<GamerScore> gamersScore, Identity winnerIdentity)
         {
             Room room = self.GetParent<Room>();
             Gamer[] gamers = room.GetAll();
@@ -279,17 +288,18 @@ namespace ETHotfix
             MapHelper.SendMessage(new MP2MH_SyncRoomState_Ntt() { RoomID = room.Id, State = room.State });
 
             Dictionary<long, long> gamersMoney = new Dictionary<long, long>();
-            foreach (Gamer gamer in gamers)
+            foreach (GamerScore gamerScore in gamersScore)
             {
                 //结算玩家余额
-                long gamerMoney = await self.StatisticalIntegral(gamer, gamersScore[gamer.UserID]);
+                Gamer gamer = room.Get(gamerScore.UserID);
+                long gamerMoney = await self.StatisticalIntegral(gamer, gamerScore.Score);
                 gamersMoney[gamer.UserID] = gamerMoney;
             }
 
             //广播游戏结束消息
             room.Broadcast(new Actor_Gameover_Ntt()
             {
-                Winner = winnerIdentity,
+                Winner = (byte)winnerIdentity,
                 BasePointPerMatch = self.BasePointPerMatch,
                 Multiples = self.Multiples,
                 GamersScore = gamersScore
@@ -301,13 +311,13 @@ namespace ETHotfix
                 //踢出离线玩家
                 if (_gamer.isOffline)
                 {
-                    ActorProxy actorProxy = Game.Scene.GetComponent<ActorProxyComponent>().Get(_gamer.Id);
+                    ActorMessageSender actorProxy = Game.Scene.GetComponent<ActorMessageSenderComponent>().Get(_gamer.Id);
                     await actorProxy.Call(new Actor_PlayerExitRoom_Req());
                 }
                 //踢出余额不足玩家
                 else if (gamersMoney[_gamer.UserID] < self.MinThreshold)
                 {
-                    ActorProxy actorProxy = _gamer.GetComponent<UnitGateComponent>().GetActorProxy();
+                    ActorMessageSender actorProxy = _gamer.GetComponent<UnitGateComponent>().GetActorMessageSender();
                     actorProxy.Send(new Actor_GamerMoneyLess_Ntt() { UserID = _gamer.UserID });
                 }
             }

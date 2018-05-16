@@ -18,7 +18,7 @@ namespace ETHotfix
                 {
                     //创建房间玩家对象
                     gamer = GamerFactory.Create(message.PlayerID, message.UserID);
-                    await gamer.AddComponent<ActorComponent>().AddLocation();
+                    await gamer.AddComponent<MailBoxComponent>().AddLocation();
                     gamer.AddComponent<UnitGateComponent, long>(message.SessionID);
 
                     //加入到房间
@@ -49,7 +49,7 @@ namespace ETHotfix
                     //玩家重连
                     gamer.isOffline = false;
                     gamer.PlayerID = message.PlayerID;
-                    gamer.GetComponent<UnitGateComponent>().GateSessionId = message.SessionID;
+                    gamer.GetComponent<UnitGateComponent>().GateSessionActorId = message.SessionID;
 
                     //玩家重连移除托管组件
                     gamer.RemoveComponent<TrusteeshipComponent>();
@@ -70,11 +70,11 @@ namespace ETHotfix
                     }
 
                     //发送房间玩家信息
-                    ActorProxy actorProxy = gamer.GetComponent<UnitGateComponent>().GetActorProxy();
+                    ActorMessageSender actorProxy = gamer.GetComponent<UnitGateComponent>().GetActorMessageSender();
                     actorProxy.Send(broadcastMessage);
 
-                    Dictionary<long, Identity> gamersIdentity = new Dictionary<long, Identity>();
-                    Dictionary<long, int> gamersCardsNum = new Dictionary<long, int>();
+                    List<GamerCardNum> gamersCardNum = new List<GamerCardNum>();
+                    List<GamerState> gamersState = new List<GamerState>();
                     GameControllerComponent gameController = room.GetComponent<GameControllerComponent>();
                     OrderControllerComponent orderController = room.GetComponent<OrderControllerComponent>();
                     DeskCardsCacheComponent deskCardsCache = room.GetComponent<DeskCardsCacheComponent>();
@@ -82,19 +82,31 @@ namespace ETHotfix
                     foreach (Gamer _gamer in room.GetAll())
                     {
                         HandCardsComponent handCards = _gamer.GetComponent<HandCardsComponent>();
-                        gamersCardsNum.Add(_gamer.UserID, handCards.CardsCount);
-                        gamersIdentity.Add(_gamer.UserID, handCards.AccessIdentity);
+                        gamersCardNum.Add(new GamerCardNum()
+                        {
+                            UserID = _gamer.UserID,
+                            Num = _gamer.GetComponent<HandCardsComponent>().GetAll().Length
+                        });
+                        gamersState.Add(new GamerState()
+                        {
+                            UserID = _gamer.UserID,
+                            Identity = (byte)handCards.AccessIdentity,
+                            GrabLandlordState = orderController.GamerLandlordState.ContainsKey(_gamer.UserID)
+                            ? orderController.GamerLandlordState[_gamer.UserID]
+                            : false
+                        });
                     }
 
                     //发送游戏开始消息
                     Actor_GameStart_Ntt gameStartNotice = new Actor_GameStart_Ntt()
                     {
-                        GamerCards = gamer.GetComponent<HandCardsComponent>().GetAll(),
-                        GamerCardsNum = gamersCardsNum
+                        HandCards = gamer.GetComponent<HandCardsComponent>().GetAll(),
+                        GamersCardNum = gamersCardNum
                     };
                     actorProxy.Send(gameStartNotice);
 
                     Card[] lordCards = null;
+
                     if (gamer.GetComponent<HandCardsComponent>().AccessIdentity == Identity.None)
                     {
                         //广播先手玩家
@@ -114,10 +126,9 @@ namespace ETHotfix
                     Actor_GamerReconnect_Ntt reconnectNotice = new Actor_GamerReconnect_Ntt()
                     {
                         Multiples = room.GetComponent<GameControllerComponent>().Multiples,
-                        GamersIdentity = gamersIdentity,
+                        GamersState = gamersState,
                         DeskCards = new KeyValuePair<long, Card[]>(orderController.Biggest, deskCardsCache.library.ToArray()),
                         LordCards = lordCards,
-                        GamerGrabLandlordState = orderController.GamerLandlordState
                     };
                     actorProxy.Send(reconnectNotice);
 

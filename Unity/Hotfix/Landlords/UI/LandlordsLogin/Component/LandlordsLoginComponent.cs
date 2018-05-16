@@ -38,9 +38,9 @@ namespace ETHotfix
             //热更测试
             Text hotfixPrompt = rc.Get<GameObject>("HotfixPrompt").GetComponent<Text>();
 #if ILRuntime
-            hotfixPrompt.text = "斗地主3.2 (ILRuntime模式)";
+            hotfixPrompt.text = "斗地主3.2.1 (ILRuntime模式)";
 #else
-            hotfixPrompt.text = "斗地主3.2 (Mono模式)";
+            hotfixPrompt.text = "斗地主3.2.1 (Mono模式)";
 #endif
 
             //绑定关联对象
@@ -75,13 +75,13 @@ namespace ETHotfix
 
             //设置登录中状态
             isLogining = true;
-            SessionWrap sessionWrap = null;
+            Session sessionWrap = null;
             try
             {
                 //创建登录服务器连接
                 IPEndPoint connetEndPoint = NetworkHelper.ToIPEndPoint(GlobalConfigComponent.Instance.GlobalProto.Address);
-                Session session = netOuterComponent.Create(connetEndPoint);
-                sessionWrap = new SessionWrap(session);
+                ETModel.Session session = netOuterComponent.Create(connetEndPoint);
+                sessionWrap = ComponentFactory.Create<Session, ETModel.Session>(session);
                 sessionWrap.session.GetComponent<SessionCallbackComponent>().DisposeCallback += s => 
                 {
                     if (Game.Scene.GetComponent<UIComponent>()?.Get(UIType.LandlordsLogin) != null)
@@ -110,19 +110,19 @@ namespace ETHotfix
 
                 //创建Gate服务器连接
                 connetEndPoint = NetworkHelper.ToIPEndPoint(r2C_Login_Ack.Address);
-                Session gateSession = netOuterComponent.Create(connetEndPoint);
-                Game.Scene.AddComponent<SessionWrapComponent>().Session = new SessionWrap(gateSession);
+                ETModel.Session gateSession = netOuterComponent.Create(connetEndPoint);
+                Game.Scene.AddComponent<SessionComponent>().Session = ComponentFactory.Create<Session, ETModel.Session>(gateSession);
                 //SessionWeap添加连接断开组件，用于处理客户端连接断开
-                Game.Scene.GetComponent<SessionWrapComponent>().Session.AddComponent<SessionOfflineComponent>();
-                ETModel.Game.Scene.AddComponent<SessionComponent>().Session = gateSession;
+                Game.Scene.GetComponent<SessionComponent>().Session.AddComponent<SessionOfflineComponent>();
+                Game.Scene.ModelScene.AddComponent<ETModel.SessionComponent>().Session = gateSession;
 
                 //登录Gate服务器
-                G2C_LoginGate_Ack g2C_LoginGate_Ack = await SessionWrapComponent.Instance.Session.Call(new C2G_LoginGate_Req() { Key = r2C_Login_Ack.Key }) as G2C_LoginGate_Ack;
+                G2C_LoginGate_Ack g2C_LoginGate_Ack = await SessionComponent.Instance.Session.Call(new C2G_LoginGate_Req() { Key = r2C_Login_Ack.Key }) as G2C_LoginGate_Ack;
                 if (g2C_LoginGate_Ack.Error == ErrorCode.ERR_ConnectGateKeyError)
                 {
                     prompt.text = "连接网关服务器超时";
                     password.text = "";
-                    Game.Scene.GetComponent<SessionWrapComponent>().Session.Dispose();
+                    Game.Scene.GetComponent<SessionComponent>().Session.Dispose();
                     return;
                 }
 
@@ -145,7 +145,7 @@ namespace ETHotfix
             finally
             {
                 //断开验证服务器的连接
-                netOuterComponent.Remove(sessionWrap.session.Id);
+                sessionWrap.Dispose();
                 //设置登录处理完成状态
                 isLogining = false;
             }
@@ -163,14 +163,14 @@ namespace ETHotfix
 
             //设置登录中状态
             isRegistering = true;
-            SessionWrap sessionWrap = null;
+            Session sessionWrap = null;
             prompt.text = "";
             try
             {
                 //创建登录服务器连接
                 IPEndPoint connetEndPoint = NetworkHelper.ToIPEndPoint(GlobalConfigComponent.Instance.GlobalProto.Address);
-                Session session = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetEndPoint);
-                sessionWrap = new SessionWrap(session);
+                ETModel.Session session = Game.Scene.ModelScene.GetComponent<NetOuterComponent>().Create(connetEndPoint);
+                sessionWrap = ComponentFactory.Create<Session, ETModel.Session>(session);
 
                 //发送注册请求
                 prompt.text = "正在注册中....";

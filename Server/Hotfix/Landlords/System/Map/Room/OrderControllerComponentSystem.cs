@@ -43,7 +43,6 @@ namespace ETHotfix
                 index = 0;
             }
             self.CurrentAuthority = gamers[index].UserID;
-            room.Broadcast(new Actor_AuthorityPlayCard_Ntt() { UserID = self.CurrentAuthority, IsFirst = false });
         }
     }
 }

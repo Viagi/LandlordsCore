@@ -19,8 +19,8 @@ namespace ILRuntime.Runtime.Generated
             System_Collections_IDictionary_Binding.Register(app);
             LitJson_JsonMapper_Binding.Register(app);
             ETModel_Log_Binding.Register(app);
-            ETModel_Game_Binding.Register(app);
             ETModel_Entity_Binding.Register(app);
+            ETModel_Game_Binding.Register(app);
             ETModel_ClientComponent_Binding.Register(app);
             ETModel_Component_Binding.Register(app);
             ETModel_User_Binding.Register(app);

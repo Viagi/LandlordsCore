@@ -111,7 +111,7 @@ namespace ETHotfix
                 {
                     continue;
                 }
-                ActorProxy actorProxy = gamer.GetComponent<UnitGateComponent>().GetActorProxy();
+                ActorMessageSender actorProxy = gamer.GetComponent<UnitGateComponent>().GetActorMessageSender();
                 actorProxy.Send(message);
             }
         }
