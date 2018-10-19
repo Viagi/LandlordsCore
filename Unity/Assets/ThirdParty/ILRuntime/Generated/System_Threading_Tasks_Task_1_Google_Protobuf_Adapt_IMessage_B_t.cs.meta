@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: e6e143f82eee5884d9fb40c5a45803a1
 timeCreated: 1539950598
 licenseType: Pro
+=======
+guid: 6bf0632d12c19af4e8c533f163c694f3
+>>>>>>> ETorigin/Branch_V3.6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

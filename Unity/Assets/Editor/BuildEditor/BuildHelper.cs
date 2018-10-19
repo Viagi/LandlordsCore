@@ -114,10 +114,6 @@ namespace ETEditor
 		{
 			foreach (string file in Directory.GetFiles(dir))
 			{
-				if (file.EndsWith(".manifest"))
-				{
-					continue;
-				}
 				string md5 = MD5Helper.FileMD5(file);
 				FileInfo fi = new FileInfo(file);
 				long size = fi.Length;

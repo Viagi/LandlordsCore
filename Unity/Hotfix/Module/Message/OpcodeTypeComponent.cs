@@ -33,7 +33,7 @@ namespace ETHotfix
 			this.opcodeTypes.Clear();
 			this.typeMessages.Clear();
 			
-			List<Type> types = ETModel.Game.Hotfix.GetHotfixTypes();
+			List<Type> types = Game.EventSystem.GetTypes();
 			foreach (Type type in types)
 			{
 				object[] attrs = type.GetCustomAttributes(typeof(MessageAttribute), false);
@@ -48,8 +48,6 @@ namespace ETHotfix
 					continue;
 				}
 				this.opcodeTypes.Add(messageAttribute.Opcode, type);
-                Log.Info(type.ToString());
-                Log.Info(messageAttribute.Opcode.ToString());
 				this.typeMessages.Add(messageAttribute.Opcode, Activator.CreateInstance(type));
 			}
 		}

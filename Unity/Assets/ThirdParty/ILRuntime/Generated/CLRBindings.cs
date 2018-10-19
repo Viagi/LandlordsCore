@@ -91,7 +91,6 @@ namespace ILRuntime.Runtime.Generated
             UnityEngine_Color_Binding.Register(app);
             UnityEngine_UI_Graphic_Binding.Register(app);
             System_Collections_Generic_Dictionary_2_Type_ILTypeInstance_Binding.Register(app);
-            ETModel_Hotfix_Binding.Register(app);
             System_Collections_Generic_List_1_Type_Binding.Register(app);
             System_Collections_Generic_List_1_Type_Binding_Enumerator_Binding.Register(app);
             System_Reflection_MemberInfo_Binding.Register(app);
@@ -109,6 +108,7 @@ namespace ILRuntime.Runtime.Generated
             ETModel_UnOrderMultiMap_2_Type_ILTypeInstance_Binding.Register(app);
             System_Collections_Generic_Queue_1_Int64_Binding.Register(app);
             System_Collections_Generic_List_1_ILTypeInstance_Binding_Enumerator_Binding.Register(app);
+            ETModel_Hotfix_Binding.Register(app);
             ETModel_EventAttribute_Binding.Register(app);
             ETModel_EventProxy_Binding.Register(app);
             ETModel_EventSystem_Binding.Register(app);
@@ -129,7 +129,6 @@ namespace ILRuntime.Runtime.Generated
             ETModel_DoubleMap_2_UInt16_Type_Binding.Register(app);
             System_Collections_Generic_Dictionary_2_UInt16_Object_Binding.Register(app);
             ETModel_MessageAttribute_Binding.Register(app);
-            System_UInt16_Binding.Register(app);
             System_Collections_Generic_Dictionary_2_String_ILTypeInstance_Binding.Register(app);
             ETModel_UIFactoryAttribute_Binding.Register(app);
             ETModel_CanvasConfig_Binding.Register(app);

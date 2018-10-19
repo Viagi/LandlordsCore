@@ -7,6 +7,8 @@ namespace ETHotfix
 	public sealed class EventSystem
 	{
 		private readonly Dictionary<long, Component> allComponents = new Dictionary<long, Component>();
+		
+		private readonly List<Type> types = new List<Type>();
 
 		private readonly Dictionary<string, List<IEvent>> allEvents = new Dictionary<string, List<IEvent>>();
 
@@ -37,7 +39,21 @@ namespace ETHotfix
 
 		public EventSystem()
 		{
-			List<Type> types = ETModel.Game.Hotfix.GetHotfixTypes();
+			this.types.Clear();
+			
+			List<Type> ts = ETModel.Game.Hotfix.GetHotfixTypes();
+			
+			foreach (Type type in ts)
+			{
+				// ILRuntime无法判断是否有Attribute
+				//if (type.GetCustomAttributes(typeof (Attribute), false).Length == 0)
+				//{
+				//	continue;
+				//}
+				
+				this.types.Add(type);	
+			}
+			
 			foreach (Type type in types)
 			{
 				object[] attrs = type.GetCustomAttributes(typeof(ObjectSystemAttribute), false);
@@ -109,7 +125,7 @@ namespace ETHotfix
 					this.RegisterEvent(aEventAttribute.Type, iEvent);
 
 					// hotfix的事件也要注册到mono层，hotfix可以订阅mono层的事件
-					Action<List<object>> action = list => { Handle(aEventAttribute.Type, list); };
+					Action<List<object>> action = list => { Handle(iEvent, list); };
 					ETModel.Game.EventSystem.RegisterEvent(aEventAttribute.Type, new EventProxy(action));
 				}
 			}
@@ -117,21 +133,21 @@ namespace ETHotfix
 			this.Load();
 		}
 
-		public static void Handle(string type, List<object> param)
+		public static void Handle(IEvent iEvent, List<object> param)
 		{
 			switch (param.Count)
 			{
 				case 0:
-					Game.EventSystem.Run(type);
+					iEvent.Handle();
 					break;
 				case 1:
-					Game.EventSystem.Run(type, param[0]);
+					iEvent.Handle(param[0]);
 					break;
 				case 2:
-					Game.EventSystem.Run(type, param[0], param[1]);
+					iEvent.Handle(param[0], param[1]);
 					break;
 				case 3:
-					Game.EventSystem.Run(type, param[0], param[1], param[2]);
+					iEvent.Handle(param[0], param[1], param[2]);
 					break;
 			}
 		}
@@ -143,6 +159,11 @@ namespace ETHotfix
 				this.allEvents.Add(eventId, new List<IEvent>());
 			}
 			this.allEvents[eventId].Add(e);
+		}
+		
+		public List<Type> GetTypes()
+		{
+			return this.types;
 		}
 
 		public void Add(Component component)

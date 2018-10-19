@@ -25,8 +25,12 @@ namespace ETModel
 
 		public readonly PacketParser parser;
 
+		public readonly byte[] cache = new byte[2];
+
 		public TChannel(IPEndPoint ipEndPoint, TService service): base(service, ChannelType.Connect)
 		{
+			this.InstanceId = IdGenerater.GenerateId();
+			
 			this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 			this.socket.NoDelay = true;
 			this.parser = new PacketParser(this.recvBuffer);
@@ -41,6 +45,8 @@ namespace ETModel
 		
 		public TChannel(Socket socket, TService service): base(service, ChannelType.Accept)
 		{
+			this.InstanceId = IdGenerater.GenerateId();
+			
 			this.socket = socket;
 			this.socket.NoDelay = true;
 			this.parser = new PacketParser(this.recvBuffer);
@@ -89,22 +95,6 @@ namespace ETModel
 			this.StartRecv();
 			this.StartSend();
 		}
-
-		public override void Send(byte[] buffer, int index, int length)
-		{
-			if (this.IsDisposed)
-			{
-				throw new Exception("TChannel已经被Dispose, 不能发送消息");
-			}
-			byte[] sizeBuffer = BitConverter.GetBytes(length);
-			this.sendBuffer.Write(sizeBuffer, 0, sizeBuffer.Length);
-			this.sendBuffer.Write(buffer, index, length);
-
-			if(!this.isSending)
-			{
-				this.StartSend();
-			}
-		}
 		
 		public override void Send(MemoryStream stream)
 		{
@@ -113,9 +103,8 @@ namespace ETModel
 				throw new Exception("TChannel已经被Dispose, 不能发送消息");
 			}
 
-			ushort size = (ushort)(stream.Length - stream.Position);
-			byte[] sizeBuffer = BitConverter.GetBytes(size);
-			this.sendBuffer.Write(sizeBuffer, 0, sizeBuffer.Length);
+			cache.WriteTo(0, (ushort)stream.Length);
+			this.sendBuffer.Write(this.cache, 0, this.cache.Length);
 			this.sendBuffer.ReadFrom(stream);
 
 			if(!this.isSending)

@@ -2,6 +2,13 @@
 
 __讨论QQ群 : 474643097__
 
+# ET 3.6发布! 
+1.kcp改成C版的，已经去掉所有gc，性能大幅提升，unity mono的socket udp收发还有少量gc，这个只能以后替换成C版的socket了，kcp增加了安全性检查，防止了第三方虚假包的攻击  
+2.优化了热更扫描Attribute的性能，提升服务端热更速度  
+3.修复: 热更层订阅model层事件的一个bug，mono层抛事件到热更层会抛多次  
+4.修复windows上更新资源删除Version.txt的bug  
+5.readme增加mac运行指南视频教程链接,L主讲  
+
 # ET 3.5发布! 
 1.protobuf改用官方3.0版本，不再使用protobuf-net，以消除消息反序列化GC，目前网络层真正做到了0GC  
 2.客户端资源更新直接计算本地文件的md5  
@@ -124,6 +131,7 @@ ET框架的服务端是一个强大灵活的分布式服务端架构，完全可
 视频教程：  
 [肉饼老师主讲](http://www.taikr.com/my/course/972)   
 [ET新手教程-初见主讲](https://pan.baidu.com/s/1a5-j2R5QctZpC9n3sMC9QQ) 密码: ru1j  
+[ET在Mac上运行指南-L主讲](https://pan.baidu.com/s/1VUQbdd1Yio7ULFXwAv7X7A) 密码: l3e3  
   
 相关网站:  
 [ET框架问题讨论](http://www.etframework.cn/)  

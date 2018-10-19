@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
 namespace ETModel
 {
-	[Flags]
-	public enum PacketFlags
-	{
-		None = 0,
-		Reliable = 1 << 0,
-		Unsequenced = 1 << 1,
-		NoAllocate = 1 << 2
-	}
-
 	public enum ChannelType
 	{
 		Connect,
@@ -79,12 +69,7 @@ namespace ETModel
 		}
 
 		public abstract void Start();
-
-		/// <summary>
-		/// 发送消息
-		/// </summary>
-		public abstract void Send(byte[] buffer, int index, int length);
-
+		
 		public abstract void Send(MemoryStream stream);
 		
 		public override void Dispose()
