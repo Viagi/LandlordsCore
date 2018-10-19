@@ -16,7 +16,7 @@ namespace ETHotfix
                 DBProxyComponent dbProxy = Game.Scene.GetComponent<DBProxyComponent>();
 
                 //查询账号是否存在
-                List<AccountInfo> result = await dbProxy.QueryJson<AccountInfo>($"{{Account:'{message.Account}'}}");
+                List<ComponentWithId> result = await dbProxy.Query<AccountInfo>(_account => _account.Account == message.Account);
                 if (result.Count > 0)
                 {
                     response.Error = ErrorCode.ERR_AccountAlreadyRegister;
