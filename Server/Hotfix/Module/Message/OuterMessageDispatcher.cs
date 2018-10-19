@@ -1,5 +1,6 @@
 ﻿using System;
 using ETModel;
+using Google.Protobuf;
 
 namespace ETHotfix
 {
@@ -10,9 +11,9 @@ namespace ETHotfix
 			object message;
 			try
 			{
-				Type messageType = session.Network.Entity.GetComponent<OpcodeTypeComponent>().GetType(packet.Opcode);
-				message = session.Network.MessagePacker.DeserializeFrom(messageType, packet.Stream);
-				
+				OpcodeTypeComponent opcodeTypeComponent = session.Network.Entity.GetComponent<OpcodeTypeComponent>();
+				object instance = opcodeTypeComponent.GetInstance(packet.Opcode);
+				message = session.Network.MessagePacker.DeserializeFrom(instance, packet.Stream);
 			}
 			catch (Exception e)
 			{
@@ -38,7 +39,7 @@ namespace ETHotfix
 					OneFrameMessage oneFrameMessage = new OneFrameMessage
 					{
 						Op = packet.Opcode,
-						AMessage = session.Network.MessagePacker.SerializeToByteArray(iFrameMessage)
+						AMessage = ByteString.CopyFrom(session.Network.MessagePacker.SerializeTo(iFrameMessage))
 					};
 					actorMessageSender.Send(oneFrameMessage);
 					return;

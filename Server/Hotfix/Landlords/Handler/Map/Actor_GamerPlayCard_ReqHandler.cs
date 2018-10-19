@@ -25,7 +25,7 @@ namespace ETHotfix
                     //当前出牌牌型是否比牌桌上牌型的权重更大
                     bool isWeightGreater = CardsHelper.GetWeight(message.Cards, type) > deskCardsCache.GetTotalWeight();
                     //当前出牌牌型是否和牌桌上牌型的数量一样
-                    bool isSameCardsNum = message.Cards.Length == deskCardsCache.GetAll().Length;
+                    bool isSameCardsNum = message.Cards.count == deskCardsCache.GetAll().Length;
                     //当前出牌玩家是否是上局最大出牌者
                     bool isBiggest = orderController.Biggest == orderController.CurrentAuthority;
                     //当前牌桌牌型是否是顺子

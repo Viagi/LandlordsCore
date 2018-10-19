@@ -16,7 +16,7 @@ namespace ETHotfix
             if (gamer.UserID == ClientComponent.Instance.LocalPlayer.UserID)
             {
                 LandlordsInteractionComponent interaction = uiRoom.GetComponent<LandlordsRoomComponent>().Interaction;
-                interaction.isTrusteeship = message.isTrusteeship;
+                interaction.isTrusteeship = message.IsTrusteeship;
             }
         }
     }

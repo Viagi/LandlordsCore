@@ -1,117 +1,148 @@
-#region ET
+syntax = "proto3";
+import "OuterMessage.proto";
+package ETHotfix;
 
 message C2R_Login // IRequest
 {
-	required string	Account	 = 1;	// 帐号
-	required string	Password = 2;	// 密码
+	int32 RpcId = 90;
+	string	Account	 = 1;	// 帐号
+	string	Password = 2;	// 密码
 }
 
 message R2C_Login // IResponse
 {
-	required string Address = 1;
-	required int64 	Key	    = 2;
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string Address = 1;
+	int64 Key	    = 2;
 }
 
 message C2G_LoginGate // IRequest
 {
-	required int64 Key = 1;	// 帐号
+	int32 RpcId = 90;
+	int64 Key = 1;	// 帐号
 }
 
 message G2C_LoginGate // IResponse
 {
-	required int64 PlayerId = 1;
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 PlayerId = 1;
 }
 
 message G2C_TestHotfixMessage // IMessage
 {
-	required string Info = 1;
+	string Info = 1;
 }
 
 message C2M_TestActorRequest // IActorRequest
 {
-	required string Info = 1;
+	int32 RpcId = 90;
+	int64 ActorId = 91;
+	string Info = 1;
 }
 
 message M2C_TestActorResponse // IActorResponse
 {
-	required string Info = 1;
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string Info = 1;
 }
 
-message PlayerInfo // IMessage
+message PlayerInfo
 {
+	
 }
 
 message C2G_PlayerInfo // IRequest
 {
+	int32 RpcId = 90;
 }
 
 message G2C_PlayerInfo // IResponse
 {
-	repeated PlayerInfo PlayerInfos = 1;
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	PlayerInfo PlayerInfos = 1;
 }
-
-#endregion
-    
-#region Client-Realm
 
 message C2R_Login_Req // IRequest
 {
-    required string Account = 1;
-    required string Password = 2;
+	int32 RpcId = 90;
+    string Account = 1;
+    string Password = 2;
 }
 
 message R2C_Login_Ack // IResponse
 {
-    required long Key = 1;
-    required string Address = 2;
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+    int64 Key = 1;
+    string Address = 2;
 }
 
 message C2R_Register_Req // IRequest
 {
-    required string Account = 1;
-    required string Password = 2;
+	int32 RpcId = 90;
+    string Account = 1;
+    string Password = 2;
 }
 
 message R2C_Register_Ack // IResponse
 {
-
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
 }
-
-#endregion
-
-#region Client-Gate
 
 message C2G_LoginGate_Req // IRequest
 {
-    required long Key = 1;
+	int32 RpcId = 90;
+    int64 Key = 1;
 }
 
 message G2C_LoginGate_Ack // IResponse
 {
-    required long PlayerID = 1;
-    required long UserID = 2;
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+    int64 PlayerID = 1;
+    int64 UserID = 2;
 }
 
 message C2G_GetUserInfo_Req // IRequest
 {
-    required long UserID = 1;
+	int32 RpcId = 90;
+    int64 UserID = 1;
 }
 
 message G2C_GetUserInfo_Ack // IResponse
 {
-    required string NickName = 1;
-    required int Wins = 2;
-    required int Loses = 3;
-    required long Money = 4;
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+    string NickName = 1;
+    int32 Wins = 2;
+    int32 Loses = 3;
+    int64 Money = 4;
 }
 
 message C2G_StartMatch_Req // IRequest
 {
+	int32 RpcId = 90;
 
 }
 
 message G2C_StartMatch_Ack // IResponse
 {
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
 
 }
 
@@ -120,144 +151,174 @@ message C2G_ReturnLobby_Ntt // IMessage
 
 }
 
-#endregion
-
-#region Client-Map
-
 message Actor_GamerReady_Ntt // IActorMessage
 {
-    required long UserID = 1;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    int64 UserID = 1;
 }
 
 message Actor_GamerGrabLandlordSelect_Ntt // IActorMessage
 {
-    required long UserID = 1;
-    required bool IsGrab = 2;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    int64 UserID = 1;
+    bool IsGrab = 2;
 }
 
 message Actor_GamerPlayCard_Req // IActorRequest
 {
-    required Card[] Cards = 1;
+	int32 RpcId = 90;
+	int64 ActorId = 91;
+    repeated ETModel.Card Cards = 1;
 }
 
 message Actor_GamerPlayCard_Ack // IActorResponse
 {
-
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
 }
 
 message Actor_GamerPlayCard_Ntt // IActorMessage
 {
-    required long UserID = 1;
-    required Card[] Cards = 2;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    int64 UserID = 1;
+    repeated ETModel.Card Cards = 2;
 }
 
 message Actor_GamerPrompt_Req // IActorRequest
 {
+	int32 RpcId = 90;
+	int64 ActorId = 91;
 
 }
 
 message Actor_GamerPrompt_Ack // IActorResponse
 {
-    required Card[] Cards = 1;
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+    repeated ETModel.Card Cards = 1;
 }
 
 message Actor_GamerDontPlay_Ntt // IActorMessage
 {
-    required long UserID = 1;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    int64 UserID = 1;
 }
 
 message Actor_Trusteeship_Ntt // IActorMessage
 {
-    required long UserID = 1;
-    required bool isTrusteeship = 2;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    int64 UserID = 1;
+    bool isTrusteeship = 2;
 }
-
-#endregion
-
-#region Map-Client
 
 message GamerInfo
 {
-    required long UserID = 1;
-    required bool IsReady = 2;
+    int64 UserID = 1;
+    bool IsReady = 2;
 }
 
 message Actor_GamerEnterRoom_Ntt // IActorMessage
 {
+	int32 RpcId = 90;
+	int64 ActorId = 94;
     repeated GamerInfo Gamers = 1;
 }
 
 message Actor_GamerExitRoom_Ntt // IActorMessage
 {
-    required long UserID = 1;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    int64 UserID = 1;
 }
 
 message GamerState
 {
-    required long UserID = 1;
-    required byte Identity = 2;
-	required bool GrabLandlordState = 3;
+    int64 UserID = 1;
+    ETModel.Identity UserIdentity = 2;
+	bool GrabLandlordState = 3;
 }
 
 message Actor_GamerReconnect_Ntt // IActorMessage
 {
-    required int Multiples = 1;
-    repeated GamerState GamersState = 2;
-    required Card[] LordCards = 3;
-    required KeyValuePair<long,Card[]> DeskCards = 4;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+	int64 UserId = 1;
+    int32 Multiples = 2;
+	repeated ETModel.Card Cards = 3;
+    repeated GamerState GamersState = 4;
+    repeated ETModel.Card LordCards = 5;
 }
 
-message GamerCardNum
+message GamerCardNum // IMessage
 {
-    required long UserID = 1;
-    required int Num = 2;
+    int64 UserID = 1;
+    int32 Num = 2;
 }
 
 message Actor_GameStart_Ntt // IActorMessage
 {
-    required Card[] HandCards = 1;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    repeated ETModel.Card HandCards = 1;
     repeated GamerCardNum GamersCardNum = 2;
 }
 
 message Actor_AuthorityGrabLandlord_Ntt // IActorMessage
 {
-    required long UserID = 1;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    int64 UserID = 1;
 }
 
 message Actor_AuthorityPlayCard_Ntt // IActorMessage
 {
-    required long UserID = 1;
-    required bool IsFirst = 2;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    int64 UserID = 1;
+    bool IsFirst = 2;
 }
 
 message Actor_SetMultiples_Ntt // IActorMessage
 {
-    required int Multiples = 1;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    int32 Multiples = 1;
 }
 
 message Actor_SetLandlord_Ntt // IActorMessage
 {
-    required long UserID = 1;
-    required Card[] LordCards = 2;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    int64 UserID = 1;
+    repeated ETModel.Card LordCards = 2;
 }
 
 message GamerScore
 {
-    required long UserID = 1;
-    required long Score = 2;
+    int64 UserID = 1;
+    int64 Score = 2;
 }
 
 message Actor_Gameover_Ntt // IActorMessage
 {
-    required byte Winner = 1;
-    required long BasePointPerMatch = 2;
-    required int Multiples = 3;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    ETModel.Identity Winner = 1;
+    int64 BasePointPerMatch = 2;
+    int32 Multiples = 3;
     repeated GamerScore GamersScore = 4;
 }
 
 message Actor_GamerMoneyLess_Ntt // IActorMessage
 {
-    required long UserID = 1;
+	int32 RpcId = 90;
+	int64 ActorId = 94;
+    int64 UserID = 1;
 }
-
-#endregion

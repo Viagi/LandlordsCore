@@ -102,11 +102,11 @@ namespace ETHotfix
         /// 添加多张牌
         /// </summary>
         /// <param name="cards"></param>
-        public void AddCards(Card[] cards)
+        public void AddCards(IEnumerable<Card> cards)
         {
-            for (int i = 0; i < cards.Length; i++)
+            foreach (Card card in cards)
             {
-                AddCard(cards[i]);
+                AddCard(card);
             }
             CardsSpriteUpdate(handCards, 50.0f);
         }
@@ -115,14 +115,15 @@ namespace ETHotfix
         /// 出多张牌
         /// </summary>
         /// <param name="cards"></param>
-        public void PopCards(Card[] cards)
+        public void PopCards(IList<Card> cards)
         {
             ClearPlayCards();
 
-            for (int i = 0; i < cards.Length; i++)
+            foreach (Card card in cards)
             {
-                PopCard(cards[i]);
+                PopCard(card);
             }
+
             CardsSpriteUpdate(playCards, 25.0f);
             CardsSpriteUpdate(handCards, 50.0f);
 
@@ -131,7 +132,7 @@ namespace ETHotfix
             if (poker != null)
             {
                 Text pokerNum = poker.GetComponentInChildren<Text>();
-                pokerNum.text = (int.Parse(pokerNum.text) - cards.Length).ToString();
+                pokerNum.text = (int.Parse(pokerNum.text) - cards.Count).ToString();
             }
         }
 

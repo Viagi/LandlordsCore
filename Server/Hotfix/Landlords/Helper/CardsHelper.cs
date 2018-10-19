@@ -13,7 +13,7 @@ namespace ETHotfix
         /// <param name="cards"></param>
         /// <param name="rule"></param>
         /// <returns></returns>
-        public static int GetWeight(Card[] cards, CardsType rule)
+        public static int GetWeight(IList<Card> cards, CardsType rule)
         {
             int totalWeight = 0;
             if (rule == CardsType.JokerBoom)
@@ -26,9 +26,9 @@ namespace ETHotfix
             }
             else if (rule == CardsType.ThreeAndOne || rule == CardsType.ThreeAndTwo)
             {
-                for (int i = 0; i < cards.Length; i++)
+                for (int i = 0; i < cards.Count; i++)
                 {
-                    if (i < cards.Length - 2)
+                    if (i < cards.Count - 2)
                     {
                         if (cards[i].CardWeight == cards[i + 1].CardWeight &&
                             cards[i].CardSuits == cards[i + 2].CardSuits)
@@ -42,7 +42,7 @@ namespace ETHotfix
             }
             else
             {
-                for (int i = 0; i < cards.Length; i++)
+                for (int i = 0; i < cards.Count; i++)
                 {
                     totalWeight += (int)cards[i].CardWeight;
                 }
@@ -72,9 +72,9 @@ namespace ETHotfix
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
-        public static bool IsSingle(Card[] cards)
+        public static bool IsSingle(IList<Card> cards)
         {
-            if (cards.Length == 1)
+            if (cards.Count == 1)
                 return true;
             else
                 return false;
@@ -85,9 +85,9 @@ namespace ETHotfix
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
-        public static bool IsDouble(Card[] cards)
+        public static bool IsDouble(IList<Card> cards)
         {
-            if (cards.Length == 2)
+            if (cards.Count == 2)
             {
                 if (cards[0].CardWeight == cards[1].CardWeight)
                     return true;
@@ -101,11 +101,11 @@ namespace ETHotfix
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
-        public static bool IsStraight(Card[] cards)
+        public static bool IsStraight(IList<Card> cards)
         {
-            if (cards.Length < 5 || cards.Length > 12)
+            if (cards.Count < 5 || cards.Count > 12)
                 return false;
-            for (int i = 0; i < cards.Length - 1; i++)
+            for (int i = 0; i < cards.Count - 1; i++)
             {
                 Weight w = cards[i].CardWeight;
                 if (w - cards[i + 1].CardWeight != 1)
@@ -124,17 +124,17 @@ namespace ETHotfix
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
-        public static bool IsDoubleStraight(Card[] cards)
+        public static bool IsDoubleStraight(IList<Card> cards)
         {
-            if (cards.Length < 6 || cards.Length % 2 != 0)
+            if (cards.Count < 6 || cards.Count % 2 != 0)
                 return false;
 
-            for (int i = 0; i < cards.Length; i += 2)
+            for (int i = 0; i < cards.Count; i += 2)
             {
                 if (cards[i + 1].CardWeight != cards[i].CardWeight)
                     return false;
 
-                if (i < cards.Length - 2)
+                if (i < cards.Count - 2)
                 {
                     if (cards[i].CardWeight - cards[i + 2].CardWeight != 1)
                         return false;
@@ -153,12 +153,12 @@ namespace ETHotfix
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
-        public static bool IsTripleStraight(Card[] cards)
+        public static bool IsTripleStraight(IList<Card> cards)
         {
-            if (cards.Length < 6 || cards.Length % 3 != 0)
+            if (cards.Count < 6 || cards.Count % 3 != 0)
                 return false;
 
-            for (int i = 0; i < cards.Length; i += 3)
+            for (int i = 0; i < cards.Count; i += 3)
             {
                 if (cards[i + 1].CardWeight != cards[i].CardWeight)
                     return false;
@@ -167,7 +167,7 @@ namespace ETHotfix
                 if (cards[i + 1].CardWeight != cards[i + 2].CardWeight)
                     return false;
 
-                if (i < cards.Length - 3)
+                if (i < cards.Count - 3)
                 {
                     if (cards[i].CardWeight - cards[i + 3].CardWeight != 1)
                         return false;
@@ -186,9 +186,9 @@ namespace ETHotfix
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
-        public static bool IsOnlyThree(Card[] cards)
+        public static bool IsOnlyThree(IList<Card> cards)
         {
-            if (cards.Length % 3 != 0)
+            if (cards.Count % 3 != 0)
                 return false;
             if (cards[0].CardWeight != cards[1].CardWeight)
                 return false;
@@ -206,9 +206,9 @@ namespace ETHotfix
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
-        public static bool IsThreeAndOne(Card[] cards)
+        public static bool IsThreeAndOne(IList<Card> cards)
         {
-            if (cards.Length != 4)
+            if (cards.Count != 4)
                 return false;
 
             if (cards[0].CardWeight == cards[1].CardWeight &&
@@ -225,9 +225,9 @@ namespace ETHotfix
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
-        public static bool IsThreeAndTwo(Card[] cards)
+        public static bool IsThreeAndTwo(IList<Card> cards)
         {
-            if (cards.Length != 5)
+            if (cards.Count != 5)
                 return false;
 
             if (cards[0].CardWeight == cards[1].CardWeight &&
@@ -252,9 +252,9 @@ namespace ETHotfix
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
-        public static bool IsBoom(Card[] cards)
+        public static bool IsBoom(IList<Card> cards)
         {
-            if (cards.Length != 4)
+            if (cards.Count != 4)
                 return false;
 
             if (cards[0].CardWeight != cards[1].CardWeight)
@@ -273,19 +273,19 @@ namespace ETHotfix
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
-        public static bool IsJokerBoom(Card[] cards)
+        public static bool IsJokerBoom(IList<Card> cards)
         {
-            if (cards.Length != 2)
+            if (cards.Count != 2)
                 return false;
-            if (cards[0].CardWeight == Weight.SJoker)
+            if (cards[0].CardWeight == Weight.Sjoker)
             {
-                if (cards[1].CardWeight == Weight.LJoker)
+                if (cards[1].CardWeight == Weight.Ljoker)
                     return true;
                 return false;
             }
-            else if (cards[0].CardWeight == Weight.LJoker)
+            else if (cards[0].CardWeight == Weight.Ljoker)
             {
-                if (cards[1].CardWeight == Weight.SJoker)
+                if (cards[1].CardWeight == Weight.Sjoker)
                     return true;
                 return false;
             }
@@ -299,11 +299,11 @@ namespace ETHotfix
         /// <param name="cards"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static bool PopEnable(Card[] cards, out CardsType type)
+        public static bool PopEnable(IList<Card> cards, out CardsType type)
         {
             type = CardsType.None;
             bool isRule = false;
-            switch (cards?.Length)
+            switch (cards?.Count)
             {
                 case 1:
                     isRule = true;
@@ -497,10 +497,10 @@ namespace ETHotfix
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
-        public static async Task<List<Card[]>> GetPrompt(List<Card> cards, DeskCardsCacheComponent deskCardsCache, CardsType type)
+        public static async Task<List<IList<Card>>> GetPrompt(List<Card> cards, DeskCardsCacheComponent deskCardsCache, CardsType type)
         {
-            List<Card[]> result = new List<Card[]>();
-            Card[] deskCards = deskCardsCache.GetAll();
+            List<IList<Card>> result = new List<IList<Card>>();
+            IList<Card> deskCards = deskCardsCache.GetAll();
             int weight = deskCardsCache.GetTotalWeight();
 
             if (type == CardsType.JokerBoom)
@@ -511,7 +511,7 @@ namespace ETHotfix
             //检索王炸
             if (cards.Count >= 2)
             {
-                Card[] groupCards = new Card[2];
+                IList<Card> groupCards = new Card[2];
                 groupCards[0] = cards[0];
                 groupCards[1] = cards[1];
 
@@ -524,7 +524,7 @@ namespace ETHotfix
             //检索炸弹
             for (int i = cards.Count - 1; i >= 3; i--)
             {
-                Card[] groupCards = new Card[4];
+                IList<Card> groupCards = new Card[4];
                 groupCards[0] = cards[i - 3];
                 groupCards[1] = cards[i - 2];
                 groupCards[2] = cards[i - 1];
@@ -541,12 +541,12 @@ namespace ETHotfix
                 case CardsType.OnlyThree:
                     for (int i = cards.Count - 1; i >= 2; i--)
                     {
-                        if (cards[i].CardWeight <= deskCards[deskCards.Length - 1].CardWeight)
+                        if (cards[i].CardWeight <= deskCards[deskCards.Count - 1].CardWeight)
                         {
                             continue;
                         }
 
-                        Card[] groupCards = new Card[3];
+                        IList<Card> groupCards = new Card[3];
                         groupCards[0] = cards[i - 2];
                         groupCards[1] = cards[i - 1];
                         groupCards[2] = cards[i];
@@ -562,7 +562,7 @@ namespace ETHotfix
                     {
                         for (int i = cards.Count - 1; i >= 2; i--)
                         {
-                            if (cards[i].CardWeight <= deskCards[deskCards.Length - 1].CardWeight)
+                            if (cards[i].CardWeight <= deskCards[deskCards.Count - 1].CardWeight)
                             {
                                 continue;
                             }
@@ -570,7 +570,7 @@ namespace ETHotfix
                             List<Card> other = new List<Card>(cards);
                             other.RemoveRange(i - 2, 3);
 
-                            Card[] groupCards = new Card[4];
+                            IList<Card> groupCards = new Card[4];
                             groupCards[0] = cards[i - 2];
                             groupCards[1] = cards[i - 1];
                             groupCards[2] = cards[i];
@@ -588,7 +588,7 @@ namespace ETHotfix
                     {
                         for (int i = cards.Count - 1; i >= 2; i--)
                         {
-                            if (cards[i].CardWeight <= deskCards[deskCards.Length - 1].CardWeight)
+                            if (cards[i].CardWeight <= deskCards[deskCards.Count - 1].CardWeight)
                             {
                                 continue;
                             }
@@ -596,11 +596,11 @@ namespace ETHotfix
                             List<Card> other = new List<Card>(cards);
                             other.RemoveRange(i - 2, 3);
 
-                            List<Card[]> otherDouble = await GetPrompt(other, deskCardsCache, CardsType.Double);
+                            List<IList<Card>> otherDouble = await GetPrompt(other, deskCardsCache, CardsType.Double);
                             if (otherDouble.Count > 0)
                             {
-                                Card[] randomDouble = otherDouble[RandomHelper.RandomNumber(0, otherDouble.Count)];
-                                Card[] groupCards = new Card[5];
+                                IList<Card> randomDouble = otherDouble[RandomHelper.RandomNumber(0, otherDouble.Count)];
+                                IList<Card> groupCards = new Card[5];
                                 groupCards[0] = cards[i - 2];
                                 groupCards[1] = cards[i - 1];
                                 groupCards[2] = cards[i];
@@ -621,19 +621,19 @@ namespace ETHotfix
                      * 8 7 6 5 4
                      * 
                      * */
-                    if (cards.Count >= deskCards.Length)
+                    if (cards.Count >= deskCards.Count)
                     {
-                        for (int i = cards.Count - 1; i >= deskCards.Length - 1; i--)
+                        for (int i = cards.Count - 1; i >= deskCards.Count - 1; i--)
                         {
-                            if (cards[i].CardWeight <= deskCards[deskCards.Length - 1].CardWeight)
+                            if (cards[i].CardWeight <= deskCards[deskCards.Count - 1].CardWeight)
                             {
                                 continue;
                             }
 
                             //是否全部搜索完成
                             bool isTrue = true;
-                            Card[] groupCards = new Card[deskCards.Length];
-                            for (int j = 0; j < deskCards.Length; j++)
+                            IList<Card> groupCards = new Card[deskCards.Count];
+                            for (int j = 0; j < deskCards.Count; j++)
                             {
                                 //搜索连续权重牌
                                 Card findCard = cards.Where(card => (int)card.CardWeight == (int)cards[i].CardWeight + j).FirstOrDefault();
@@ -642,7 +642,7 @@ namespace ETHotfix
                                     isTrue = false;
                                     break;
                                 }
-                                groupCards[deskCards.Length - 1 - j] = findCard;
+                                groupCards[deskCards.Count - 1 - j] = findCard;
                             }
 
                             if (isTrue && IsStraight(groupCards) && GetWeight(groupCards, type) > weight)
@@ -658,29 +658,29 @@ namespace ETHotfix
                      * 6 6 5 5 4 4
                      * 
                      * */
-                    if (cards.Count >= deskCards.Length)
+                    if (cards.Count >= deskCards.Count)
                     {
-                        for (int i = cards.Count - 1; i >= deskCards.Length - 1; i--)
+                        for (int i = cards.Count - 1; i >= deskCards.Count - 1; i--)
                         {
-                            if (cards[i].CardWeight <= deskCards[deskCards.Length - 1].CardWeight)
+                            if (cards[i].CardWeight <= deskCards[deskCards.Count - 1].CardWeight)
                             {
                                 continue;
                             }
 
                             //是否全部搜索完成
                             bool isTrue = true;
-                            Card[] groupCards = new Card[deskCards.Length];
-                            for (int j = 0; j < deskCards.Length; j += 2)
+                            IList<Card> groupCards = new Card[deskCards.Count];
+                            for (int j = 0; j < deskCards.Count; j += 2)
                             {
                                 //搜索连续权重牌
-                                Card[] findCards = cards.Where(card => (int)card.CardWeight == (int)cards[i].CardWeight + (j / 2)).ToArray();
-                                if (findCards.Length < 2)
+                                IList<Card> findCards = cards.Where(card => (int)card.CardWeight == (int)cards[i].CardWeight + (j / 2)).ToArray();
+                                if (findCards.Count < 2)
                                 {
                                     isTrue = false;
                                     break;
                                 }
-                                groupCards[deskCards.Length - 2 - j] = findCards[0];
-                                groupCards[deskCards.Length - 1 - j] = findCards[1];
+                                groupCards[deskCards.Count - 2 - j] = findCards[0];
+                                groupCards[deskCards.Count - 1 - j] = findCards[1];
                             }
 
                             if (isTrue && IsDoubleStraight(groupCards) && GetWeight(groupCards, type) > weight)
@@ -691,30 +691,30 @@ namespace ETHotfix
                     }
                     break;
                 case CardsType.TripleStraight:
-                    if (cards.Count >= deskCards.Length)
+                    if (cards.Count >= deskCards.Count)
                     {
-                        for (int i = cards.Count - 1; i >= deskCards.Length - 1; i--)
+                        for (int i = cards.Count - 1; i >= deskCards.Count - 1; i--)
                         {
-                            if (cards[i].CardWeight <= deskCards[deskCards.Length - 1].CardWeight)
+                            if (cards[i].CardWeight <= deskCards[deskCards.Count - 1].CardWeight)
                             {
                                 continue;
                             }
 
                             //是否全部搜索完成
                             bool isTrue = true;
-                            Card[] groupCards = new Card[deskCards.Length];
-                            for (int j = 0; j < deskCards.Length; j += 3)
+                            IList<Card> groupCards = new Card[deskCards.Count];
+                            for (int j = 0; j < deskCards.Count; j += 3)
                             {
                                 //搜索连续权重牌
-                                Card[] findCards = cards.Where(card => (int)card.CardWeight == (int)cards[i].CardWeight + (j / 3)).ToArray();
-                                if (findCards.Length < 3)
+                                IList<Card> findCards = cards.Where(card => (int)card.CardWeight == (int)cards[i].CardWeight + (j / 3)).ToArray();
+                                if (findCards.Count < 3)
                                 {
                                     isTrue = false;
                                     break;
                                 }
-                                groupCards[deskCards.Length - 3 - j] = findCards[0];
-                                groupCards[deskCards.Length - 2 - j] = findCards[1];
-                                groupCards[deskCards.Length - 1 - j] = findCards[2];
+                                groupCards[deskCards.Count - 3 - j] = findCards[0];
+                                groupCards[deskCards.Count - 2 - j] = findCards[1];
+                                groupCards[deskCards.Count - 1 - j] = findCards[2];
                             }
 
                             if (isTrue && IsTripleStraight(groupCards) && GetWeight(groupCards, type) > weight)
@@ -729,7 +729,7 @@ namespace ETHotfix
                     {
                         for (int i = cards.Count - 1; i >= 1; i--)
                         {
-                            Card[] groupCards = new Card[2];
+                            IList<Card> groupCards = new Card[2];
                             groupCards[0] = cards[i - 1];
                             groupCards[1] = cards[i];
 
@@ -745,12 +745,12 @@ namespace ETHotfix
                     {
                         for (int i = cards.Count - 1; i >= 0; i--)
                         {
-                            if (cards[i].CardWeight <= deskCards[deskCards.Length - 1].CardWeight)
+                            if (cards[i].CardWeight <= deskCards[deskCards.Count - 1].CardWeight)
                             {
                                 continue;
                             }
 
-                            Card[] groupCards = new Card[1];
+                            IList<Card> groupCards = new Card[1];
                             groupCards[0] = cards[i];
 
                             if (IsSingle(groupCards) && GetWeight(groupCards, type) > weight)

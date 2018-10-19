@@ -1,5 +1,6 @@
 ﻿using System;
 using ETModel;
+using Google.Protobuf;
 
 namespace ETHotfix
 {
@@ -14,7 +15,7 @@ namespace ETHotfix
 				Unit unit = ComponentFactory.Create<Unit>();
 
 				await unit.AddComponent<MailBoxComponent>().AddLocation();
-				unit.AddComponent<UnitGateComponent, long>(message.GateSessionActorId);
+				unit.AddComponent<UnitGateComponent, long>(message.GateSessionId);
 				Game.Scene.GetComponent<UnitComponent>().Add(unit);
 				response.UnitId = unit.Id;
 

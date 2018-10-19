@@ -30,7 +30,7 @@ namespace ETHotfix
                         if (_gamer == null)
                         {
                             //添加空位
-                            broadcastMessage.Gamers.Add(null);
+                            broadcastMessage.Gamers.Add(default(GamerInfo));
                             continue;
                         }
 
@@ -60,7 +60,7 @@ namespace ETHotfix
                         if (_gamer == null)
                         {
                             //添加空位
-                            broadcastMessage.Gamers.Add(null);
+                            broadcastMessage.Gamers.Add(default(GamerInfo));
                             continue;
                         }
 
@@ -90,7 +90,7 @@ namespace ETHotfix
                         gamersState.Add(new GamerState()
                         {
                             UserID = _gamer.UserID,
-                            Identity = (byte)handCards.AccessIdentity,
+                            UserIdentity = handCards.AccessIdentity,
                             GrabLandlordState = orderController.GamerLandlordState.ContainsKey(_gamer.UserID)
                             ? orderController.GamerLandlordState[_gamer.UserID]
                             : false
@@ -98,11 +98,9 @@ namespace ETHotfix
                     }
 
                     //发送游戏开始消息
-                    Actor_GameStart_Ntt gameStartNotice = new Actor_GameStart_Ntt()
-                    {
-                        HandCards = gamer.GetComponent<HandCardsComponent>().GetAll(),
-                        GamersCardNum = gamersCardNum
-                    };
+                    Actor_GameStart_Ntt gameStartNotice = new Actor_GameStart_Ntt();
+                    gameStartNotice.HandCards.AddRange(gamer.GetComponent<HandCardsComponent>().GetAll());
+                    gameStartNotice.GamersCardNum.AddRange(gamersCardNum);
                     actorProxy.Send(gameStartNotice);
 
                     Card[] lordCards = null;
@@ -125,11 +123,12 @@ namespace ETHotfix
                     //发送重连数据
                     Actor_GamerReconnect_Ntt reconnectNotice = new Actor_GamerReconnect_Ntt()
                     {
-                        Multiples = room.GetComponent<GameControllerComponent>().Multiples,
-                        GamersState = gamersState,
-                        DeskCards = new KeyValuePair<long, Card[]>(orderController.Biggest, deskCardsCache.library.ToArray()),
-                        LordCards = lordCards,
+                        UserId = orderController.Biggest,
+                        Multiples = room.GetComponent<GameControllerComponent>().Multiples
                     };
+                    reconnectNotice.GamersState.AddRange(gamersState);
+                    reconnectNotice.LordCards.AddRange(lordCards);
+                    reconnectNotice.Cards.AddRange(deskCardsCache.library);
                     actorProxy.Send(reconnectNotice);
 
                     Log.Info($"玩家{message.UserID}重连");

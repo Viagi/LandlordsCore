@@ -1,72 +1,137 @@
+syntax = "proto3";
+package ETModel;
+
 message Actor_Test // IActorMessage
 {
-	required string Info = 1;
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	string Info = 1;
 }
 
 message Actor_TestRequest // IActorRequest
 {
-	required string request = 1;
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	string request = 1;
 }
 
 message Actor_TestResponse // IActorResponse
 {
-	required string response = 1;
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string response = 1;
 }
 
 message Actor_TransferRequest // IActorRequest
 {
-	required int32 MapIndex = 1;
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 MapIndex = 1;
 }
 
 message Actor_TransferResponse // IActorResponse
 {
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
 }
 
 message C2G_EnterMap // IRequest
 {
+	int32 RpcId = 90;
 }
 
 message G2C_EnterMap // IResponse
 {
-	required int64 UnitId = 1;
-	required int32 Count  = 2;
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 UnitId = 1;
+	int32 Count  = 2;
 }
 
 message UnitInfo
 {
-	required int64 UnitId  = 1;
-	required int32 X       = 2;
-	required int32 Z       = 3;
+	int64 UnitId  = 1;
+	int32 X       = 2;
+	int32 Z       = 3;
 }
 
 message Actor_CreateUnits // IActorMessage
 {
+	int32 RpcId = 90;
+	int64 ActorId = 93;
     repeated UnitInfo Units = 1;
 }
 
 message Frame_ClickMap // IFrameMessage
 {
-	required int32 X = 1;
-	required int32 Z = 2;
+	int32 RpcId = 90;
+	int64 Id = 94;
+	int32 X = 1;
+	int32 Z = 2;
 }
 
-message C2M_Reload // IRequest
-{
-	required AppType AppType = 1;
-}
-
-message M2C_Reload // IResponse
-{
-}
 
 message C2R_Ping // IRequest
 {
+	int32 RpcId = 90;
 }
 
 message R2C_Ping // IResponse
 {
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
 }
 
 message G2C_Test // IMessage
 {
+}
+
+//花色
+enum Suits
+{
+	SuitsFirst = 0;
+	Club = 1;    //梅花
+	Diamond = 2; //方块
+	Heart = 3;   //红心
+	Spade = 4;   //黑桃
+	None = 5;
+}
+
+//权重
+enum Weight
+{
+	WeightFirst = 0;
+    Three = 1;      //3
+    Four = 2;       //4
+    Five = 3;       //5
+    Six = 4;        //6
+    Seven = 5;      //7
+    Eight = 6;      //8
+    Nine = 7;       //9
+    Ten = 8;        //10
+    Jack = 9;       //J
+    Queen = 10;      //Q
+    King = 11;       //K
+    One = 12;        //A
+    Two = 13;        //2
+    SJoker = 14;     //小王
+    LJoker = 15;     //大王
+}
+
+//身份
+enum Identity
+{
+	IdentityNone = 0;
+	Farmer = 1;     //平民
+    Landlord = 2;   //地主
+}
+
+message Card
+{
+	Weight CardWeight = 1;
+	Suits CardSuits = 2;
 }

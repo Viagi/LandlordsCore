@@ -23,15 +23,15 @@ namespace ETHotfix
 
                 if (gamer.UserID == orderController.Biggest)
                 {
-                    response.Cards = handCards.Where(card => card.CardWeight == handCards[handCards.Count - 1].CardWeight).ToArray();
+                    response.Cards.AddRange(handCards.Where(card => card.CardWeight == handCards[handCards.Count - 1].CardWeight).ToArray());
                 }
                 else
                 {
-                    List<Card[]> result = await CardsHelper.GetPrompt(handCards, deskCardsCache, deskCardsCache.Rule);
+                    List<IList<Card>> result = await CardsHelper.GetPrompt(handCards, deskCardsCache, deskCardsCache.Rule);
 
                     if (result.Count > 0)
                     {
-                        response.Cards = result[RandomHelper.RandomNumber(0, result.Count)];
+                        response.Cards.AddRange(result[RandomHelper.RandomNumber(0, result.Count)]);
                     }
                 }
 

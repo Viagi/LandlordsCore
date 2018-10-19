@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ETModel;
-using ProtoBuf;
 
 namespace ETHotfix
 {
@@ -10,16 +9,30 @@ namespace ETHotfix
 	{
 		public override void Awake(OpcodeTypeComponent self)
 		{
-			self.Awake();
+			self.Load();
+		}
+	}
+	
+	[ObjectSystem]
+	public class OpcodeTypeComponentLoadSystem : LoadSystem<OpcodeTypeComponent>
+	{
+		public override void Load(OpcodeTypeComponent self)
+		{
+			self.Load();
 		}
 	}
 
 	public class OpcodeTypeComponent : Component
 	{
 		private readonly DoubleMap<ushort, Type> opcodeTypes = new DoubleMap<ushort, Type>();
+		
+		private readonly Dictionary<ushort, object> typeMessages = new Dictionary<ushort, object>();
 
-		public void Awake()
+		public void Load()
 		{
+			this.opcodeTypes.Clear();
+			this.typeMessages.Clear();
+			
 			List<Type> types = ETModel.Game.Hotfix.GetHotfixTypes();
 			foreach (Type type in types)
 			{
@@ -35,17 +48,9 @@ namespace ETHotfix
 					continue;
 				}
 				this.opcodeTypes.Add(messageAttribute.Opcode, type);
-			}
-
-			foreach (Type type in types)
-			{
-				object[] attrs = type.GetCustomAttributes(typeof(ProtoContractAttribute), false);
-				if (attrs.Length == 0)
-				{
-					continue;
-				}
-
-				PType.RegisterType(type.FullName, type);
+                Log.Info(type.ToString());
+                Log.Info(messageAttribute.Opcode.ToString());
+				this.typeMessages.Add(messageAttribute.Opcode, Activator.CreateInstance(type));
 			}
 		}
 
@@ -57,6 +62,11 @@ namespace ETHotfix
 		public Type GetType(ushort opcode)
 		{
 			return this.opcodeTypes.GetValueByKey(opcode);
+		}
+		
+		public object GetInstance(ushort opcode)
+		{
+			return this.typeMessages[opcode];
 		}
 
 		public override void Dispose()

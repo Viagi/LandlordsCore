@@ -1,3 +1,139 @@
+using ETModel;
+namespace ETHotfix
+{
+	[Message(HotfixOpcode.C2R_Login)]
+	public partial class C2R_Login : IRequest {}
+
+	[Message(HotfixOpcode.R2C_Login)]
+	public partial class R2C_Login : IResponse {}
+
+	[Message(HotfixOpcode.C2G_LoginGate)]
+	public partial class C2G_LoginGate : IRequest {}
+
+	[Message(HotfixOpcode.G2C_LoginGate)]
+	public partial class G2C_LoginGate : IResponse {}
+
+	[Message(HotfixOpcode.G2C_TestHotfixMessage)]
+	public partial class G2C_TestHotfixMessage : IMessage {}
+
+	[Message(HotfixOpcode.C2M_TestActorRequest)]
+	public partial class C2M_TestActorRequest : IActorRequest {}
+
+	[Message(HotfixOpcode.M2C_TestActorResponse)]
+	public partial class M2C_TestActorResponse : IActorResponse {}
+
+	[Message(HotfixOpcode.PlayerInfo)]
+	public partial class PlayerInfo {}
+
+	[Message(HotfixOpcode.C2G_PlayerInfo)]
+	public partial class C2G_PlayerInfo : IRequest {}
+
+	[Message(HotfixOpcode.G2C_PlayerInfo)]
+	public partial class G2C_PlayerInfo : IResponse {}
+
+	[Message(HotfixOpcode.C2R_Login_Req)]
+	public partial class C2R_Login_Req : IRequest {}
+
+	[Message(HotfixOpcode.R2C_Login_Ack)]
+	public partial class R2C_Login_Ack : IResponse {}
+
+	[Message(HotfixOpcode.C2R_Register_Req)]
+	public partial class C2R_Register_Req : IRequest {}
+
+	[Message(HotfixOpcode.R2C_Register_Ack)]
+	public partial class R2C_Register_Ack : IResponse {}
+
+	[Message(HotfixOpcode.C2G_LoginGate_Req)]
+	public partial class C2G_LoginGate_Req : IRequest {}
+
+	[Message(HotfixOpcode.G2C_LoginGate_Ack)]
+	public partial class G2C_LoginGate_Ack : IResponse {}
+
+	[Message(HotfixOpcode.C2G_GetUserInfo_Req)]
+	public partial class C2G_GetUserInfo_Req : IRequest {}
+
+	[Message(HotfixOpcode.G2C_GetUserInfo_Ack)]
+	public partial class G2C_GetUserInfo_Ack : IResponse {}
+
+	[Message(HotfixOpcode.C2G_StartMatch_Req)]
+	public partial class C2G_StartMatch_Req : IRequest {}
+
+	[Message(HotfixOpcode.G2C_StartMatch_Ack)]
+	public partial class G2C_StartMatch_Ack : IResponse {}
+
+	[Message(HotfixOpcode.C2G_ReturnLobby_Ntt)]
+	public partial class C2G_ReturnLobby_Ntt : IMessage {}
+
+	[Message(HotfixOpcode.Actor_GamerReady_Ntt)]
+	public partial class Actor_GamerReady_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.Actor_GamerGrabLandlordSelect_Ntt)]
+	public partial class Actor_GamerGrabLandlordSelect_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.Actor_GamerPlayCard_Req)]
+	public partial class Actor_GamerPlayCard_Req : IActorRequest {}
+
+	[Message(HotfixOpcode.Actor_GamerPlayCard_Ack)]
+	public partial class Actor_GamerPlayCard_Ack : IActorResponse {}
+
+	[Message(HotfixOpcode.Actor_GamerPlayCard_Ntt)]
+	public partial class Actor_GamerPlayCard_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.Actor_GamerPrompt_Req)]
+	public partial class Actor_GamerPrompt_Req : IActorRequest {}
+
+	[Message(HotfixOpcode.Actor_GamerPrompt_Ack)]
+	public partial class Actor_GamerPrompt_Ack : IActorResponse {}
+
+	[Message(HotfixOpcode.Actor_GamerDontPlay_Ntt)]
+	public partial class Actor_GamerDontPlay_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.Actor_Trusteeship_Ntt)]
+	public partial class Actor_Trusteeship_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.GamerInfo)]
+	public partial class GamerInfo {}
+
+	[Message(HotfixOpcode.Actor_GamerEnterRoom_Ntt)]
+	public partial class Actor_GamerEnterRoom_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.Actor_GamerExitRoom_Ntt)]
+	public partial class Actor_GamerExitRoom_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.GamerState)]
+	public partial class GamerState {}
+
+	[Message(HotfixOpcode.Actor_GamerReconnect_Ntt)]
+	public partial class Actor_GamerReconnect_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.GamerCardNum)]
+	public partial class GamerCardNum : IMessage {}
+
+	[Message(HotfixOpcode.Actor_GameStart_Ntt)]
+	public partial class Actor_GameStart_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.Actor_AuthorityGrabLandlord_Ntt)]
+	public partial class Actor_AuthorityGrabLandlord_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.Actor_AuthorityPlayCard_Ntt)]
+	public partial class Actor_AuthorityPlayCard_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.Actor_SetMultiples_Ntt)]
+	public partial class Actor_SetMultiples_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.Actor_SetLandlord_Ntt)]
+	public partial class Actor_SetLandlord_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.GamerScore)]
+	public partial class GamerScore {}
+
+	[Message(HotfixOpcode.Actor_Gameover_Ntt)]
+	public partial class Actor_Gameover_Ntt : IActorMessage {}
+
+	[Message(HotfixOpcode.Actor_GamerMoneyLess_Ntt)]
+	public partial class Actor_GamerMoneyLess_Ntt : IActorMessage {}
+
+}
 namespace ETHotfix
 {
 	public static partial class HotfixOpcode

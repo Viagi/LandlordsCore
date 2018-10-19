@@ -19,13 +19,11 @@ namespace ILRuntime.Runtime.Generated
         {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
             MethodBase method;
-            FieldInfo field;
             Type[] args;
             Type type = typeof(ETModel.Actor_TestRequest);
-
-            field = type.GetField("request", flag);
-            app.RegisterCLRFieldGetter(field, get_request_0);
-            app.RegisterCLRFieldSetter(field, set_request_0);
+            args = new Type[]{typeof(System.String)};
+            method = type.GetMethod("set_Request", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, set_Request_0);
 
             args = new Type[]{};
             method = type.GetConstructor(flag, null, args, null);
@@ -34,15 +32,25 @@ namespace ILRuntime.Runtime.Generated
         }
 
 
+        static StackObject* set_Request_0(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        {
+            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
+            StackObject* ptr_of_this_method;
+            StackObject* __ret = ILIntepreter.Minus(__esp, 2);
 
-        static object get_request_0(ref object o)
-        {
-            return ((ETModel.Actor_TestRequest)o).request;
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
+            System.String @value = (System.String)typeof(System.String).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            __intp.Free(ptr_of_this_method);
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
+            ETModel.Actor_TestRequest instance_of_this_method = (ETModel.Actor_TestRequest)typeof(ETModel.Actor_TestRequest).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            __intp.Free(ptr_of_this_method);
+
+            instance_of_this_method.Request = value;
+
+            return __ret;
         }
-        static void set_request_0(ref object o, object v)
-        {
-            ((ETModel.Actor_TestRequest)o).request = (System.String)v;
-        }
+
 
         static StackObject* Ctor_0(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {

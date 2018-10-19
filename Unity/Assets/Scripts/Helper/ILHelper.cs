@@ -12,32 +12,23 @@ namespace ETModel
 {
 	public static class ILHelper
 	{
-		public static unsafe void InitILRuntime(ILRuntime.Runtime.Enviorment.AppDomain appDomain)
+		public static void InitILRuntime(ILRuntime.Runtime.Enviorment.AppDomain appdomain)
 		{
 			// 注册重定向函数
 
 			// 注册委托
-			appDomain.DelegateManager.RegisterMethodDelegate<List<object>>();
-			appDomain.DelegateManager.RegisterMethodDelegate<AChannel, System.Net.Sockets.SocketError>();
-			appDomain.DelegateManager.RegisterMethodDelegate<byte[], int, int>();
-			appDomain.DelegateManager.RegisterMethodDelegate<IResponse>();
-			appDomain.DelegateManager.RegisterMethodDelegate<Session, object>();
-			appDomain.DelegateManager.RegisterMethodDelegate<Session, Packet>();
-			appDomain.DelegateManager.RegisterMethodDelegate<Session>();
-			appDomain.DelegateManager.RegisterMethodDelegate<ILTypeInstance>();
-            appDomain.DelegateManager.RegisterMethodDelegate<ILTypeInstance, System.Boolean>();
+			appdomain.DelegateManager.RegisterMethodDelegate<List<object>>();
+			appdomain.DelegateManager.RegisterMethodDelegate<AChannel, System.Net.Sockets.SocketError>();
+			appdomain.DelegateManager.RegisterMethodDelegate<byte[], int, int>();
+			appdomain.DelegateManager.RegisterMethodDelegate<IResponse>();
+			appdomain.DelegateManager.RegisterMethodDelegate<Session, object>();
+			appdomain.DelegateManager.RegisterMethodDelegate<Session, Packet>();
+			appdomain.DelegateManager.RegisterMethodDelegate<Session>();
+			appdomain.DelegateManager.RegisterMethodDelegate<ILTypeInstance>();
+			appdomain.DelegateManager.RegisterFunctionDelegate<Google.Protobuf.Adapt_IMessage.Adaptor>();
+			appdomain.DelegateManager.RegisterMethodDelegate<Google.Protobuf.Adapt_IMessage.Adaptor>();
 
-            appDomain.DelegateManager.RegisterFunctionDelegate<ILTypeInstance, System.Boolean>();
-
-            appDomain.DelegateManager.RegisterDelegateConvertor<Predicate<ILTypeInstance>>((act) =>
-            {
-                return new Predicate<ILTypeInstance>((obj) =>
-                {
-                    return ((Func<ILTypeInstance, System.Boolean>)act)(obj);
-                });
-            });
-
-            CLRBindings.Initialize(appDomain);
+			CLRBindings.Initialize(appdomain);
 
 			// 注册适配器
 			Assembly assembly = typeof(Init).Assembly;
@@ -54,34 +45,10 @@ namespace ETModel
 				{
 					continue;
 				}
-				appDomain.RegisterCrossBindingAdaptor(adaptor);
+				appdomain.RegisterCrossBindingAdaptor(adaptor);
 			}
 
-			// 初始化ILRuntime的protobuf
-			InitializeILRuntimeProtobuf(appDomain);
-			LitJson.JsonMapper.RegisterILRuntimeCLRRedirection(appDomain);
-		}
-
-		public static void InitializeILRuntimeProtobuf(ILRuntime.Runtime.Enviorment.AppDomain appDomain)
-		{
-			ProtoBuf.PType.RegisterFunctionCreateInstance((typeName)=>PType_CreateInstance(appDomain, typeName));
-			ProtoBuf.PType.RegisterFunctionGetRealType(PType_GetRealType);
-		}
-
-		private static object PType_CreateInstance(ILRuntime.Runtime.Enviorment.AppDomain appDomain, string typeName)
-		{
-			return appDomain.Instantiate(typeName);
-		}
-
-		private static Type PType_GetRealType(object o)
-		{
-			Type type = o.GetType();
-			if (type.FullName == "ILRuntime.Runtime.Intepreter.ILTypeInstance")
-			{
-				ILTypeInstance ilo = o as ILTypeInstance;
-				type = ProtoBuf.PType.FindType(ilo.Type.FullName);
-			}
-			return type;
+			LitJson.JsonMapper.RegisterILRuntimeCLRRedirection(appdomain);
 		}
 	}
 }

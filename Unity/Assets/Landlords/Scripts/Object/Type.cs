@@ -1,6 +1,4 @@
-﻿using ProtoBuf;
-
-namespace ETModel
+﻿namespace ETModel
 {
     /// <summary>
     /// 房间等级
@@ -8,53 +6,6 @@ namespace ETModel
     public enum RoomLevel : byte
     {
         Lv100   //100底分局
-    }
-
-    /// <summary>
-    /// 花色
-    /// </summary>
-    [ProtoContract]
-    public enum Suits : byte
-    {
-        Club,    //梅花
-        Diamond, //方块
-        Heart,   //红心
-        Spade,   //黑桃
-        None
-    }
-
-    /// <summary>
-    /// 卡牌权值
-    /// </summary>
-    [ProtoContract]
-    public enum Weight : byte
-    {
-        Three,      //3
-        Four,       //4
-        Five,       //5
-        Six,        //6
-        Seven,      //7
-        Eight,      //8
-        Nine,       //9
-        Ten,        //10
-        Jack,       //J
-        Queen,      //Q
-        King,       //K
-        One,        //A
-        Two,        //2
-        SJoker,     //小王
-        LJoker,     //大王
-    }
-
-    /// <summary>
-    /// 身份
-    /// </summary>
-    [ProtoContract]
-    public enum Identity : byte
-    {
-        None,
-        Farmer,     //平民
-        Landlord    //地主
     }
 
     /// <summary>

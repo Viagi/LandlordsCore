@@ -71,14 +71,14 @@ namespace ETHotfix
                 {
                     Weight w = (Weight)value;
                     Suits s = (Suits)color;
-                    Card card = new Card(w, s);
+                    Card card = new Card() { CardSuits = s, CardWeight = w };
                     self.library.Add(card);
                 }
             }
 
             //创建大小王扑克
-            self.library.Add(new Card(Weight.SJoker, Suits.None));
-            self.library.Add(new Card(Weight.LJoker, Suits.None));
+            self.library.Add(new Card() { CardWeight = Weight.Sjoker, CardSuits = Suits.None });
+            self.library.Add(new Card() { CardWeight = Weight.Ljoker, CardSuits = Suits.None });
         }
     }
 }

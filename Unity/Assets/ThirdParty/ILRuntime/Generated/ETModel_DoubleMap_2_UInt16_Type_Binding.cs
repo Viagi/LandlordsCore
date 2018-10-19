@@ -21,15 +21,18 @@ namespace ILRuntime.Runtime.Generated
             MethodBase method;
             Type[] args;
             Type type = typeof(ETModel.DoubleMap<System.UInt16, System.Type>);
+            args = new Type[]{};
+            method = type.GetMethod("Clear", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, Clear_0);
             args = new Type[]{typeof(System.UInt16), typeof(System.Type)};
             method = type.GetMethod("Add", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Add_0);
+            app.RegisterCLRMethodRedirection(method, Add_1);
             args = new Type[]{typeof(System.Type)};
             method = type.GetMethod("GetKeyByValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetKeyByValue_1);
+            app.RegisterCLRMethodRedirection(method, GetKeyByValue_2);
             args = new Type[]{typeof(System.UInt16)};
             method = type.GetMethod("GetValueByKey", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetValueByKey_2);
+            app.RegisterCLRMethodRedirection(method, GetValueByKey_3);
 
             args = new Type[]{};
             method = type.GetConstructor(flag, null, args, null);
@@ -38,7 +41,22 @@ namespace ILRuntime.Runtime.Generated
         }
 
 
-        static StackObject* Add_0(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* Clear_0(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        {
+            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
+            StackObject* ptr_of_this_method;
+            StackObject* __ret = ILIntepreter.Minus(__esp, 1);
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
+            ETModel.DoubleMap<System.UInt16, System.Type> instance_of_this_method = (ETModel.DoubleMap<System.UInt16, System.Type>)typeof(ETModel.DoubleMap<System.UInt16, System.Type>).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            __intp.Free(ptr_of_this_method);
+
+            instance_of_this_method.Clear();
+
+            return __ret;
+        }
+
+        static StackObject* Add_1(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -60,7 +78,7 @@ namespace ILRuntime.Runtime.Generated
             return __ret;
         }
 
-        static StackObject* GetKeyByValue_1(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* GetKeyByValue_2(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -81,7 +99,7 @@ namespace ILRuntime.Runtime.Generated
             return __ret + 1;
         }
 
-        static StackObject* GetValueByKey_2(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* GetValueByKey_3(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;

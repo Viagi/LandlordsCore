@@ -1,8 +1,8 @@
-﻿using ProtoBuf;
+﻿using Google.Protobuf;
 
 namespace ETHotfix
 {
-	public interface IMessage
+	public interface IMessage: Google.Protobuf.IMessage
 	{
 	}
 	
@@ -23,5 +23,20 @@ namespace ETHotfix
 		public int Error { get; set; }
 		public string Message { get; set; }
 		public int RpcId { get; set; }
+		
+		public void MergeFrom(CodedInputStream input)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public void WriteTo(CodedOutputStream output)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public int CalculateSize()
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

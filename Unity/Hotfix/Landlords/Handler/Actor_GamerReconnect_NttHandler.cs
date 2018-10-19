@@ -18,16 +18,15 @@ namespace ETHotfix
                 Gamer gamer = gamerComponent.Get(gamerState.UserID);
                 HandCardsComponent gamerHandCards = gamer.GetComponent<HandCardsComponent>();
                 GamerUIComponent gamerUI = gamer.GetComponent<GamerUIComponent>();
-                Identity gamerIdentity = (Identity)gamerState.Identity;
+                Identity gamerIdentity = gamerState.UserIdentity;
                 gamerHandCards.AccessIdentity = gamerIdentity;
                 gamerUI.SetIdentity(gamerIdentity);
                 //初始化出牌
-                if (message.DeskCards.Key == gamer.UserID && gamerIdentity != Identity.None)
+                if (message.UserId == gamer.UserID && gamerIdentity != Identity.None)
                 {
-                    Card[] deskCards = message.DeskCards.Value;
-                    if (deskCards != null)
+                    if (message.Cards != null)
                     {
-                        gamerHandCards.PopCards(deskCards);
+                        gamerHandCards.PopCards(message.Cards);
                     }
                 }
                 else if (message.LordCards == null && gamerState.GrabLandlordState)

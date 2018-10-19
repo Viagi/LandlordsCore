@@ -54,8 +54,8 @@ namespace ETHotfix
 			byte flag = packet.Flag;
 
 			OpcodeTypeComponent opcodeTypeComponent = Game.Scene.GetComponent<OpcodeTypeComponent>();
-			Type responseType = opcodeTypeComponent.GetType(opcode);
-			object message = this.session.Network.MessagePacker.DeserializeFrom(responseType, packet.Stream);
+			object instance = opcodeTypeComponent.GetInstance(opcode);
+			object message = this.session.Network.MessagePacker.DeserializeFrom(instance, packet.Stream);
 
 			if ((flag & 0x01) > 0)
 			{
@@ -87,13 +87,12 @@ namespace ETHotfix
 		public void Send(byte flag, IMessage message)
 		{
 			ushort opcode = Game.Scene.GetComponent<OpcodeTypeComponent>().GetOpcode(message.GetType());
-			byte[] bytes = ProtobufHelper.ToBytes(message);
-			session.Send(flag, opcode, bytes);
+			this.Send(flag, opcode, message);
 		}
 
-		public void Send(byte flag, ushort opcode, byte[] bytes)
+		public void Send(byte flag, ushort opcode, IMessage message)
 		{
-			session.Send(flag, opcode, bytes);
+			session.Send(flag, opcode, message);
 		}
 
 		public Task<IResponse> Call(IRequest request)

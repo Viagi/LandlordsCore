@@ -1,324 +1,409 @@
-	#region ET
-	
 	/// <summary>
 	/// 传送unit
 	/// </summary>
 	message M2M_TrasferUnitRequest // IRequest
 	{
-		required Unit Unit = 1;
+		int32 RpcId = 90;
+		Unit Unit = 1;
 	}
 	
 	message M2M_TrasferUnitResponse // IResponse
 	{
-		required int64 InstanceId = 1;
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
+
+		int64 InstanceId = 1;
 	}
 	
 	message M2A_Reload // IRequest
 	{
+		int32 RpcId = 90;
 	}
 
 	message A2M_Reload // IResponse
 	{
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 	}
 
 	message G2G_LockRequest // IRequest
 	{
-		required int64 Id = 1;
-		required string Address = 2;
+		int32 RpcId = 90;
+		int64 Id = 1;
+		string Address = 2;
 	}
 
 	message G2G_LockResponse // IResponse
 	{
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 	}
 
 	message G2G_LockReleaseRequest // IRequest
 	{
-		required int64 Id = 1;
-		required string Address = 2;
+		int32 RpcId = 90;
+		int64 Id = 1;
+		string Address = 2;
 	}
 
 	message G2G_LockReleaseResponse // IResponse
 	{
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 	}
 
 	message DBSaveRequest // IRequest
 	{
-		required bool NeedCache = 1;
+		int32 RpcId = 90;
 
-		required string CollectionName = 2;
-
-		required ComponentWithId Component = 3;
+		bool NeedCache = 1;
+		string CollectionName = 2;
+		ComponentWithId Component = 3;
 	}
 
 
 	message DBSaveBatchResponse // IResponse
 	{
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 	}
 
 	message DBSaveBatchRequest // IRequest
 	{
-		required bool NeedCache = 1;
-		required string CollectionName = 2;
+		int32 RpcId = 90;
+
+		bool NeedCache = 1;
+		string CollectionName = 2;
 		repeated ComponentWithId Components = 3;
 	}
 
 	message DBSaveResponse // IResponse
 	{
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 	}
 
 	message DBQueryRequest // IRequest
 	{
-		required int64 Id = 1;
-		required string CollectionName = 2;
-		required bool NeedCache = 3;
+		int32 RpcId = 90;
+		int64 Id = 1;
+		string CollectionName = 2;
+		bool NeedCache = 3;
 	}
 
 	message DBQueryResponse // IResponse
 	{
-		required ComponentWithId Component = 1;
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
+
+		ComponentWithId Component = 1;
 	}
 
 	message DBQueryBatchRequest // IRequest
 	{
-		required string CollectionName = 1;
+		int32 RpcId = 90;
+		string CollectionName = 1;
 		repeated int64 IdList = 2;
-		required bool NeedCache = 3;
+		bool NeedCache = 3;
 	}
 
 	message DBQueryBatchResponse // IResponse
 	{
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
+
 		repeated ComponentWithId Components = 1;
 	}
 
 	message DBQueryJsonRequest // IRequest
 	{
-		required string CollectionName = 1;
-		required string Json = 2;
+		int32 RpcId = 90;
+		string CollectionName = 1;
+		string Json = 2;
 	}
 
 	message DBQueryJsonResponse // IResponse
 	{
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
+
 		repeated ComponentWithId Components = 1;
 	}
 
 	message ObjectAddRequest // IRequest
 	{
-		required int64 Key = 1;
-		required int64 InstanceId = 2;
+		int32 RpcId = 90;
+		int64 Key = 1;
+		int64 InstanceId = 2;
 	}
 
 	message ObjectAddResponse // IResponse
 	{
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 	}
 
 	message ObjectRemoveRequest // IRequest
 	{
-		required int64 Key = 1;
+		int32 RpcId = 90;
+		int64 Key = 1;
 	}
 
 	message ObjectRemoveResponse // IResponse
 	{
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 	}
 
 	message ObjectLockRequest // IRequest
 	{
-		required int64 Key = 1;
-		required int64 InstanceId = 2;
-		required int Time = 3;
+		int32 RpcId = 90;
+		int64 Key = 1;
+		int64 InstanceId = 2;
+		int Time = 3;
 	}
 
 	message ObjectLockResponse // IResponse
 	{
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 	}
 
 	message ObjectUnLockRequest // IRequest
 	{
-		required int64 Key = 1;
-		required int64 OldInstanceId = 2;
-		required int64 InstanceId = 3;
+		int32 RpcId = 90;
+		int64 Key = 1;
+		int64 OldInstanceId = 2;
+		int64 InstanceId = 3;
 	}
 
 	message ObjectUnLockResponse // IResponse
 	{
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 	}
 
 	message ObjectGetRequest // IRequest
 	{
-		required int64 Key = 1;
+		int32 RpcId = 90;
+		int64 Key = 1;
 	}
 
 	message ObjectGetResponse // IResponse
 	{
-		required int64 InstanceId = 1;
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
+
+		int64 InstanceId = 1;
 	}
 
 	message R2G_GetLoginKey // IRequest
 	{
-		required string Account = 1;
+		int32 RpcId = 90;
+		string Account = 1;
 	}
 
 	message G2R_GetLoginKey // IResponse
 	{
-		required int64 Key = 1;
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
+
+		int64 Key = 1;
 	}
 
 	message G2M_CreateUnit // IRequest
 	{
-		required int64 PlayerId = 1;
-		required int64 GateSessionActorId = 2;
+		int32 RpcId = 90;
+		int64 PlayerId = 1;
+		int64 GateSessionId = 2;
 	}
 
 	message M2G_CreateUnit // IResponse
 	{
-		required int64 UnitId = 1;
-		required int Count = 2;
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
+
+		int64 UnitId = 1;
+		int Count = 2;
 	}
 
 	message G2M_SessionDisconnect // IActorMessage
 	{
+		int32 RpcId = 90;
+		long ActorId = 94;
 	}
-	
-	#endregion
-	
-	#region Gate-Realm
 
     message G2R_PlayerOnline_Req // IRequest
     {
-        required long UserID = 1;
-        required int GateAppID = 2;
+		int32 RpcId = 90;
+        long UserID = 1;
+        int GateAppID = 2;
     }
 	
 	message R2G_PlayerOnline_Ack // IResponse
     {
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
     }
 
     message G2R_PlayerOffline_Req // IRequest
     {
-        required long UserID = 1;
+		int32 RpcId = 90;
+        long UserID = 1;
     }
 	
 	message R2G_PlayerOffline_Ack // IResponse
     {
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
     }
-
-    #endregion
-
-    #region Realm-Gate
 
     message R2G_GetLoginKey_Req // IRequest
     {
-        required long UserID = 1;
+		int32 RpcId = 90;
+        long UserID = 1;
     }
 
     message G2R_GetLoginKey_Ack // IResponse
     {
-        required long Key = 1;
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
+        long Key = 1;
     }
 
     message R2G_PlayerKickOut_Req // IRequest
     {
-        required long UserID = 1;
+		int32 RpcId = 90;
+        long UserID = 1;
     }
 
     message G2R_PlayerKickOut_Ack // IResponse
     {
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 
     }
 
-    #endregion
-
-    #region Gate-Match
-
     message G2M_PlayerEnterMatch_Req // IRequest
     {
-        required long PlayerID = 1;
-        required long UserID = 2;
-        required long SessionID = 3;
+		int32 RpcId = 90;
+        long PlayerID = 1;
+        long UserID = 2;
+        long SessionID = 3;
     }
 
     message M2G_PlayerEnterMatch_Ack // IResponse
     {
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 
     }
 
     message G2M_PlayerExitMatch_Req // IRequest
     {
-        required long UserID = 1;
+		int32 RpcId = 90;
+        long UserID = 1;
     }
 
     message M2G_PlayerExitMatch_Ack // IResponse
     {
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 
     }
 
-    #endregion
-
-    #region Gate-Map
-
     message Actor_PlayerExitRoom_Req // IActorRequest
     {
-        required long UserID = 1;
+		int32 RpcId = 90;
+		int64 ActorId = 91;
+        long UserID = 1;
     }
 
     message Actor_PlayerExitRoom_Ack // IActorResponse
     {
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
 
     }
-
-    #endregion
-
-    #region Match-Gate
 	
     message Actor_MatchSucess_Ntt // IActorMessage
     {
-        required long GamerID = 1;
+		int32 RpcId = 90;
+		long ActorId = 94;
+        long GamerID = 1;
     }
-
-    #endregion
-
-    #region Match-Map
 
     message MH2MP_CreateRoom_Req // IRequest
     {
+		int32 RpcId = 90;
 
     }
 
     message MP2MH_CreateRoom_Ack // IResponse
     {
-        required long RoomID = 1;
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
+        long RoomID = 1;
     }
 
     message Actor_PlayerEnterRoom_Req // IActorRequest
     {
-        required long PlayerID = 1;
-        required long UserID = 2;
-        required long SessionID = 3;
+		int32 RpcId = 90;
+		int64 ActorId = 91;
+        long PlayerID = 1;
+        long UserID = 2;
+        long SessionID = 3;
     }
 
     message Actor_PlayerEnterRoom_Ack // IActorResponse
     {
-        required long GamerID = 1;
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
+        long GamerID = 1;
     }
-
-    #endregion
-
-    #region Map-Match
 
     message MP2MH_PlayerExitRoom_Req // IRequest
     {
-        required long RoomID = 1;
-        required long UserID = 2;
+		int32 RpcId = 90;
+        long RoomID = 1;
+        long UserID = 2;
     }
 	
 	message MH2MP_PlayerExitRoom_Ack // IResponse
     {
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
     }
 
     message MP2MH_SyncRoomState_Ntt // IMessage
     {
-        required long RoomID = 1;
-        required RoomState State = 2;
+        long RoomID = 1;
+        RoomState State = 2;
     }
-
-    #endregion
 }

@@ -22,6 +22,11 @@ namespace ETModel
 				{
 					continue;
 				}
+				
+				if(type == typeof(ComponentWithId) || type == typeof(Component) || type == typeof(Entity))
+				{
+					continue;
+				}
 				methodInfo.MakeGenericMethod(type).Invoke(null, null);
 			}
 
@@ -52,7 +57,14 @@ namespace ETModel
 		{
 			return obj.ToBson();
 		}
-
+		
+		public static void ToBson(object obj, MemoryStream stream)
+		{
+			byte[] bytes = obj.ToBson();
+			stream.Write(bytes);
+			stream.Seek(0, SeekOrigin.Begin);
+		}
+		
 		public static object FromBson(Type type, byte[] bytes)
 		{
 			return BsonSerializer.Deserialize(bytes, type);
@@ -64,6 +76,19 @@ namespace ETModel
 			{
 				return BsonSerializer.Deserialize(memoryStream, type);
 			}
+		}
+		
+		public static object FromBson(object instance, byte[] bytes, int index, int count)
+		{
+			using (MemoryStream memoryStream = new MemoryStream(bytes, index, count))
+			{
+				return BsonSerializer.Deserialize(memoryStream, instance.GetType());
+			}
+		}
+		
+		public static object FromBson(object instance, Stream stream)
+		{
+			return BsonSerializer.Deserialize(stream, instance.GetType());
 		}
 		
 		public static object FromStream(Type type, Stream stream)

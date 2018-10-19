@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using ETModel;
+using System.Collections.Generic;
 
 namespace ETHotfix
 {
@@ -24,7 +25,7 @@ namespace ETHotfix
                 }
             }
 
-            int localGamerIndex = message.Gamers.FindIndex(info => info.UserID == gamerComponent.LocalGamer.UserID);
+            int localGamerIndex = new List<GamerInfo>(message.Gamers).FindIndex(info => info.UserID == gamerComponent.LocalGamer.UserID);
             //添加未显示玩家
             for (int i = 0; i < message.Gamers.Count; i++)
             {

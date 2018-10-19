@@ -13,7 +13,7 @@ namespace ETHotfix
             Room room = Game.Scene.GetComponent<RoomComponent>().Get(gamer.RoomID);
             //是否已经托管
             bool isTrusteeship = gamer.GetComponent<TrusteeshipComponent>() != null;
-            if (message.isTrusteeship && !isTrusteeship)
+            if (message.IsTrusteeship && !isTrusteeship)
             {
                 gamer.AddComponent<TrusteeshipComponent>();
                 Log.Info($"玩家{gamer.UserID}切换为自动模式");
@@ -26,7 +26,7 @@ namespace ETHotfix
 
             //这里由服务端设置消息UserID用于转发
             Actor_Trusteeship_Ntt transpond = new Actor_Trusteeship_Ntt();
-            transpond.isTrusteeship = message.isTrusteeship;
+            transpond.IsTrusteeship = message.IsTrusteeship;
             transpond.UserID = gamer.UserID;
             //转发消息
             room.Broadcast(transpond);

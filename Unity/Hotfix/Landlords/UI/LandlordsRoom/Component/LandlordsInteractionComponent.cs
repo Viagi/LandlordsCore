@@ -175,7 +175,7 @@ namespace ETHotfix
                 EndPlay();
                 changeGameModeButton.GetComponentInChildren<Text>().text = "取消托管";
             }
-            SessionComponent.Instance.Session.Send(new Actor_Trusteeship_Ntt() { isTrusteeship = !this.isTrusteeship });
+            SessionComponent.Instance.Session.Send(new Actor_Trusteeship_Ntt() { IsTrusteeship = !this.isTrusteeship });
         }
 
         /// <summary>
@@ -184,7 +184,8 @@ namespace ETHotfix
         private async void OnPlay()
         {
             CardHelper.Sort(currentSelectCards);
-            Actor_GamerPlayCard_Req request = new Actor_GamerPlayCard_Req() { Cards = currentSelectCards.ToArray() };
+            Actor_GamerPlayCard_Req request = new Actor_GamerPlayCard_Req();
+            request.Cards.AddRange(currentSelectCards);
             Actor_GamerPlayCard_Ack response = await SessionComponent.Instance.Session.Call(request) as Actor_GamerPlayCard_Ack;
 
             //出牌错误提示
@@ -216,9 +217,9 @@ namespace ETHotfix
             //自动选中提示出牌
             if (response.Cards != null)
             {
-                for (int i = 0; i < response.Cards.Length; i++)
+                foreach (Card card in response.Cards)
                 {
-                    handCards.GetSprite(response.Cards[i]).GetComponent<HandCardSprite>().OnClick(null);
+                    handCards.GetSprite(card).GetComponent<HandCardSprite>().OnClick(null);
                 }
             }
         }

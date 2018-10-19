@@ -56,11 +56,9 @@ namespace ETHotfix
                         Array.ForEach(gamers, _gamer =>
                         {
                             ActorMessageSender actorProxy = _gamer.GetComponent<UnitGateComponent>().GetActorMessageSender();
-                            actorProxy.Send(new Actor_GameStart_Ntt()
-                            {
-                                HandCards = _gamer.GetComponent<HandCardsComponent>().GetAll(),
-                                GamersCardNum = gamersCardNum
-                            });
+                            Actor_GameStart_Ntt actorMessage = new Actor_GameStart_Ntt();
+                            actorMessage.HandCards.AddRange(_gamer.GetComponent<HandCardsComponent>().GetAll());
+                            actorMessage.GamersCardNum.AddRange(gamersCardNum);
                         });
 
                         //随机先手玩家

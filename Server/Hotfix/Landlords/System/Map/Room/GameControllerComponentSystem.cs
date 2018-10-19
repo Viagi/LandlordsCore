@@ -115,7 +115,9 @@ namespace ETHotfix
             }
 
             //广播地主消息
-            room.Broadcast(new Actor_SetLandlord_Ntt() { UserID = id, LordCards = deskCardsCache.LordCards.ToArray() });
+            Actor_SetLandlord_Ntt SetLandlordMessage = new Actor_SetLandlord_Ntt() { UserID = id };
+            SetLandlordMessage.LordCards.AddRange(deskCardsCache.LordCards);
+            room.Broadcast(SetLandlordMessage);
 
             //广播地主先手出牌消息
             room.Broadcast(new Actor_AuthorityPlayCard_Ntt() { UserID = id, IsFirst = true });
@@ -207,11 +209,10 @@ namespace ETHotfix
                 foreach (var _gamer in gamers)
                 {
                     ActorMessageSender actorProxy = _gamer.GetComponent<UnitGateComponent>().GetActorMessageSender();
-                    actorProxy.Send(new Actor_GameStart_Ntt()
-                    {
-                        HandCards = _gamer.GetComponent<HandCardsComponent>().GetAll(),
-                        GamersCardNum = gamersCardNum
-                    });
+                    Actor_GameStart_Ntt gameStartMessage = new Actor_GameStart_Ntt();
+                    gameStartMessage.HandCards.AddRange(_gamer.GetComponent<HandCardsComponent>().GetAll());
+                    gameStartMessage.GamersCardNum.AddRange(gamersCardNum);
+                    actorProxy.Send(gameStartMessage);
                 }
 
                 //随机先手玩家
@@ -255,7 +256,9 @@ namespace ETHotfix
                     {
                         //剩余玩家摊牌
                         Card[] _gamerCards = gamer.GetComponent<HandCardsComponent>().GetAll();
-                        room.Broadcast(new Actor_GamerPlayCard_Ntt() { UserID = gamer.UserID, Cards = _gamerCards });
+                        Actor_GamerPlayCard_Ntt gamerPlayCardMessage = new Actor_GamerPlayCard_Ntt() { UserID = gamer.UserID };
+                        gamerPlayCardMessage.Cards.AddRange(gamer.GetComponent<HandCardsComponent>().GetAll());
+                        room.Broadcast(gamerPlayCardMessage);
                     }
                 }
 
@@ -297,13 +300,14 @@ namespace ETHotfix
             }
 
             //广播游戏结束消息
-            room.Broadcast(new Actor_Gameover_Ntt()
+            Actor_Gameover_Ntt gameoverMessage = new Actor_Gameover_Ntt()
             {
-                Winner = (byte)winnerIdentity,
+                Winner = winnerIdentity,
                 BasePointPerMatch = self.BasePointPerMatch,
-                Multiples = self.Multiples,
-                GamersScore = gamersScore
-            });
+                Multiples = self.Multiples
+            };
+            gameoverMessage.GamersScore.AddRange(gamersScore);
+            room.Broadcast(gameoverMessage);
 
             //清理玩家
             foreach (var _gamer in gamers)
