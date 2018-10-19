@@ -1,16 +1,18 @@
 ﻿using System;
+using System.IO;
 
 namespace ETModel
 {
-	internal enum ParserState
+	public enum ParserState
 	{
 		PacketSize,
 		PacketBody
 	}
-	
-	public struct Packet
+
+	public class Packet
 	{
-		public const int MinSize = 2;
+		public const int MinSize = 3;
+		public const int MaxSize = 60000;
 		public const int FlagIndex = 0;
 		public const int OpcodeIndex = 1;
 		public const int Index = 3;
@@ -18,39 +20,36 @@ namespace ETModel
 		/// <summary>
 		/// 只读，不允许修改
 		/// </summary>
-		public byte[] Bytes { get; }
-		public ushort Length { get; set; }
+		public byte[] Bytes
+		{
+			get
+			{
+				return this.Stream.GetBuffer();
+			}
+		}
+		
+		public byte Flag { get; set; }
+		public ushort Opcode { get; set; }
+		public MemoryStream Stream { get; }
 
 		public Packet(int length)
 		{
-			this.Length = 0;
-			this.Bytes = new byte[length];
+			this.Stream = new MemoryStream(length);
 		}
 
 		public Packet(byte[] bytes)
 		{
-			this.Bytes = bytes;
-			this.Length = (ushort)bytes.Length;
-		}
-
-		public byte Flag()
-		{
-			return this.Bytes[0];
-		}
-		
-		public ushort Opcode()
-		{
-			return BitConverter.ToUInt16(this.Bytes, OpcodeIndex);
+			this.Stream = new MemoryStream(bytes);
 		}
 	}
 
-	internal class PacketParser
+	public class PacketParser
 	{
 		private readonly CircularBuffer buffer;
-
 		private ushort packetSize;
 		private ParserState state;
-		private Packet packet = new Packet(ushort.MaxValue);
+		public readonly Packet packet = new Packet(ushort.MaxValue);
+		private readonly byte[] cache = new byte[2];
 		private bool isOK;
 
 		public PacketParser(CircularBuffer buffer)
@@ -78,10 +77,10 @@ namespace ETModel
 						else
 						{
 							this.buffer.Read(this.packet.Bytes, 0, 2);
-							this.packetSize = BitConverter.ToUInt16(this.packet.Bytes, 0);
-							if (packetSize > 60000)
+							packetSize = BitConverter.ToUInt16(this.packet.Bytes, 0);
+							if (packetSize < Packet.MinSize || packetSize > Packet.MaxSize)
 							{
-								throw new Exception($"packet too large, size: {this.packetSize}");
+								throw new Exception($"packet size error: {this.packetSize}");
 							}
 							this.state = ParserState.PacketBody;
 						}
@@ -93,8 +92,15 @@ namespace ETModel
 						}
 						else
 						{
-							this.buffer.Read(this.packet.Bytes, 0, this.packetSize);
-							this.packet.Length = this.packetSize;
+							this.buffer.Read(this.cache, 0, 1);
+							this.packet.Flag = this.cache[0];
+							this.buffer.Read(this.cache, 0, 2);
+							this.packet.Opcode = BitConverter.ToUInt16(this.cache, 0);
+							
+							this.packet.Stream.Seek(0, SeekOrigin.Begin);
+							this.packet.Stream.SetLength(this.packetSize - Packet.Index);
+							this.buffer.Read(this.packet.Stream.GetBuffer(), 0, this.packetSize - Packet.Index);
+							
 							this.isOK = true;
 							this.state = ParserState.PacketSize;
 							finish = true;

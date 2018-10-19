@@ -212,4 +212,10 @@ namespace ETModel
 
 	}
 
+	[Message(OuterOpcode.G2C_Test)]
+	[ProtoContract]
+	public partial class G2C_Test: IMessage
+	{
+	}
+
 }

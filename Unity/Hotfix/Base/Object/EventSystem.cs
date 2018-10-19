@@ -37,7 +37,7 @@ namespace ETHotfix
 
 		public EventSystem()
 		{
-			Type[] types = ETModel.Game.Hotfix.GetHotfixTypes();
+			List<Type> types = ETModel.Game.Hotfix.GetHotfixTypes();
 			foreach (Type type in types)
 			{
 				object[] attrs = type.GetCustomAttributes(typeof(ObjectSystemAttribute), false);
@@ -88,7 +88,7 @@ namespace ETHotfix
 				IChangeSystem changeSystem = obj as IChangeSystem;
 				if (changeSystem != null)
 				{
-					this.changeSystems.Add(loadSystem.Type(), changeSystem);
+					this.changeSystems.Add(changeSystem.Type(), changeSystem);
 				}
 			}
 

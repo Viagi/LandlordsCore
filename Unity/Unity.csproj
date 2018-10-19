@@ -328,6 +328,9 @@
     <Compile Include="Assets\Scripts\Base\Object\ObjectSystemAttribute.cs" />
     <Compile Include="Assets\Scripts\Base\OneThreadSynchronizationContext.cs" />
     <Compile Include="Assets\Scripts\Base\QueueDictionary.cs" />
+    <Compile Include="Assets\Scripts\Base\RecyclableMemoryStream\Events.cs" />
+    <Compile Include="Assets\Scripts\Base\RecyclableMemoryStream\RecyclableMemoryStream.cs" />
+    <Compile Include="Assets\Scripts\Base\RecyclableMemoryStream\RecyclableMemoryStreamManager.cs" />
     <Compile Include="Assets\Scripts\Base\TryLocker.cs" />
     <Compile Include="Assets\Scripts\Base\UnOrderMultiMap.cs" />
     <Compile Include="Assets\Scripts\BehaviorTreeNode\CreateUIEffect.cs" />
@@ -354,9 +357,9 @@
     <Compile Include="Assets\Scripts\Entity\Scene.cs" />
     <Compile Include="Assets\Scripts\Entity\UnityWebRequestAsync.cs" />
     <Compile Include="Assets\Scripts\Entity\WWWAsync.cs" />
+    <Compile Include="Assets\Scripts\G2C_TestHandler.cs" />
     <Compile Include="Assets\Scripts\Helper\ActionHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\BundleHelper.cs" />
-    <Compile Include="Assets\Scripts\Helper\DllHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\GameObjectHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\ILHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\PathHelper.cs" />
@@ -576,6 +579,8 @@
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_ILTypeInstance_Binding_Enume_t.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_Object_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_String_Binding.cs" />
+    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_Type_Binding.cs" />
+    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_Type_Binding_Enumerator_Bind_t.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_UnitInfo_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_UnitInfo_Binding_Enumerator__t.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Queue_1_ILTypeInstance_Binding.cs" />
