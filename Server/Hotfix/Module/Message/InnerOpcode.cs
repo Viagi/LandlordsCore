@@ -34,27 +34,6 @@ namespace ETHotfix
 		 public const ushort G2R_GetLoginKey = 1030;
 		 public const ushort G2M_CreateUnit = 1031;
 		 public const ushort M2G_CreateUnit = 1032;
-		 public const ushort G2R_PlayerOnline_Req = 1033;
-		 public const ushort R2G_PlayerOnline_Ack = 1034;
-		 public const ushort G2R_PlayerOffline_Req = 1035;
-		 public const ushort R2G_PlayerOffline_Ack = 1036;
-		 public const ushort R2G_GetLoginKey_Req = 1037;
-		 public const ushort G2R_GetLoginKey_Ack = 1038;
-		 public const ushort R2G_PlayerKickOut_Req = 1039;
-		 public const ushort G2R_PlayerKickOut_Ack = 1040;
-		 public const ushort G2M_PlayerEnterMatch_Req = 1041;
-		 public const ushort M2G_PlayerEnterMatch_Ack = 1042;
-		 public const ushort G2M_PlayerExitMatch_Req = 1043;
-		 public const ushort M2G_PlayerExitMatch_Ack = 1044;
-		 public const ushort Actor_PlayerExitRoom_Req = 1045;
-		 public const ushort Actor_PlayerExitRoom_Ack = 1046;
-		 public const ushort Actor_MatchSucess_Ntt = 1047;
-		 public const ushort MH2MP_CreateRoom_Req = 1048;
-		 public const ushort MP2MH_CreateRoom_Ack = 1049;
-		 public const ushort Actor_PlayerEnterRoom_Req = 1050;
-		 public const ushort Actor_PlayerEnterRoom_Ack = 1051;
-		 public const ushort MP2MH_PlayerExitRoom_Req = 1052;
-		 public const ushort MH2MP_PlayerExitRoom_Ack = 1053;
-		 public const ushort MP2MH_SyncRoomState_Ntt = 1054;
+		 public const ushort G2M_SessionDisconnect = 1033;
 	}
 }

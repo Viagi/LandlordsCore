@@ -173,6 +173,10 @@
 		required int64 UnitId = 1;
 		required int Count = 2;
 	}
+
+	message G2M_SessionDisconnect // IActorMessage
+	{
+	}
 	
 	#endregion
 	
