@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -37,11 +38,14 @@ namespace ILRuntime.Runtime.Generated
             method = type.GetMethod("CalculateSize", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, CalculateSize_4);
             args = new Type[]{};
+            method = type.GetMethod("get_Count", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, get_Count_5);
+            args = new Type[]{};
             method = type.GetMethod("Clear", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Clear_5);
+            app.RegisterCLRMethodRedirection(method, Clear_6);
             args = new Type[]{typeof(Google.Protobuf.CodedInputStream), typeof(Google.Protobuf.FieldCodec<ETModel.Card>)};
             method = type.GetMethod("AddEntriesFrom", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, AddEntriesFrom_6);
+            app.RegisterCLRMethodRedirection(method, AddEntriesFrom_7);
 
             args = new Type[]{};
             method = type.GetConstructor(flag, null, args, null);
@@ -156,7 +160,24 @@ namespace ILRuntime.Runtime.Generated
             return __ret + 1;
         }
 
-        static StackObject* Clear_5(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* get_Count_5(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        {
+            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
+            StackObject* ptr_of_this_method;
+            StackObject* __ret = ILIntepreter.Minus(__esp, 1);
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
+            Google.Protobuf.Collections.RepeatedField<ETModel.Card> instance_of_this_method = (Google.Protobuf.Collections.RepeatedField<ETModel.Card>)typeof(Google.Protobuf.Collections.RepeatedField<ETModel.Card>).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            __intp.Free(ptr_of_this_method);
+
+            var result_of_this_method = instance_of_this_method.Count;
+
+            __ret->ObjectType = ObjectTypes.Integer;
+            __ret->Value = result_of_this_method;
+            return __ret + 1;
+        }
+
+        static StackObject* Clear_6(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -171,7 +192,7 @@ namespace ILRuntime.Runtime.Generated
             return __ret;
         }
 
-        static StackObject* AddEntriesFrom_6(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* AddEntriesFrom_7(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;

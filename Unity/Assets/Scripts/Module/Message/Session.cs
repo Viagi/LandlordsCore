@@ -56,9 +56,8 @@ namespace ETModel
 				this.Network.Remove(id); 
 			};
 			channel.ReadCallback += this.OnRead;
-			
-			this.channel.Start();
 		}
+		
 		public override void Dispose()
 		{
 			if (this.IsDisposed)
@@ -75,15 +74,20 @@ namespace ETModel
 				action.Invoke(new ResponseMessage { Error = this.Error });
 			}
 
-			int error = this.channel.Error;
-			if (this.channel.Error != 0)
-			{
-				Log.Error($"session dispose: {this.Id} {error}");
-			}
+			//int error = this.channel.Error;
+			//if (this.channel.Error != 0)
+			//{
+			//	Log.Trace($"session dispose: {this.Id} ErrorCode: {error}, please see ErrorCode.cs!");
+			//}
 			
 			this.channel.Dispose();
 			this.Network.Remove(id);
 			this.requestCallback.Clear();
+		}
+
+		public void Start()
+		{
+			this.channel.Start();
 		}
 
 		public IPEndPoint RemoteAddress
@@ -110,11 +114,11 @@ namespace ETModel
 			}
 		}
 
-		public void OnRead(Packet packet)
+		public void OnRead(MemoryStream memoryStream)
 		{
 			try
 			{
-				this.Run(packet);
+				this.Run(memoryStream);
 			}
 			catch (Exception e)
 			{
@@ -122,36 +126,26 @@ namespace ETModel
 			}
 		}
 
-		private void Run(Packet packet)
+		private void Run(MemoryStream memoryStream)
 		{
-			packet.Flag = packet.Bytes[Packet.FlagIndex];
-			packet.Opcode = BitConverter.ToUInt16(packet.Bytes, Packet.OpcodeIndex);
-			packet.Stream.Seek(Packet.MessageIndex, SeekOrigin.Begin);
-			
-			byte flag = packet.Flag;
-			ushort opcode = packet.Opcode;
+			memoryStream.Seek(Packet.MessageIndex, SeekOrigin.Begin);
+			byte flag = memoryStream.GetBuffer()[Packet.FlagIndex];
+			ushort opcode = BitConverter.ToUInt16(memoryStream.GetBuffer(), Packet.OpcodeIndex);
 			
 #if !SERVER
 			if (OpcodeHelper.IsClientHotfixMessage(opcode))
 			{
-				this.Network.MessageDispatcher.Dispatch(this, packet);
+				this.GetComponent<SessionCallbackComponent>().MessageCallback.Invoke(this, flag, opcode, memoryStream);
 				return;
 			}
 #endif
-
-			// flag第一位为1表示这是rpc返回消息,否则交由MessageDispatcher分发
-			if ((flag & 0x01) == 0)
-			{
-				this.Network.MessageDispatcher.Dispatch(this, packet);
-				return;
-			}
-
+			
 			object message;
 			try
 			{
 				OpcodeTypeComponent opcodeTypeComponent = this.Network.Entity.GetComponent<OpcodeTypeComponent>();
 				object instance = opcodeTypeComponent.GetInstance(opcode);
-				message = this.Network.MessagePacker.DeserializeFrom(instance, packet.Stream);
+				message = this.Network.MessagePacker.DeserializeFrom(instance, memoryStream);
 				//Log.Debug($"recv: {JsonHelper.ToJson(message)}");
 			}
 			catch (Exception e)
@@ -160,6 +154,13 @@ namespace ETModel
 				Log.Error($"opcode: {opcode} {this.Network.Count} {e} ");
 				this.Error = ErrorCode.ERR_PacketParserError;
 				this.Network.Remove(this.Id);
+				return;
+			}
+
+			// flag第一位为1表示这是rpc返回消息,否则交由MessageDispatcher分发
+			if ((flag & 0x01) == 0)
+			{
+				this.Network.MessageDispatcher.Dispatch(this, opcode, message);
 				return;
 			}
 				
@@ -285,8 +286,7 @@ namespace ETModel
 			if (this.Network.AppType == AppType.AllServer)
 			{
 				Session session = this.Network.Entity.GetComponent<NetInnerComponent>().Get(this.RemoteAddress);
-				Packet packet = ((TChannel)this.channel).parser.packet;
-				session.Run(packet);
+				session.Run(stream);
 				return;
 			}
 #endif

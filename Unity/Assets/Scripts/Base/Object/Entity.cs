@@ -34,7 +34,9 @@ namespace ETModel
 				return;
 			}
 			
-			foreach (Component component in this.GetComponents())
+			base.Dispose();
+			
+			foreach (Component component in this.componentDict.Values)
 			{
 				try
 				{
@@ -46,13 +48,11 @@ namespace ETModel
 				}
 			}
 			
-			base.Dispose();
-			
 			this.components.Clear();
 			this.componentDict.Clear();
 		}
 		
-		public Component AddComponent(Component component)
+		public virtual Component AddComponent(Component component)
 		{
 			Type type = component.GetType();
 			if (this.componentDict.ContainsKey(type))
@@ -70,7 +70,7 @@ namespace ETModel
 			return component;
 		}
 
-		public Component AddComponent(Type type)
+		public virtual Component AddComponent(Type type)
 		{
 			if (this.componentDict.ContainsKey(type))
 			{
@@ -87,7 +87,7 @@ namespace ETModel
 			return component;
 		}
 
-		public K AddComponent<K>() where K : Component, new()
+		public virtual K AddComponent<K>() where K : Component, new()
 		{
 			Type type = typeof (K);
 			if (this.componentDict.ContainsKey(type))
@@ -105,7 +105,7 @@ namespace ETModel
 			return component;
 		}
 
-		public K AddComponent<K, P1>(P1 p1) where K : Component, new()
+		public virtual K AddComponent<K, P1>(P1 p1) where K : Component, new()
 		{
 			Type type = typeof (K);
 			if (this.componentDict.ContainsKey(type))
@@ -123,7 +123,7 @@ namespace ETModel
 			return component;
 		}
 
-		public K AddComponent<K, P1, P2>(P1 p1, P2 p2) where K : Component, new()
+		public virtual K AddComponent<K, P1, P2>(P1 p1, P2 p2) where K : Component, new()
 		{
 			Type type = typeof (K);
 			if (this.componentDict.ContainsKey(type))
@@ -141,7 +141,7 @@ namespace ETModel
 			return component;
 		}
 
-		public K AddComponent<K, P1, P2, P3>(P1 p1, P2 p2, P3 p3) where K : Component, new()
+		public virtual K AddComponent<K, P1, P2, P3>(P1 p1, P2 p2, P3 p3) where K : Component, new()
 		{
 			Type type = typeof (K);
 			if (this.componentDict.ContainsKey(type))
@@ -159,8 +159,12 @@ namespace ETModel
 			return component;
 		}
 
-		public void RemoveComponent<K>() where K : Component
+		public virtual void RemoveComponent<K>() where K : Component
 		{
+			if (this.IsDisposed)
+			{
+				return;
+			}
 			Type type = typeof (K);
 			Component component;
 			if (!this.componentDict.TryGetValue(type, out component))
@@ -174,8 +178,12 @@ namespace ETModel
 			component.Dispose();
 		}
 
-		public void RemoveComponent(Type type)
+		public virtual void RemoveComponent(Type type)
 		{
+			if (this.IsDisposed)
+			{
+				return;
+			}
 			Component component;
 			if (!this.componentDict.TryGetValue(type, out component))
 			{

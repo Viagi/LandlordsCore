@@ -7,6 +7,7 @@ namespace ETModel
 	{
 		KCP,
 		TCP,
+		WebSocket,
 	}
 
 	public abstract class AService: Component
@@ -33,11 +34,11 @@ namespace ETModel
 		}
 
 		public abstract AChannel ConnectChannel(IPEndPoint ipEndPoint);
+		
+		public abstract AChannel ConnectChannel(string address);
 
 		public abstract void Remove(long channelId);
 
 		public abstract void Update();
-
-		public abstract void Start();
 	}
 }

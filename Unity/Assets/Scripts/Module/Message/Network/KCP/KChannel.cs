@@ -28,21 +28,22 @@ namespace ETModel
 		private readonly Queue<WaitSendBuffer> sendBuffer = new Queue<WaitSendBuffer>();
 
 		private bool isConnected;
-		public bool isRecvFirstKcpMessage;
+		
 		private readonly IPEndPoint remoteEndPoint;
 
-		public uint lastRecvTime;
+		private uint lastRecvTime;
 		
-		public uint CreateTime;
+		private uint createTime;
 
-		public uint RemoteConn;
+		public uint RemoteConn { get; private set; }
 
-		public Packet packet = new Packet(ushort.MaxValue);
+		private MemoryStream memoryStream;
 
 		// accept
 		public KChannel(uint localConn, uint remoteConn, Socket socket, IPEndPoint remoteEndPoint, KService kService) : base(kService, ChannelType.Accept)
 		{
 			this.InstanceId = IdGenerater.GenerateId();
+			this.memoryStream = this.GetService().MemoryStreamManager.GetStream("message", ushort.MaxValue);
 
 			this.LocalConn = localConn;
 			this.RemoteConn = remoteConn;
@@ -60,23 +61,22 @@ namespace ETModel
 			Kcp.KcpNodelay(this.kcp, 1, 10, 1, 1);
 			Kcp.KcpWndsize(this.kcp, 256, 256);
 			Kcp.KcpSetmtu(this.kcp, 470);
-			this.isConnected = true;
-			this.isRecvFirstKcpMessage = false;
 			this.lastRecvTime = kService.TimeNow;
-			this.CreateTime = kService.TimeNow;
+			this.createTime = kService.TimeNow;
+			this.Accept();
 		}
 
 		// connect
 		public KChannel(uint localConn, Socket socket, IPEndPoint remoteEndPoint, KService kService) : base(kService, ChannelType.Connect)
 		{
 			this.InstanceId = IdGenerater.GenerateId();
+			this.memoryStream = this.GetService().MemoryStreamManager.GetStream("message", ushort.MaxValue);
 
 			this.LocalConn = localConn;
 			this.socket = socket;
 			this.remoteEndPoint = remoteEndPoint;
-			this.isRecvFirstKcpMessage = false;
 			this.lastRecvTime = kService.TimeNow;
-			this.CreateTime = kService.TimeNow;
+			this.createTime = kService.TimeNow;
 			this.Connect();
 		}
 
@@ -121,13 +121,14 @@ namespace ETModel
 				this.kcp = IntPtr.Zero;
 			}
 			this.socket = null;
+			this.memoryStream.Dispose();
 		}
 
 		public override MemoryStream Stream
 		{
 			get
 			{
-				return this.packet.Stream;
+				return this.memoryStream;
 			}
 		}
 
@@ -169,24 +170,25 @@ namespace ETModel
 			HandleSend();
 		}
 
-		public void HandleAccept(uint remoteConn)
+		public void Accept()
 		{
 			if (this.socket == null)
 			{
 				return;
 			}
+			
+			uint timeNow = this.GetService().TimeNow;
 
-			// 如果channel已经收到过消息，则不再响应连接请求
-			if (this.isRecvFirstKcpMessage)
-			{
-				return;
-			}
 			try
 			{
-				this.packet.Bytes.WriteTo(0, KcpProtocalType.ACK);
-				this.packet.Bytes.WriteTo(1, LocalConn);
-				this.packet.Bytes.WriteTo(5, RemoteConn);
-				this.socket.SendTo(this.packet.Bytes, 0, 9, SocketFlags.None, remoteEndPoint);
+				byte[] buffer = this.memoryStream.GetBuffer();
+				buffer.WriteTo(0, KcpProtocalType.ACK);
+				buffer.WriteTo(1, LocalConn);
+				buffer.WriteTo(5, RemoteConn);
+				this.socket.SendTo(buffer, 0, 9, SocketFlags.None, remoteEndPoint);
+				
+				// 200毫秒后再次update发送connect请求
+				this.GetService().AddToUpdateNextTime(timeNow + 200, this.Id);
 			}
 			catch (Exception e)
 			{
@@ -206,12 +208,13 @@ namespace ETModel
 				
 				this.lastRecvTime = timeNow;
 				
-				this.packet.Bytes.WriteTo(0, KcpProtocalType.SYN);
-				this.packet.Bytes.WriteTo(1, this.LocalConn);
-				this.socket.SendTo(this.packet.Bytes, 0, 5, SocketFlags.None, remoteEndPoint);
+				byte[] buffer = this.memoryStream.GetBuffer();
+				buffer.WriteTo(0, KcpProtocalType.SYN);
+				buffer.WriteTo(1, this.LocalConn);
+				this.socket.SendTo(buffer, 0, 5, SocketFlags.None, remoteEndPoint);
 				
 				// 200毫秒后再次update发送connect请求
-				this.GetService().AddToUpdateNextTime(timeNow + 200, this.Id);
+				this.GetService().AddToUpdateNextTime(timeNow + 300, this.Id);
 			}
 			catch (Exception e)
 			{
@@ -228,11 +231,12 @@ namespace ETModel
 			}
 			try
 			{
-				this.packet.Bytes.WriteTo(0, KcpProtocalType.FIN);
-				this.packet.Bytes.WriteTo(1, this.LocalConn);
-				this.packet.Bytes.WriteTo(5, this.RemoteConn);
-				this.packet.Bytes.WriteTo(9, (uint)this.Error);
-				this.socket.SendTo(this.packet.Bytes, 0, 13, SocketFlags.None, remoteEndPoint);
+				byte[] buffer = this.memoryStream.GetBuffer();
+				buffer.WriteTo(0, KcpProtocalType.FIN);
+				buffer.WriteTo(1, this.LocalConn);
+				buffer.WriteTo(5, this.RemoteConn);
+				buffer.WriteTo(9, (uint)this.Error);
+				this.socket.SendTo(buffer, 0, 13, SocketFlags.None, remoteEndPoint);
 			}
 			catch (Exception e)
 			{
@@ -254,26 +258,36 @@ namespace ETModel
 			if (!this.isConnected)
 			{
 				// 10秒没连接上则报错
-				if (timeNow - this.CreateTime > 10 * 1000)
+				if (timeNow - this.createTime > 10 * 1000)
 				{
 					this.OnError(ErrorCode.ERR_KcpCantConnect);
 					return;
 				}
 				
-				if (timeNow - this.lastRecvTime < 150)
+				if (timeNow - this.lastRecvTime < 200)
 				{
 					return;
 				}
-				this.Connect();
+
+				switch (ChannelType)
+				{
+					case ChannelType.Accept:
+						this.Accept();
+						break;
+					case ChannelType.Connect:
+						this.Connect();
+						break;
+				}
+				
 				return;
 			}
 
 			// 超时断开连接
-			if (timeNow - this.lastRecvTime > 40 * 1000)
-			{
-				this.OnError(ErrorCode.ERR_KcpChannelTimeout);
-				return;
-			}
+			//if (timeNow - this.lastRecvTime > 40 * 1000)
+			//{
+			//	this.OnError(ErrorCode.ERR_KcpChannelTimeout);
+			//	return;
+			//}
 
 			try
 			{
@@ -315,12 +329,7 @@ namespace ETModel
 				return;
 			}
 
-			// 收到了kcp消息则将自己从连接状态移除
-			if (!this.isRecvFirstKcpMessage)
-			{
-				this.GetService().RemoveFromWaitConnectChannels(this.RemoteConn);
-				this.isRecvFirstKcpMessage = true;
-			}
+			this.isConnected = true;
 			
 			Kcp.KcpInput(this.kcp, date, offset, length);
 			this.GetService().AddToUpdateNextTime(0, this.Id);
@@ -342,9 +351,9 @@ namespace ETModel
 					return;
 				}
 
-				byte[] buffer = this.packet.Bytes;
-				this.packet.Stream.SetLength(n);
-				this.packet.Stream.Seek(0, SeekOrigin.Begin);
+				byte[] buffer = this.memoryStream.GetBuffer();
+				this.memoryStream.SetLength(n);
+				this.memoryStream.Seek(0, SeekOrigin.Begin);
 				int count = Kcp.KcpRecv(this.kcp, buffer, ushort.MaxValue);
 				if (n != count)
 				{
@@ -357,7 +366,7 @@ namespace ETModel
 
 				this.lastRecvTime = this.GetService().TimeNow;
 
-				this.OnRead(packet);
+				this.OnRead(this.memoryStream);
 			}
 		}
 
@@ -379,11 +388,12 @@ namespace ETModel
 					return;
 				}
 
-				this.packet.Bytes.WriteTo(0, KcpProtocalType.MSG);
+				byte[] buffer = this.memoryStream.GetBuffer();
+				buffer.WriteTo(0, KcpProtocalType.MSG);
 				// 每个消息头部写下该channel的id;
-				this.packet.Bytes.WriteTo(1, this.LocalConn);
-				Marshal.Copy(bytes, this.packet.Bytes, 5, count);
-				this.socket.SendTo(this.packet.Bytes, 0, count + 5, SocketFlags.None, this.remoteEndPoint);
+				buffer.WriteTo(1, this.LocalConn);
+				Marshal.Copy(bytes, buffer, 5, count);
+				this.socket.SendTo(buffer, 0, count + 5, SocketFlags.None, this.remoteEndPoint);
 			}
 			catch (Exception e)
 			{
@@ -415,6 +425,16 @@ namespace ETModel
 
 		public override void Send(MemoryStream stream)
 		{
+			if (this.kcp != IntPtr.Zero)
+			{
+				// 检查等待发送的消息，如果超出两倍窗口大小，应该断开连接
+				if (Kcp.KcpWaitsnd(this.kcp) > 256 * 2)
+				{
+					this.OnError(ErrorCode.ERR_KcpWaitSendSizeTooLarge);
+					return;
+				}
+			}
+
 			ushort size = (ushort)(stream.Length - stream.Position);
 			byte[] bytes;
 			if (this.isConnected)

@@ -15,7 +15,7 @@ namespace ETModel
 		
 		public const int ERR_NotFoundActor = 200002;
 		public const int ERR_ActorNoMailBoxComponent = 200003;
-		public const int ERR_ActorTimeOut = 200004;
+		public const int ERR_ActorRemove = 200004;
 		public const int ERR_PacketParserError = 200005;
 
 		public const int ERR_AccountOrPasswordError = 200102;
@@ -33,6 +33,14 @@ namespace ETModel
 		public const int ERR_PeerDisconnect = 202008;
 		public const int ERR_SocketCantSend = 202009;
 		public const int ERR_SocketError = 202010;
+		public const int ERR_KcpWaitSendSizeTooLarge = 202011;
+
+		public const int ERR_WebsocketPeerReset = 203001;
+		public const int ERR_WebsocketMessageTooBig = 203002;
+		public const int ERR_WebsocketError = 203003;
+		public const int ERR_WebsocketConnectError = 203004;
+		public const int ERR_WebsocketSendError = 203005;
+		public const int ERR_WebsocketRecvError = 203006;
 
 		public static bool IsRpcNeedThrowException(int error)
 		{

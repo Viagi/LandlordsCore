@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -30,6 +31,9 @@ namespace ILRuntime.Runtime.Generated
             args = new Type[]{};
             method = type.GetMethod("get_CardSuits", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, get_CardSuits_2);
+            args = new Type[]{};
+            method = type.GetMethod("get_Parser", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, get_Parser_3);
 
 
         }
@@ -76,6 +80,17 @@ namespace ILRuntime.Runtime.Generated
             __intp.Free(ptr_of_this_method);
 
             var result_of_this_method = instance_of_this_method.CardSuits;
+
+            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+        }
+
+        static StackObject* get_Parser_3(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        {
+            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
+            StackObject* __ret = ILIntepreter.Minus(__esp, 0);
+
+
+            var result_of_this_method = ETModel.Card.Parser;
 
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }

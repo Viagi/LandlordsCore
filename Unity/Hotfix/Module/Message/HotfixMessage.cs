@@ -10,7 +10,7 @@ namespace ETHotfix {
 
   #region Messages
   public partial class C2R_Login : pb::IMessage {
-    private static readonly pb::MessageParser<C2R_Login> _parser = new pb::MessageParser<C2R_Login>(() => new C2R_Login());
+    private static readonly pb::MessageParser<C2R_Login> _parser = new pb::MessageParser<C2R_Login>(() => (C2R_Login)MessagePool.Instance.Fetch(typeof(C2R_Login)));
     public static pb::MessageParser<C2R_Login> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -101,7 +101,7 @@ namespace ETHotfix {
   }
 
   public partial class R2C_Login : pb::IMessage {
-    private static readonly pb::MessageParser<R2C_Login> _parser = new pb::MessageParser<R2C_Login>(() => new R2C_Login());
+    private static readonly pb::MessageParser<R2C_Login> _parser = new pb::MessageParser<R2C_Login>(() => (R2C_Login)MessagePool.Instance.Fetch(typeof(R2C_Login)));
     public static pb::MessageParser<R2C_Login> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -226,7 +226,7 @@ namespace ETHotfix {
   }
 
   public partial class C2G_LoginGate : pb::IMessage {
-    private static readonly pb::MessageParser<C2G_LoginGate> _parser = new pb::MessageParser<C2G_LoginGate>(() => new C2G_LoginGate());
+    private static readonly pb::MessageParser<C2G_LoginGate> _parser = new pb::MessageParser<C2G_LoginGate>(() => (C2G_LoginGate)MessagePool.Instance.Fetch(typeof(C2G_LoginGate)));
     public static pb::MessageParser<C2G_LoginGate> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -294,7 +294,7 @@ namespace ETHotfix {
   }
 
   public partial class G2C_LoginGate : pb::IMessage {
-    private static readonly pb::MessageParser<G2C_LoginGate> _parser = new pb::MessageParser<G2C_LoginGate>(() => new G2C_LoginGate());
+    private static readonly pb::MessageParser<G2C_LoginGate> _parser = new pb::MessageParser<G2C_LoginGate>(() => (G2C_LoginGate)MessagePool.Instance.Fetch(typeof(G2C_LoginGate)));
     public static pb::MessageParser<G2C_LoginGate> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -399,7 +399,7 @@ namespace ETHotfix {
   }
 
   public partial class G2C_TestHotfixMessage : pb::IMessage {
-    private static readonly pb::MessageParser<G2C_TestHotfixMessage> _parser = new pb::MessageParser<G2C_TestHotfixMessage>(() => new G2C_TestHotfixMessage());
+    private static readonly pb::MessageParser<G2C_TestHotfixMessage> _parser = new pb::MessageParser<G2C_TestHotfixMessage>(() => (G2C_TestHotfixMessage)MessagePool.Instance.Fetch(typeof(G2C_TestHotfixMessage)));
     public static pb::MessageParser<G2C_TestHotfixMessage> Parser { get { return _parser; } }
 
     private string info_ = "";
@@ -444,7 +444,7 @@ namespace ETHotfix {
   }
 
   public partial class C2M_TestActorRequest : pb::IMessage {
-    private static readonly pb::MessageParser<C2M_TestActorRequest> _parser = new pb::MessageParser<C2M_TestActorRequest>(() => new C2M_TestActorRequest());
+    private static readonly pb::MessageParser<C2M_TestActorRequest> _parser = new pb::MessageParser<C2M_TestActorRequest>(() => (C2M_TestActorRequest)MessagePool.Instance.Fetch(typeof(C2M_TestActorRequest)));
     public static pb::MessageParser<C2M_TestActorRequest> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -529,7 +529,7 @@ namespace ETHotfix {
   }
 
   public partial class M2C_TestActorResponse : pb::IMessage {
-    private static readonly pb::MessageParser<M2C_TestActorResponse> _parser = new pb::MessageParser<M2C_TestActorResponse>(() => new M2C_TestActorResponse());
+    private static readonly pb::MessageParser<M2C_TestActorResponse> _parser = new pb::MessageParser<M2C_TestActorResponse>(() => (M2C_TestActorResponse)MessagePool.Instance.Fetch(typeof(M2C_TestActorResponse)));
     public static pb::MessageParser<M2C_TestActorResponse> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -634,7 +634,7 @@ namespace ETHotfix {
   }
 
   public partial class PlayerInfo : pb::IMessage {
-    private static readonly pb::MessageParser<PlayerInfo> _parser = new pb::MessageParser<PlayerInfo>(() => new PlayerInfo());
+    private static readonly pb::MessageParser<PlayerInfo> _parser = new pb::MessageParser<PlayerInfo>(() => (PlayerInfo)MessagePool.Instance.Fetch(typeof(PlayerInfo)));
     public static pb::MessageParser<PlayerInfo> Parser { get { return _parser; } }
 
     public void WriteTo(pb::CodedOutputStream output) {
@@ -659,7 +659,7 @@ namespace ETHotfix {
   }
 
   public partial class C2G_PlayerInfo : pb::IMessage {
-    private static readonly pb::MessageParser<C2G_PlayerInfo> _parser = new pb::MessageParser<C2G_PlayerInfo>(() => new C2G_PlayerInfo());
+    private static readonly pb::MessageParser<C2G_PlayerInfo> _parser = new pb::MessageParser<C2G_PlayerInfo>(() => (C2G_PlayerInfo)MessagePool.Instance.Fetch(typeof(C2G_PlayerInfo)));
     public static pb::MessageParser<C2G_PlayerInfo> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -704,7 +704,7 @@ namespace ETHotfix {
   }
 
   public partial class G2C_PlayerInfo : pb::IMessage {
-    private static readonly pb::MessageParser<G2C_PlayerInfo> _parser = new pb::MessageParser<G2C_PlayerInfo>(() => new G2C_PlayerInfo());
+    private static readonly pb::MessageParser<G2C_PlayerInfo> _parser = new pb::MessageParser<G2C_PlayerInfo>(() => (G2C_PlayerInfo)MessagePool.Instance.Fetch(typeof(G2C_PlayerInfo)));
     public static pb::MessageParser<G2C_PlayerInfo> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -731,19 +731,55 @@ namespace ETHotfix {
       }
     }
 
-    private global::ETHotfix.PlayerInfo playerInfos_;
-    public global::ETHotfix.PlayerInfo PlayerInfos {
-      get { return playerInfos_; }
+    private global::ETHotfix.PlayerInfo playerInfo_;
+    public global::ETHotfix.PlayerInfo PlayerInfo {
+      get { return playerInfo_; }
       set {
-        playerInfos_ = value;
+        playerInfo_ = value;
       }
     }
 
+    private static readonly pb::FieldCodec<global::ETHotfix.PlayerInfo> _repeated_playerInfos_codec
+        = pb::FieldCodec.ForMessage(18, global::ETHotfix.PlayerInfo.Parser);
+    private pbc::RepeatedField<global::ETHotfix.PlayerInfo> playerInfos_ = new pbc::RepeatedField<global::ETHotfix.PlayerInfo>();
+    public pbc::RepeatedField<global::ETHotfix.PlayerInfo> PlayerInfos {
+      get { return playerInfos_; }
+      set { playerInfos_ = value; }
+    }
+
+    private static readonly pb::FieldCodec<string> _repeated_testRepeatedString_codec
+        = pb::FieldCodec.ForString(26);
+    private pbc::RepeatedField<string> testRepeatedString_ = new pbc::RepeatedField<string>();
+    public pbc::RepeatedField<string> TestRepeatedString {
+      get { return testRepeatedString_; }
+      set { testRepeatedString_ = value; }
+    }
+
+    private static readonly pb::FieldCodec<int> _repeated_testRepeatedInt32_codec
+        = pb::FieldCodec.ForInt32(34);
+    private pbc::RepeatedField<int> testRepeatedInt32_ = new pbc::RepeatedField<int>();
+    public pbc::RepeatedField<int> TestRepeatedInt32 {
+      get { return testRepeatedInt32_; }
+      set { testRepeatedInt32_ = value; }
+    }
+
+    private static readonly pb::FieldCodec<long> _repeated_testRepeatedInt64_codec
+        = pb::FieldCodec.ForInt64(42);
+    private pbc::RepeatedField<long> testRepeatedInt64_ = new pbc::RepeatedField<long>();
+    public pbc::RepeatedField<long> TestRepeatedInt64 {
+      get { return testRepeatedInt64_; }
+      set { testRepeatedInt64_ = value; }
+    }
+
     public void WriteTo(pb::CodedOutputStream output) {
-      if (playerInfos_ != null) {
+      if (playerInfo_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(PlayerInfos);
+        output.WriteMessage(PlayerInfo);
       }
+      playerInfos_.WriteTo(output, _repeated_playerInfos_codec);
+      testRepeatedString_.WriteTo(output, _repeated_testRepeatedString_codec);
+      testRepeatedInt32_.WriteTo(output, _repeated_testRepeatedInt32_codec);
+      testRepeatedInt64_.WriteTo(output, _repeated_testRepeatedInt64_codec);
       if (RpcId != 0) {
         output.WriteRawTag(208, 5);
         output.WriteInt32(RpcId);
@@ -769,13 +805,23 @@ namespace ETHotfix {
       if (Message.Length != 0) {
         size += 2 + pb::CodedOutputStream.ComputeStringSize(Message);
       }
-      if (playerInfos_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerInfos);
+      if (playerInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerInfo);
       }
+      size += playerInfos_.CalculateSize(_repeated_playerInfos_codec);
+      size += testRepeatedString_.CalculateSize(_repeated_testRepeatedString_codec);
+      size += testRepeatedInt32_.CalculateSize(_repeated_testRepeatedInt32_codec);
+      size += testRepeatedInt64_.CalculateSize(_repeated_testRepeatedInt64_codec);
       return size;
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
+      if (playerInfo_ != null) MessagePool.Instance.Recycle(playerInfo_); playerInfo_ = null;
+      for (int i = 0; i < playerInfos_.Count; i++) { MessagePool.Instance.Recycle(playerInfos_[i]); }
+      playerInfos_.Clear();
+      testRepeatedString_.Clear();
+      testRepeatedInt32_.Clear();
+      testRepeatedInt64_.Clear();
       rpcId_ = 0;
       error_ = 0;
       message_ = "";
@@ -786,10 +832,28 @@ namespace ETHotfix {
             input.SkipLastField();
             break;
           case 10: {
-            if (playerInfos_ == null) {
-              playerInfos_ = new global::ETHotfix.PlayerInfo();
+            if (playerInfo_ == null) {
+              playerInfo_ = new global::ETHotfix.PlayerInfo();
             }
-            input.ReadMessage(playerInfos_);
+            input.ReadMessage(playerInfo_);
+            break;
+          }
+          case 18: {
+            playerInfos_.AddEntriesFrom(input, _repeated_playerInfos_codec);
+            break;
+          }
+          case 26: {
+            testRepeatedString_.AddEntriesFrom(input, _repeated_testRepeatedString_codec);
+            break;
+          }
+          case 34:
+          case 32: {
+            testRepeatedInt32_.AddEntriesFrom(input, _repeated_testRepeatedInt32_codec);
+            break;
+          }
+          case 42:
+          case 40: {
+            testRepeatedInt64_.AddEntriesFrom(input, _repeated_testRepeatedInt64_codec);
             break;
           }
           case 720: {
@@ -811,7 +875,7 @@ namespace ETHotfix {
   }
 
   public partial class C2R_Login_Req : pb::IMessage {
-    private static readonly pb::MessageParser<C2R_Login_Req> _parser = new pb::MessageParser<C2R_Login_Req>(() => new C2R_Login_Req());
+    private static readonly pb::MessageParser<C2R_Login_Req> _parser = new pb::MessageParser<C2R_Login_Req>(() => (C2R_Login_Req)MessagePool.Instance.Fetch(typeof(C2R_Login_Req)));
     public static pb::MessageParser<C2R_Login_Req> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -896,7 +960,7 @@ namespace ETHotfix {
   }
 
   public partial class R2C_Login_Ack : pb::IMessage {
-    private static readonly pb::MessageParser<R2C_Login_Ack> _parser = new pb::MessageParser<R2C_Login_Ack>(() => new R2C_Login_Ack());
+    private static readonly pb::MessageParser<R2C_Login_Ack> _parser = new pb::MessageParser<R2C_Login_Ack>(() => (R2C_Login_Ack)MessagePool.Instance.Fetch(typeof(R2C_Login_Ack)));
     public static pb::MessageParser<R2C_Login_Ack> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -1021,7 +1085,7 @@ namespace ETHotfix {
   }
 
   public partial class C2R_Register_Req : pb::IMessage {
-    private static readonly pb::MessageParser<C2R_Register_Req> _parser = new pb::MessageParser<C2R_Register_Req>(() => new C2R_Register_Req());
+    private static readonly pb::MessageParser<C2R_Register_Req> _parser = new pb::MessageParser<C2R_Register_Req>(() => (C2R_Register_Req)MessagePool.Instance.Fetch(typeof(C2R_Register_Req)));
     public static pb::MessageParser<C2R_Register_Req> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -1106,7 +1170,7 @@ namespace ETHotfix {
   }
 
   public partial class R2C_Register_Ack : pb::IMessage {
-    private static readonly pb::MessageParser<R2C_Register_Ack> _parser = new pb::MessageParser<R2C_Register_Ack>(() => new R2C_Register_Ack());
+    private static readonly pb::MessageParser<R2C_Register_Ack> _parser = new pb::MessageParser<R2C_Register_Ack>(() => (R2C_Register_Ack)MessagePool.Instance.Fetch(typeof(R2C_Register_Ack)));
     public static pb::MessageParser<R2C_Register_Ack> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -1191,7 +1255,7 @@ namespace ETHotfix {
   }
 
   public partial class C2G_LoginGate_Req : pb::IMessage {
-    private static readonly pb::MessageParser<C2G_LoginGate_Req> _parser = new pb::MessageParser<C2G_LoginGate_Req>(() => new C2G_LoginGate_Req());
+    private static readonly pb::MessageParser<C2G_LoginGate_Req> _parser = new pb::MessageParser<C2G_LoginGate_Req>(() => (C2G_LoginGate_Req)MessagePool.Instance.Fetch(typeof(C2G_LoginGate_Req)));
     public static pb::MessageParser<C2G_LoginGate_Req> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -1256,7 +1320,7 @@ namespace ETHotfix {
   }
 
   public partial class G2C_LoginGate_Ack : pb::IMessage {
-    private static readonly pb::MessageParser<G2C_LoginGate_Ack> _parser = new pb::MessageParser<G2C_LoginGate_Ack>(() => new G2C_LoginGate_Ack());
+    private static readonly pb::MessageParser<G2C_LoginGate_Ack> _parser = new pb::MessageParser<G2C_LoginGate_Ack>(() => (G2C_LoginGate_Ack)MessagePool.Instance.Fetch(typeof(G2C_LoginGate_Ack)));
     public static pb::MessageParser<G2C_LoginGate_Ack> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -1381,7 +1445,7 @@ namespace ETHotfix {
   }
 
   public partial class C2G_GetUserInfo_Req : pb::IMessage {
-    private static readonly pb::MessageParser<C2G_GetUserInfo_Req> _parser = new pb::MessageParser<C2G_GetUserInfo_Req>(() => new C2G_GetUserInfo_Req());
+    private static readonly pb::MessageParser<C2G_GetUserInfo_Req> _parser = new pb::MessageParser<C2G_GetUserInfo_Req>(() => (C2G_GetUserInfo_Req)MessagePool.Instance.Fetch(typeof(C2G_GetUserInfo_Req)));
     public static pb::MessageParser<C2G_GetUserInfo_Req> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -1446,7 +1510,7 @@ namespace ETHotfix {
   }
 
   public partial class G2C_GetUserInfo_Ack : pb::IMessage {
-    private static readonly pb::MessageParser<G2C_GetUserInfo_Ack> _parser = new pb::MessageParser<G2C_GetUserInfo_Ack>(() => new G2C_GetUserInfo_Ack());
+    private static readonly pb::MessageParser<G2C_GetUserInfo_Ack> _parser = new pb::MessageParser<G2C_GetUserInfo_Ack>(() => (G2C_GetUserInfo_Ack)MessagePool.Instance.Fetch(typeof(G2C_GetUserInfo_Ack)));
     public static pb::MessageParser<G2C_GetUserInfo_Ack> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -1611,7 +1675,7 @@ namespace ETHotfix {
   }
 
   public partial class C2G_StartMatch_Req : pb::IMessage {
-    private static readonly pb::MessageParser<C2G_StartMatch_Req> _parser = new pb::MessageParser<C2G_StartMatch_Req>(() => new C2G_StartMatch_Req());
+    private static readonly pb::MessageParser<C2G_StartMatch_Req> _parser = new pb::MessageParser<C2G_StartMatch_Req>(() => (C2G_StartMatch_Req)MessagePool.Instance.Fetch(typeof(C2G_StartMatch_Req)));
     public static pb::MessageParser<C2G_StartMatch_Req> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -1656,7 +1720,7 @@ namespace ETHotfix {
   }
 
   public partial class G2C_StartMatch_Ack : pb::IMessage {
-    private static readonly pb::MessageParser<G2C_StartMatch_Ack> _parser = new pb::MessageParser<G2C_StartMatch_Ack>(() => new G2C_StartMatch_Ack());
+    private static readonly pb::MessageParser<G2C_StartMatch_Ack> _parser = new pb::MessageParser<G2C_StartMatch_Ack>(() => (G2C_StartMatch_Ack)MessagePool.Instance.Fetch(typeof(G2C_StartMatch_Ack)));
     public static pb::MessageParser<G2C_StartMatch_Ack> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -1741,7 +1805,7 @@ namespace ETHotfix {
   }
 
   public partial class C2G_ReturnLobby_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<C2G_ReturnLobby_Ntt> _parser = new pb::MessageParser<C2G_ReturnLobby_Ntt>(() => new C2G_ReturnLobby_Ntt());
+    private static readonly pb::MessageParser<C2G_ReturnLobby_Ntt> _parser = new pb::MessageParser<C2G_ReturnLobby_Ntt>(() => (C2G_ReturnLobby_Ntt)MessagePool.Instance.Fetch(typeof(C2G_ReturnLobby_Ntt)));
     public static pb::MessageParser<C2G_ReturnLobby_Ntt> Parser { get { return _parser; } }
 
     public void WriteTo(pb::CodedOutputStream output) {
@@ -1766,7 +1830,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GamerReady_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GamerReady_Ntt> _parser = new pb::MessageParser<Actor_GamerReady_Ntt>(() => new Actor_GamerReady_Ntt());
+    private static readonly pb::MessageParser<Actor_GamerReady_Ntt> _parser = new pb::MessageParser<Actor_GamerReady_Ntt>(() => (Actor_GamerReady_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GamerReady_Ntt)));
     public static pb::MessageParser<Actor_GamerReady_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -1851,7 +1915,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GamerGrabLandlordSelect_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GamerGrabLandlordSelect_Ntt> _parser = new pb::MessageParser<Actor_GamerGrabLandlordSelect_Ntt>(() => new Actor_GamerGrabLandlordSelect_Ntt());
+    private static readonly pb::MessageParser<Actor_GamerGrabLandlordSelect_Ntt> _parser = new pb::MessageParser<Actor_GamerGrabLandlordSelect_Ntt>(() => (Actor_GamerGrabLandlordSelect_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GamerGrabLandlordSelect_Ntt)));
     public static pb::MessageParser<Actor_GamerGrabLandlordSelect_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -1956,7 +2020,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GamerPlayCard_Req : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GamerPlayCard_Req> _parser = new pb::MessageParser<Actor_GamerPlayCard_Req>(() => new Actor_GamerPlayCard_Req());
+    private static readonly pb::MessageParser<Actor_GamerPlayCard_Req> _parser = new pb::MessageParser<Actor_GamerPlayCard_Req>(() => (Actor_GamerPlayCard_Req)MessagePool.Instance.Fetch(typeof(Actor_GamerPlayCard_Req)));
     public static pb::MessageParser<Actor_GamerPlayCard_Req> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -2008,6 +2072,7 @@ namespace ETHotfix {
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
+      for (int i = 0; i < cards_.Count; i++) { MessagePool.Instance.Recycle(cards_[i]); }
       cards_.Clear();
       rpcId_ = 0;
       actorId_ = 0;
@@ -2036,7 +2101,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GamerPlayCard_Ack : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GamerPlayCard_Ack> _parser = new pb::MessageParser<Actor_GamerPlayCard_Ack>(() => new Actor_GamerPlayCard_Ack());
+    private static readonly pb::MessageParser<Actor_GamerPlayCard_Ack> _parser = new pb::MessageParser<Actor_GamerPlayCard_Ack>(() => (Actor_GamerPlayCard_Ack)MessagePool.Instance.Fetch(typeof(Actor_GamerPlayCard_Ack)));
     public static pb::MessageParser<Actor_GamerPlayCard_Ack> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -2121,7 +2186,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GamerPlayCard_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GamerPlayCard_Ntt> _parser = new pb::MessageParser<Actor_GamerPlayCard_Ntt>(() => new Actor_GamerPlayCard_Ntt());
+    private static readonly pb::MessageParser<Actor_GamerPlayCard_Ntt> _parser = new pb::MessageParser<Actor_GamerPlayCard_Ntt>(() => (Actor_GamerPlayCard_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GamerPlayCard_Ntt)));
     public static pb::MessageParser<Actor_GamerPlayCard_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -2189,6 +2254,7 @@ namespace ETHotfix {
 
     public void MergeFrom(pb::CodedInputStream input) {
       userID_ = 0;
+      for (int i = 0; i < cards_.Count; i++) { MessagePool.Instance.Recycle(cards_[i]); }
       cards_.Clear();
       rpcId_ = 0;
       actorId_ = 0;
@@ -2221,7 +2287,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GamerPrompt_Req : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GamerPrompt_Req> _parser = new pb::MessageParser<Actor_GamerPrompt_Req>(() => new Actor_GamerPrompt_Req());
+    private static readonly pb::MessageParser<Actor_GamerPrompt_Req> _parser = new pb::MessageParser<Actor_GamerPrompt_Req>(() => (Actor_GamerPrompt_Req)MessagePool.Instance.Fetch(typeof(Actor_GamerPrompt_Req)));
     public static pb::MessageParser<Actor_GamerPrompt_Req> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -2286,7 +2352,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GamerPrompt_Ack : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GamerPrompt_Ack> _parser = new pb::MessageParser<Actor_GamerPrompt_Ack>(() => new Actor_GamerPrompt_Ack());
+    private static readonly pb::MessageParser<Actor_GamerPrompt_Ack> _parser = new pb::MessageParser<Actor_GamerPrompt_Ack>(() => (Actor_GamerPrompt_Ack)MessagePool.Instance.Fetch(typeof(Actor_GamerPrompt_Ack)));
     public static pb::MessageParser<Actor_GamerPrompt_Ack> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -2353,6 +2419,7 @@ namespace ETHotfix {
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
+      for (int i = 0; i < cards_.Count; i++) { MessagePool.Instance.Recycle(cards_[i]); }
       cards_.Clear();
       rpcId_ = 0;
       error_ = 0;
@@ -2386,7 +2453,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GamerDontPlay_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GamerDontPlay_Ntt> _parser = new pb::MessageParser<Actor_GamerDontPlay_Ntt>(() => new Actor_GamerDontPlay_Ntt());
+    private static readonly pb::MessageParser<Actor_GamerDontPlay_Ntt> _parser = new pb::MessageParser<Actor_GamerDontPlay_Ntt>(() => (Actor_GamerDontPlay_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GamerDontPlay_Ntt)));
     public static pb::MessageParser<Actor_GamerDontPlay_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -2471,7 +2538,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_Trusteeship_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_Trusteeship_Ntt> _parser = new pb::MessageParser<Actor_Trusteeship_Ntt>(() => new Actor_Trusteeship_Ntt());
+    private static readonly pb::MessageParser<Actor_Trusteeship_Ntt> _parser = new pb::MessageParser<Actor_Trusteeship_Ntt>(() => (Actor_Trusteeship_Ntt)MessagePool.Instance.Fetch(typeof(Actor_Trusteeship_Ntt)));
     public static pb::MessageParser<Actor_Trusteeship_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -2576,7 +2643,7 @@ namespace ETHotfix {
   }
 
   public partial class GamerInfo : pb::IMessage {
-    private static readonly pb::MessageParser<GamerInfo> _parser = new pb::MessageParser<GamerInfo>(() => new GamerInfo());
+    private static readonly pb::MessageParser<GamerInfo> _parser = new pb::MessageParser<GamerInfo>(() => (GamerInfo)MessagePool.Instance.Fetch(typeof(GamerInfo)));
     public static pb::MessageParser<GamerInfo> Parser { get { return _parser; } }
 
     private long userID_;
@@ -2641,7 +2708,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GamerEnterRoom_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GamerEnterRoom_Ntt> _parser = new pb::MessageParser<Actor_GamerEnterRoom_Ntt>(() => new Actor_GamerEnterRoom_Ntt());
+    private static readonly pb::MessageParser<Actor_GamerEnterRoom_Ntt> _parser = new pb::MessageParser<Actor_GamerEnterRoom_Ntt>(() => (Actor_GamerEnterRoom_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GamerEnterRoom_Ntt)));
     public static pb::MessageParser<Actor_GamerEnterRoom_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -2693,6 +2760,7 @@ namespace ETHotfix {
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
+      for (int i = 0; i < gamers_.Count; i++) { MessagePool.Instance.Recycle(gamers_[i]); }
       gamers_.Clear();
       rpcId_ = 0;
       actorId_ = 0;
@@ -2721,7 +2789,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GamerExitRoom_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GamerExitRoom_Ntt> _parser = new pb::MessageParser<Actor_GamerExitRoom_Ntt>(() => new Actor_GamerExitRoom_Ntt());
+    private static readonly pb::MessageParser<Actor_GamerExitRoom_Ntt> _parser = new pb::MessageParser<Actor_GamerExitRoom_Ntt>(() => (Actor_GamerExitRoom_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GamerExitRoom_Ntt)));
     public static pb::MessageParser<Actor_GamerExitRoom_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -2806,7 +2874,7 @@ namespace ETHotfix {
   }
 
   public partial class GamerState : pb::IMessage {
-    private static readonly pb::MessageParser<GamerState> _parser = new pb::MessageParser<GamerState>(() => new GamerState());
+    private static readonly pb::MessageParser<GamerState> _parser = new pb::MessageParser<GamerState>(() => (GamerState)MessagePool.Instance.Fetch(typeof(GamerState)));
     public static pb::MessageParser<GamerState> Parser { get { return _parser; } }
 
     private long userID_;
@@ -2890,7 +2958,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GamerReconnect_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GamerReconnect_Ntt> _parser = new pb::MessageParser<Actor_GamerReconnect_Ntt>(() => new Actor_GamerReconnect_Ntt());
+    private static readonly pb::MessageParser<Actor_GamerReconnect_Ntt> _parser = new pb::MessageParser<Actor_GamerReconnect_Ntt>(() => (Actor_GamerReconnect_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GamerReconnect_Ntt)));
     public static pb::MessageParser<Actor_GamerReconnect_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -2994,8 +3062,11 @@ namespace ETHotfix {
     public void MergeFrom(pb::CodedInputStream input) {
       userId_ = 0;
       multiples_ = 0;
+      for (int i = 0; i < cards_.Count; i++) { MessagePool.Instance.Recycle(cards_[i]); }
       cards_.Clear();
+      for (int i = 0; i < gamersState_.Count; i++) { MessagePool.Instance.Recycle(gamersState_[i]); }
       gamersState_.Clear();
+      for (int i = 0; i < lordCards_.Count; i++) { MessagePool.Instance.Recycle(lordCards_[i]); }
       lordCards_.Clear();
       rpcId_ = 0;
       actorId_ = 0;
@@ -3040,7 +3111,7 @@ namespace ETHotfix {
   }
 
   public partial class GamerCardNum : pb::IMessage {
-    private static readonly pb::MessageParser<GamerCardNum> _parser = new pb::MessageParser<GamerCardNum>(() => new GamerCardNum());
+    private static readonly pb::MessageParser<GamerCardNum> _parser = new pb::MessageParser<GamerCardNum>(() => (GamerCardNum)MessagePool.Instance.Fetch(typeof(GamerCardNum)));
     public static pb::MessageParser<GamerCardNum> Parser { get { return _parser; } }
 
     private long userID_;
@@ -3105,7 +3176,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GameStart_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GameStart_Ntt> _parser = new pb::MessageParser<Actor_GameStart_Ntt>(() => new Actor_GameStart_Ntt());
+    private static readonly pb::MessageParser<Actor_GameStart_Ntt> _parser = new pb::MessageParser<Actor_GameStart_Ntt>(() => (Actor_GameStart_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GameStart_Ntt)));
     public static pb::MessageParser<Actor_GameStart_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -3167,7 +3238,9 @@ namespace ETHotfix {
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
+      for (int i = 0; i < handCards_.Count; i++) { MessagePool.Instance.Recycle(handCards_[i]); }
       handCards_.Clear();
+      for (int i = 0; i < gamersCardNum_.Count; i++) { MessagePool.Instance.Recycle(gamersCardNum_[i]); }
       gamersCardNum_.Clear();
       rpcId_ = 0;
       actorId_ = 0;
@@ -3200,7 +3273,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_AuthorityGrabLandlord_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_AuthorityGrabLandlord_Ntt> _parser = new pb::MessageParser<Actor_AuthorityGrabLandlord_Ntt>(() => new Actor_AuthorityGrabLandlord_Ntt());
+    private static readonly pb::MessageParser<Actor_AuthorityGrabLandlord_Ntt> _parser = new pb::MessageParser<Actor_AuthorityGrabLandlord_Ntt>(() => (Actor_AuthorityGrabLandlord_Ntt)MessagePool.Instance.Fetch(typeof(Actor_AuthorityGrabLandlord_Ntt)));
     public static pb::MessageParser<Actor_AuthorityGrabLandlord_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -3285,7 +3358,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_AuthorityPlayCard_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_AuthorityPlayCard_Ntt> _parser = new pb::MessageParser<Actor_AuthorityPlayCard_Ntt>(() => new Actor_AuthorityPlayCard_Ntt());
+    private static readonly pb::MessageParser<Actor_AuthorityPlayCard_Ntt> _parser = new pb::MessageParser<Actor_AuthorityPlayCard_Ntt>(() => (Actor_AuthorityPlayCard_Ntt)MessagePool.Instance.Fetch(typeof(Actor_AuthorityPlayCard_Ntt)));
     public static pb::MessageParser<Actor_AuthorityPlayCard_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -3390,7 +3463,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_SetMultiples_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_SetMultiples_Ntt> _parser = new pb::MessageParser<Actor_SetMultiples_Ntt>(() => new Actor_SetMultiples_Ntt());
+    private static readonly pb::MessageParser<Actor_SetMultiples_Ntt> _parser = new pb::MessageParser<Actor_SetMultiples_Ntt>(() => (Actor_SetMultiples_Ntt)MessagePool.Instance.Fetch(typeof(Actor_SetMultiples_Ntt)));
     public static pb::MessageParser<Actor_SetMultiples_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -3475,7 +3548,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_SetLandlord_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_SetLandlord_Ntt> _parser = new pb::MessageParser<Actor_SetLandlord_Ntt>(() => new Actor_SetLandlord_Ntt());
+    private static readonly pb::MessageParser<Actor_SetLandlord_Ntt> _parser = new pb::MessageParser<Actor_SetLandlord_Ntt>(() => (Actor_SetLandlord_Ntt)MessagePool.Instance.Fetch(typeof(Actor_SetLandlord_Ntt)));
     public static pb::MessageParser<Actor_SetLandlord_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -3543,6 +3616,7 @@ namespace ETHotfix {
 
     public void MergeFrom(pb::CodedInputStream input) {
       userID_ = 0;
+      for (int i = 0; i < lordCards_.Count; i++) { MessagePool.Instance.Recycle(lordCards_[i]); }
       lordCards_.Clear();
       rpcId_ = 0;
       actorId_ = 0;
@@ -3575,7 +3649,7 @@ namespace ETHotfix {
   }
 
   public partial class GamerScore : pb::IMessage {
-    private static readonly pb::MessageParser<GamerScore> _parser = new pb::MessageParser<GamerScore>(() => new GamerScore());
+    private static readonly pb::MessageParser<GamerScore> _parser = new pb::MessageParser<GamerScore>(() => (GamerScore)MessagePool.Instance.Fetch(typeof(GamerScore)));
     public static pb::MessageParser<GamerScore> Parser { get { return _parser; } }
 
     private long userID_;
@@ -3640,7 +3714,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_Gameover_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_Gameover_Ntt> _parser = new pb::MessageParser<Actor_Gameover_Ntt>(() => new Actor_Gameover_Ntt());
+    private static readonly pb::MessageParser<Actor_Gameover_Ntt> _parser = new pb::MessageParser<Actor_Gameover_Ntt>(() => (Actor_Gameover_Ntt)MessagePool.Instance.Fetch(typeof(Actor_Gameover_Ntt)));
     public static pb::MessageParser<Actor_Gameover_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;
@@ -3739,6 +3813,7 @@ namespace ETHotfix {
     public void MergeFrom(pb::CodedInputStream input) {
       basePointPerMatch_ = 0;
       multiples_ = 0;
+      for (int i = 0; i < gamersScore_.Count; i++) { MessagePool.Instance.Recycle(gamersScore_[i]); }
       gamersScore_.Clear();
       rpcId_ = 0;
       actorId_ = 0;
@@ -3779,7 +3854,7 @@ namespace ETHotfix {
   }
 
   public partial class Actor_GamerMoneyLess_Ntt : pb::IMessage {
-    private static readonly pb::MessageParser<Actor_GamerMoneyLess_Ntt> _parser = new pb::MessageParser<Actor_GamerMoneyLess_Ntt>(() => new Actor_GamerMoneyLess_Ntt());
+    private static readonly pb::MessageParser<Actor_GamerMoneyLess_Ntt> _parser = new pb::MessageParser<Actor_GamerMoneyLess_Ntt>(() => (Actor_GamerMoneyLess_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GamerMoneyLess_Ntt)));
     public static pb::MessageParser<Actor_GamerMoneyLess_Ntt> Parser { get { return _parser; } }
 
     private int rpcId_;

@@ -20,6 +20,24 @@
     <Compile Include="..\..\Unity\Assets\Landlords\Scripts\Object\Card.cs" Link="Landlords\Object\Card.cs" />
     <Compile Include="..\..\Unity\Assets\Landlords\Scripts\Object\Type.cs" Link="Landlords\Object\Type.cs" />
     <Compile Remove="Libs\**" />
+    <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\IClientActorMessage.cs">
+      <Link>Module\Message\IClientActorMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\MessagePool.cs">
+      <Link>Module\Message\MessagePool\ETModel\MessagePool.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\NetOuterComponent.cs">
+      <Link>Module\Message\NetOuterComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\Network\WebSocket\WChannel.cs">
+      <Link>Module\Message\Network\WebSocket\WChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\Network\WebSocket\WService.cs">
+      <Link>Module\Message\Network\WebSocket\WService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Unity\Hotfix\Module\Message\MessagePool.cs">
+      <Link>Module\Message\MessagePool\ETHotfix\MessagePool.cs</Link>
+    </Compile>
     <EmbeddedResource Remove="Libs\**" />
     <None Remove="Libs\**" />
   </ItemGroup>
@@ -77,7 +95,6 @@
     <Compile Include="..\..\Unity\Assets\Scripts\Component\TimerComponent.cs" Link="Component\TimerComponent.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Config\ACategory.cs" Link="Module\Config\ACategory.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Config\ConfigAttribute.cs" Link="Module\Config\ConfigAttribute.cs" />
-    <Compile Include="..\..\Unity\Assets\Scripts\Module\Config\ConfigComponent.cs" Link="Module\Config\ConfigComponent.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Config\IConfig.cs" Link="Module\Config\IConfig.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\FrameSync\FrameMessage.cs" Link="Module\FrameSync\FrameMessage.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\FrameSync\FrameOpcode.cs" Link="Module\FrameSync\FrameOpcode.cs" />
@@ -139,6 +156,7 @@
     <Folder Include="Landlords\Message\" />
     <Folder Include="Module\Message\Network\KCP\" />
     <Folder Include="Module\Message\Network\TCP\" />
+    <Folder Include="Module\Message\MessagePool\" />
     <Folder Include="Module\Numeric\" />
   </ItemGroup>
 </Project>

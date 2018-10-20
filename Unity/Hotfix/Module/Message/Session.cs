@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace ETHotfix
 		{
 			self.session = session;
 			SessionCallbackComponent sessionComponent = self.session.AddComponent<SessionCallbackComponent>();
-			sessionComponent.MessageCallback = (s, p) => { self.Run(s, p); };
+			sessionComponent.MessageCallback = (s, flag, opcode, memoryStream) => { self.Run(s, flag, opcode, memoryStream); };
 			sessionComponent.DisposeCallback = s => { self.Dispose(); };
 		}
 	}
@@ -48,14 +49,11 @@ namespace ETHotfix
 			this.session.Dispose();
 		}
 
-		public void Run(ETModel.Session s, Packet packet)
+		public void Run(ETModel.Session s, byte flag, ushort opcode, MemoryStream memoryStream)
 		{
-			ushort opcode = packet.Opcode;
-			byte flag = packet.Flag;
-
 			OpcodeTypeComponent opcodeTypeComponent = Game.Scene.GetComponent<OpcodeTypeComponent>();
 			object instance = opcodeTypeComponent.GetInstance(opcode);
-			object message = this.session.Network.MessagePacker.DeserializeFrom(instance, packet.Stream);
+			object message = this.session.Network.MessagePacker.DeserializeFrom(instance, memoryStream);
 
 			if ((flag & 0x01) > 0)
 			{

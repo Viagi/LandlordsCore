@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using Microsoft.IO;
 
 namespace ETModel
 {
@@ -19,21 +20,26 @@ namespace ETModel
 		private readonly CircularBuffer recvBuffer = new CircularBuffer();
 		private readonly CircularBuffer sendBuffer = new CircularBuffer();
 
+		private readonly MemoryStream memoryStream;
+
 		private bool isSending;
+
+		private bool isRecving;
 
 		private bool isConnected;
 
-		public readonly PacketParser parser;
+		private readonly PacketParser parser;
 
-		public readonly byte[] cache = new byte[2];
-
+		private readonly byte[] cache = new byte[2];
+		
 		public TChannel(IPEndPoint ipEndPoint, TService service): base(service, ChannelType.Connect)
 		{
 			this.InstanceId = IdGenerater.GenerateId();
+			this.memoryStream = this.GetService().MemoryStreamManager.GetStream("message", ushort.MaxValue);
 			
 			this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 			this.socket.NoDelay = true;
-			this.parser = new PacketParser(this.recvBuffer);
+			this.parser = new PacketParser(this.recvBuffer, this.memoryStream);
 			this.innArgs.Completed += this.OnComplete;
 			this.outArgs.Completed += this.OnComplete;
 
@@ -46,10 +52,11 @@ namespace ETModel
 		public TChannel(Socket socket, TService service): base(service, ChannelType.Accept)
 		{
 			this.InstanceId = IdGenerater.GenerateId();
+			this.memoryStream = this.GetService().MemoryStreamManager.GetStream("message", ushort.MaxValue);
 			
 			this.socket = socket;
 			this.socket.NoDelay = true;
-			this.parser = new PacketParser(this.recvBuffer);
+			this.parser = new PacketParser(this.recvBuffer, this.memoryStream);
 			this.innArgs.Completed += this.OnComplete;
 			this.outArgs.Completed += this.OnComplete;
 
@@ -74,13 +81,19 @@ namespace ETModel
 			this.innArgs = null;
 			this.outArgs = null;
 			this.socket = null;
+			this.memoryStream.Dispose();
+		}
+		
+		private TService GetService()
+		{
+			return (TService)this.service;
 		}
 
 		public override MemoryStream Stream
 		{
 			get
 			{
-				return this.parser.packet.Stream;
+				return this.memoryStream;
 			}
 		}
 
@@ -91,9 +104,14 @@ namespace ETModel
 				this.ConnectAsync(this.RemoteAddress);
 				return;
 			}
-			
-			this.StartRecv();
-			this.StartSend();
+
+			if (!this.isRecving)
+			{
+				this.isRecving = true;
+				this.StartRecv();
+			}
+
+			this.GetService().MarkNeedStartSend(this.Id);
 		}
 		
 		public override void Send(MemoryStream stream)
@@ -107,10 +125,7 @@ namespace ETModel
 			this.sendBuffer.Write(this.cache, 0, this.cache.Length);
 			this.sendBuffer.ReadFrom(stream);
 
-			if(!this.isSending)
-			{
-				this.StartSend();
-			}
+			this.GetService().MarkNeedStartSend(this.Id);
 		}
 
 		private void OnComplete(object sender, SocketAsyncEventArgs e)
@@ -161,8 +176,7 @@ namespace ETModel
 			e.RemoteEndPoint = null;
 			this.isConnected = true;
 			
-			this.StartRecv();
-			this.StartSend();
+			this.Start();
 		}
 
 		private void OnDisconnectComplete(object o)
@@ -211,7 +225,7 @@ namespace ETModel
 
 			if (e.BytesTransferred == 0)
 			{
-				this.OnError((int)e.SocketError);
+				this.OnError(ErrorCode.ERR_PeerDisconnect);
 				return;
 			}
 
@@ -230,10 +244,10 @@ namespace ETModel
 					break;
 				}
 
-				Packet packet = this.parser.GetPacket();
+				MemoryStream stream = this.parser.GetPacket();
 				try
 				{
-					this.OnRead(packet);
+					this.OnRead(stream);
 				}
 				catch (Exception exception)
 				{
@@ -249,10 +263,19 @@ namespace ETModel
 			this.StartRecv();
 		}
 
-		private void StartSend()
+		public bool IsSending => this.isSending;
+
+		public void StartSend()
 		{
 			if(!this.isConnected)
 			{
+				return;
+			}
+			
+			// 没有数据需要发送
+			if (this.sendBuffer.Length == 0)
+			{
+				this.isSending = false;
 				return;
 			}
 
@@ -297,18 +320,18 @@ namespace ETModel
 				this.OnError((int)e.SocketError);
 				return;
 			}
+			
+			if (e.BytesTransferred == 0)
+			{
+				this.OnError(ErrorCode.ERR_PeerDisconnect);
+				return;
+			}
+			
 			this.sendBuffer.FirstIndex += e.BytesTransferred;
 			if (this.sendBuffer.FirstIndex == this.sendBuffer.ChunkSize)
 			{
 				this.sendBuffer.FirstIndex = 0;
 				this.sendBuffer.RemoveFirst();
-			}
-			
-			// 没有数据需要发送
-			if (this.sendBuffer.Length == 0)
-			{
-				this.isSending = false;
-				return;
 			}
 			
 			this.StartSend();

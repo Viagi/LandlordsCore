@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using Microsoft.IO;
+
 #if SERVER
 using System.Runtime.InteropServices;
 #endif
@@ -34,12 +36,12 @@ namespace ETModel
 		private readonly byte[] cache = new byte[8192];
 
 		private readonly Queue<long> removedChannels = new Queue<long>();
+		
+		public RecyclableMemoryStreamManager MemoryStreamManager = new RecyclableMemoryStreamManager();
 
 		#region 连接相关
 		// 记录等待连接的channel，10秒后或者第一个消息过来才会从这个dict中删除
 		private readonly Dictionary<uint, KChannel> waitConnectChannels = new Dictionary<uint, KChannel>();
-		private readonly List<uint> connectTimeoutChannels = new List<uint>();
-		private uint lastCheckTime;
 		#endregion
 
 		#region 定时器相关
@@ -55,8 +57,12 @@ namespace ETModel
 
 		private EndPoint ipEndPoint = new IPEndPoint(IPAddress.Any, 0);
 
-		public KService(IPEndPoint ipEndPoint)
+		public KService(IPEndPoint ipEndPoint, Action<AChannel> acceptCallback)
 		{
+			this.InstanceId = ETModel.IdGenerater.GenerateId();
+			
+			this.AcceptCallback += acceptCallback;
+			
 			this.StartTime = TimeHelper.ClientNow();
 			this.TimeNow = (uint)(TimeHelper.ClientNow() - this.StartTime);
 			this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -76,6 +82,8 @@ namespace ETModel
 
 		public KService()
 		{
+			this.InstanceId = ETModel.IdGenerater.GenerateId();
+			
 			this.StartTime = TimeHelper.ClientNow();
 			this.TimeNow = (uint)(TimeHelper.ClientNow() - this.StartTime);
 			this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -110,10 +118,6 @@ namespace ETModel
 			this.socket.Close();
 			this.socket = null;
 			Instance = null;
-		}
-
-		public override void Start()
-		{
 		}
 
 		public void Recv()
@@ -162,10 +166,9 @@ namespace ETModel
 
 						remoteConn = BitConverter.ToUInt32(this.cache, 1);
 
-						// 如果等待连接状态,则重新响应请求
+						// 如果已经收到连接，则忽略
 						if (this.waitConnectChannels.TryGetValue(remoteConn, out kChannel))
 						{
-							kChannel.HandleAccept(remoteConn);
 							break;
 						}
 
@@ -173,8 +176,6 @@ namespace ETModel
 						kChannel = new KChannel(localConn, remoteConn, this.socket, acceptIpEndPoint, this);
 						this.localConnChannels[kChannel.LocalConn] = kChannel;
 						this.waitConnectChannels[remoteConn] = kChannel;
-
-						kChannel.HandleAccept(remoteConn);
 
 						this.OnAccept(kChannel);
 
@@ -224,6 +225,9 @@ namespace ETModel
 						// 处理chanel
 						remoteConn = BitConverter.ToUInt32(this.cache, 1);
 						localConn = BitConverter.ToUInt32(this.cache, 5);
+
+						this.waitConnectChannels.Remove(remoteConn);
+						
 						kChannel = this.GetKChannel(localConn);
 						if (kChannel != null)
 						{
@@ -247,11 +251,6 @@ namespace ETModel
 			}
 
 			return (KChannel)aChannel;
-		}
-
-		public void RemoveFromWaitConnectChannels(uint remoteConn)
-		{
-			this.waitConnectChannels.Remove(remoteConn);
 		}
 
 		public override AChannel GetChannel(long id)
@@ -297,6 +296,12 @@ namespace ETModel
 			return channel;
 		}
 
+		public override AChannel ConnectChannel(string address)
+		{
+			IPEndPoint ipEndPoint2 = NetworkHelper.ToIPEndPoint(address);
+			return this.ConnectChannel(ipEndPoint2);
+		}
+
 		public override void Remove(long id)
 		{
 			KChannel channel;
@@ -309,7 +314,16 @@ namespace ETModel
 				return;
 			}
 			this.removedChannels.Enqueue(id);
-			channel.Dispose();
+
+			// 删除channel时检查等待连接状态的字典是否要清除
+			KChannel waitConnectChannel;
+			if (this.waitConnectChannels.TryGetValue(channel.RemoteConn, out waitConnectChannel))
+			{
+				if (waitConnectChannel.LocalConn == channel.LocalConn)
+				{
+					this.waitConnectChannels.Remove(channel.RemoteConn);
+				}
+			}
 		}
 
 #if !SERVER
@@ -329,14 +343,16 @@ namespace ETModel
 				kv.Value.Update();
 			}
 			
-			while (true)
+			while (this.removedChannels.Count > 0)
 			{
-				if (this.removedChannels.Count <= 0)
-				{
-					break;
-				}
 				long id = this.removedChannels.Dequeue();
+				KChannel channel;
+				if (!this.localConnChannels.TryGetValue(id, out channel))
+				{
+					continue;
+				}
 				this.localConnChannels.Remove(id);
+				channel.Dispose();
 			}
 		}
 #else
@@ -360,8 +376,6 @@ namespace ETModel
 			this.TimeNow = (uint)(TimeHelper.ClientNow() - this.StartTime);
 			
 			this.Recv();
-
-			this.CheckWaitTimeout();
 			
 			this.TimerOut();
 
@@ -380,52 +394,16 @@ namespace ETModel
 			}
 			this.updateChannels.Clear();
 
-			while (true)
+			while (this.removedChannels.Count > 0)
 			{
-				if (this.removedChannels.Count <= 0)
-				{
-					break;
-				}
 				long id = this.removedChannels.Dequeue();
+				KChannel channel;
+				if (!this.localConnChannels.TryGetValue(id, out channel))
+				{
+					continue;
+				}
 				this.localConnChannels.Remove(id);
-			}
-		}
-
-		// 2秒钟检查一次, 删除连接成功但是超过10秒还未发第一个消息过来的channel
-		private void CheckWaitTimeout()
-		{
-			if (this.TimeNow - this.lastCheckTime < 2000)
-			{
-				return;
-			}
-
-			this.lastCheckTime = this.TimeNow;
-
-			if (this.waitConnectChannels.Count == 0)
-			{
-				return;
-			}
-
-			this.connectTimeoutChannels.Clear();
-			foreach (KeyValuePair<uint,KChannel> kv in this.waitConnectChannels)
-			{
-				if (this.TimeNow - kv.Value.CreateTime < 10000)
-				{
-					continue;
-				}
-				this.connectTimeoutChannels.Add(kv.Key);
-			}
-
-			foreach (uint remoteConn in this.connectTimeoutChannels)
-			{
-				KChannel kChannel;
-				if (!this.waitConnectChannels.TryGetValue(remoteConn, out kChannel))
-				{
-					continue;
-				}
-
-				this.waitConnectChannels.Remove(remoteConn);
-				this.Remove(kChannel.LocalConn);
+				channel.Dispose();
 			}
 		}
 

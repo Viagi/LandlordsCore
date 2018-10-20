@@ -316,12 +316,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.Plugins.csproj">
-      <Project>{D1FDB199-0FB7-099D-3771-C6A942E4E326}</Project>
-      <Name>Unity.Plugins</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Assets\Plugins\Editor\JetBrains\Unity3DRider.cs" />
   </ItemGroup>
   <ItemGroup>

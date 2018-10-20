@@ -316,10 +316,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.Plugins.csproj">
-      <Project>{D1FDB199-0FB7-099D-3771-C6A942E4E326}</Project>
-      <Name>Unity.Plugins</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.csproj">
       <Project>{CF118143-7E37-744F-BE45-3F55345FEC40}</Project>
       <Name>Unity</Name>
@@ -332,6 +328,7 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\BuildEditor\BuildEditor.cs" />
     <Compile Include="Assets\Editor\BuildEditor\BuildHelper.cs" />
+    <Compile Include="Assets\Editor\BuildEditor\BuildHotifxEditor.cs" />
     <Compile Include="Assets\Editor\BuildEditor\BuildIOSEditor.cs" />
     <Compile Include="Assets\Editor\ExcelExporterEditor\ExcelExporterEditor.cs" />
     <Compile Include="Assets\Editor\ExportNavmesh.cs" />
@@ -346,6 +343,7 @@
     <Compile Include="Assets\Editor\RsyncEditor\RsyncConfig.cs" />
     <Compile Include="Assets\Editor\RsyncEditor\RsyncEditor.cs" />
     <Compile Include="Assets\Editor\ServerCommandLineEditor\ServerCommandLineEditor.cs" />
+    <Compile Include="Assets\Editor\ServerManagerEditor\ServerManagerEditor.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Editor\ILRuntimeCLRBinding.cs" />
   </ItemGroup>
   <ItemGroup>

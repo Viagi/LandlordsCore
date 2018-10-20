@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Microsoft.IO;
 
 namespace ETModel
 {
@@ -9,7 +10,7 @@ namespace ETModel
 		PacketBody
 	}
 
-	public class Packet
+	public static class Packet
 	{
 		public const int SizeLength = 2;
 		public const int MinSize = 3;
@@ -17,31 +18,6 @@ namespace ETModel
 		public const int FlagIndex = 0;
 		public const int OpcodeIndex = 1;
 		public const int MessageIndex = 3;
-
-		/// <summary>
-		/// 只读，不允许修改
-		/// </summary>
-		public byte[] Bytes
-		{
-			get
-			{
-				return this.Stream.GetBuffer();
-			}
-		}
-		
-		public byte Flag { get; set; }
-		public ushort Opcode { get; set; }
-		public MemoryStream Stream { get; }
-
-		public Packet(int length)
-		{
-			this.Stream = new MemoryStream(length);
-		}
-
-		public Packet(byte[] bytes)
-		{
-			this.Stream = new MemoryStream(bytes);
-		}
 	}
 
 	public class PacketParser
@@ -49,12 +25,13 @@ namespace ETModel
 		private readonly CircularBuffer buffer;
 		private ushort packetSize;
 		private ParserState state;
-		public readonly Packet packet = new Packet(ushort.MaxValue);
+		public MemoryStream memoryStream;
 		private bool isOK;
 
-		public PacketParser(CircularBuffer buffer)
+		public PacketParser(CircularBuffer buffer, MemoryStream memoryStream)
 		{
 			this.buffer = buffer;
+			this.memoryStream = memoryStream;
 		}
 
 		public bool Parse()
@@ -76,8 +53,8 @@ namespace ETModel
 						}
 						else
 						{
-							this.buffer.Read(this.packet.Bytes, 0, 2);
-							packetSize = BitConverter.ToUInt16(this.packet.Bytes, 0);
+							this.buffer.Read(this.memoryStream.GetBuffer(), 0, 2);
+							packetSize = BitConverter.ToUInt16(this.memoryStream.GetBuffer(), 0);
 							if (packetSize < Packet.MinSize || packetSize > Packet.MaxSize)
 							{
 								throw new Exception($"packet size error: {this.packetSize}");
@@ -92,9 +69,9 @@ namespace ETModel
 						}
 						else
 						{
-							this.packet.Stream.Seek(0, SeekOrigin.Begin);
-							this.packet.Stream.SetLength(this.packetSize);
-							byte[] bytes = this.packet.Stream.GetBuffer();
+							this.memoryStream.Seek(0, SeekOrigin.Begin);
+							this.memoryStream.SetLength(this.packetSize);
+							byte[] bytes = this.memoryStream.GetBuffer();
 							this.buffer.Read(bytes, 0, this.packetSize);
 							this.isOK = true;
 							this.state = ParserState.PacketSize;
@@ -106,10 +83,10 @@ namespace ETModel
 			return this.isOK;
 		}
 
-		public Packet GetPacket()
+		public MemoryStream GetPacket()
 		{
 			this.isOK = false;
-			return this.packet;
+			return this.memoryStream;
 		}
 	}
 }

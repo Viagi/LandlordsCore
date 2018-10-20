@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -48,7 +49,7 @@ namespace ILRuntime.Runtime.Generated
         }
         static void set_MessageCallback_1(ref object o, object v)
         {
-            ((ETModel.SessionCallbackComponent)o).MessageCallback = (System.Action<ETModel.Session, ETModel.Packet>)v;
+            ((ETModel.SessionCallbackComponent)o).MessageCallback = (System.Action<ETModel.Session, System.Byte, System.UInt16, System.IO.MemoryStream>)v;
         }
 
 
