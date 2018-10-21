@@ -284,6 +284,15 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>Assets/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Pathfinding.ClipperLib">
+      <HintPath>Assets/Plugins/AstarPathfindingProject/Clipper/Pathfinding.ClipperLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+      <HintPath>Assets/Plugins/AstarPathfindingProject/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
+    <Reference Include="Pathfinding.Poly2Tri">
+      <HintPath>Assets/Plugins/AstarPathfindingProject/Poly2Tri/Pathfinding.Poly2Tri.dll</HintPath>
+    </Reference>
     <Reference Include="JetBrains.Rider.Unity.Editor.Plugin.Repacked">
       <HintPath>Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
     </Reference>
@@ -401,12 +410,12 @@
     <Compile Include="Assets\Hotfix\Module\Config\ConfigComponent.cs" />
     <Compile Include="Assets\Hotfix\Module\Config\ConfigHelper.cs" />
     <Compile Include="Assets\Hotfix\Module\Config\IConfig.cs" />
-    <Compile Include="Assets\Hotfix\Module\FrameSync\Actor_CreateUnitsHandler.cs" />
-    <Compile Include="Assets\Hotfix\Module\FrameSync\Actor_TestHandler.cs" />
-    <Compile Include="Assets\Hotfix\Module\FrameSync\Frame_ClickMapHandler.cs" />
-    <Compile Include="Assets\Hotfix\Module\FrameSync\G2C_TestHotfixHandler.cs" />
-    <Compile Include="Assets\Hotfix\Module\FrameSync\OperaComponent.cs" />
-    <Compile Include="Assets\Hotfix\Module\FrameSync\TestHotfixSubscribMonoEvent_LogString.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\Actor_CreateUnitsHandler.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\Actor_TestHandler.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\G2C_TestHotfixHandler.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\M2C_PathfindingResultHandler.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\OperaComponent.cs" />
+    <Compile Include="Assets\Hotfix\Module\Demo\TestHotfixSubscribMonoEvent_LogString.cs" />
     <Compile Include="Assets\Hotfix\Module\Message\AMHandler.cs" />
     <Compile Include="Assets\Hotfix\Module\Message\HotfixMessage.cs" />
     <Compile Include="Assets\Hotfix\Module\Message\HotfixMessageDispatcher.cs" />
@@ -430,10 +439,27 @@
     <Compile Include="Assets\Hotfix\UI\UILogin\Factory\UILoginFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Editor\AstarPathfindingProject\EditorAssets\Materials\Navmesh.cginc" />
+    <None Include="Assets\Editor\AstarPathfindingProject\EditorAssets\Materials\Navmesh.shader" />
+    <None Include="Assets\Editor\AstarPathfindingProject\EditorAssets\Materials\NavmeshOutline.shader" />
+    <None Include="Assets\Editor\Unity.Editor.asmdef" />
+    <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
+    <None Include="Assets\Model\Module\Pathfinding\AstarPathfindingProject\ExampleScenes\Materials\DiffuseAlwaysVisible.shader" />
+    <None Include="Assets\Model\Module\Pathfinding\AstarPathfindingProject\ExampleScenes\Materials\Projector Light.shader" />
+    <None Include="Assets\Model\Module\Pathfinding\AstarPathfindingProject\ExampleScenes\_Example Scenes.txt" />
+    <None Include="Assets\Model\Module\Pathfinding\AstarPathfindingProject\Readme.txt" />
+    <None Include="Assets\Model\Module\Pathfinding\AstarPathfindingProject\Readme_upgrading.txt" />
+    <None Include="Assets\Model\Module\Pathfinding\AstarPathfindingProject\link.xml" />
+    <None Include="Assets\Model\Unity.Model.asmdef" />
+    <None Include="Assets\Plugins\AstarPathfindingProject\Clipper\ClipperLicense.txt" />
+    <None Include="Assets\Plugins\AstarPathfindingProject\DotNetZip\DotNetZipLicense.txt" />
+    <None Include="Assets\Plugins\AstarPathfindingProject\Poly2Tri\Poly2TriLicense.txt" />
+    <None Include="Assets\Plugins\AstarPathfindingProject\dependencies.txt" />
     <None Include="Assets\Res\Config\BuffConfig.txt" />
     <None Include="Assets\Res\Config\GlobalProto.txt" />
     <None Include="Assets\Res\Config\UnitConfig.txt" />
     <None Include="Assets\StreamingAssets\Version.txt" />
+    <None Include="Assets\ThirdParty\Unity.ThirdParty.asmdef" />
     <None Include="Assets\link.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

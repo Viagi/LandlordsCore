@@ -12,22 +12,6 @@ namespace ETHotfix
             {
                 switch (message)
                 {
-                    case IFrameMessage iFrameMessage: // 如果是帧消息，构造成OneFrameMessage发给对应的unit
-                        {
-                            long actorId = session.GetComponent<SessionUserComponent>().User.ActorID;
-                            ActorLocationSender actorLocationSender = Game.Scene.GetComponent<ActorLocationSenderComponent>().Get(actorId);
-
-                            // 这里设置了帧消息的id，防止客户端伪造
-                            iFrameMessage.Id = actorId;
-
-                            OneFrameMessage oneFrameMessage = new OneFrameMessage
-                            {
-                                Op = opcode,
-                                AMessage = ByteString.CopyFrom(session.Network.MessagePacker.SerializeTo(iFrameMessage))
-                            };
-                            actorLocationSender.Send(oneFrameMessage);
-                            return;
-                        }
                     case IActorLocationRequest actorLocationRequest: // gate session收到actor rpc消息，先向actor 发送rpc请求，再将请求结果返回客户端
                         {
                             long actorId = session.GetComponent<SessionUserComponent>().User.ActorID;

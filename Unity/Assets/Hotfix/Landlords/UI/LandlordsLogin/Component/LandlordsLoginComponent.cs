@@ -38,9 +38,9 @@ namespace ETHotfix
             //热更测试
             Text hotfixPrompt = rc.Get<GameObject>("HotfixPrompt").GetComponent<Text>();
 #if ILRuntime
-            hotfixPrompt.text = "斗地主3.2.1 (ILRuntime模式)";
+            hotfixPrompt.text = "斗地主4.0.0 (ILRuntime模式)";
 #else
-            hotfixPrompt.text = "斗地主3.2.1 (Mono模式)";
+            hotfixPrompt.text = "斗地主4.0.0 (Mono模式)";
 #endif
 
             //绑定关联对象
