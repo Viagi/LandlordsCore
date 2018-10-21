@@ -33,7 +33,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2017_4_5;UNITY_2017_4;UNITY_2017;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;ENABLE_SPRITE_MASKING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_VIDEO;ENABLE_RMGUI;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_STYLE_SHEETS;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_4_6;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;UNITY_PRO_LICENSE;NET45;ILRuntime</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2017_4_5;UNITY_2017_4;UNITY_2017;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;ENABLE_SPRITE_MASKING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_VIDEO;ENABLE_RMGUI;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_STYLE_SHEETS;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_4_6;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;UNITY_PRO_LICENSE;NET45</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -43,7 +43,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2017_4_5;UNITY_2017_4;UNITY_2017;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;ENABLE_SPRITE_MASKING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_VIDEO;ENABLE_RMGUI;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_STYLE_SHEETS;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_4_6;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;UNITY_PRO_LICENSE;NET45;ILRuntime</DefineConstants>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2017_4_5;UNITY_2017_4;UNITY_2017;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;ENABLE_SPRITE_MASKING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_VIDEO;ENABLE_RMGUI;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_STYLE_SHEETS;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_4_6;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;UNITY_PRO_LICENSE;NET45</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
@@ -253,6 +253,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.ThirdParty.csproj">
+      <Project>{CFBC0A95-3456-3439-6B2E-60FDE0FE5EE1}</Project>
+      <Name>Unity.ThirdParty</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Editor.csproj">
       <Project>{C17F48D3-964E-E97C-3D2E-966F7A6C6D93}</Project>
       <Name>Unity.Editor</Name>
@@ -269,146 +273,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Base\Helper\MongoHelper.cs" />
     <Compile Include="Assets\Scripts\Module\Config\ICategory.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\CLRBindings.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_ActionHelper_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Actor_CreateUnits_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Actor_Test_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Actor_TestRequest_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Actor_TransferRequest_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_C2G_EnterMap_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_CameraComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_CanvasConfig_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Card_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_ClientComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Component_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_ComponentFactory_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_ComponentWithId_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_DoubleMap_2_UInt16_Type_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Entity_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_ErrorCode_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_EventAttribute_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_EventProxy_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_EventSystem_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Frame_ClickMap_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Game_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_GameObjectHelper_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_GlobalConfigComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_GlobalProto_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_HandCardSprite_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Hotfix_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_IdGenerater_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_IMessagePacker_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Log_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_MessageAttribute_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_MessageDispatherComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_MessageInfo_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_MessageProxy_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_MoveComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_NetworkComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_NetworkHelper_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_OpcodeTypeComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Player_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_PlayerComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_ResourcesComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_RpcException_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Scene_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Session_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_SessionCallbackComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_SessionComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_UIFactoryAttribute_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Unit_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_UnitComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_UnitFactory_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_UnitInfo_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_UnOrderMultiMap_2_Type_ILTypeInstance_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_User_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\Google_Protobuf_CodedInputStream_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\Google_Protobuf_CodedOutputStream_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\Google_Protobuf_Collections_RepeatedField_1_Card_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\Google_Protobuf_Collections_RepeatedField_1_Google_Protobuf_Ad_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\Google_Protobuf_Collections_RepeatedField_1_Int32_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\Google_Protobuf_Collections_RepeatedField_1_Int64_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\Google_Protobuf_Collections_RepeatedField_1_String_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\Google_Protobuf_Collections_RepeatedField_1_UnitInfo_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\Google_Protobuf_FieldCodec_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\Google_Protobuf_MessageParser_1_Google_Protobuf_Adapt_IMessage_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\Google_Protobuf_ProtoPreconditions_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\LitJson_JsonMapper_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ReferenceCollector_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Action_1_Google_Protobuf_Adapt_IMessage_Binding_Adaptor_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Activator_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int32_Action_1_Google__t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int64_ILTypeInstance_B_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int64_Int32_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_GameObject_Bind_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_ILTypeInstance__t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_ILTypeInstance__t_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_ILTypeInstance__t_t_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_List_1_ILTypeIn_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Type_ILTypeInstance_Bi_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Type_ILTypeInstance_Bi_t_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Type_ILTypeInstance_Bi_t_t_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Type_Queue_1_ILTypeIns_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Type_Queue_1_Object_Bi_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_UInt16_List_1_ILTypeIn_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_UInt16_Object_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_HashSet_1_ILTypeInstance_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_HashSet_1_ILTypeInstance_Binding_En_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_ICollection_1_Card_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_IEnumerable_1_Card_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_IEnumerator_1_Card_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_IEnumerator_1_Google_Protobuf_Adapt_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_IEnumerator_1_UnitInfo_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_Card_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_Google_Protobuf_Adapt_IMessa_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_ILTypeInstance_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_ILTypeInstance_Binding_Enume_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_Object_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_String_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_Type_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_List_1_Type_Binding_Enumerator_Bind_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Queue_1_ILTypeInstance_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Queue_1_Int64_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_Generic_Queue_1_Object_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_IDictionary_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Collections_IEnumerator_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Enum_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Exception_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_IDisposable_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Int32_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Linq_Enumerable_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_NotImplementedException_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Object_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Reflection_MemberInfo_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Runtime_CompilerServices_AsyncVoidMethodBuilder_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Runtime_CompilerServices_TaskAwaiter_1_Google_Protobuf__t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Runtime_CompilerServices_TaskAwaiter_1_IResponse_Bindin_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_String_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Threading_CancellationToken_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Threading_Tasks_Task_1_Google_Protobuf_Adapt_IMessage_B_t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Threading_Tasks_Task_1_IResponse_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Threading_Tasks_TaskCompletionSource_1_Google_Protobuf__t.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\System_Type_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_Camera_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_Color_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_Component_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_GameObject_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_Input_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_LayerMask_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_Object_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_Physics_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_RaycastHit_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_RectTransform_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_TextAsset_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_Transform_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_UI_Button_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_UI_Graphic_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_UI_Image_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_UI_InputField_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_UI_Text_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_Vector2_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\UnityEngine_Vector3_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\VInt3_Binding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Res\Config\BuffConfig.txt" />

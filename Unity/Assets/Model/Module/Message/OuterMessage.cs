@@ -13,91 +13,89 @@ namespace ETModel {
   ///花色
   /// </summary>
   public enum Suits {
-    First = 0,
     /// <summary>
     ///梅花
     /// </summary>
-    Club = 1,
+    Club = 0,
     /// <summary>
     ///方块
     /// </summary>
-    Diamond = 2,
+    Diamond = 1,
     /// <summary>
     ///红心
     /// </summary>
-    Heart = 3,
+    Heart = 2,
     /// <summary>
     ///黑桃
     /// </summary>
-    Spade = 4,
-    None = 5,
+    Spade = 3,
+    None = 4,
   }
 
   /// <summary>
   ///权重
   /// </summary>
   public enum Weight {
-    First = 0,
     /// <summary>
     ///3
     /// </summary>
-    Three = 1,
+    Three = 0,
     /// <summary>
     ///4
     /// </summary>
-    Four = 2,
+    Four = 1,
     /// <summary>
     ///5
     /// </summary>
-    Five = 3,
+    Five = 2,
     /// <summary>
     ///6
     /// </summary>
-    Six = 4,
+    Six = 3,
     /// <summary>
     ///7
     /// </summary>
-    Seven = 5,
+    Seven = 4,
     /// <summary>
     ///8
     /// </summary>
-    Eight = 6,
+    Eight = 5,
     /// <summary>
     ///9
     /// </summary>
-    Nine = 7,
+    Nine = 6,
     /// <summary>
     ///10
     /// </summary>
-    Ten = 8,
+    Ten = 7,
     /// <summary>
     ///J
     /// </summary>
-    Jack = 9,
+    Jack = 8,
     /// <summary>
     ///Q
     /// </summary>
-    Queen = 10,
+    Queen = 9,
     /// <summary>
     ///K
     /// </summary>
-    King = 11,
+    King = 10,
     /// <summary>
     ///A
     /// </summary>
-    One = 12,
+    One = 11,
     /// <summary>
     ///2
     /// </summary>
-    Two = 13,
+    Two = 12,
     /// <summary>
     ///小王
     /// </summary>
-    Sjoker = 14,
+    Sjoker = 13,
     /// <summary>
     ///大王
     /// </summary>
-    Ljoker = 15,
+    Ljoker = 14,
   }
 
   /// <summary>

@@ -14,11 +14,19 @@ namespace ETHotfix
             Gamer gamer = gamerComponent.Get(message.UserID);
             if (gamer != null)
             {
+                GamerUIComponent gamerUIComponent = gamer.GetComponent<GamerUIComponent>();
                 if (gamer.UserID == gamerComponent.LocalGamer.UserID)
                 {
                     uiRoom.GetComponent<LandlordsRoomComponent>().Interaction.EndGrab();
                 }
-                gamer.GetComponent<GamerUIComponent>().SetGrab(message.IsGrab);
+                if (message.IsGrab)
+                {
+                    gamerUIComponent.SetGrab(GrabLandlordState.Grab);
+                }
+                else
+                {
+                    gamerUIComponent.SetGrab(GrabLandlordState.UnGrab);
+                }
             }
         }
     }

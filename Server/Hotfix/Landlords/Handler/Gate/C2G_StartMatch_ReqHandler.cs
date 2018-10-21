@@ -41,9 +41,9 @@ namespace ETHotfix
                 Session matchSession = Game.Scene.GetComponent<NetInnerComponent>().Get(matchIPEndPoint);
                 M2G_PlayerEnterMatch_Ack m2G_PlayerEnterMatch_Ack = await matchSession.Call(new G2M_PlayerEnterMatch_Req()
                 {
-                    PlayerID = user.Id,
+                    PlayerID = user.InstanceId,
                     UserID = user.UserID,
-                    SessionID = session.Id,
+                    SessionID = session.InstanceId,
                 }) as M2G_PlayerEnterMatch_Ack;
 
                 user.IsMatching = true;

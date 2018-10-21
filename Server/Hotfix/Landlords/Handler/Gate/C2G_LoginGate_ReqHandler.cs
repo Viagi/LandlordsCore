@@ -28,7 +28,7 @@ namespace ETHotfix
 
 
                 //创建User对象
-                User user = UserFactory.Create(userId, session.Id);
+                User user = UserFactory.Create(userId, session.InstanceId);
                 await user.AddComponent<MailBoxComponent>().AddLocation();
 
                 //添加User对象关联到Session上
@@ -42,7 +42,7 @@ namespace ETHotfix
                 Session realmSession = Game.Scene.GetComponent<NetInnerComponent>().Get(realmIPEndPoint);
                 await realmSession.Call(new G2R_PlayerOnline_Req() { UserID = userId, GateAppID = config.StartConfig.AppId });
 
-                response.PlayerID = user.Id;
+                response.PlayerID = user.InstanceId;
                 response.UserID = user.UserID;
                 reply(response);
             }

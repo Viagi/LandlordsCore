@@ -28,8 +28,17 @@ namespace ETModel
 			appdomain.DelegateManager.RegisterMethodDelegate<ILTypeInstance>();
 			appdomain.DelegateManager.RegisterFunctionDelegate<Google.Protobuf.Adapt_IMessage.Adaptor>();
 			appdomain.DelegateManager.RegisterMethodDelegate<Google.Protobuf.Adapt_IMessage.Adaptor>();
+            appdomain.DelegateManager.RegisterFunctionDelegate<Google.Protobuf.Adapt_IMessage.Adaptor, System.Boolean>();
 
-			CLRBindings.Initialize(appdomain);
+            appdomain.DelegateManager.RegisterDelegateConvertor<System.Predicate<Google.Protobuf.Adapt_IMessage.Adaptor>>((act) =>
+            {
+                return new System.Predicate<Google.Protobuf.Adapt_IMessage.Adaptor>((obj) =>
+                {
+                    return ((Func<Google.Protobuf.Adapt_IMessage.Adaptor, System.Boolean>)act)(obj);
+                });
+            });
+
+            CLRBindings.Initialize(appdomain);
 
 			// 注册适配器
 			Assembly assembly = typeof(Init).Assembly;

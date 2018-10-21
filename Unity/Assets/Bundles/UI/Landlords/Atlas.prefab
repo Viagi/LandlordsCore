@@ -134,11 +134,11 @@ MonoBehaviour:
     gameObject: {fileID: 21300076, guid: d8396ba905ec610429f1c55258169be8, type: 3}
   - key: Identity_Landlord
     gameObject: {fileID: 21300078, guid: d8396ba905ec610429f1c55258169be8, type: 3}
-  - key: LJoker
+  - key: Ljoker
     gameObject: {fileID: 21300080, guid: d8396ba905ec610429f1c55258169be8, type: 3}
   - key: None
     gameObject: {fileID: 21300118, guid: d8396ba905ec610429f1c55258169be8, type: 3}
-  - key: SJoker
+  - key: Sjoker
     gameObject: {fileID: 21300082, guid: d8396ba905ec610429f1c55258169be8, type: 3}
   - key: SpadeEight
     gameObject: {fileID: 21300084, guid: d8396ba905ec610429f1c55258169be8, type: 3}

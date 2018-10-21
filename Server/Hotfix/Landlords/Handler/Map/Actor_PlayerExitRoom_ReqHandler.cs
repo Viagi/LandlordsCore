@@ -28,7 +28,7 @@ namespace ETHotfix
                     room.Remove(gamer.UserID);
 
                     //同步匹配服务器移除玩家
-                    await MapHelper.GetMapSession().Call(new MP2MH_PlayerExitRoom_Req() { RoomID = room.Id, UserID = gamer.UserID });
+                    await MapHelper.GetMapSession().Call(new MP2MH_PlayerExitRoom_Req() { RoomID = room.InstanceId, UserID = gamer.UserID });
 
                     //消息广播给其他人
                     room.Broadcast(new Actor_GamerExitRoom_Ntt() { UserID = gamer.UserID });

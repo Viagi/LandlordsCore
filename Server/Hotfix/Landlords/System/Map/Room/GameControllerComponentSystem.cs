@@ -54,7 +54,7 @@ namespace ETHotfix
             //发地主牌
             for (int i = 0; i < 3; i++)
             {
-                self.DealTo(room.Id);
+                self.DealTo(room.InstanceId);
             }
 
             self.Multiples = self.Config.Multiples;
@@ -68,7 +68,7 @@ namespace ETHotfix
         {
             Room room = self.GetParent<Room>();
             Card card = room.GetComponent<DeckComponent>().Deal();
-            if (id == room.Id)
+            if (id == room.InstanceId)
             {
                 DeskCardsCacheComponent deskCardsCache = room.GetComponent<DeskCardsCacheComponent>();
                 deskCardsCache.AddCard(card);
@@ -175,7 +175,7 @@ namespace ETHotfix
             {
                 //同步匹配服务器开始游戏
                 room.State = RoomState.Game;
-                MapHelper.SendMessage(new MP2MH_SyncRoomState_Ntt() { RoomID = room.Id, State = room.State });
+                MapHelper.SendMessage(new MP2MH_SyncRoomState_Ntt() { RoomID = room.InstanceId, State = room.State });
 
                 //初始玩家开始状态
                 foreach (var _gamer in gamers)
@@ -218,7 +218,7 @@ namespace ETHotfix
                 //随机先手玩家
                 gameController.RandomFirstAuthority();
 
-                Log.Info($"房间{room.Id}开始游戏");
+                Log.Info($"房间{room.InstanceId}开始游戏");
             }
         }
 
@@ -288,7 +288,7 @@ namespace ETHotfix
 
             //同步匹配服务器结束游戏
             room.State = RoomState.Ready;
-            MapHelper.SendMessage(new MP2MH_SyncRoomState_Ntt() { RoomID = room.Id, State = room.State });
+            MapHelper.SendMessage(new MP2MH_SyncRoomState_Ntt() { RoomID = room.InstanceId, State = room.State });
 
             Dictionary<long, long> gamersMoney = new Dictionary<long, long>();
             foreach (GamerScore gamerScore in gamersScore)
@@ -315,7 +315,7 @@ namespace ETHotfix
                 //踢出离线玩家
                 if (_gamer.isOffline)
                 {
-                    ActorMessageSender actorProxy = Game.Scene.GetComponent<ActorMessageSenderComponent>().Get(_gamer.Id);
+                    ActorMessageSender actorProxy = Game.Scene.GetComponent<ActorMessageSenderComponent>().Get(_gamer.InstanceId);
                     await actorProxy.Call(new Actor_PlayerExitRoom_Req());
                 }
                 //踢出余额不足玩家

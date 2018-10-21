@@ -20,9 +20,9 @@ namespace ETHotfix
                 await room.AddComponent<MailBoxComponent>().AddLocation();
                 Game.Scene.GetComponent<RoomComponent>().Add(room);
 
-                Log.Info($"创建房间{room.Id}");
+                Log.Info($"创建房间{room.InstanceId}");
 
-                response.RoomID = room.Id;
+                response.RoomID = room.InstanceId;
 
                 reply(response);
             }

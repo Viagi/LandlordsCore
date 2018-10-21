@@ -44,8 +44,8 @@ TextureImporter:
     21300074: HeartTwo
     21300076: Identity_Farmer
     21300078: Identity_Landlord
-    21300080: LJoker
-    21300082: SJoker
+    21300080: Ljoker
+    21300082: Sjoker
     21300084: SpadeEight
     21300086: SpadeFive
     21300088: SpadeFour
@@ -65,6 +65,7 @@ TextureImporter:
     21300116: Role2
     21300118: None
     21300120: HeartOne
+  externalObjects: {}
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -105,8 +106,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -118,20 +120,24 @@ TextureImporter:
   platformSettings:
   - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    androidETC2FallbackOverride: 0
   - buildTarget: Standalone
     maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -696,7 +702,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: LJoker
+      name: Ljoker
       rect:
         serializedVersion: 2
         x: 432
@@ -710,7 +716,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: SJoker
+      name: Sjoker
       rect:
         serializedVersion: 2
         x: 514
@@ -993,5 +999,5 @@ TextureImporter:
     physicsShape: []
   spritePackingTag: UIshare
   userData: 
-  assetBundleName: uishare.unity3d
+  assetBundleName: atlas.unity3d
   assetBundleVariant: 

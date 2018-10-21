@@ -42,7 +42,7 @@ namespace ETHotfix
                     continue;
                 }
 
-                ActorMessageSender actorProxy = Game.Scene.GetComponent<ActorMessageSenderComponent>().Get(gamer.Id);
+                ActorMessageSender actorProxy = Game.Scene.GetComponent<ActorMessageSenderComponent>().Get(gamer.InstanceId);
                 //当还没抢地主时随机抢地主
                 if (gamer.GetComponent<HandCardsComponent>().AccessIdentity == Identity.None)
                 {
@@ -54,7 +54,7 @@ namespace ETHotfix
 
                 //自动提示出牌
                 Actor_GamerPrompt_Ack response = await actorProxy.Call(new Actor_GamerPrompt_Req()) as Actor_GamerPrompt_Ack;
-                if (response.Error > 0 || response.Cards == null)
+                if (response.Error > 0 || response.Cards.Count == 0)
                 {
                     actorProxy.Send(new Actor_GamerDontPlay_Ntt());
                 }

@@ -30,7 +30,7 @@ namespace ETHotfix
                         if (_gamer == null)
                         {
                             //添加空位
-                            broadcastMessage.Gamers.Add(default(GamerInfo));
+                            broadcastMessage.Gamers.Add(new GamerInfo());
                             continue;
                         }
 
@@ -87,14 +87,23 @@ namespace ETHotfix
                             UserID = _gamer.UserID,
                             Num = _gamer.GetComponent<HandCardsComponent>().GetAll().Length
                         });
-                        gamersState.Add(new GamerState()
+                        GamerState gamerState = new GamerState()
                         {
                             UserID = _gamer.UserID,
-                            UserIdentity = handCards.AccessIdentity,
-                            GrabLandlordState = orderController.GamerLandlordState.ContainsKey(_gamer.UserID)
-                            ? orderController.GamerLandlordState[_gamer.UserID]
-                            : false
-                        });
+                            UserIdentity = handCards.AccessIdentity
+                        };
+                        if (orderController.GamerLandlordState.TryGetValue(_gamer.UserID, out bool state))
+                        {
+                            if (state)
+                            {
+                                gamerState.State = GrabLandlordState.Grab;
+                            }
+                            else
+                            {
+                                gamerState.State = GrabLandlordState.UnGrab;
+                            }
+                        }
+                        gamersState.Add(gamerState);
                     }
 
                     //发送游戏开始消息
@@ -127,14 +136,17 @@ namespace ETHotfix
                         Multiples = room.GetComponent<GameControllerComponent>().Multiples
                     };
                     reconnectNotice.GamersState.AddRange(gamersState);
-                    reconnectNotice.LordCards.AddRange(lordCards);
                     reconnectNotice.Cards.AddRange(deskCardsCache.library);
+                    if (lordCards != null)
+                    {
+                        reconnectNotice.LordCards.AddRange(lordCards);
+                    }
                     actorProxy.Send(reconnectNotice);
 
                     Log.Info($"玩家{message.UserID}重连");
                 }
 
-                response.GamerID = gamer.Id;
+                response.GamerID = gamer.InstanceId;
 
                 reply(response);
             }

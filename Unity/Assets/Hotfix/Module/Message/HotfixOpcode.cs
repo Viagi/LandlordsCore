@@ -17,13 +17,13 @@ namespace ETHotfix
 	public partial class G2C_TestHotfixMessage : IMessage {}
 
 	[Message(HotfixOpcode.C2M_TestActorRequest)]
-	public partial class C2M_TestActorRequest : IClientActorRequest {}
+	public partial class C2M_TestActorRequest : IActorLocationRequest {}
 
 	[Message(HotfixOpcode.M2C_TestActorResponse)]
-	public partial class M2C_TestActorResponse : IClientActorResponse {}
+	public partial class M2C_TestActorResponse : IActorLocationResponse {}
 
 	[Message(HotfixOpcode.PlayerInfo)]
-	public partial class PlayerInfo {}
+	public partial class PlayerInfo : IMessage {}
 
 	[Message(HotfixOpcode.C2G_PlayerInfo)]
 	public partial class C2G_PlayerInfo : IRequest {}
@@ -100,6 +100,7 @@ namespace ETHotfix
 	[Message(HotfixOpcode.Actor_GamerExitRoom_Ntt)]
 	public partial class Actor_GamerExitRoom_Ntt : IActorMessage {}
 
+//抢地主状态
 	[Message(HotfixOpcode.GamerState)]
 	public partial class GamerState {}
 

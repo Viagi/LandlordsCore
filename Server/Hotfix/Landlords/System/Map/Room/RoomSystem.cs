@@ -17,7 +17,7 @@ namespace ETHotfix
                 self.gamers[seatIndex] = gamer;
                 self.seats[gamer.UserID] = seatIndex;
 
-                gamer.RoomID = self.Id;
+                gamer.RoomID = self.InstanceId;
             }
         }
 

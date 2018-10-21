@@ -15,7 +15,7 @@ namespace ETModel
         /// <param name="room"></param>
         public void Add(Room room)
         {
-            this.rooms.Add(room.Id, room);
+            this.rooms.Add(room.InstanceId, room);
         }
 
         /// <summary>

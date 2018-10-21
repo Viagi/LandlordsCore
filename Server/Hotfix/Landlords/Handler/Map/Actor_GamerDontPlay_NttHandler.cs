@@ -8,7 +8,7 @@ namespace ETHotfix
     [ActorMessageHandler(AppType.Map)]
     public class Actor_GamerDontPlay_NttHandler : AMActorHandler<Gamer, Actor_GamerDontPlay_Ntt>
     {
-        protected override async Task Run(Gamer gamer, Actor_GamerDontPlay_Ntt message)
+        protected override void Run(Gamer gamer, Actor_GamerDontPlay_Ntt message)
         {
             Room room = Game.Scene.GetComponent<RoomComponent>().Get(gamer.RoomID);
             OrderControllerComponent orderController = room.GetComponent<OrderControllerComponent>();
@@ -30,7 +30,6 @@ namespace ETHotfix
                 }
                 room.Broadcast(new Actor_AuthorityPlayCard_Ntt() { UserID = orderController.CurrentAuthority, IsFirst = isFirst });
             }
-            await Task.CompletedTask;
         }
     }
 }

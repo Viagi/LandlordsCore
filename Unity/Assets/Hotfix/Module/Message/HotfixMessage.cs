@@ -8,6 +8,27 @@ using pbc = global::Google.Protobuf.Collections;
 using scg = global::System.Collections.Generic;
 namespace ETHotfix {
 
+  #region Enums
+  /// <summary>
+  ///抢地主状态
+  /// </summary>
+  public enum GrabLandlordState {
+    /// <summary>
+    ///未抢地主
+    /// </summary>
+    Not = 0,
+    /// <summary>
+    ///抢地主
+    /// </summary>
+    Grab = 1,
+    /// <summary>
+    ///不抢地主
+    /// </summary>
+    UnGrab = 2,
+  }
+
+  #endregion
+
   #region Messages
   public partial class C2R_Login : pb::IMessage {
     private static readonly pb::MessageParser<C2R_Login> _parser = new pb::MessageParser<C2R_Login>(() => (C2R_Login)MessagePool.Instance.Fetch(typeof(C2R_Login)));
@@ -637,21 +658,41 @@ namespace ETHotfix {
     private static readonly pb::MessageParser<PlayerInfo> _parser = new pb::MessageParser<PlayerInfo>(() => (PlayerInfo)MessagePool.Instance.Fetch(typeof(PlayerInfo)));
     public static pb::MessageParser<PlayerInfo> Parser { get { return _parser; } }
 
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
     public void WriteTo(pb::CodedOutputStream output) {
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
     }
 
     public int CalculateSize() {
       int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
       return size;
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
+      rpcId_ = 0;
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
           default:
             input.SkipLastField();
             break;
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
         }
       }
     }
@@ -2893,11 +2934,11 @@ namespace ETHotfix {
       }
     }
 
-    private bool grabLandlordState_;
-    public bool GrabLandlordState {
-      get { return grabLandlordState_; }
+    private global::ETHotfix.GrabLandlordState state_ = 0;
+    public global::ETHotfix.GrabLandlordState State {
+      get { return state_; }
       set {
-        grabLandlordState_ = value;
+        state_ = value;
       }
     }
 
@@ -2910,9 +2951,9 @@ namespace ETHotfix {
         output.WriteRawTag(16);
         output.WriteEnum((int) UserIdentity);
       }
-      if (GrabLandlordState != false) {
+      if (State != 0) {
         output.WriteRawTag(24);
-        output.WriteBool(GrabLandlordState);
+        output.WriteEnum((int) State);
       }
     }
 
@@ -2924,15 +2965,14 @@ namespace ETHotfix {
       if (UserIdentity != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) UserIdentity);
       }
-      if (GrabLandlordState != false) {
-        size += 1 + 1;
+      if (State != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) State);
       }
       return size;
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
       userID_ = 0;
-      grabLandlordState_ = false;
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -2948,7 +2988,7 @@ namespace ETHotfix {
             break;
           }
           case 24: {
-            GrabLandlordState = input.ReadBool();
+            state_ = (global::ETHotfix.GrabLandlordState) input.ReadEnum();
             break;
           }
         }

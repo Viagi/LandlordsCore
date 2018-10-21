@@ -37,14 +37,14 @@ message G2C_TestHotfixMessage // IMessage
 	string Info = 1;
 }
 
-message C2M_TestActorRequest // IClientActorRequest
+message C2M_TestActorRequest // IActorLocationRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 91;
 	string Info = 1;
 }
 
-message M2C_TestActorResponse // IClientActorResponse
+message M2C_TestActorResponse // IActorLocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
@@ -52,9 +52,9 @@ message M2C_TestActorResponse // IClientActorResponse
 	string Info = 1;
 }
 
-message PlayerInfo
+message PlayerInfo // IMessage
 {
-	
+	int32 RpcId = 90;
 }
 
 message C2G_PlayerInfo // IRequest
@@ -242,11 +242,19 @@ message Actor_GamerExitRoom_Ntt // IActorMessage
     int64 UserID = 1;
 }
 
+//抢地主状态
+enum GrabLandlordState
+{
+	Not = 0;	//未抢地主
+	Grab = 1;	//抢地主
+	UnGrab = 2; //不抢地主
+}
+
 message GamerState
 {
     int64 UserID = 1;
     ETModel.Identity UserIdentity = 2;
-	bool GrabLandlordState = 3;
+	GrabLandlordState State = 3;
 }
 
 message Actor_GamerReconnect_Ntt // IActorMessage
@@ -258,6 +266,7 @@ message Actor_GamerReconnect_Ntt // IActorMessage
 	repeated ETModel.Card Cards = 3;
     repeated GamerState GamersState = 4;
     repeated ETModel.Card LordCards = 5;
+	
 }
 
 message GamerCardNum // IMessage

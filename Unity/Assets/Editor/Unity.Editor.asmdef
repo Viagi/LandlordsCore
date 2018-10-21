@@ -1,10 +1,13 @@
 {
     "name": "Unity.Editor",
     "references": [
-        "Unity.Model"
+        "Unity.Model",
+        "Unity.ThirdParty"
     ],
+    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": true
 }

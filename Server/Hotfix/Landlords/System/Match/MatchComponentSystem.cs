@@ -103,12 +103,13 @@ namespace ETHotfix
 
             //向房间服务器发送玩家进入请求
             ActorMessageSender actorProxy = Game.Scene.GetComponent<ActorMessageSenderComponent>().Get(room.Id);
-            Actor_PlayerEnterRoom_Ack actor_PlayerEnterRoom_Ack = await actorProxy.Call(new Actor_PlayerEnterRoom_Req()
+            IResponse response = await actorProxy.Call(new Actor_PlayerEnterRoom_Req()
             {
                 PlayerID = matcher.PlayerID,
                 UserID = matcher.UserID,
                 SessionID = matcher.GateSessionID
-            }) as Actor_PlayerEnterRoom_Ack;
+            });
+            Actor_PlayerEnterRoom_Ack actor_PlayerEnterRoom_Ack = response as Actor_PlayerEnterRoom_Ack;
 
             Gamer gamer = GamerFactory.Create(matcher.PlayerID, matcher.UserID, actor_PlayerEnterRoom_Ack.GamerID);
             room.Add(gamer);

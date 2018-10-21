@@ -8,7 +8,7 @@ namespace ETHotfix
     [ActorMessageHandler(AppType.Map)]
     public class Actor_Trusteeship_NttHandler : AMActorHandler<Gamer, Actor_Trusteeship_Ntt>
     {
-        protected override async Task Run(Gamer gamer, Actor_Trusteeship_Ntt message)
+        protected override void Run(Gamer gamer, Actor_Trusteeship_Ntt message)
         {
             Room room = Game.Scene.GetComponent<RoomComponent>().Get(gamer.RoomID);
             //是否已经托管
@@ -41,8 +41,6 @@ namespace ETHotfix
                     actorProxy.Send(new Actor_AuthorityPlayCard_Ntt() { UserID = orderController.CurrentAuthority, IsFirst = isFirst });
                 }
             }
-
-            await Task.CompletedTask;
         }
     }
 }

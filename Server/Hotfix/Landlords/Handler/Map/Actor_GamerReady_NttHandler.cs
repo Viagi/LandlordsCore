@@ -9,7 +9,7 @@ namespace ETHotfix
     [ActorMessageHandler(AppType.Map)]
     public class Actor_GamerReady_NttHandler : AMActorHandler<Gamer, Actor_GamerReady_Ntt>
     {
-        protected override async Task Run(Gamer gamer, Actor_GamerReady_Ntt message)
+        protected override void Run(Gamer gamer, Actor_GamerReady_Ntt message)
         {
             gamer.IsReady = true;
 
@@ -23,8 +23,6 @@ namespace ETHotfix
 
             //检测开始游戏
             room.GetComponent<GameControllerComponent>().ReadyStartGame();
-
-            await Task.CompletedTask;
         }
     }
 }

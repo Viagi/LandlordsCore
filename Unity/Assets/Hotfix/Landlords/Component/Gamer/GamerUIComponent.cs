@@ -126,15 +126,18 @@ namespace ETHotfix
         /// <summary>
         /// 玩家抢地主
         /// </summary>
-        public void SetGrab(bool isGrab)
+        public void SetGrab(GrabLandlordState state)
         {
-            if (isGrab)
+            switch (state)
             {
-                prompt.text = "抢地主";
-            }
-            else
-            {
-                prompt.text = "不抢";
+                case GrabLandlordState.Not:
+                    break;
+                case GrabLandlordState.Grab:
+                    prompt.text = "抢地主";
+                    break;
+                case GrabLandlordState.UnGrab:
+                    prompt.text = "不抢";
+                    break;
             }
         }
 

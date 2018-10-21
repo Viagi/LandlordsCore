@@ -8,14 +8,14 @@ message Actor_Test // IActorMessage
 	string Info = 1;
 }
 
-message Actor_TestRequest // IActorRequest
+message Actor_TestRequest // IActorLocationRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 	string request = 1;
 }
 
-message Actor_TestResponse // IActorResponse
+message Actor_TestResponse // IActorLocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
@@ -23,14 +23,14 @@ message Actor_TestResponse // IActorResponse
 	string response = 1;
 }
 
-message Actor_TransferRequest // IActorRequest
+message Actor_TransferRequest // IActorLocationRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 	int32 MapIndex = 1;
 }
 
-message Actor_TransferResponse // IActorResponse
+message Actor_TransferResponse // IActorLocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
@@ -107,33 +107,31 @@ message M2C_Reload // IResponse
 //花色
 enum Suits
 {
-	SuitsFirst = 0;
-	Club = 1;    //梅花
-	Diamond = 2; //方块
-	Heart = 3;   //红心
-	Spade = 4;   //黑桃
-	None = 5;
+	Club = 0;    //梅花
+	Diamond = 1; //方块
+	Heart = 2;   //红心
+	Spade = 3;   //黑桃
+	None = 4;
 }
 
 //权重
 enum Weight
 {
-	WeightFirst = 0;
-    Three = 1;      //3
-    Four = 2;       //4
-    Five = 3;       //5
-    Six = 4;        //6
-    Seven = 5;      //7
-    Eight = 6;      //8
-    Nine = 7;       //9
-    Ten = 8;        //10
-    Jack = 9;       //J
-    Queen = 10;      //Q
-    King = 11;       //K
-    One = 12;        //A
-    Two = 13;        //2
-    SJoker = 14;     //小王
-    LJoker = 15;     //大王
+    Three = 0;      //3
+    Four = 1;       //4
+    Five = 2;       //5
+    Six = 3;        //6
+    Seven = 4;      //7
+    Eight = 5;      //8
+    Nine = 6;       //9
+    Ten = 7;        //10
+    Jack = 8;       //J
+    Queen = 9;      //Q
+    King = 10;       //K
+    One = 11;        //A
+    Two = 12;        //2
+    SJoker = 13;     //小王
+    LJoker = 14;     //大王
 }
 
 //身份
