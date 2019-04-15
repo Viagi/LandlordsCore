@@ -14,38 +14,35 @@ using ILRuntime.CLR.Utils;
 
 namespace ILRuntime.Runtime.Generated
 {
-    unsafe class ETModel_Player_Binding
+    unsafe class System_Threading_Tasks_Task_1_Boolean_Binding
     {
         public static void Register(ILRuntime.Runtime.Enviorment.AppDomain app)
         {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
             MethodBase method;
             Type[] args;
-            Type type = typeof(ETModel.Player);
-            args = new Type[]{typeof(System.Int64)};
-            method = type.GetMethod("set_UnitId", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, set_UnitId_0);
+            Type type = typeof(System.Threading.Tasks.Task<System.Boolean>);
+            args = new Type[]{};
+            method = type.GetMethod("GetAwaiter", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, GetAwaiter_0);
 
 
         }
 
 
-        static StackObject* set_UnitId_0(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* GetAwaiter_0(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 2);
+            StackObject* __ret = ILIntepreter.Minus(__esp, 1);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Int64 @value = *(long*)&ptr_of_this_method->Value;
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
-            ETModel.Player instance_of_this_method = (ETModel.Player)typeof(ETModel.Player).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            System.Threading.Tasks.Task<System.Boolean> instance_of_this_method = (System.Threading.Tasks.Task<System.Boolean>)typeof(System.Threading.Tasks.Task<System.Boolean>).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
             __intp.Free(ptr_of_this_method);
 
-            instance_of_this_method.UnitId = value;
+            var result_of_this_method = instance_of_this_method.GetAwaiter();
 
-            return __ret;
+            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
 

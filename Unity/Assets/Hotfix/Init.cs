@@ -42,6 +42,7 @@ namespace ETHotfix
 
                 //Game.EventSystem.Run(EventIdType.InitSceneStart);
                 Game.EventSystem.Run(EventIdType.LandlordsInitSceneStart);
+
             }
 			catch (Exception e)
 			{

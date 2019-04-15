@@ -14,31 +14,31 @@ using ILRuntime.CLR.Utils;
 
 namespace ILRuntime.Runtime.Generated
 {
-    unsafe class ETModel_CameraComponent_Binding
+    unsafe class ETModel_Define_Binding
     {
         public static void Register(ILRuntime.Runtime.Enviorment.AppDomain app)
         {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
             FieldInfo field;
             Type[] args;
-            Type type = typeof(ETModel.CameraComponent);
+            Type type = typeof(ETModel.Define);
 
-            field = type.GetField("Unit", flag);
-            app.RegisterCLRFieldGetter(field, get_Unit_0);
-            app.RegisterCLRFieldSetter(field, set_Unit_0);
+            field = type.GetField("IsILRuntime", flag);
+            app.RegisterCLRFieldGetter(field, get_IsILRuntime_0);
+            app.RegisterCLRFieldSetter(field, set_IsILRuntime_0);
 
 
         }
 
 
 
-        static object get_Unit_0(ref object o)
+        static object get_IsILRuntime_0(ref object o)
         {
-            return ((ETModel.CameraComponent)o).Unit;
+            return ETModel.Define.IsILRuntime;
         }
-        static void set_Unit_0(ref object o, object v)
+        static void set_IsILRuntime_0(ref object o, object v)
         {
-            ((ETModel.CameraComponent)o).Unit = (ETModel.Unit)v;
+            ETModel.Define.IsILRuntime = (System.Boolean)v;
         }
 
 

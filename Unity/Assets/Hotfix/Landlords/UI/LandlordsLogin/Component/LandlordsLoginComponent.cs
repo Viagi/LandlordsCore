@@ -86,7 +86,7 @@ namespace ETHotfix
                 {
                     if (Game.Scene.GetComponent<UIComponent>()?.Get(UIType.LandlordsLogin) != null)
                     {
-                        prompt.text = "连接失败";
+                        prompt.text = "断开连接";
                         isLogining = false;
                     }
                 };
@@ -105,6 +105,11 @@ namespace ETHotfix
                 {
                     prompt.text = "登录失败,账号或密码错误";
                     password.text = "";
+
+                    //断开验证服务器的连接
+                    sessionWrap.Dispose();
+                    //设置登录处理完成状态
+                    isLogining = false;
                     return;
                 }
 
@@ -123,6 +128,11 @@ namespace ETHotfix
                     prompt.text = "连接网关服务器超时";
                     password.text = "";
                     Game.Scene.GetComponent<SessionComponent>().Session.Dispose();
+
+                    //断开验证服务器的连接
+                    sessionWrap.Dispose();
+                    //设置登录处理完成状态
+                    isLogining = false;
                     return;
                 }
 
@@ -141,9 +151,7 @@ namespace ETHotfix
             {
                 prompt.text = "登录异常";
                 Log.Error(e.ToStr());
-            }
-            finally
-            {
+
                 //断开验证服务器的连接
                 sessionWrap.Dispose();
                 //设置登录处理完成状态

@@ -20,6 +20,7 @@ namespace ILRuntime.Runtime.Generated
         {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
             MethodBase method;
+            FieldInfo field;
             Type[] args;
             Type type = typeof(Google.Protobuf.Collections.RepeatedField<ETModel.Card>);
             args = new Type[]{typeof(System.Int32)};
@@ -46,6 +47,10 @@ namespace ILRuntime.Runtime.Generated
             args = new Type[]{typeof(Google.Protobuf.CodedInputStream), typeof(Google.Protobuf.FieldCodec<ETModel.Card>)};
             method = type.GetMethod("AddEntriesFrom", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, AddEntriesFrom_7);
+
+            field = type.GetField("count", flag);
+            app.RegisterCLRFieldGetter(field, get_count_0);
+            app.RegisterCLRFieldSetter(field, set_count_0);
 
             args = new Type[]{};
             method = type.GetConstructor(flag, null, args, null);
@@ -215,6 +220,15 @@ namespace ILRuntime.Runtime.Generated
             return __ret;
         }
 
+
+        static object get_count_0(ref object o)
+        {
+            return ((Google.Protobuf.Collections.RepeatedField<ETModel.Card>)o).count;
+        }
+        static void set_count_0(ref object o, object v)
+        {
+            ((Google.Protobuf.Collections.RepeatedField<ETModel.Card>)o).count = (System.Int32)v;
+        }
 
         static StackObject* Ctor_0(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
