@@ -53,7 +53,7 @@ namespace ET
                         }
 
                         ResponseTypeAttribute responseTypeAttribute = attrs[0] as ResponseTypeAttribute;
-                        self.requestResponse.Add(type, EventSystem.Instance.GetType($"ET.{responseTypeAttribute.Type}"));
+                        self.requestResponse.Add(type, EventSystem.Instance.GetType(responseTypeAttribute.Type));
                     }
                 }
             }

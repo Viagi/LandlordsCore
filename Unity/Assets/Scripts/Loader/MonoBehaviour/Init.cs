@@ -10,8 +10,8 @@ namespace ET
 		private void Start()
 		{
 			DontDestroyOnLoad(gameObject);
-			
-			AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
 			{
 				Log.Error(e.ExceptionObject.ToString());
 			};
@@ -19,7 +19,7 @@ namespace ET
 			Game.AddSingleton<MainThreadSynchronizationContext>();
 
 			// 命令行参数
-			string[] args = "".Split(" ");
+			string[] args = "--Console=1".Split(" ");
 			Parser.Default.ParseArguments<Options>(args)
 				.WithNotParsed(error => throw new Exception($"命令行格式错误! {error}"))
 				.WithParsed(Game.AddSingleton);

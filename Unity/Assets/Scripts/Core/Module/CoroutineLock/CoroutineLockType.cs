@@ -11,6 +11,12 @@ namespace ET
         public const int Resources = 6;
         public const int ResourcesLoader = 7;
 
+        public const int Login = 11;                    // 避免登录重入
+        public const int User = 12;                     // 访问玩家数据时使用
+        public const int Friend = 13;                   // 访问好友数据时使用
+
+        public const int UI = 50;                       // UI切换
+
         public const int Max = 100; // 这个必须最大
     }
 }

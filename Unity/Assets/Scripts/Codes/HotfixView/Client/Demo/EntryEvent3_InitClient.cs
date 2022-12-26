@@ -3,6 +3,8 @@ using System.IO;
 
 namespace ET.Client
 {
+    /*
+     * 这里将原本Demo流程中断，走斗地主Demo流程
     [Event(SceneType.Process)]
     public class EntryEvent3_InitClient: AEvent<ET.EventType.EntryEvent3>
     {
@@ -20,4 +22,5 @@ namespace ET.Client
             await EventSystem.Instance.PublishAsync(clientScene, new EventType.AppStartInitFinish());
         }
     }
+    */
 }

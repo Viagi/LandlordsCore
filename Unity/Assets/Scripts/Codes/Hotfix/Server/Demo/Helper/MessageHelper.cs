@@ -44,6 +44,11 @@ namespace ET.Server
         /// <param name="message"></param>
         public static void SendToLocationActor(long id, IActorLocationMessage message)
         {
+            if (Root.Instance == null)
+            {
+                return;
+            }
+
             ActorLocationSenderComponent.Instance.Send(id, message);
         }
         

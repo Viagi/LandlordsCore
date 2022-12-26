@@ -1,3 +1,4 @@
+using ET.Landlords;
 using System.Net;
 
 namespace ET.Server
@@ -18,6 +19,9 @@ namespace ET.Server
             Root.Instance.Scene.AddComponent<RobotCaseComponent>();
 
             Root.Instance.Scene.AddComponent<NavmeshComponent>();
+
+            // 管理实体对象传输的组件
+            Root.Instance.Scene.AddComponent<MessageEntityComponent>();
 
             StartProcessConfig processConfig = StartProcessConfigCategory.Instance.Get(Options.Instance.Process);
             switch (Options.Instance.AppType)

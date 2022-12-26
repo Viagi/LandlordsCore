@@ -67,18 +67,13 @@ namespace ET
 
         public static void ProtoFile2CS(string fileName, string protoName, string cs, int startOpcode)
         {
-            string ns = "ET";
+            string ns = "";
             msgOpcode.Clear();
             string proto = Path.Combine(protoDir, $"{fileName}.proto");
             
             string s = File.ReadAllText(proto);
 
             StringBuilder sb = new StringBuilder();
-            sb.Append("using ET;\n");
-            sb.Append("using ProtoBuf;\n");
-            sb.Append("using System.Collections.Generic;\n");
-            sb.Append($"namespace {ns}\n");
-            sb.Append("{\n");
             
             bool isMsgStart = false;
             foreach (string line in s.Split('\n'))
@@ -90,10 +85,32 @@ namespace ET
                     continue;
                 }
 
+                if (newline.StartsWith("using"))
+                {
+                    sb.Append(line);
+                    continue;
+                }
+
+                if (newline.StartsWith("package"))
+                {
+                    ns = line.Split(" ")[1].TrimEnd('\r', '\n');
+                    sb.Append("\r\n");
+                    sb.Append($"namespace {ns}\n");
+                    sb.Append("{\n");
+                    continue;
+                }
+
                 if (newline.StartsWith("//ResponseType"))
                 {
                     string responseType = line.Split(" ")[1].TrimEnd('\r', '\n');
-                    sb.Append($"\t[ResponseType(nameof({responseType}))]\n");
+                    if (!string.IsNullOrEmpty(ns))
+                    {
+                        sb.Append($"\t[ResponseType(\"{ns}.\" + nameof({responseType}))]\n");
+                    }
+                    else
+                    {
+                        sb.Append($"\t[ResponseType({responseType}))]\n");
+                    }
                     continue;
                 }
 
@@ -183,9 +200,11 @@ namespace ET
             }
 
             sb.Append("\t}\n");
-            
 
-            sb.Append("}\n");
+            if (!string.IsNullOrEmpty(ns))
+            {
+                sb.Append("}\n");
+            }
 
             if (cs.Contains("C"))
             {

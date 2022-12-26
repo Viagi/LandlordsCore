@@ -55,12 +55,15 @@ namespace ET.Client
                 return;
             }
 
-            if (self.LoadedResource.Contains(ab))
+            if (!self.LoadedResource.Contains(ab))
+            {
+                self.LoadedResource.Add(ab);
+            }
+            else if (ResourcesComponent.Instance.Contains(ab))
             {
                 return;
             }
 
-            self.LoadedResource.Add(ab);
             await ResourcesComponent.Instance.LoadBundleAsync(ab);
         }
     }

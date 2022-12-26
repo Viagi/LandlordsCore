@@ -17,6 +17,13 @@
 		BenchmarkServer = 11,
 		Benchmark = 12,
 
+		//斗地主场景
+		Cache = 13,
+		Lobby = 14,
+		Friend = 15,
+		Match = 16,
+		Room = 17,
+
 		// 客户端Model层
 		Client = 31,
 		Current = 34,

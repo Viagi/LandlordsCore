@@ -1,5 +1,8 @@
 syntax = "proto3";
-package ET;
+using ProtoBuf;
+using System.Collections.Generic;
+
+package ET
 
 message HttpGetRouterResponse
 {

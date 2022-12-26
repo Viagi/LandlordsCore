@@ -20,6 +20,16 @@ namespace ET
         
         public List<StartSceneConfig> Robots = new List<StartSceneConfig>();
 
+        public MultiMap<int, StartSceneConfig> Lobbys = new MultiMap<int, StartSceneConfig>();
+
+        public MultiMap<int, StartSceneConfig> Friends = new MultiMap<int, StartSceneConfig>();
+
+        public MultiMap<int, StartSceneConfig> Rooms = new MultiMap<int, StartSceneConfig>();
+
+        public StartSceneConfig MatchServer;
+
+        public StartSceneConfig CacheServer;
+
         public StartSceneConfig BenchmarkServer;
         
         public List<StartSceneConfig> GetByProcess(int process)
@@ -63,6 +73,21 @@ namespace ET
                         break;
                     case SceneType.BenchmarkServer:
                         this.BenchmarkServer = startSceneConfig;
+                        break;
+                    case SceneType.Cache:
+                        this.CacheServer = startSceneConfig;
+                        break;
+                    case SceneType.Lobby:
+                        this.Lobbys.Add(startSceneConfig.Zone, startSceneConfig);
+                        break;
+                    case SceneType.Friend:
+                        this.Friends.Add(startSceneConfig.Zone, startSceneConfig);
+                        break;
+                    case SceneType.Match:
+                        this.MatchServer = startSceneConfig;
+                        break;
+                    case SceneType.Room:
+                        this.Rooms.Add(startSceneConfig.Zone, startSceneConfig);
                         break;
                 }
             }

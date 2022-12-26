@@ -26,10 +26,15 @@ namespace ET.Server
 	    {
 		    return self.database.GetCollection<Entity>(name);
 	    }
-	    
-	    #region Query
 
-	    public static async ETTask<T> Query<T>(this DBComponent self, long id, string collection = null) where T : Entity
+		public static void Preheat<T>(this DBComponent self)
+		{
+			self.GetCollection<T>().EstimatedDocumentCountAsync();
+		}
+
+        #region Query
+
+        public static async ETTask<T> Query<T>(this DBComponent self, long id, string collection = null) where T : Entity
 	    {
 		    using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.DB, id % DBComponent.TaskCount))
 		    {

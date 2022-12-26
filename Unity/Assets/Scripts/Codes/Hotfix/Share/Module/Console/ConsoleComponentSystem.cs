@@ -69,7 +69,7 @@ namespace ET
                     {
                         Console.Write($"{modeContex?.Mode ?? ""}> ");
                         return Console.In.ReadLine();
-                    }, self.CancellationTokenSource.Token);
+                    }, self.CancellationTokenSource.Token) ?? "";
                     
                     line = line.Trim();
 

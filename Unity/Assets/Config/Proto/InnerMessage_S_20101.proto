@@ -1,0 +1,278 @@
+syntax = "proto3";
+using ET;
+using ProtoBuf;
+using System.Collections.Generic;
+
+package ET.Landlords
+
+//ResponseType C2R_GetAccount
+message R2C_GetAccount // IActorRequest
+{
+	int32 RpcId = 1;
+	string Account = 2;  // 帐号
+	string Password = 3;  // 密码
+}
+
+message C2R_GetAccount // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	int64 UserId = 4;	// 账号唯一ID
+}
+
+//ResponseType C2R_CreateAccount
+message R2C_CreateAccount // IActorRequest
+{
+	int32 RpcId = 1;
+	string Account = 2;  // 帐号
+	string Password = 3;  // 密码
+}
+
+message C2R_CreateAccount // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	int64 UserId = 4;	// 账号唯一ID
+}
+
+//ResponseType C2R_CreateOnlineUnit
+message R2C_CreateOnlineUnit // IActorRequest
+{
+	int32 RpcId = 1;
+	int64 UserId = 2;
+	int64 GateId = 3;
+	int64 GateKey = 4;
+}
+
+message C2R_CreateOnlineUnit // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+//ResponseType Actor_GetOnlineUnitResponse
+message Actor_GetOnlineUnitRequest // IActorRequest
+{
+	int32 RpcId = 1;
+	int64 UserId = 2;
+}
+
+message Actor_GetOnlineUnitResponse // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	bytes Entity = 4;
+}
+
+message Actor_RemoveOnlineUnit // IActorMessage
+{
+	int64 UserId = 1;
+	int64 GateId = 2;
+	int64 GateKey = 3;
+}
+
+//ResponseType G2R_GetLoginKey
+message R2G_GetLoginKey // IActorRequest
+{
+	int32 RpcId = 1;
+	int64 UserId = 2;
+}
+
+message G2R_GetLoginKey // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	int64 Key = 4;
+	int64 GateId = 5;
+}
+
+//ResponseType L2G_LoginLobby
+message G2L_LoginLobby // IActorRequest
+{
+	int32 RpcId = 1;
+	int64 UserId = 2;
+	bytes Entity = 3;
+}
+
+message L2G_LoginLobby // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	int64 UnitId = 4;
+}
+
+message Actor_Offline // IActorMessage
+{
+	int32 RpcId = 1;
+}
+
+//ResponseType AccessUserResponse
+message AccessUserRequest // IActorRequest
+{
+	int32 RpcId = 1;
+	int64 UserId = 2;
+	bool ReadWrite = 3;
+}
+
+message AccessUserResponse // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated bytes Components = 4;
+}
+
+//ResponseType ChangeUserResponse
+message ChangeUserRequest // IActorRequest
+{
+	int32 RpcId = 1;
+	int64 UserId = 2;
+	repeated bytes Components = 3;
+	bool Save = 4;
+}
+
+message ChangeUserResponse // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+//ResponseType F2G_LoginFriend
+message G2F_LoginFriend // IActorRequest
+{
+	int32 RpcId = 1;
+	int64 UserId = 2;
+	bytes Entity = 3;
+}
+
+message F2G_LoginFriend // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	int64 UnitId = 4;
+}
+
+//ResponseType M2G_CreateMatchUnit
+message G2M_CreateMatchUnit // IActorRequest
+{
+	int32 RpcId = 1;
+	int64 UserId = 2;
+	bytes Entity = 3;
+}
+
+message M2G_CreateMatchUnit // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	int64 UnitId = 4;
+}
+
+//ResponseType Actor_RemoveMatchUnitResponse
+message Actor_RemoveMatchUnitRequest // IActorLocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message Actor_RemoveMatchUnitResponse // IActorLocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+//ResponseType R2M_GetRoom
+message M2R_GetRoom // IActorRequest
+{
+	int32 RpcId = 1;
+}
+
+message R2M_GetRoom // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	int64 RoomId = 4;
+}
+
+message Actor_RoomStart // IActorMessage
+{
+	int64 RoomId = 1;
+}
+
+message Actor_RoomEnd // IActorMessage
+{
+	int64 RoomId = 1;
+}
+
+//ResponseType Actor_JoinRoomResponse
+message Actor_JoinRoomRequest // IActorRequest
+{
+	int32 RpcId = 1;
+	repeated int64 UserIds = 3;
+	repeated bytes Entitys = 4;
+}
+
+message Actor_JoinRoomResponse // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+//ResponseType Actor_ExitRoomResponse
+message Actor_ExitRoomRequest // IActorLocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message Actor_ExitRoomResponse // IActorLocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+message Actor_JoinRoomMessage // IActorMessage
+{
+	bytes Entity = 1;
+	int64 UnitId = 2;
+}
+
+message Actor_CreateUnit // IActorMessage
+{
+	int64 UserId = 1;
+	int32 SceneType = 2;
+	int64 UnitId = 3;
+}
+
+message Actor_RemoveUnit // IActorMessage
+{
+	int64 UserId = 1;
+	int32 SceneType = 2;
+	int64 UnitId = 3;
+}
+
+//ResponseType Actor_ConnectRobotResponse
+message Actor_ConnectRobotRequest // IActorRequest
+{
+	int32 RpcId = 1;
+	int64 UnitId = 2;
+	bytes Entity = 3;
+}
+
+message Actor_ConnectRobotResponse // IActorResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	int64 UserId = 4;
+}

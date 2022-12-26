@@ -1,0 +1,212 @@
+syntax = "proto3";
+using ET;
+using ProtoBuf;
+using System.Collections.Generic;
+
+package ET.Landlords
+
+//ResponseType R2C_Login
+message C2R_Login // IRequest
+{
+	int32 RpcId = 1;
+	string  Account = 2;  // 帐号
+	string  Password = 3;  // 密码
+}
+
+message R2C_Login // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	string Address = 4;	// 分配网关内网地址和路由端口
+	int64 Key = 5;	// 网关登录令牌
+}
+
+//ResponseType R2C_Register
+message C2R_Register // IRequest
+{
+	int32 RpcId = 1;
+	string  Account = 2;  // 帐号
+	string  Password = 3;  // 密码
+}
+
+message R2C_Register // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	string Address = 4;	// 分配网关内网地址和路由端口
+	int64 Key = 5;	// 网关登录令牌
+}
+
+message ClientOffline // IMessage
+{
+	
+}
+
+//ResponseType G2C_LoginGate
+message C2G_LoginGate // IRequest
+{
+	int32 RpcId = 1;
+	int64 Key = 2;  // 网关登录令牌
+}
+
+message G2C_LoginGate // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+//ResponseType L2C_GetLobby
+message C2L_GetLobby // IActorLobbyRequest
+{
+	int32 RpcId = 1;
+}
+
+message L2C_GetLobby // IActorLobbyResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated bytes Components = 4;
+}
+
+//ResponseType F2C_GetFriends
+message C2F_GetFriends // IActorFriendRequest
+{
+	int32 RpcId = 1;
+}
+
+message F2C_GetFriends // IActorFriendResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	bytes Entity = 4;
+}
+
+//ResponseType G2C_EnterMatch
+message C2G_EnterMatch // IRequest
+{
+	int32 RpcId = 1;
+}
+
+message G2C_EnterMatch // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+message G2C_EnterRoom // IActorMessage
+{
+	bytes Entity = 1;
+	int64 UnitId = 2;
+}
+
+//ResponseType G2C_ReturnLobby
+message C2G_ReturnLobby // IRequest
+{
+	int32 RpcId = 1;
+}
+
+message G2C_ReturnLobby // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+message Actor_PlayerEnter // IActorMessage
+{
+	repeated bytes Entitys = 1;
+}
+
+message Actor_PlayerExit // IActorMessage
+{
+	int64 UnitId = 1;
+}
+
+message Actor_PlayerReady // IActorRoomMessage
+{
+	int64 UnitId = 2;
+}
+
+message Actor_GameStart // IActorMessage
+{
+	repeated bytes Entitys = 1;
+}
+
+message Actor_PlaySwitch // IActorMessage
+{
+	ERoomStatus Status = 1;
+	int32 Before = 2;
+	int32 Current = 3;
+	int32 Active = 4;
+	int64 Rate = 5;
+	int64 Time = 6;
+}
+
+message Actor_CallLandlord // IActorRoomMessage
+{
+	bool CallLandlord = 1;
+	int32 Index = 2;
+}
+
+message Actor_RobLandlord // IActorRoomMessage
+{
+	bool RobLandlord = 1;
+	int32 Index = 2;
+}
+
+message Actor_SetLandlord // IActorMessage
+{
+	int32 Index = 1;
+	repeated HandCard Cards = 2;
+}
+
+message Actor_PlayCards // IActorRoomMessage
+{
+	repeated HandCard Cards = 1;
+	bool ShowCards = 2;
+	int32 Index = 3;
+}
+
+message Actor_GameEnd // IActorMessage
+{
+	repeated bytes Entitys = 1;
+	repeated long Results = 2;
+	bytes Component = 3;
+}
+
+message Actor_Trust // IActorRoomMessage
+{
+	bool IsTrust = 1;
+	int64 UnitId = 2;
+}
+
+//ResponseType G2C_ConnectGate
+message C2G_ConnectGate // IRequest
+{
+	int32 RpcId = 1;
+	int64 UnitId = 2;
+	int64 ActorId = 4;
+}
+
+message G2C_ConnectGate // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+message Actor_PlayerDisconnect // IActorMessage
+{
+	int64 UnitId = 1;
+}
+
+message Actor_PlayerReconnect // IActorMessage
+{
+	repeated bytes Entitys = 1;
+}

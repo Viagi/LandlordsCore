@@ -15,5 +15,16 @@ namespace ET
 			}
 			return retVal.ToHex("x2");
 		}
+
+		public static string StringMD5(string input, string format = "x2")
+		{
+			using(MD5 md5 = MD5.Create())
+			{
+				byte[] bytes = System.Text.Encoding.UTF8.GetBytes(input);
+				byte[] hashBytes = md5.ComputeHash(bytes);
+
+				return hashBytes.ToHex(format);
+            }
+		}
 	}
 }

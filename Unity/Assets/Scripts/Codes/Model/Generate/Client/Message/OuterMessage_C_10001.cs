@@ -1,6 +1,4 @@
-using ET;
-using ProtoBuf;
-using System.Collections.Generic;
+using ProtoBuf;using System.Collections.Generic;
 namespace ET
 {
 	[Message(OuterMessage.HttpGetRouterResponse)]
@@ -27,7 +25,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(M2C_TestResponse))]
+	[ResponseType("ET." + nameof(M2C_TestResponse))]
 	[Message(OuterMessage.C2M_TestRequest)]
 	[ProtoContract]
 	public partial class C2M_TestRequest: ProtoObject, IActorLocationRequest
@@ -58,7 +56,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(Actor_TransferResponse))]
+	[ResponseType("ET." + nameof(Actor_TransferResponse))]
 	[Message(OuterMessage.Actor_TransferRequest)]
 	[ProtoContract]
 	public partial class Actor_TransferRequest: ProtoObject, IActorLocationRequest
@@ -86,7 +84,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(G2C_EnterMap))]
+	[ResponseType("ET." + nameof(G2C_EnterMap))]
 	[Message(OuterMessage.C2G_EnterMap)]
 	[ProtoContract]
 	public partial class C2G_EnterMap: ProtoObject, IRequest
@@ -250,7 +248,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(G2C_Ping))]
+	[ResponseType("ET." + nameof(G2C_Ping))]
 	[Message(OuterMessage.C2G_Ping)]
 	[ProtoContract]
 	public partial class C2G_Ping: ProtoObject, IRequest
@@ -284,7 +282,7 @@ namespace ET
 	{
 	}
 
-	[ResponseType(nameof(M2C_Reload))]
+	[ResponseType("ET." + nameof(M2C_Reload))]
 	[Message(OuterMessage.C2M_Reload)]
 	[ProtoContract]
 	public partial class C2M_Reload: ProtoObject, IRequest
@@ -315,7 +313,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(R2C_Login))]
+	[ResponseType("ET." + nameof(R2C_Login))]
 	[Message(OuterMessage.C2R_Login)]
 	[ProtoContract]
 	public partial class C2R_Login: ProtoObject, IRequest
@@ -355,7 +353,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(G2C_LoginGate))]
+	[ResponseType("ET." + nameof(G2C_LoginGate))]
 	[Message(OuterMessage.C2G_LoginGate)]
 	[ProtoContract]
 	public partial class C2G_LoginGate: ProtoObject, IRequest
@@ -398,7 +396,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(M2C_TestRobotCase))]
+	[ResponseType("ET." + nameof(M2C_TestRobotCase))]
 	[Message(OuterMessage.C2M_TestRobotCase)]
 	[ProtoContract]
 	public partial class C2M_TestRobotCase: ProtoObject, IActorLocationRequest
@@ -429,7 +427,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(M2C_TransferMap))]
+	[ResponseType("ET." + nameof(M2C_TransferMap))]
 	[Message(OuterMessage.C2M_TransferMap)]
 	[ProtoContract]
 	public partial class C2M_TransferMap: ProtoObject, IActorLocationRequest
@@ -454,7 +452,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(G2C_Benchmark))]
+	[ResponseType("ET." + nameof(G2C_Benchmark))]
 	[Message(OuterMessage.C2G_Benchmark)]
 	[ProtoContract]
 	public partial class C2G_Benchmark: ProtoObject, IRequest

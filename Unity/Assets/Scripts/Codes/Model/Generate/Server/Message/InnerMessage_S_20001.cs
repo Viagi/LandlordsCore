@@ -1,10 +1,7 @@
-using ET;
-using ProtoBuf;
-using System.Collections.Generic;
+using ProtoBuf;using System.Collections.Generic;
 namespace ET
 {
-// using
-	[ResponseType(nameof(ObjectQueryResponse))]
+	[ResponseType("ET." + nameof(ObjectQueryResponse))]
 	[Message(InnerMessage.ObjectQueryRequest)]
 	[ProtoContract]
 	public partial class ObjectQueryRequest: ProtoObject, IActorRequest
@@ -20,7 +17,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(A2M_Reload))]
+	[ResponseType("ET." + nameof(A2M_Reload))]
 	[Message(InnerMessage.M2A_Reload)]
 	[ProtoContract]
 	public partial class M2A_Reload: ProtoObject, IActorRequest
@@ -45,7 +42,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(G2G_LockResponse))]
+	[ResponseType("ET." + nameof(G2G_LockResponse))]
 	[Message(InnerMessage.G2G_LockRequest)]
 	[ProtoContract]
 	public partial class G2G_LockRequest: ProtoObject, IActorRequest
@@ -76,7 +73,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(G2G_LockReleaseResponse))]
+	[ResponseType("ET." + nameof(G2G_LockReleaseResponse))]
 	[Message(InnerMessage.G2G_LockReleaseRequest)]
 	[ProtoContract]
 	public partial class G2G_LockReleaseRequest: ProtoObject, IActorRequest
@@ -107,7 +104,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(ObjectAddResponse))]
+	[ResponseType("ET." + nameof(ObjectAddResponse))]
 	[Message(InnerMessage.ObjectAddRequest)]
 	[ProtoContract]
 	public partial class ObjectAddRequest: ProtoObject, IActorRequest
@@ -138,7 +135,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(ObjectLockResponse))]
+	[ResponseType("ET." + nameof(ObjectLockResponse))]
 	[Message(InnerMessage.ObjectLockRequest)]
 	[ProtoContract]
 	public partial class ObjectLockRequest: ProtoObject, IActorRequest
@@ -172,7 +169,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(ObjectUnLockResponse))]
+	[ResponseType("ET." + nameof(ObjectUnLockResponse))]
 	[Message(InnerMessage.ObjectUnLockRequest)]
 	[ProtoContract]
 	public partial class ObjectUnLockRequest: ProtoObject, IActorRequest
@@ -206,7 +203,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(ObjectRemoveResponse))]
+	[ResponseType("ET." + nameof(ObjectRemoveResponse))]
 	[Message(InnerMessage.ObjectRemoveRequest)]
 	[ProtoContract]
 	public partial class ObjectRemoveRequest: ProtoObject, IActorRequest
@@ -234,7 +231,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(ObjectGetResponse))]
+	[ResponseType("ET." + nameof(ObjectGetResponse))]
 	[Message(InnerMessage.ObjectGetRequest)]
 	[ProtoContract]
 	public partial class ObjectGetRequest: ProtoObject, IActorRequest
@@ -265,7 +262,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(G2R_GetLoginKey))]
+	[ResponseType("ET." + nameof(G2R_GetLoginKey))]
 	[Message(InnerMessage.R2G_GetLoginKey)]
 	[ProtoContract]
 	public partial class R2G_GetLoginKey: ProtoObject, IActorRequest
@@ -326,7 +323,7 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(M2M_UnitTransferResponse))]
+	[ResponseType("ET." + nameof(M2M_UnitTransferResponse))]
 	[Message(InnerMessage.M2M_UnitTransferRequest)]
 	[ProtoContract]
 	public partial class M2M_UnitTransferRequest: ProtoObject, IActorRequest

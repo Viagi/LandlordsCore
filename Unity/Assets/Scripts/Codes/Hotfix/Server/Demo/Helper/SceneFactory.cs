@@ -1,3 +1,4 @@
+using ET.Server.Landlords;
 using System.Net;
 using System.Net.Sockets;
 
@@ -46,6 +47,19 @@ namespace ET.Server
                     break;
                 case SceneType.BenchmarkClient:
                     scene.AddComponent<BenchmarkClientComponent>();
+                    break;
+                case SceneType.Cache:
+                    scene.AddComponent<DBManagerComponent>();
+                    scene.AddComponent<UserManagerComponent>();
+                    break;
+                case SceneType.Lobby:
+                    break;
+                case SceneType.Friend:
+                    break;
+                case SceneType.Match:
+                    scene.AddComponent<MatchUnitManagerComponent>();
+                    break;
+                case SceneType.Room:
                     break;
             }
 

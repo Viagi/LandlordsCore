@@ -13,7 +13,7 @@ namespace ET
             }
             return self.IsDispose();
         }
-        
+
         private class CoroutineBlocker
         {
             private int count;
@@ -140,7 +140,7 @@ namespace ET
             return !cancellationToken.IsCancel();
         }
 
-        public static async ETTask<bool> WaitAll<T>(List<ETTask<T>> tasks, ETCancellationToken cancellationToken = null)
+        public static async ETTask<bool> WaitAll<T>(List<ETTask<T>> tasks, ETCancellationToken cancellationToken = null, T[] results = null)
         {
             if (tasks.Count == 0)
             {
@@ -149,14 +149,17 @@ namespace ET
 
             CoroutineBlocker coroutineBlocker = new CoroutineBlocker(tasks.Count + 1);
 
-            foreach (ETTask<T> task in tasks)
+            for (int i = 0; i < tasks.Count; i++)
             {
-                RunOneTask(task).Coroutine();
+                RunOneTask(tasks[i], i).Coroutine();
             }
 
-            async ETVoid RunOneTask(ETTask<T> task)
+            async ETVoid RunOneTask(ETTask<T> task, int index)
             {
-                await task;
+                if (results == null)
+                    await task;
+                else
+                    results[index] = await task;
                 await coroutineBlocker.WaitAsync();
             }
 

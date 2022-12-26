@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using ET.Server.Landlords;
+
+namespace ET.Server
 {
     [Event(SceneType.Process)]
     public class NetServerComponentOnReadEvent: AEvent<NetServerComponentOnRead>
@@ -19,33 +21,84 @@
             {
                 case IActorLocationRequest actorLocationRequest: // gate session收到actor rpc消息，先向actor 发送rpc请求，再将请求结果返回客户端
                 {
-                    long unitId = session.GetComponent<SessionPlayerComponent>().PlayerId;
-                    int rpcId = actorLocationRequest.RpcId; // 这里要保存客户端的rpcId
-                    long instanceId = session.InstanceId;
-                    IResponse iResponse = await ActorLocationSenderComponent.Instance.Call(unitId, actorLocationRequest);
-                    iResponse.RpcId = rpcId;
-                    // session可能已经断开了，所以这里需要判断
-                    if (session.InstanceId == instanceId)
+                    long? unitId = session.GetComponent<SessionPlayerComponent>()?.PlayerId;
+                    if (unitId.HasValue)
                     {
-                        session.Send(iResponse);
+                        int rpcId = actorLocationRequest.RpcId; // 这里要保存客户端的rpcId
+                        long instanceId = session.InstanceId;
+                        IResponse iResponse = await MessageHelper.CallLocationActor(unitId.Value, actorLocationRequest);
+                        iResponse.RpcId = rpcId;
+                        // session可能已经断开了，所以这里需要判断
+                        if (session.InstanceId == instanceId)
+                        {
+                            session.Send(iResponse);
+                        }
                     }
                     break;
                 }
                 case IActorLocationMessage actorLocationMessage:
                 {
-                    long unitId = session.GetComponent<SessionPlayerComponent>().PlayerId;
-                    ActorLocationSenderComponent.Instance.Send(unitId, actorLocationMessage);
+                    long? unitId = session.GetComponent<SessionPlayerComponent>()?.PlayerId;
+                    if (unitId.HasValue)
+                    {
+                        MessageHelper.SendToLocationActor(unitId.Value, actorLocationMessage);
+                    }
                     break;
                 }
                 case IActorRequest actorRequest:  // 分发IActorRequest消息，目前没有用到，需要的自己添加
                 {
+                    long? actorId = null;
+                    switch (actorRequest)
+                    {
+                        case IActorLobbyRequest:
+                            actorId = session.GetPlayer()?.GetComponent<LandlordsComponent>()?.LobbyId;
+                            break;
+                        case IActorFriendRequest:
+                            actorId = session.GetPlayer()?.GetComponent<LandlordsComponent>()?.FriendId;
+                            break;
+                        case IActorRoomRequest:
+                                actorId = session.GetPlayer()?.GetComponent<LandlordsComponent>()?.RoomId;
+                            break;
+                        default:
+                            break;
+                    }
+                    if (actorId.HasValue)
+                    {
+                        int rpcId = actorRequest.RpcId; // 这里要保存客户端的rpcId
+                        long instanceId = session.InstanceId;
+                        IActorResponse iResponse = await MessageHelper.CallActor(actorId.Value, actorRequest);
+                        iResponse.RpcId = rpcId;
+                        // session可能已经断开了，所以这里需要判断
+                        if (session.InstanceId == instanceId)
+                        {
+                            session.Send(iResponse);
+                        }
+                    }
                     break;
                 }
                 case IActorMessage actorMessage:  // 分发IActorMessage消息，目前没有用到，需要的自己添加
                 {
+                    long? actorId = null;
+                    switch (actorMessage)
+                    {
+                        case IActorLobbyMessage:
+                            actorId = session.GetPlayer()?.GetComponent<LandlordsComponent>()?.LobbyId;
+                            break;
+                        case IActorFriendMessage:
+                            actorId = session.GetPlayer()?.GetComponent<LandlordsComponent>()?.FriendId;
+                            break;
+                        case IActorRoomMessage:
+                            actorId = session.GetPlayer()?.GetComponent<LandlordsComponent>()?.RoomId;
+                            break;
+                        default:
+                            break;
+                    }
+                    if (actorId.HasValue)
+                    {
+                        MessageHelper.SendActor(actorId.Value, actorMessage);
+                    }
                     break;
                 }
-				
                 default:
                 {
                     // 非Actor消息

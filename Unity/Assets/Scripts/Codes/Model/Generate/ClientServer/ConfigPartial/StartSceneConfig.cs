@@ -7,26 +7,36 @@ namespace ET
     public partial class StartSceneConfigCategory
     {
         public MultiMap<int, StartSceneConfig> Gates = new MultiMap<int, StartSceneConfig>();
-        
+
         public MultiMap<int, StartSceneConfig> ProcessScenes = new MultiMap<int, StartSceneConfig>();
-        
+
         public Dictionary<long, Dictionary<string, StartSceneConfig>> ClientScenesByName = new Dictionary<long, Dictionary<string, StartSceneConfig>>();
 
         public StartSceneConfig LocationConfig;
 
         public List<StartSceneConfig> Realms = new List<StartSceneConfig>();
-        
+
         public List<StartSceneConfig> Routers = new List<StartSceneConfig>();
-        
+
         public List<StartSceneConfig> Robots = new List<StartSceneConfig>();
 
+        public MultiMap<int, StartSceneConfig> Lobbys = new MultiMap<int, StartSceneConfig>();
+
+        public MultiMap<int, StartSceneConfig> Friends = new MultiMap<int, StartSceneConfig>();
+
+        public MultiMap<int, StartSceneConfig> Rooms = new MultiMap<int, StartSceneConfig>();
+
+        public StartSceneConfig MatchServer;
+
+        public StartSceneConfig CacheServer;
+
         public StartSceneConfig BenchmarkServer;
-        
+
         public List<StartSceneConfig> GetByProcess(int process)
         {
             return this.ProcessScenes[process];
         }
-        
+
         public StartSceneConfig GetBySceneName(int zone, string name)
         {
             return this.ClientScenesByName[zone][name];
@@ -37,13 +47,13 @@ namespace ET
             foreach (StartSceneConfig startSceneConfig in this.GetAll().Values)
             {
                 this.ProcessScenes.Add(startSceneConfig.Process, startSceneConfig);
-                
+
                 if (!this.ClientScenesByName.ContainsKey(startSceneConfig.Zone))
                 {
                     this.ClientScenesByName.Add(startSceneConfig.Zone, new Dictionary<string, StartSceneConfig>());
                 }
                 this.ClientScenesByName[startSceneConfig.Zone].Add(startSceneConfig.Name, startSceneConfig);
-                
+
                 switch (startSceneConfig.Type)
                 {
                     case SceneType.Realm:
@@ -64,15 +74,30 @@ namespace ET
                     case SceneType.BenchmarkServer:
                         this.BenchmarkServer = startSceneConfig;
                         break;
+                    case SceneType.Cache:
+                        this.CacheServer = startSceneConfig;
+                        break;
+                    case SceneType.Lobby:
+                        this.Lobbys.Add(startSceneConfig.Zone, startSceneConfig);
+                        break;
+                    case SceneType.Friend:
+                        this.Friends.Add(startSceneConfig.Zone, startSceneConfig);
+                        break;
+                    case SceneType.Match:
+                        this.MatchServer = startSceneConfig;
+                        break;
+                    case SceneType.Room:
+                        this.Rooms.Add(startSceneConfig.Zone, startSceneConfig);
+                        break;
                 }
             }
         }
     }
-    
-    public partial class StartSceneConfig: ISupportInitialize
+
+    public partial class StartSceneConfig : ISupportInitialize
     {
         public long InstanceId;
-        
+
         public SceneType Type;
 
         public StartProcessConfig StartProcessConfig
@@ -82,7 +107,7 @@ namespace ET
                 return StartProcessConfigCategory.Instance.Get(this.Process);
             }
         }
-        
+
         public StartZoneConfig StartZoneConfig
         {
             get
@@ -126,7 +151,7 @@ namespace ET
         public override void AfterEndInit()
         {
             this.Type = EnumHelper.FromString<SceneType>(this.SceneType);
-            InstanceIdStruct instanceIdStruct = new InstanceIdStruct(this.Process, (uint) this.Id);
+            InstanceIdStruct instanceIdStruct = new InstanceIdStruct(this.Process, (uint)this.Id);
             this.InstanceId = instanceIdStruct.ToLong();
         }
     }

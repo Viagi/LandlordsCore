@@ -1,10 +1,13 @@
 
-"Realm*Realm0’N
-"Gate*Gate10“N
-"Gate*Gate20”N
-"Location*Location
-"Map*Map1
-"Map*Map2
+"Cache*Cache
+"Realm*Realm10’N
+"Gate*Gate10“N
+"Gate*Gate20”N
+"Location*Location
+"Lobby*Lobby1
+"Friend*Friend1
+"Match*Match
+	"Room*Room1
 È"Robot*Robot01
 (¬"RouterManager*RouterManager0¼P
 ­"Router*Router010½P
