@@ -21,6 +21,8 @@ namespace ET.Client
 
                     EventSystem.Instance.Publish(scene, new PlayerDisconnect() { UnitId = message.UnitId });
                 }
+
+                await ETTask.CompletedTask;
             }
         }
     }

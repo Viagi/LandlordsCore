@@ -10,7 +10,7 @@ namespace ET.Server
             protected override async ETTask Run(Player unit, Actor_Offline message)
             {
                 UnitGateComponent unitGateComponent = unit.GetComponent<UnitGateComponent>();
-                Session session = EventSystem.Instance.Get(unitGateComponent.GateSessionId) as Session;
+                Session session = Root.Instance.Get(unitGateComponent.GateSessionId) as Session;
 
                 if (session != null && !session.IsDisposed)
                 {

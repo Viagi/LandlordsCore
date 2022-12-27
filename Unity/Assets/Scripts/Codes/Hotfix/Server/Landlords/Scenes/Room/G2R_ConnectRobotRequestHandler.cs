@@ -10,7 +10,7 @@ namespace ET.Server
         {
             protected override async ETTask Run(Scene scene, Actor_ConnectRobotRequest request, Actor_ConnectRobotResponse response, Action reply)
             {
-                RoomUnitEntity unit = EventSystem.Instance.Get(request.UnitId) as RoomUnitEntity;
+                RoomUnitEntity unit = Root.Instance.Get(request.UnitId) as RoomUnitEntity;
                 UnitRobotComponent robotComponent = unit?.GetComponent<UnitRobotComponent>();
                 if (robotComponent != null)
                 {

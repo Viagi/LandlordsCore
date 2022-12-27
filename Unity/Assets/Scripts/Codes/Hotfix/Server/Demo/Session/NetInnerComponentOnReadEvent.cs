@@ -30,12 +30,19 @@ namespace ET.Server
                     {
                         void Reply(IActorResponse response)
                         {
+                            if (fromProcess == Options.Instance.Process) // 返回消息是同一个进程
+                            {
+                                // NetInnerComponent.Instance.HandleMessage(realActorId, response); 等同于直接调用下面这句
+                                ActorMessageSenderComponent.Instance.RunMessage(realActorId, response);
+                                return;
+                            }
+                            
                             Session replySession = NetInnerComponent.Instance.Get(fromProcess);
                             // 发回真实的actorId 做查问题使用
                             replySession.Send(realActorId, response);
                         }
                         
-                        Entity entity = EventSystem.Instance.Get(realActorId);
+                        Entity entity = Root.Instance.Get(realActorId);
                         if (entity == null)
                         {
                             IActorResponse response = ActorHelper.CreateResponse(iActorRequest, ErrorCore.ERR_NotFoundActor);
@@ -78,7 +85,7 @@ namespace ET.Server
                     }
                     case IActorMessage iActorMessage:
                     {
-                        Entity entity = EventSystem.Instance.Get(realActorId);
+                        Entity entity = Root.Instance.Get(realActorId);
                         if (entity == null)
                         {
                             Log.Error($"not found actor: {scene.Name} {realActorId} {message}");

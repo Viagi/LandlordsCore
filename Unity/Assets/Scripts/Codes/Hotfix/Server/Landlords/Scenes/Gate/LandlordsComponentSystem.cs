@@ -20,7 +20,7 @@ namespace ET.Server
         {
             protected override void Destroy(LandlordsComponent self)
             {
-                if(Root.Instance == null || self.IsRobot)
+                if(Root.Instance.Scene.IsDisposed || self.IsRobot)
                 {
                     return;
                 }

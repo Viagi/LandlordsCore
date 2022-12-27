@@ -20,7 +20,7 @@ namespace ET.Server
         {
             protected override void Destroy(SessionPlayerComponent self)
             {
-                if (Root.Instance == null)
+                if (Root.Instance.Scene.IsDisposed)
                 {
                     return;
                 }

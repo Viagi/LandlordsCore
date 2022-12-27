@@ -18,7 +18,7 @@ namespace ET.Server
         {
             protected override void Destroy(MatchUnitEntity self)
             {
-                if (Root.Instance == null)
+                if (Root.Instance.Scene.IsDisposed)
                 {
                     return;
                 }

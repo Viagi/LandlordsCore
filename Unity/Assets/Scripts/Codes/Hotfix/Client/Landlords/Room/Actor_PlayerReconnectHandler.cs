@@ -27,6 +27,8 @@ namespace ET.Client
                         EventSystem.Instance.Publish(scene, new PlayerReconnect() { Units = units });
                     }
                 }
+
+                await ETTask.CompletedTask;
             }
         }
     }

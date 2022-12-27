@@ -29,7 +29,7 @@ namespace ET.Server
         {
             public static void AddOnlineLocation(this MirrorUnitComponent self)
             {
-                if (Root.Instance == null)
+                if (Root.Instance.Scene.IsDisposed)
                 {
                     return;
                 }
@@ -39,7 +39,7 @@ namespace ET.Server
 
             public static void RemoveOnlineLocation(this MirrorUnitComponent self)
             {
-                if (Root.Instance == null)
+                if (Root.Instance.Scene.IsDisposed)
                 {
                     return;
                 }
